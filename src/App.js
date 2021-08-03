@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import './App.css';
+import './Buttons.css';
 
 import {
   BrowserRouter as Router,
@@ -10,10 +11,11 @@ import {
 
 import Header from './components/Header'
 import Projects from './components/projects/Projects'
+import Form from './components/Form'
 
 function App() {
   return (
-    <div className="app">
+    <div className="app" id="test-modal">
       <Router>
         <>
           <Header />
@@ -21,6 +23,9 @@ function App() {
             <Switch>
               <Route path="/projects" exact>
                 <Projects />
+              </Route>
+              <Route path="/form" exact>
+                <Form />
               </Route>
             </Switch>
           </AppBody>

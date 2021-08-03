@@ -1,0 +1,42 @@
+.btn {
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 5px 7.5px;
+  text-decoration: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn.btn-gold {
+  background: var(--gold);
+  color: #fff;
+}
+
+.btn.btn-light-gray {
+  background: #F4F2F0;
+  color: #B1B0AF;
+}
+
+.btn.btn-dark-gray {
+  background: #DDDBD7;
+  color: #3C3C3C;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-left .btn {
+  margin-right: 10px;
+}
+
+.btn-right .btn {
+  margin-left: 10px;
+}
