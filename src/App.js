@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import './App.css';
 import './Buttons.css';
+import './Forms.css';
 
 import {
   BrowserRouter as Router,
