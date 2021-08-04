@@ -17,6 +17,82 @@ function Header() {
   const [user] = useAuthState(auth)
 
   const [navOpen, setNavOpen] = useState(false)
+  const [activeNav, setActiveNav] = useState(null)
+  const [activeSubitem, setActiveSubitem] = useState(null)
+
+  const navItems = [
+    {
+      item: 'To dos',
+      sub_items: []
+    },
+    {
+      item: 'Work',
+      sub_items: [
+        {
+          title: 'Projects',
+          path: '/projects'
+        },
+        {
+          title: 'Estimates',
+          path: '/estimates'
+        },
+        {
+          title: 'Purchases',
+          path: '/purchases'
+        },
+        {
+          title: 'Invoices',
+          path: '/invoices'
+        },
+        {
+          title: 'Reports',
+          path: '/reports'
+        }
+      ]
+    },
+    {
+      item: 'Contacts',
+      sub_items: [
+        {
+          title: 'Companies',
+          path: '/companies'
+        },
+        {
+          title: 'People',
+          path: '/people'
+        }
+      ]
+    },
+    {
+      item: 'Settings',
+      sub_items: [
+        {
+          title: 'Your profile',
+          path: '/profile'
+        },
+        {
+          title: 'Your team',
+          path: '/team'
+        },
+        {
+          title: 'Company settings',
+          path: '/settings'
+        },
+        {
+          title: 'Items & Tasks',
+          path: '/items-and-tasks'
+        },
+        {
+          title: 'Expenses',
+          path: '/expenses'
+        },
+        {
+          title: 'Subscription',
+          path: '/subscription'
+        }
+      ]
+    }
+  ]
 
   return (
     <HeaderContainer>
@@ -25,18 +101,13 @@ function Header() {
           <h1>RSR</h1>
         </HeaderLogo>
         <HeaderNav>
-          <Link to="/">
-            To Dos
-          </Link>
-          <Link to="/projects">
-            Work
-          </Link>
-          <Link to="/">
-            Contacts
-          </Link>
-          <Link to="/">
-            Settings
-          </Link>
+          {
+            navItems.map(item => (
+              <Link to="/" key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav == item.item ? 'active' : null}>
+                { item.item }
+              </Link>
+            ))
+          }
         </HeaderNav>
         <HeaderActions>
           <AddCircleIcon />
@@ -66,21 +137,17 @@ function Header() {
       <HeaderSubnav> 
         <LeftSpace />
         <SubnavLinks>
-          <Link to="/">
-            Projects
-          </Link>
-          <Link to="/">
-            Estimates
-          </Link>
-          <Link to="/">
-            Purchases
-          </Link>
-          <Link to="/">
-            Invoices
-          </Link>
-          <Link to="/">
-            Reports
-          </Link>
+          {
+            navItems.map(item => (
+              item.sub_items.map(sub_item => (
+                activeNav == item.item ?
+                  <Link to={sub_item.path} key={sub_item.title} parent={item.item} onClick={(e) => setActiveSubitem(sub_item.title)} className={activeSubitem == sub_item.title ? 'active' : null}>
+                    { sub_item.title }
+                  </Link>
+                : null
+              ))
+            ))
+          }
         </SubnavLinks>
         <SubnavSearch>
           <input id="search" name="search" className="form-control" placeholder="Search..." />
@@ -124,8 +191,9 @@ const HeaderNav = styled.div`
     color: #fff;
   }
 
-  > a:active {
-    background: #fff;
+  > a.active {
+    background: var(--gold);
+    color: #fff;
   }
 `
 
@@ -134,12 +202,10 @@ const HeaderActions = styled.div`
   position: relative;
 
   > .MuiSvgIcon-root {
-    padding: 15px 7.5px;
     fill: #fff;
   }
 
   > .MuiAvatar-root {
-    padding: 15px 7.5px;
     width: 24px;
     height: 24px;
 
@@ -164,6 +230,7 @@ const ProfileDropdown = styled.div`
   padding: 15px;
   background: #fff;
   min-width: 150px;
+  z-index: 1;
 
   > a {
     padding: 5px 10px;
@@ -202,12 +269,17 @@ const SubnavLinks = styled.div`
     padding: 5px 7.5px;
     text-decoration: none;
     margin: 0 5px;
+    border-radius: 2px;
   }
 
   > a:hover {
     background-color: var(--gold);
     color: #fff;
-    border-radius: 2px;
+  }
+
+  > a.active {
+    background-color: var(--gold);
+    color: #fff;
   }
 `
 

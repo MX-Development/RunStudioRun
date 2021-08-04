@@ -1,0 +1,65 @@
+.MuiDataGrid-renderingZone {
+  max-height: 100% !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row {
+  margin-bottom: 7.5px;
+  border-left: 5px solid;
+  background: #fff;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row.bordered-yellow {
+  border-color: #FCDB6E !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row.bordered-green {
+  border-color: #BFE764 !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row.bordered-blue {
+  border-color: #71DBFC !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
+  background-color: #fff !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .MuiDataGrid-root .MuiDataGrid-cell:focus {
+  outline: none !important;
+}
+
+.MuiDataGrid-root {
+  border: none !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaderWrapper {
+  background: #DDDBD7;
+  margin-bottom: 7.5px;
+  color: #3C3C3C;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+  font-weight: 600 !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-menuIcon {
+  display: none !important;
+}
+
+@media (hover: none) {
+  .MuiDataGrid-root .MuiDataGrid-row.Mui-selected:hover,
+  .MuiDataGrid-root .MuiDataGrid-row:hover {
+    background-color: #fff !important;
+  }
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .MuiDataGrid-root .MuiDataGrid-cell:focus {
+  outline: none !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell {
+  border-bottom: none !important;
+}

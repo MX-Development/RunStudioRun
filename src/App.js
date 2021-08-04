@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import './App.css';
 import './Buttons.css';
 import './Forms.css';
+import './Table.css';
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './config/firebase'
@@ -18,6 +19,9 @@ import Projects from './components/projects/Projects'
 import Form from './components/Form'
 import Settings from './components/Settings'
 import Login from './components/account/Login'
+import MaterialTable from './components/MaterialTable';
+import Companies from './components/contacts/Companies';
+import Subscription from './components/settings/Subscription';
 
 function App() {
 
@@ -48,6 +52,15 @@ function App() {
                   </Route>
                   <Route path="/settings" exact>
                     <Settings />
+                  </Route>
+                  <Route path="/table" exact>
+                    <MaterialTable /> 
+                  </Route>
+                  <Route path="/companies" exact>
+                    <Companies /> 
+                  </Route>
+                  <Route path="/subscription" exact>
+                    <Subscription /> 
                   </Route>
                 </Switch>
               </AppBody>
