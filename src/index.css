@@ -1,7 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,900&subset=latin,latin-ext');
 
 * {
   margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {

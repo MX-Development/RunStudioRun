@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import HelpIcon from '@material-ui/icons/Help';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Avatar from '@material-ui/core/Avatar';
 
 import {
   Link
 } from "react-router-dom"
 
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../config/firebase'
+
 function Header() {
+
+  const [user] = useAuthState(auth)
+
+  const [navOpen, setNavOpen] = useState(false)
+
   return (
     <HeaderContainer>
       <HeaderTop>
@@ -33,7 +41,26 @@ function Header() {
         <HeaderActions>
           <AddCircleIcon />
           <HelpIcon />
-          <AccountCircleIcon />
+          <Avatar alt={ user?.displayName } src={ user?.photoURL } onClick={(e) => setNavOpen(!navOpen)}>
+            { user?.displayName.charAt(0) } 
+          </Avatar>
+          <ProfileDropdown className={navOpen ? 'active' : ''}>
+            <Link to="/profile">
+              Your Profile
+            </Link>
+            <Link to="/team">
+              Your Team
+            </Link>
+            <Link to="/settings">
+              Company Settings
+            </Link>
+            <Link to="/subscription">
+              Subscription
+            </Link>
+            <Link to="#" onClick={() => auth.signOut()}>
+              Sign Out
+            </Link>
+          </ProfileDropdown>
         </HeaderActions>
       </HeaderTop>
       <HeaderSubnav> 
@@ -104,15 +131,55 @@ const HeaderNav = styled.div`
 
 const HeaderActions = styled.div`
   display: flex;
+  position: relative;
 
   > .MuiSvgIcon-root {
     padding: 15px 7.5px;
     fill: #fff;
   }
+
+  > .MuiAvatar-root {
+    padding: 15px 7.5px;
+    width: 24px;
+    height: 24px;
+
+    > img {
+      border-radius: 50%;
+    }
+
+    > :hover {
+      cursor: pointer;
+    }
+  }
+`
+
+const ProfileDropdown = styled.div`
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 57px;
+  right: 0;
+  box-shadow: 0px 0px 8px #00000033;
+  border-radius: 0px 0px 4px 4px;
+  padding: 15px;
+  background: #fff;
+  min-width: 150px;
+
+  > a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #292724;
+    font-size: 16px;
+  }
+
+  &.active {
+    display: flex;
+  }
 `
 
 const HeaderSubnav = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   background-color: #FFFFFF;
   box-shadow: 0px 1px 4px #0000001A;

@@ -4,6 +4,9 @@ import './App.css';
 import './Buttons.css';
 import './Forms.css';
 
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from './config/firebase'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,24 +16,44 @@ import {
 import Header from './components/Header'
 import Projects from './components/projects/Projects'
 import Form from './components/Form'
+import Settings from './components/Settings'
+import Login from './components/account/Login'
 
 function App() {
+
+  const [user, loading] = useAuthState(auth)
+
+  if (loading) {
+    return (
+      <h1>Loading...</h1>
+    )
+  }
+
   return (
     <div className="app" id="test-modal">
       <Router>
-        <>
-          <Header />
-          <AppBody>
-            <Switch>
-              <Route path="/projects" exact>
-                <Projects />
-              </Route>
-              <Route path="/form" exact>
-                <Form />
-              </Route>
-            </Switch>
-          </AppBody>
-        </>
+        {
+          !user ? (
+            <Login />
+          ) : (
+            <>
+              <Header />
+              <AppBody>
+                <Switch>
+                  <Route path="/projects" exact>
+                    <Projects />
+                  </Route>
+                  <Route path="/form" exact>
+                    <Form />
+                  </Route>
+                  <Route path="/settings" exact>
+                    <Settings />
+                  </Route>
+                </Switch>
+              </AppBody>
+            </>
+          )
+        }
       </Router>
     </div>
   );
