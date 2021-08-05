@@ -16,7 +16,7 @@ body {
   /* Variables */
   --gold: #E0BC77;
 
-  overflow: hidden;
+  overflow-x: hidden;
   margin: 0;
   color: #3C3C3C;
   background: #F4F2F0;

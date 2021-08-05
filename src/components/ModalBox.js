@@ -17,7 +17,7 @@ Modal.setAppElement('#root');
 
 function ModalBox({ modalOpened, title, buttons, children }) {
 
-  console.log(buttons);
+  console.log(modalOpened);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 

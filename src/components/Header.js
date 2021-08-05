@@ -12,6 +12,8 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../config/firebase'
 
+import RunStudioRunLogo from './assets/runstudiorun-logo.svg'
+
 function Header() {
 
   const [user] = useAuthState(auth)
@@ -98,12 +100,12 @@ function Header() {
     <HeaderContainer>
       <HeaderTop>
         <HeaderLogo>
-          <h1>RSR</h1>
+          <img src={RunStudioRunLogo} alt="Run Studio Run logo" />
         </HeaderLogo>
         <HeaderNav>
           {
             navItems.map(item => (
-              <Link to="/" key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav == item.item ? 'active' : null}>
+              <Link to="/" key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav === item.item ? 'active' : null}>
                 { item.item }
               </Link>
             ))
@@ -140,8 +142,8 @@ function Header() {
           {
             navItems.map(item => (
               item.sub_items.map(sub_item => (
-                activeNav == item.item ?
-                  <Link to={sub_item.path} key={sub_item.title} parent={item.item} onClick={(e) => setActiveSubitem(sub_item.title)} className={activeSubitem == sub_item.title ? 'active' : null}>
+                activeNav === item.item ?
+                  <Link to={sub_item.path} key={sub_item.title} parent={item.item} onClick={(e) => setActiveSubitem(sub_item.title)} className={activeSubitem === sub_item.title ? 'active' : null}>
                     { sub_item.title }
                   </Link>
                 : null
@@ -173,7 +175,8 @@ const HeaderTop = styled.div`
 `
 
 const HeaderLogo = styled.div`
-  color: #fff;
+  position: relative;
+  top: 5px;
 `
 
 const HeaderNav = styled.div`

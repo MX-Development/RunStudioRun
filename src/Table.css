@@ -4,20 +4,29 @@
 
 .MuiDataGrid-root .MuiDataGrid-row {
   margin-bottom: 7.5px;
-  border-left: 5px solid;
+  border-left: 5px solid; 
   background: #fff;
+  border-radius: 2px;
 }
 
-.MuiDataGrid-root .MuiDataGrid-row.bordered-yellow {
+.MuiDataGrid-renderingZone > .MuiDataGrid-row:nth-child(1n) {
   border-color: #FCDB6E !important;
 }
 
-.MuiDataGrid-root .MuiDataGrid-row.bordered-green {
+.MuiDataGrid-renderingZone > .MuiDataGrid-row:nth-child(2n) {
+  border-color: #71DBFC !important;
+}
+
+.MuiDataGrid-renderingZone > .MuiDataGrid-row:nth-child(3n) {
   border-color: #BFE764 !important;
 }
 
-.MuiDataGrid-root .MuiDataGrid-row.bordered-blue {
-  border-color: #71DBFC !important;
+.MuiDataGrid-renderingZone > .MuiDataGrid-row:nth-child(4n) {
+  border-color: #4444F8 !important;
+}
+
+.MuiDataGrid-renderingZone > .MuiDataGrid-row:nth-child(5n) {
+  border-color: #F14D4C !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-row.Mui-selected {

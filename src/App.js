@@ -14,6 +14,8 @@ import {
   Route
 } from "react-router-dom";
 
+import LoadingScreen from './components/LoadingScreen';
+
 import Header from './components/Header'
 import Projects from './components/projects/Projects'
 import Form from './components/Form'
@@ -22,6 +24,8 @@ import Login from './components/account/Login'
 import MaterialTable from './components/MaterialTable';
 import Companies from './components/contacts/Companies';
 import Subscription from './components/settings/Subscription';
+import YourTeam from './components/settings/YourTeam';
+import ItemsTasks from './components/settings/ItemsTasks';
 
 function App() {
 
@@ -29,7 +33,7 @@ function App() {
 
   if (loading) {
     return (
-      <h1>Loading...</h1>
+      <LoadingScreen />
     )
   }
 
@@ -62,6 +66,13 @@ function App() {
                   <Route path="/subscription" exact>
                     <Subscription /> 
                   </Route>
+
+                  <Route exact path="/team" component={YourTeam} />
+                  <Route path="/team/:id" component={YourTeam} />
+
+                  <Route exact path="/items-and-tasks" component={ItemsTasks} />
+                  <Route path="/items-and-tasks/:id" component={ItemsTasks} />
+
                 </Switch>
               </AppBody>
             </>
