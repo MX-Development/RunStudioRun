@@ -21,6 +21,8 @@ function Header() {
   const [navOpen, setNavOpen] = useState(false)
   const [activeNav, setActiveNav] = useState(null)
   const [activeSubitem, setActiveSubitem] = useState(null)
+  
+  const [openQuickNav, setQuicknav] = useState(false)
 
   const navItems = [
     {
@@ -112,7 +114,48 @@ function Header() {
           }
         </HeaderNav>
         <HeaderActions>
-          <AddCircleIcon />
+          <AddCircleIcon onClick={(e) => setQuicknav(!openQuickNav)} />
+          <QuickNav className={openQuickNav ? 'active' : ''}>
+            <h2>Quick</h2>
+            <Columns>
+              <Column>
+                <h3>Projects</h3>
+                <Link to="/projects/add">
+                  New Project
+                </Link>
+                <Link to="/jobs/add">
+                  New Job
+                </Link>
+                <Link to="/purchases/add">
+                  New Purchases
+                </Link>
+              </Column>
+              <Column>
+                <h3>Contacts</h3>
+                <Link to="/projects/add">
+                  New Project
+                </Link>
+                <Link to="/jobs/add">
+                  New Job
+                </Link>
+                <Link to="/purchases/add">
+                  New Purchases
+                </Link>
+              </Column>
+              <Column>
+                <h3>Profile & Settings</h3>
+                <Link to="/projects/add">
+                  New Project
+                </Link>
+                <Link to="/jobs/add">
+                  New Job
+                </Link>
+                <Link to="/purchases/add">
+                  New Purchases
+                </Link>
+              </Column>
+            </Columns>
+          </QuickNav>
           <HelpIcon />
           <Avatar alt={ user?.displayName } src={ user?.photoURL } onClick={(e) => setNavOpen(!navOpen)}>
             { user?.displayName.charAt(0) } 
@@ -206,6 +249,7 @@ const HeaderActions = styled.div`
 
   > .MuiSvgIcon-root {
     fill: #fff;
+    cursor: pointer;
   }
 
   > .MuiAvatar-root {
@@ -226,20 +270,26 @@ const ProfileDropdown = styled.div`
   display: none;
   flex-direction: column;
   position: absolute;
-  top: 57px;
+  top: 40px;
   right: 0;
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 0px 0px 4px 4px;
   padding: 15px;
   background: #fff;
-  min-width: 150px;
+  min-width: 175px;
   z-index: 1;
 
   > a {
     padding: 5px 10px;
     text-decoration: none;
     color: #292724;
-    font-size: 16px;
+    font-size: 14px;
+    display: flex;
+    word-wrap: none;
+  }
+
+  > a:hover {
+    background: #F4F2F0;
   }
 
   &.active {
@@ -292,5 +342,54 @@ const SubnavSearch = styled.div`
   input {
     width: 100%;
     font-size: 12px;  
+  }
+`
+
+const QuickNav = styled.div`
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  box-shadow: 0px 0px 8px #00000033;
+  border-radius: 0px 0px 4px 4px;
+  padding: 15px;
+  background: #fff;
+  z-index: 1;
+
+  &.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  > h2 {
+    font-size: 42px;
+    font-weight: 300;
+    margin-bottom: 15px;
+  }
+`
+
+const Columns = styled.div`
+  display: flex;
+`
+
+const Column = styled.div`
+  min-width: 150px;
+
+  > h3 {
+    color: #E0BC77;
+    margin-bottom: 20px;
+  }
+
+  > a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #292724;
+    font-size: 14px;
+    display: flex;
+    word-wrap: none;
+  }
+
+  > a:hover {
+    background: #F4F2F0;
   }
 `

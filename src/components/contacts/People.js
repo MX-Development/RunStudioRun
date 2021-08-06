@@ -12,8 +12,7 @@ const data = [
     phone: '0424 059 513',
     email: 'taso@ak-d.com.au',
     company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
+    notes: 'Notes to remember birthday and more...'
   },
   {
     id: 2,
@@ -21,8 +20,7 @@ const data = [
     phone: '0424 059 513',
     email: 'taso@ak-d.com.au',
     company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
+    notes: 'Notes to remember birthday and more...'
   },
   {
     id: 3,
@@ -30,8 +28,7 @@ const data = [
     phone: '06 99 99 99 99',
     email: 'mikehendriks94@gmail.com',
     company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
+    notes: 'Notes to remember birthday and more...'
   },
   {
     id: 4,
@@ -39,8 +36,7 @@ const data = [
     phone: '0424 059 513',
     email: 'taso@ak-d.com.au',
     company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
+    notes: 'Notes to remember birthday and more...'
   },
   {
     id: 5,
@@ -48,8 +44,7 @@ const data = [
     phone: '0424 059 513',
     email: 'taso@ak-d.com.au',
     company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
+    notes: 'Notes to remember birthday and more...'
   },
   {
     id: 6,
@@ -57,44 +52,7 @@ const data = [
     phone: '06 99 99 99 99',
     email: 'mikehendriks94@gmail.com',
     company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
-  },
-  {
-    id: 7,
-    name: 'Lorem ipsum',
-    phone: '0424 059 513',
-    email: 'taso@ak-d.com.au',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
-  },
-  {
-    id: 8,
-    name: 'Mike Hendriks',
-    phone: '06 99 99 99 99',
-    email: 'mikehendriks94@gmail.com',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
-  },
-  {
-    id: 9,
-    name: 'Lorem ipsum',
-    phone: '0424 059 513',
-    email: 'taso@ak-d.com.au',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
-  },
-  {
-    id: 10,
-    name: 'Mike Hendriks',
-    phone: '06 99 99 99 99',
-    email: 'mikehendriks94@gmail.com',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...',
-    subscription: 'Active'
+    notes: 'Notes to remember birthday and more...'
   }
 ];
 
@@ -104,10 +62,9 @@ const columns = [
   { field: 'email', type: 'string', flex: 0.3 },
   { field: 'company', type: 'string', flex: 0.2 },
   { field: 'notes', type: 'string', flex: 0.4 },
-  { field: 'subscription', type: 'string', flex: 0.2 }
 ]
 
-function YourTeam() {
+function People() {
 
   const modalContent = (          
     <MemberAvatar>
@@ -122,11 +79,11 @@ function YourTeam() {
   )
 
   return (
-    <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} />
+    <List title={'People'} columns={columns} data={data} modalTitle={'Add/Edit People'} modalContent={modalContent} />
   )
 }
 
-export default YourTeam
+export default People
 
 const MemberAvatar = styled.div`
   display: flex;

@@ -1,7 +1,9 @@
 import React from 'react'
-import { DataGrid } from '@material-ui/data-grid';
+import styled from 'styled-components'
 
-import PageTitle from '../layout/PageTitle'
+import List from '../List'
+
+import Avatar from '@material-ui/core/Avatar';
 
 const data = [
   {
@@ -30,29 +32,47 @@ const data = [
   }
 ];
 
+const columns = [
+  { field: 'company', type: 'string' },
+  { field: 'phone', type: 'string' },
+  { field: 'website', type: 'string' },
+  { field: 'physical_address', type: 'string' },
+  { field: 'notes', type: 'string', flex: 0.3 },
+  { field: '', type: 'string', width: 50 }
+]
+
 function Companies() {
+
+  const modalContent = (          
+    <MemberAvatar>
+      <Avatar alt="" src="">
+        MM
+      </Avatar>
+      <MemberInfo>
+        <h5>Full Name</h5>
+        <span>Position</span> 
+      </MemberInfo>
+    </MemberAvatar>
+  )
+
   return (
-    <>
-      <PageTitle title={'Companies'} />
-      
-      <div style={{ height: 400, width: '100%' }}>
-        <DataGrid
-          columns={[
-            { field: 'company', type: 'string' },
-            { field: 'phone', type: 'string' },
-            { field: 'website', type: 'string' },
-            { field: 'physical_address', type: 'string' },
-            { field: 'notes', type: 'string', flex: 0.3 },
-            { field: '', type: 'string', width: 50 }
-          ]}
-          rows={data}
-          getRowClassName={(params) =>
-            `bordered-${params.getValue(params.id, 'status')}`
-          }
-        />
-      </div>
-    </>
+    <List title={'Companies'} columns={columns} data={data} modalTitle={'Add/Edit Company'} modalContent={modalContent} />
   )
 }
 
 export default Companies
+
+const MemberAvatar = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const MemberInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+
+  > span {
+    font-size: 12px;
+  }
+`

@@ -5,7 +5,7 @@
 .MuiDataGrid-root .MuiDataGrid-row {
   margin-bottom: 7.5px;
   border-left: 5px solid; 
-  background: #fff;
+  background-color: #fff;
   border-radius: 2px;
 }
 
@@ -27,10 +27,6 @@
 
 .MuiDataGrid-renderingZone > .MuiDataGrid-row:nth-child(5n) {
   border-color: #F14D4C !important;
-}
-
-.MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
-  background-color: #fff !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .MuiDataGrid-root .MuiDataGrid-cell:focus {
@@ -71,4 +67,18 @@
 
 .MuiDataGrid-root .MuiDataGrid-cell {
   border-bottom: none !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row {
+  background-color: #fff;
+  transition: all 1s;
+  transition-timing-function: cubic-bezier(.17,.67,.83,.67);
+}
+
+.MuiDataGrid-root .MuiDataGrid-row:hover {
+  cursor: pointer;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
+  background-color: rgba(63, 81, 181, 0.12) !important;
 }

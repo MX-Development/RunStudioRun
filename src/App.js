@@ -17,15 +17,29 @@ import {
 import LoadingScreen from './components/LoadingScreen';
 
 import Header from './components/Header'
-import Projects from './components/projects/Projects'
 import Form from './components/Form'
 import Settings from './components/Settings'
 import Login from './components/account/Login'
 import MaterialTable from './components/MaterialTable';
-import Companies from './components/contacts/Companies';
 import Subscription from './components/settings/Subscription';
+
+// Work
+import Projects from './components/work/Projects'
+import AddProject from './components/work/AddProject'
+import Estimates from './components/work/Estimates';
+import Purchases from './components/work/Purchases';
+import Invoices from './components/work/Invoices';
+
+// Contacts
+import Companies from './components/contacts/Companies';
+import People from './components/contacts/People';
+
+// Settings
 import YourTeam from './components/settings/YourTeam';
 import ItemsTasks from './components/settings/ItemsTasks';
+import Expenses from './components/settings/Expenses';
+
+import DragList from './components/DragList';
 
 function App() {
 
@@ -48,6 +62,10 @@ function App() {
               <Header />
               <AppBody>
                 <Switch>
+                  <Route path="/draglist" exact>
+                    <DragList />
+                  </Route>
+
                   <Route path="/projects" exact>
                     <Projects />
                   </Route>
@@ -60,18 +78,34 @@ function App() {
                   <Route path="/table" exact>
                     <MaterialTable /> 
                   </Route>
-                  <Route path="/companies" exact>
-                    <Companies /> 
-                  </Route>
                   <Route path="/subscription" exact>
                     <Subscription /> 
                   </Route>
 
+                  {/* Work */}
+                  <Route exact path="/projects" component={Projects} />
+                  <Route exact path="/projects/add" component={AddProject} />
+                  <Route path="/projects/:id" component={Projects} />
+                  <Route exact path="/estimates" component={Estimates} />
+                  <Route path="/estimates/:id" component={Estimates} />
+                  <Route exact path="/purchases" component={Purchases} />
+                  <Route path="/purchases/:id" component={Purchases} />
+                  <Route exact path="/invoices" component={Invoices} />
+                  <Route path="/invoices/:id" component={Invoices} />
+
+                  {/* Contacts */}
+                  <Route exact path="/companies" component={Companies} />
+                  <Route path="/companies/:id" component={Companies} />
+                  <Route exact path="/people" component={People} />
+                  <Route path="/people/:id" component={People} />
+
+                  {/* Settings */}
                   <Route exact path="/team" component={YourTeam} />
                   <Route path="/team/:id" component={YourTeam} />
-
                   <Route exact path="/items-and-tasks" component={ItemsTasks} />
                   <Route path="/items-and-tasks/:id" component={ItemsTasks} />
+                  <Route exact path="/expenses" component={Expenses} />
+                  <Route path="/expenses/:id" component={Expenses} />
 
                 </Switch>
               </AppBody>
