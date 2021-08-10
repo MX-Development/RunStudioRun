@@ -40,6 +40,9 @@ import ItemsTasks from './components/settings/ItemsTasks';
 import Expenses from './components/settings/Expenses';
 
 import DragList from './components/DragList';
+import DragList2 from './components/DragList2';
+
+import Calendar from './components/Calendar';
 
 function App() {
 
@@ -65,6 +68,9 @@ function App() {
                   <Route path="/draglist" exact>
                     <DragList />
                   </Route>
+                  <Route path="/draglist2" exact>
+                    <DragList2 />
+                  </Route>
 
                   <Route path="/projects" exact>
                     <Projects />
@@ -81,6 +87,8 @@ function App() {
                   <Route path="/subscription" exact>
                     <Subscription /> 
                   </Route>
+
+                  <Route exact path="/calendar" component={Calendar} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />

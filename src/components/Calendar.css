@@ -1,0 +1,117 @@
+.fc-event-main {
+  background: #fff;
+  color: #333 !important;
+  border-left: 10px solid red;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.fc-timegrid-event {
+  border-radius: 2px;
+  border: none;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+  border-left: none;
+  border-right: none;
+}
+
+.fc .fc-timegrid-slot-minor {
+  border-top-style: solid;
+  border-color: #DDDBD7;
+}
+
+.fc .fc-timegrid-slot-label {
+  border: none;
+}
+
+.fc .fc-scrollgrid {
+  border: none;
+}
+
+.fc-theme-standard th {
+  border: none;
+  padding: 5px 10px;
+}
+
+.fc-theme-standard th .fc-scrollgrid-sync-inner {
+  background: #fff;
+  text-align: left;
+}
+
+.fc-timegrid-col {
+  padding: 0 10px !important;
+}
+
+/* Table headers */
+.time-bar {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.time-bar .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 60%;
+  background: red;
+  z-index: 0;
+}
+
+.time-worked,
+.time-total {
+  position: relative;
+  z-index: 1;
+}
+
+.fc .fc-col-header-cell-cushion {
+  padding: 0;
+  width: 100%;
+}
+
+/* Event cards */
+.event-container {
+  padding: 0 7.5px 7.5px;
+  position: relative;
+  height: 100%;
+}
+
+.event-container .event-header {
+  background: #fff;
+  z-index: 5;
+  position: relative;
+}
+
+.event-container .event-header h6 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.event-container .event-header .type {
+  color: #B1B0AF;
+  font-weight: bold;
+}
+
+.event-container .event-description {
+  padding: 15px 0;
+}
+
+.event-container .event-footer {
+  position: absolute;
+  bottom: 0;
+  background: #fff;
+  padding: 7.5px 0;
+  width: 100%;
+}
+
+.event-container .event-footer .remaining {
+  display: flex;
+  align-items: center;
+}
+
+.event-container .event-footer .remaining img {
+  margin-right: 5px;
+}
