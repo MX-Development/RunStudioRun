@@ -38,6 +38,7 @@ import People from './components/contacts/People';
 import YourTeam from './components/settings/YourTeam';
 import ItemsTasks from './components/settings/ItemsTasks';
 import Expenses from './components/settings/Expenses';
+import YourProfile from './components/settings/YourProfile';
 
 import DragList from './components/DragList';
 import DragList2 from './components/DragList2';
@@ -88,12 +89,12 @@ function App() {
                     <Subscription /> 
                   </Route>
 
-                  <Route exact path="/calendar" component={Calendar} />
+                  <Route exact path="/to-do" component={Calendar} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />
-                  <Route exact path="/projects/add" component={AddProject} />
-                  <Route path="/projects/:id" component={Projects} />
+                  {/* <Route path="/projects/:id" component={AddProject} /> */}
+                  <Route path="/projects/:id/:view?" component={AddProject} />
                   <Route exact path="/estimates" component={Estimates} />
                   <Route path="/estimates/:id" component={Estimates} />
                   <Route exact path="/purchases" component={Purchases} />
@@ -108,6 +109,7 @@ function App() {
                   <Route path="/people/:id" component={People} />
 
                   {/* Settings */}
+                  <Route exact path="/profile" component={YourProfile} />
                   <Route exact path="/team" component={YourTeam} />
                   <Route path="/team/:id" component={YourTeam} />
                   <Route exact path="/items-and-tasks" component={ItemsTasks} />

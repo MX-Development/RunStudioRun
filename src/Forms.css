@@ -4,6 +4,10 @@
   margin-bottom: 17px;
 }
 
+.form-group.small-gap {
+  margin-bottom: 8.5px;
+}
+
 .form-group label {
   margin-bottom: 7.5px;
   font-size: 16px;
@@ -12,6 +16,34 @@
 .form-control {
   border: 1px solid #DDDBD7;
   padding: 12.5px;
+}
+
+.form-row {
+  display: flex;
+}
+
+.form-row .form-group {
+  width: 47.5%;
+  margin-right: 5%;
+}
+
+.helper {
+  font-size: 12px;
+}
+
+.text-row {
+  background: rgba(255,255,255,0.5);
+  padding: 12.5px;
+}
+
+/* Project page */
+.inline-blocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inline-blocks .form-block {
+  width: 30%;
 }
 
 /* Modal */

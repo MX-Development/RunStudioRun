@@ -107,7 +107,7 @@ function Header() {
         <HeaderNav>
           {
             navItems.map(item => (
-              <Link to="/" key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav === item.item ? 'active' : null}>
+              <Link to={item.item == 'To dos' ? `/to-do` : `/`} key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav === item.item ? 'active' : null}>
                 { item.item }
               </Link>
             ))
