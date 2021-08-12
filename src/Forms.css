@@ -27,6 +27,11 @@
   margin-right: 5%;
 }
 
+.form-row.three .form-group {
+  width: 32%;
+  margin-right: 2.5%;
+}
+
 .helper {
   font-size: 12px;
 }
@@ -49,4 +54,28 @@
 /* Modal */
 .ReactModal__Overlay {
   background-color: rgba(60, 60, 60, 0.5) !important;
+}
+
+/* Material UI */
+.MuiOutlinedInput-input {
+  border: 1px solid #DDDBD7 !important;
+  padding: 12.5px !important;
+  font-size: 14px !important;
+}
+
+.MuiTypography-body1 {
+  font-size: 12px !important;
+}
+
+.MuiCheckbox-root {
+  color: #B1B0AF !important;
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: var(--gold) !important;
+}
+
+.MuiFormLabel-root {
+  color: #3C3C3C !important;
+  font-weight: 400 !important;
 }

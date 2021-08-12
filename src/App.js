@@ -18,7 +18,7 @@ import LoadingScreen from './components/LoadingScreen';
 
 import Header from './components/Header'
 import Form from './components/Form'
-import Settings from './components/Settings'
+import Settings from './components/settings/Settings'
 import Login from './components/account/Login'
 import MaterialTable from './components/MaterialTable';
 import Subscription from './components/settings/Subscription';
