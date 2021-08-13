@@ -8,7 +8,8 @@ import Avatar from '@material-ui/core/Avatar';
 import ModalBox from './ModalBox'
 
 import {
-  Link
+  Link,
+  useHistory
 } from "react-router-dom"
 
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -17,6 +18,8 @@ import { auth } from '../config/firebase'
 import RunStudioRunLogo from './assets/runstudiorun-logo.svg'
 
 function Header() {
+
+  let history = useHistory()
 
   const [user] = useAuthState(auth)
 
@@ -105,10 +108,6 @@ function Header() {
 
   return (
     <>
-      <ModalBox title={modalTitle} modalOpened={modalOpened}>
-        Test
-      </ModalBox>
-
       <HeaderContainer>
         <HeaderTop>
           <HeaderLogo>
@@ -117,7 +116,18 @@ function Header() {
           <HeaderNav>
             {
               navItems.map(item => (
-                <Link to={item.item == 'To dos' ? `/to-do` : `/`} key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav === item.item ? 'active' : null}>
+                <Link key={item.item} onClick={(e) => {
+                  
+                  setActiveNav(item.item)
+
+                  if (item.item == 'To dos') {
+                    history.push(`/to-do`)
+                  } else {
+                    history.push(`${item.sub_items[0].path}`)
+                    setActiveSubitem(item.sub_items[0].title)
+                  }
+                  
+                }} className={activeNav === item.item ? 'active' : null}>
                   { item.item }
                 </Link>
               ))
@@ -270,10 +280,12 @@ const HeaderNav = styled.div`
   display: flex;
 
   > a {
+    background: transparent;
     padding: 15px 45px;
     text-decoration: none;
     color: #fff;
     font-size: 22px;
+    transition: background .25s ease-in-out;
   }
 
   > a:hover {

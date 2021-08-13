@@ -40,9 +40,64 @@ function Calendar() {
         dayHeaderContent={renderHeaderContent}
         events={[
           { 
+            title: 'Task', 
+            start: '2021-08-09T09:00:00',
+            end: '2021-08-09T11:00:00',
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.',
+            editable: true,
+            eventDurationEditable: true,
+            extendedProps: {
+              department: 'BioChemistry'
+            }
+          },
+          { 
+            title: 'Task', 
+            start: '2021-08-09T11:00:00',
+            end: '2021-08-09T12:30:00',
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.',
+            editable: true,
+            eventDurationEditable: true,
+            extendedProps: {
+              department: 'BioChemistry'
+            }
+          },
+          { 
+            title: 'Task', 
+            start: '2021-08-09T14:30:00',
+            end: '2021-08-09T14:45:00',
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.',
+            editable: true,
+            eventDurationEditable: true,
+            extendedProps: {
+              department: 'BioChemistry'
+            }
+          },
+          { 
+            title: 'Task', 
+            start: '2021-08-09T15:00:00',
+            end: '2021-08-09T15:30:00',
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.',
+            editable: true,
+            eventDurationEditable: true,
+            extendedProps: {
+              department: 'BioChemistry'
+            }
+          },
+          { 
             title: 'Task 1', 
             start: '2021-08-11T10:30:00',
             end: '2021-08-11T12:30:00',
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.',
+            editable: true,
+            eventDurationEditable: true,
+            extendedProps: {
+              department: 'BioChemistry'
+            }
+          },
+          { 
+            title: 'Task 1', 
+            start: '2021-08-12T11:30:00',
+            end: '2021-08-12T15:15:00',
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.',
             editable: true,
             eventDurationEditable: true,

@@ -1,7 +1,7 @@
 .fc-event-main {
   background: #fff;
   color: #333 !important;
-  border-left: 10px solid red;
+  border-left: 10px solid var(--gold);
   padding: 10px;
   overflow: hidden;
 }
@@ -49,6 +49,10 @@
   justify-content: space-between;
   position: relative;
   width: 100%;
+  padding: 7.5px;
+  background: #DDDBD7;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .time-bar .bar {
@@ -57,7 +61,7 @@
   left: 0;
   height: 100%;
   width: 60%;
-  background: red;
+  background: var(--gold);
   z-index: 0;
 }
 
@@ -65,6 +69,10 @@
 .time-total {
   position: relative;
   z-index: 1;
+}
+
+.time-worked {
+  color: #fff;
 }
 
 .fc .fc-col-header-cell-cushion {
@@ -97,6 +105,7 @@
 
 .event-container .event-description {
   padding: 15px 0;
+  font-size: 12px;
 }
 
 .event-container .event-footer {
@@ -114,4 +123,9 @@
 
 .event-container .event-footer .remaining img {
   margin-right: 5px;
+}
+
+/* Table heading */
+.table-heading .day {
+  padding: 7.5px;
 }

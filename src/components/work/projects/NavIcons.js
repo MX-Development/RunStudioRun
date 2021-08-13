@@ -17,16 +17,16 @@ function NavIcons({ id }) {
   return (
     <Icons>
       <Link to={`/projects/${id}/timeline`} onClick={(e) => setActiveNav('timeline')} className={activeNav === 'timeline' ? 'active' : ''}>
-        <img src={TimelineIcon} />
+        <img src={TimelineIcon} alt="timeline icon" />
       </Link>
       <Link to={`/projects/${id}/book`} onClick={(e) => setActiveNav('book')} className={activeNav === 'book' ? 'active' : ''}>
-        <img src={BookIcon} />
+        <img src={BookIcon} alt="book icon" />
       </Link>
       <Link to={`/projects/${id}/disc`} onClick={(e) => setActiveNav('disc')} className={activeNav === 'disc' ? 'active' : ''}>
-        <img src={DiscIcon} />
+        <img src={DiscIcon} alt="disc icon" />
       </Link>
       <Link to={`/projects/${id}/eye`} onClick={(e) => setActiveNav('eye')} className={activeNav === 'eye' ? 'active' : ''}>
-        <img src={EyeIcon} />
+        <img src={EyeIcon} alt="eye icon" />
       </Link>
     </Icons>
   )

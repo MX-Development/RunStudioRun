@@ -60,7 +60,9 @@ function ItemsTasks() {
   const selectedID = id;
 
   const { handleSubmit, control, setValue } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => { 
+    console.log(selectedData)
+  }
 
   const [selectedData, setSelectedData] = useState(null)
 
@@ -122,6 +124,7 @@ function ItemsTasks() {
                         placeholder="Enter the task description or what you intend in working on to allow a client to clearly understand the work you will do."
                         {...field}
                         value={selectedData ? selectedData.description : null}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}

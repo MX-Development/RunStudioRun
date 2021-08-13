@@ -57,7 +57,10 @@ function Companies() {
   const selectedID = id;
 
   const { handleSubmit, control, setValue } = useForm();
-  const onSubmit = data => console.log(data);
+
+  const onSubmit = data => { 
+    console.log(selectedData)
+  }
 
   const [selectedData, setSelectedData] = useState(null)
 
@@ -117,6 +120,7 @@ function Companies() {
                       placeholder="000-000-0000"
                       {...field}
                       value={selectedData ? selectedData.phone : ''}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -136,6 +140,7 @@ function Companies() {
                       placeholder="000-000-0000"
                       {...field}
                       value={selectedData ? selectedData.alt_phone : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -155,6 +160,7 @@ function Companies() {
                       placeholder="Interwebs"
                       {...field}
                       value={selectedData ? selectedData.website : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -174,6 +180,7 @@ function Companies() {
                       placeholder="Where people can see you"
                       {...field}
                       value={selectedData ? selectedData.physical_address : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -193,6 +200,7 @@ function Companies() {
                       placeholder="Where to post stuff"
                       {...field}
                       value={selectedData ? selectedData.postal_address : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -212,6 +220,7 @@ function Companies() {
                       placeholder="Australian business number (ABN) or equivalent (VAT)"
                       {...field}
                       value={selectedData ? selectedData.company_tax_number : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -231,6 +240,7 @@ function Companies() {
                       placeholder="Important things to remember"
                       {...field}
                       value={selectedData ? selectedData.notes : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -250,6 +260,7 @@ function Companies() {
                       placeholder="Add a 3 letter representation of the company"
                       {...field}
                       value={selectedData ? selectedData.prefix : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -269,7 +280,7 @@ function Companies() {
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value={10}>1</MenuItem>
+                  <MenuItem value={'Rate'}>Rate</MenuItem>
                   <MenuItem value={20}>2</MenuItem>
                   <MenuItem value={30}>3</MenuItem>
                 </Select>

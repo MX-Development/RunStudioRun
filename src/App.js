@@ -25,7 +25,7 @@ import Subscription from './components/settings/Subscription';
 
 // Work
 import Projects from './components/work/Projects'
-import AddProject from './components/work/AddProject'
+import Project from './components/work/Project'
 import Estimates from './components/work/Estimates';
 import Purchases from './components/work/Purchases';
 import Invoices from './components/work/Invoices';
@@ -45,6 +45,7 @@ import DragList2 from './components/DragList2';
 
 import Calendar from './components/Calendar';
 import Reports from './components/work/Reports';
+import ProjectNav from './components/work/ProjectNav';
 
 function App() {
 
@@ -95,7 +96,7 @@ function App() {
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />
                   {/* <Route path="/projects/:id" component={AddProject} /> */}
-                  <Route path="/projects/:id/:view?" component={AddProject} />
+                  <Route path="/projects/:id/:view?" component={Project} />
                   <Route exact path="/estimates" component={Estimates} />
                   <Route path="/estimates/:id" component={Estimates} />
                   <Route exact path="/purchases" component={Purchases} />

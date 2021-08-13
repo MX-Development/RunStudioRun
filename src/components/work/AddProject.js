@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
 import Avatar from '@material-ui/core/Avatar'
@@ -10,14 +10,44 @@ import ProjectNav from './ProjectNav'
 import NavIcons from './projects/NavIcons'
 import ProjectView from './projects/ProjectView'
 
+import Checkbox from '@material-ui/core/Checkbox'
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import { MenuItem, Select } from '@material-ui/core'
+
 function AddProject() {
 
   let { id, view } = useParams();
+  const selectedID = id;
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const { handleSubmit, control, setValue } = useForm();
 
-  console.log(watch("example")); // watch input value by passing the name of it
+  const onSubmit = data => { 
+    console.log(selectedData)
+  }
+
+  const [selectedData, setSelectedData] = useState(null)
+
+  // useEffect(() => {
+  //   if (id) {
+  //     const dataSelect = data.filter(obj => {
+  //       return obj.id === parseInt(selectedID)
+  //     })
+
+  //     setSelectedData(dataSelect[0])
+  //   }
+  // }, [id]);
+
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value // This code replace the font object
+    });
+  }
 
   return (
     <>
@@ -49,7 +79,7 @@ function AddProject() {
             </select>
           </div>
           <div className="form-group small-gap">
-            <input className="form-control" placeholder="Client Purchase Order Number [Optional]" id="order_nr" {...register("order_nr")} />
+            <input className="form-control" placeholder="Client Purchase Order Number [Optional]" id="order_nr" />
           </div>
         </div>
 
@@ -57,7 +87,7 @@ function AddProject() {
           <ProjectNav />
           <div className="form-group">
             <label htmlFor="name">Project notes</label>
-            <textarea className="form-control" placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate." id="project_notes" rows="5" {...register("project_notes")} />
+            <textarea className="form-control" placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate." id="project_notes" rows="5" />
           </div>
           <div className="form-group">
             <select className="form-control" id="gender">

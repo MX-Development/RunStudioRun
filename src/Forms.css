@@ -59,8 +59,12 @@
 /* Material UI */
 .MuiOutlinedInput-input {
   border: 1px solid #DDDBD7 !important;
-  padding: 12.5px !important;
+  padding: 7.5px !important;
   font-size: 14px !important;
+}
+
+.MuiOutlinedInput-multiline {
+  padding: 0 !important;
 }
 
 .MuiTypography-body1 {
