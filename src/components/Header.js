@@ -306,11 +306,14 @@ const HeaderActions = styled.div`
   > .MuiSvgIcon-root {
     fill: #fff;
     cursor: pointer;
+    width: 1.5em !important;
+    height: 1.5em !important;
+    margin-right: 5px;
   }
 
   > .MuiAvatar-root {
-    width: 24px !important;
-    height: 24px !important;
+    width: 1.75em !important;
+    height: 1.75em !important;
 
     > img {
       border-radius: 50%;
