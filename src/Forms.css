@@ -79,3 +79,9 @@
   color: #3C3C3C !important;
   font-weight: 400 !important;
 }
+
+/* Avatar */
+.MuiAvatar-root {
+  width: 60px !important;
+  height: 60px !important;
+}

@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import styled from 'styled-components'
-import Checkbox from '@material-ui/core/Checkbox';
+
+import Checkbox from '@material-ui/core/Checkbox'
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 import PageTitle from '../layout/PageTitle'
 
@@ -13,13 +19,15 @@ function YourProfile() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
 
-  console.log(watch("example")); // watch input value by passing the name of 
-  
-  const [checked, setChecked] = useState(true);
+  console.log(watch("example")); // watch input value by passing the name of it
+
+  const [state, setState] = useState({
+    job_nr_req: true
+  });
 
   const handleChange = (event) => {
-    setChecked(event.target.checked);
-  }; 
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
   return (
     <>
@@ -37,185 +45,153 @@ function YourProfile() {
           </MemberInfo>
         </MemberAvatar>
 
-        <Form>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-            <LeftContainer>
+          <FormControl component="fieldset">
 
-              <h3>Your Profile</h3>
+          <Grid container spacing={2}> 
+            <Grid item xs={12} sm={6}>
+              <Grid container spacing={2}>  
 
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label> 
-                <input className="form-control" placeholder="First and last name" id="name" {...register("name")} />
-              </div>
+                <Grid item xs={12} sm={12}>
+                  <h3>Your Profile</h3>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Full Name</FormLabel>
+                      <TextField
+                        id="full_name"
+                        placeholder="First and last name"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Job Title</FormLabel>
+                      <TextField
+                        id="job_title"
+                        placeholder="Are you the leader of the pack?"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Email</FormLabel>
+                      <TextField
+                        id="email"
+                        placeholder="you@somehere.com"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Phone</FormLabel>
+                      <TextField
+                        id="phone"
+                        placeholder="000-000-0000"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Billable rate</FormLabel>
+                      <TextField
+                        id="billable_rate"
+                        placeholder="What are they worth"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Cost rate</FormLabel>
+                      <TextField
+                        id="cost_rate"
+                        placeholder="What it costs us"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                
+                <Grid item xs={12} sm={12}>
+                  <h3>Hours I’m available to work</h3>
+                </Grid>
 
-              <div className="form-group">
-                <label htmlFor="name">Job Title</label> 
-                <input className="form-control" placeholder="Are you the leader of the pack?" id="name" {...register("name")} />
-              </div>
+              </Grid>
+            </Grid>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name">Email</label> 
-                  <input className="form-control" placeholder="you@somehere.com" id="name" {...register("name")} />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="name">Phone</label> 
-                  <input className="form-control" placeholder="000-000-0000" id="name" {...register("name")} />
-                </div>
-              </div>
+            <Grid item xs={12} sm={6}>
+              <Grid container spacing={2}>  
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name">Billable Rate</label> 
-                  <input className="form-control" placeholder="What are they worth" id="name" {...register("name")} />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="name">Cost Rate</label> 
-                  <input className="form-control" placeholder="What it costs us" id="name" {...register("name")} />
-                </div>
-              </div>
+                <Grid item xs={12} sm={12}>
+                  <h3>Change Password</h3>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Current Password</FormLabel>
+                      <TextField
+                        id="password"
+                        placeholder="Don’t choose 1234"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>New Password</FormLabel>
+                      <TextField
+                        id="new_password"
+                        placeholder="We know you chose 1234"
+                        variant="outlined"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Confirm Password</FormLabel>
+                      <TextField
+                        id="confirm_password"
+                        placeholder="Remember what you chose?"
+                        variant="outlined"
+                        helperText="Password strength: strong"
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <button type="submit" className="btn btn-gray">Update</button>
+                  </div>
+                </Grid>
 
-              <h3 style={{ marginTop: '15px' }}>Hours I’m available to work</h3>
+              </Grid>
+            </Grid>
+          </Grid>
 
-              <DaysAvailable>
-                <Day>
-                  <span>Mon</span>
-                  <Checkbox
-                    defaultChecked
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
-                  <TextField
-                    id="standard-number"
-                    label="Number"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Day>
-                <Day>
-                  <span>Mon</span>
-                  <Checkbox
-                    defaultChecked
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
-                  <TextField
-                    id="standard-number"
-                    label="Number"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Day>
-                <Day>
-                  <span>Mon</span>
-                  <Checkbox
-                    defaultChecked
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
-                  <TextField
-                    id="standard-number"
-                    label="Number"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Day>
-                <Day>
-                  <span>Mon</span>
-                  <Checkbox
-                    defaultChecked
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
-                  <TextField
-                    id="standard-number"
-                    label="Number"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Day>
-                <Day>
-                  <span>Mon</span>
-                  <Checkbox
-                    defaultChecked
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
-                  <TextField
-                    id="standard-number"
-                    label="Number"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Day>
-                <Day>
-                  <span>Mon</span>
-                  <Checkbox
-                    defaultChecked
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
-                  <TextField
-                    id="standard-number"
-                    label="Number"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Day>
-                <Day>
-                  <span>Mon</span>
-                  <Checkbox
-                    defaultChecked
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
-                  <TextField
-                    id="standard-number"
-                    label="Number"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Day>
-              </DaysAvailable>
+          </FormControl>
 
-            </LeftContainer>
-
-            <RightContainer>
-              
-              <h3>Change Password</h3>
-
-              <div className="form-group">
-                <label htmlFor="name">Current Password</label> 
-                <input className="form-control" placeholder="Don’t choose 1234" id="name" {...register("name")} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="name">New Password</label> 
-                <input className="form-control" placeholder="We know you chose 1234" id="name" {...register("name")} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="name">Confirm Password</label> 
-                <input className="form-control" placeholder="Remember what you chose?" id="name" {...register("name")} />
-              </div>
-              <span className="helper">Password strength: Strong</span>
-            </RightContainer>
-
-          </form>
-        </Form>
+        </form>
         
       </ProfileContainer>
     </>
@@ -227,6 +203,7 @@ export default YourProfile
 const MemberAvatar = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 `
 
 const MemberInfo = styled.div`
@@ -245,25 +222,6 @@ const ProfileContainer = styled.div`
   background: #fff;
   padding: 20px;
   width: 66.6%;
-`
-
-const Form = styled.div`
-  display: flex;
-  margin-top: 30px;
-
-  > form {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-`
-
-const LeftContainer = styled.div`
-  width: 48.5%;
-`
-
-const RightContainer = styled.div`
-  width: 48.5%;
 `
 
 const DaysAvailable = styled.div`

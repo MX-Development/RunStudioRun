@@ -8,19 +8,21 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import PageTitle from './layout/PageTitle'
 
 import Modal from 'react-modal';
-const centerModal = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  },
-};
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent }) {
+function List({ title, columns, data, modalTitle, modalContent, size }) {
+
+  const centerModal = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      maxWidth: size ? '850px' : '550px'
+    },
+  };
 
   const history = useHistory();
   const location = useLocation();

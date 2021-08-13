@@ -5,6 +5,8 @@ import HelpIcon from '@material-ui/icons/Help';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Avatar from '@material-ui/core/Avatar';
 
+import ModalBox from './ModalBox'
+
 import {
   Link
 } from "react-router-dom"
@@ -23,6 +25,9 @@ function Header() {
   const [activeSubitem, setActiveSubitem] = useState(null)
   
   const [openQuickNav, setQuicknav] = useState(false)
+
+  const [modalOpened, setModalOpened] = useState(false)
+  const [modalTitle, setModalTitle] = useState(null)
 
   const navItems = [
     {
@@ -99,106 +104,145 @@ function Header() {
   ]
 
   return (
-    <HeaderContainer>
-      <HeaderTop>
-        <HeaderLogo>
-          <img src={RunStudioRunLogo} alt="Run Studio Run logo" />
-        </HeaderLogo>
-        <HeaderNav>
-          {
-            navItems.map(item => (
-              <Link to={item.item == 'To dos' ? `/to-do` : `/`} key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav === item.item ? 'active' : null}>
-                { item.item }
-              </Link>
-            ))
-          }
-        </HeaderNav>
-        <HeaderActions>
-          <AddCircleIcon onClick={(e) => setQuicknav(!openQuickNav)} />
-          <QuickNav className={openQuickNav ? 'active' : ''}>
-            <h2>Quick</h2>
-            <Columns>
-              <Column>
-                <h3>Projects</h3>
-                <Link to="/projects/add">
-                  New Project
+    <>
+      <ModalBox title={modalTitle} modalOpened={modalOpened}>
+        Test
+      </ModalBox>
+
+      <HeaderContainer>
+        <HeaderTop>
+          <HeaderLogo>
+            <img src={RunStudioRunLogo} alt="Run Studio Run logo" />
+          </HeaderLogo>
+          <HeaderNav>
+            {
+              navItems.map(item => (
+                <Link to={item.item == 'To dos' ? `/to-do` : `/`} key={item.item} onClick={(e) => setActiveNav(item.item)} className={activeNav === item.item ? 'active' : null}>
+                  { item.item }
                 </Link>
-                <Link to="/jobs/add">
-                  New Job
-                </Link>
-                <Link to="/purchases/add">
-                  New Purchases
-                </Link>
-              </Column>
-              <Column>
-                <h3>Contacts</h3>
-                <Link to="/projects/add">
-                  New Project
-                </Link>
-                <Link to="/jobs/add">
-                  New Job
-                </Link>
-                <Link to="/purchases/add">
-                  New Purchases
-                </Link>
-              </Column>
-              <Column>
-                <h3>Profile & Settings</h3>
-                <Link to="/projects/add">
-                  New Project
-                </Link>
-                <Link to="/jobs/add">
-                  New Job
-                </Link>
-                <Link to="/purchases/add">
-                  New Purchases
-                </Link>
-              </Column>
-            </Columns>
-          </QuickNav>
-          <HelpIcon />
-          <Avatar alt={ user?.displayName } src={ user?.photoURL } onClick={(e) => setNavOpen(!navOpen)}>
-            { user?.displayName.charAt(0) } 
-          </Avatar>
-          <ProfileDropdown className={navOpen ? 'active' : ''}>
-            <Link to="/profile">
-              Your Profile
-            </Link>
-            <Link to="/team">
-              Your Team
-            </Link>
-            <Link to="/settings">
-              Company Settings
-            </Link>
-            <Link to="/subscription">
-              Subscription
-            </Link>
-            <Link to="#" onClick={() => auth.signOut()}>
-              Sign Out
-            </Link>
-          </ProfileDropdown>
-        </HeaderActions>
-      </HeaderTop>
-      <HeaderSubnav> 
-        <LeftSpace />
-        <SubnavLinks>
-          {
-            navItems.map(item => (
-              item.sub_items.map(sub_item => (
-                activeNav === item.item ?
-                  <Link to={sub_item.path} key={sub_item.title} parent={item.item} onClick={(e) => setActiveSubitem(sub_item.title)} className={activeSubitem === sub_item.title ? 'active' : null}>
-                    { sub_item.title }
-                  </Link>
-                : null
               ))
-            ))
-          }
-        </SubnavLinks>
-        <SubnavSearch>
-          <input id="search" name="search" className="form-control" placeholder="Search..." />
-        </SubnavSearch>
-      </HeaderSubnav>
-    </HeaderContainer>
+            }
+          </HeaderNav>
+          <HeaderActions>
+            <AddCircleIcon onClick={(e) => {
+              setQuicknav(!openQuickNav)
+              setNavOpen(false)
+            }} />
+            <QuickNav className={openQuickNav ? 'active' : ''}>
+              <h2>Quick</h2>
+              <Columns>
+                <Column>
+                  <h3>Projects</h3>
+                  <Link onClick={(e) => {
+                    setModalTitle('New Project')
+                    setModalOpened(!modalOpened)
+                    setQuicknav(false)
+                  }}>
+                    New Project
+                  </Link>
+                  <Link onClick={(e) => {
+                    setModalTitle('New Job')
+                    setModalOpened(!modalOpened)
+                    setQuicknav(false)
+                  }}>
+                    New Job
+                  </Link>
+                  <Link onClick={(e) => {
+                    setModalTitle('New Purchases')
+                    setModalOpened(!modalOpened)
+                    setQuicknav(false)
+                  }}>
+                    New Purchases
+                  </Link>
+                  <Link onClick={(e) => {
+                    setModalTitle('Additional Time')
+                    setModalOpened(!modalOpened)
+                    setQuicknav(false)
+                  }}>
+                    Additional Time
+                  </Link>
+                </Column>
+                <Column>
+                  <h3>Contacts</h3>
+                  <Link to="/companies/add">
+                    Add Company
+                  </Link>
+                  <Link to="/companies/import">
+                    Import Company
+                  </Link>
+                  <Link to="/people/add">
+                    Add People
+                  </Link>
+                  <Link to="/people/import">
+                    Import People
+                  </Link>
+                  <Link to="/contacts/sync">
+                    Sync Contacts
+                  </Link>
+                </Column>
+                <Column>
+                  <h3>Profile & Settings</h3>
+                  <Link to="/your-team/add">
+                    Add Team Member
+                  </Link>
+                  <Link to="/items/add">
+                    Add Item
+                  </Link>
+                  <Link to="/expenses/add">
+                    Add Expense
+                  </Link>
+                </Column>
+              </Columns>
+            </QuickNav>
+            <HelpIcon />
+            <Avatar alt={ user?.displayName } src={ user?.photoURL } onClick={(e) => {
+              setNavOpen(!navOpen)
+              setQuicknav(false)
+            }}>
+              { user?.displayName.charAt(0) } 
+            </Avatar>
+            <ProfileDropdown className={navOpen ? 'active' : ''}>
+              <Link to="/profile">
+                Your Profile
+              </Link>
+              <Link to="/team">
+                Your Team
+              </Link>
+              <Link to="/settings">
+                Company Settings
+              </Link>
+              <Link to="/subscription">
+                Subscription
+              </Link>
+              <Link to="#" onClick={() => auth.signOut()}>
+                Sign Out
+              </Link>
+            </ProfileDropdown>
+          </HeaderActions>
+        </HeaderTop>
+        <HeaderSubnav> 
+          <LeftSpace />
+          <SubnavLinks>
+            {
+              navItems.map(item => (
+                item.sub_items.map(sub_item => (
+                  activeNav === item.item ?
+                    <Link to={sub_item.path} key={sub_item.title} parent={item.item} onClick={(e) =>  {
+                      setActiveSubitem(sub_item.title)
+                    }} className={activeSubitem === sub_item.title ? 'active' : null}>
+                      { sub_item.title }
+                    </Link>
+                  : null
+                ))
+              ))
+            }
+          </SubnavLinks>
+          <SubnavSearch>
+            <input id="search" name="search" className="form-control" placeholder="Search..." />
+          </SubnavSearch>
+        </HeaderSubnav>
+      </HeaderContainer>
+    </>
   )
 }
 
@@ -253,8 +297,8 @@ const HeaderActions = styled.div`
   }
 
   > .MuiAvatar-root {
-    width: 24px;
-    height: 24px;
+    width: 24px !important;
+    height: 24px !important;
 
     > img {
       border-radius: 50%;
@@ -354,7 +398,7 @@ const QuickNav = styled.div`
   border-radius: 0px 0px 4px 4px;
   padding: 15px;
   background: #fff;
-  z-index: 1;
+  z-index: 5;
 
   &.active {
     display: flex;

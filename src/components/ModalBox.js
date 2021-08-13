@@ -15,7 +15,7 @@ const centerModal = {
 
 Modal.setAppElement('#root');
 
-function ModalBox({ modalOpened, title, buttons, children }) {
+function ModalBox({ modalOpened, title, children }) {
 
   console.log(modalOpened);
 

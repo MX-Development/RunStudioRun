@@ -44,6 +44,7 @@ import DragList from './components/DragList';
 import DragList2 from './components/DragList2';
 
 import Calendar from './components/Calendar';
+import Reports from './components/work/Reports';
 
 function App() {
 
@@ -101,6 +102,7 @@ function App() {
                   <Route path="/purchases/:id" component={Purchases} />
                   <Route exact path="/invoices" component={Invoices} />
                   <Route path="/invoices/:id" component={Invoices} />
+                  <Route exact path="/reports" component={Reports} />
 
                   {/* Contacts */}
                   <Route exact path="/companies" component={Companies} />
