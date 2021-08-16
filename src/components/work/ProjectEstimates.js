@@ -1,11 +1,12 @@
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useReducer, useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 // https://codedaily.io/tutorials/Multi-List-Drag-and-Drop-With-react-beautiful-dnd-Immer-and-useReducer
 
 import produce from 'immer'
 
-// import './DragList.css'
+import './ProjectEstimates.css'
+import EstimateList from './EstimateList';
 
 const dragReducer = produce((draft, action) => {
   switch (action.type) {
@@ -15,41 +16,87 @@ const dragReducer = produce((draft, action) => {
       const [removed] = draft[action.from].splice(action.fromIndex, 1);
       draft[action.to].splice(action.toIndex, 0, removed);
     }
+    case "ADD":
+      // Copy over root state
+      // draft.push({ id: "id3", done: false, body: "Buy bananas" });
   }
 });
 
-const data = [
-  {
-    id: "5f832341cc119a50d1adb972",
-    picture: "http://placehold.it/32x32",
-    name: {
-      first: "Goff",
-      last: "Robbins",
-    },
-  },
-  {
-    id: "5f832341cc119a50d1adb973",
-    picture: "http://placehold.it/32x32",
-    name: {
-      first: "Mike",
-      last: "Hendriks",
-    },
-  },
-  {
-    id: "5f832341cc119a50d1adb2333",
-    picture: "http://placehold.it/32x32",
-    name: {
-      first: "Piet",
-      last: "Gofert",
-    },
-  }
-]
+function ProjectEstimates() { 
 
-function DragList2() {
+  const data = [
+    {
+      id: "5f832341cc119a50d1adb972",
+      picture: "http://placehold.it/32x32",
+      name: {
+        first: "Goff",
+        last: "Robbins",
+      },
+    },
+    {
+      id: "5f832341cc119a50d1adb973",
+      picture: "http://placehold.it/32x32",
+      name: {
+        first: "Mike",
+        last: "Hendriks",
+      },
+    },
+    {
+      id: "5f832341cc119a50d1adb2333",
+      picture: "http://placehold.it/32x32",
+      name: {
+        first: "Piet",
+        last: "Gofert",
+      },
+    }
+  ]
+
+  const data2 = [
+    {
+      id: "5f832341cc119a50d1adb97223",
+      picture: "http://placehold.it/32x32",
+      name: {
+        first: "Goff",
+        last: "Robbins",
+      },
+    },
+    {
+      id: "5f832341cc119a50d1adb973zczcx",
+      picture: "http://placehold.it/32x32",
+      name: {
+        first: "Mike",
+        last: "Hendriks",
+      },
+    },
+    {
+      id: "5f832341cc119a50d1addfsdb2333",
+      picture: "http://placehold.it/32x32",
+      name: {
+        first: "Piet",
+        last: "Gofert",
+      },
+    }
+  ]
 
   const [state, dispatch] = useReducer(dragReducer, {
     items: data,
+    items2: data2
   });
+
+  const addData = () => {
+    console.log('adding...')
+    dispatch({
+      type: "ADD",
+      items: [...data, {
+        id: "5f832341cc119a50d1adb9727",
+        picture: "http://placehold.it/32x3232",
+        name: {
+          first: "Goff53",
+          last: "Robbin5325s",
+        },                                        
+      }]
+    });
+  }
 
   const onDragEnd = useCallback((result) => {
     console.log(result)
@@ -69,8 +116,15 @@ function DragList2() {
 
   return (
     <div style={{
-      display: 'flex'
+      display: 'flex',
+      flexDirection: 'column'
     }}>
+      {/* <button type="button" onClick={() => addData()}>Add item</button> */}
+
+      {/* <EstimateTitle /> */}
+      
+      <EstimateList type={'title'} title={'Stage/phase title'} />
+
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="items" type="PERSON">
           {(provided, snapshot) => {
@@ -94,13 +148,7 @@ function DragList2() {
                             <div 
                               className="dragger-content"
                             >
-                              <img
-                                src={person.picture}
-                                className="dragger-icon"
-                              />
-                              <span>
-                                {person.name.first} {person.name.last}
-                              </span>
+                              <EstimateList type={'item'} />
                             </div>
                           </div>
                         );
@@ -113,6 +161,11 @@ function DragList2() {
             );
           }}
         </Droppable>
+
+
+      
+        <EstimateList type={'title'} title={'Stage/phase title'} />
+
         <Droppable droppableId="items2" type="PERSON">
           {(provided, snapshot) => {
             return (
@@ -136,13 +189,7 @@ function DragList2() {
                             <div 
                               className="dragger-content"
                             >
-                              <img
-                                src={person.picture}
-                                className="dragger-icon"
-                              />
-                              <span>
-                                {person.name.first} {person.name.last}
-                              </span>
+                              <EstimateList type={'expense'} />
                             </div>
                           </div>
                         );
@@ -155,9 +202,11 @@ function DragList2() {
             );
           }}
         </Droppable>
+
+
       </DragDropContext>
     </div>
   )
 }
 
-export default DragList2
+export default ProjectEstimates

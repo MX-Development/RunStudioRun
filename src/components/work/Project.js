@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import JobScroll from './JobScroll'
 import ProjectNav from './ProjectNav'
@@ -17,6 +18,13 @@ import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select, TextareaAutosize } from '@material-ui/core'
 import ProjectInfo from './ProjectInfo'
 import Jobs from './Jobs'
+import ProjectEstimates from './ProjectEstimates'
+
+import EyeIcon from '../assets/icons/EyeIcon.svg'
+import PlusIcon from '../assets/icons/PlusIcon.svg'
+import AddNav from './projects/AddNav'
+
+import ModalBox from '../ModalBox'
 
 function Project() {
 
@@ -28,6 +36,9 @@ function Project() {
   const onSubmit = data => { 
     console.log(selectedData)
   }
+
+  const [addNav, setAddNav] = useState(false)
+  const [openModal, setOpenModal] = useState(true)
 
   const [selectedData, setSelectedData] = useState(null)
 
@@ -46,6 +57,11 @@ function Project() {
       ...selectedData,
       [event.target.name]: event.target.value // This code replace the font object
     });
+  }
+
+  const showPDF = () => {
+    console.log('Show PDF...')
+    setOpenModal(!openModal)
   }
 
   return (
@@ -168,8 +184,23 @@ function Project() {
       
       <Grid container spacing={2}>
         <Grid item xs={12}>
+
+          <DividerWithIcon onClick={() => setAddNav(!addNav)}>
+            <img src={PlusIcon} alt="" />
+            <AddNav show={addNav ? true : false} />
+          </DividerWithIcon>
+
+          <ProjectEstimates />
+
+          <DividerWithIcon onClick={() => showPDF()}>
+            <img src={EyeIcon} alt="" />
+            <ModalBox modalOpened={openModal}>
+              PDF
+            </ModalBox>
+          </DividerWithIcon>
+
           {/* <ProjectView type={view ? view : 'timeline'} /> */}
-          <Jobs />
+          {/* <Jobs /> */}
         </Grid>
       </Grid>
     </>
@@ -177,3 +208,23 @@ function Project() {
 }
 
 export default Project
+
+const DividerWithIcon = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #DDDBD7;
+  position: relative;
+  margin: 30px 0;
+  
+  :hover {
+    cursor: pointer;
+  }
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 32px;
+  }
+`

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120" height="24" viewBox="0 0 120 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="16" height="16" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect width="16" height="15.999" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_1897" data-name="Group 1897" transform="translate(-960 -552)">
+    <g id="Profile_Pic" data-name="Profile Pic" transform="translate(960 552)">
+      <rect id="BPP3390-TK-BW-Sq-2" width="24" height="24" rx="12" fill="#dddbd7"/>
+      <g id="Profile-Icon" transform="translate(4 4)" clip-path="url(#clip-path)">
+        <path id="Union_1" data-name="Union 1" d="M0,370v-2c0-2.2,3.6-4,8-4s8,1.8,8,4v2Zm4-12a4,4,0,1,1,4,4A4,4,0,0,1,4,358Z" transform="translate(0 -354)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Profile_Pic-2" data-name="Profile Pic" transform="translate(992 552)">
+      <rect id="BPP3390-TK-BW-Sq-2-2" data-name="BPP3390-TK-BW-Sq-2" width="24" height="24" rx="12" fill="#dddbd7"/>
+      <g id="Profile-Icon-2" data-name="Profile-Icon" transform="translate(4 4)" clip-path="url(#clip-path)">
+        <path id="Union_1-2" data-name="Union 1" d="M0,370v-2c0-2.2,3.6-4,8-4s8,1.8,8,4v2Zm4-12a4,4,0,1,1,4,4A4,4,0,0,1,4,358Z" transform="translate(0 -354)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="button-circle-ui" transform="translate(1056 552)">
+      <circle id="Ellipse_412" data-name="Ellipse 412" cx="12" cy="12" r="12" fill="#dddbd7"/>
+      <g id="Plus_Icon" data-name="Plus Icon" transform="translate(4 4)" clip-path="url(#clip-path-3)">
+        <path id="Union_1-3" data-name="Union 1" d="M-4613,16V9h-7V7h7V0h2V7h7V9h-7v7Z" transform="translate(4620)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Group_1634" data-name="Group 1634" transform="translate(624 350)">
+      <rect id="BPP3390-TK-BW-Sq-2-3" data-name="BPP3390-TK-BW-Sq-2" width="24" height="24" rx="2" transform="translate(400 202)" fill="#b1b0af"/>
+      <text id="_3" data-name="+3" transform="translate(407 217)" fill="#fff" font-size="9" font-family="Roboto-Bold, Roboto" font-weight="700"><tspan x="0" y="0">+3</tspan></text>
+    </g>
+  </g>
+</svg>

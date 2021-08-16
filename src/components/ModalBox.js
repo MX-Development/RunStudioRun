@@ -15,14 +15,16 @@ const centerModal = {
 
 Modal.setAppElement('#root');
 
-function ModalBox({ modalOpened, title, children }) {
+function ModalBox({ modalOpened, title, children, styling }) {
 
   console.log(modalOpened);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setIsOpen(!modalIsOpen)
+    if (modalOpened === false) {
+      setIsOpen(!modalIsOpen)
+    }
   }, [modalOpened]);
 
   function openModal() {
@@ -43,7 +45,7 @@ function ModalBox({ modalOpened, title, children }) {
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        style={centerModal}
+        style={styling ? styling : centerModal}
         contentLabel="Example Modal"
       >
         <ModalBody>

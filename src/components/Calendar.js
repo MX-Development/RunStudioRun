@@ -23,8 +23,11 @@ function Calendar() {
         weekends={false}
         eventClick={handleDateClick}
         eventContent={renderEventContent}
-        eventDragStart={(info) => eventDragging(info)}
-        eventDragStop={(info) => eventStopDragging(info)}
+        // eventDragStart={(info) => eventDragging(info)}
+        // eventDragStop={(info) => eventStopDragging(info)}
+        eventDragStart={function( info ) {
+          // info.el.style.transform = 'rotate(45deg)'
+        }}
         scrollTime={'09:00:00'}
         slotDuration={'00:15:00'}
         slotLabelInterval={'01:00'}
@@ -140,13 +143,15 @@ function Calendar() {
 
 export default Calendar
 
-const eventDragging = (info) => {
-  info.el.querySelector('.event-container').classList.add('dragged')
-}
+// const eventDragging = (info) => {
+//   info.el.querySelector('.event-container').classList.add('dragged')
+//   info.el.querySelector('.event-container').style.transform = 'rotate(45deg)'
+// }
 
-const eventStopDragging = (info) => {
-  info.el.querySelector('.event-container').classList.remove('dragged')
-}
+// const eventStopDragging = (info) => {
+//   info.el.querySelector('.event-container').classList.remove('dragged')
+//   info.el.querySelector('.event-container').style.background = '#fff'
+// }
 
 function renderEventContent(eventInfo) {
   // console.log(eventInfo)
