@@ -67,7 +67,7 @@ function Project() {
   return (
     <>
       <FormControl component="fieldset">
-        <Grid container spacing={2}>
+        <Grid container spacing={6}>
 
           <Grid item xs={4}>
 
@@ -140,12 +140,11 @@ function Project() {
           </Grid>
 
           <Grid item xs={4}>
-            <Grid container spacing={2}>
 
-              <Grid item xs={12}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+
                 <ProjectNav />
-              </Grid>
-              <Grid item xs={12}>
+
                 <FormGroup>
                   <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Project notes</FormLabel>
@@ -158,7 +157,7 @@ function Project() {
                           value={selectedData ? selectedData.project_notes : null}
                           onChange={handleChange}
                           multiline
-                          rows={2}
+                          rows={4}
                         />
                       )}
                       control={control}
@@ -166,17 +165,18 @@ function Project() {
                     />
                   </FormControl>
                 </FormGroup>  
-              </Grid>
-              <Grid item xs={12}>
-                <ProjectInfo />
-              </Grid>
 
-            </Grid>
+                <ProjectInfo />
+
+              </div>
+
           </Grid>
 
           <Grid item xs={4}>
-            <NavIcons id={id} />
-            <JobScroll />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+              <NavIcons id={id} />
+              <JobScroll />
+            </div>
           </Grid>
 
         </Grid>
