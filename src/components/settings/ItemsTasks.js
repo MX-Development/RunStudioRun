@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import axios from 'axios';
+
 import List from '../List'
 
 import { useForm, Controller } from "react-hook-form"
@@ -15,46 +17,24 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
-const data = [
-  {
-    id: 1,
-    item: 'Design Development',
-    description: 'For the development of 2 to 3 design options ready for client review/approval…',
-    rate: '$150.00',
-    tier_1: '$130.00',
-    tier_2: '$120.00',
-    tier_3: '$110.00'
-  },
-  {
-    id: 2,
-    item: 'Design Development',
-    description: 'For the development of 2 to 3 design options ready for client review/approval…',
-    rate: '$150.00',
-    tier_1: '$130.00',
-    tier_2: '$120.00',
-    tier_3: '$110.00'
-  },
-  {
-    id: 3,
-    item: 'Design Development',
-    description: 'For the development of 2 to 3 design options ready for client review/approval…',
-    rate: '$150.00',
-    tier_1: '$130.00',
-    tier_2: '$120.00',
-    tier_3: '$110.00'
-  }
-];
-
 const columns = [
-  { field: 'item', type: 'string', flex: 0.3 },
-  { field: 'description', type: 'string', flex: 0.5 },
-  { field: 'rate', type: 'string', flex: 0.1 },
-  { field: 'tier_1', type: 'string', flex: 0.1, headerName: 'Tier 1' },
-  { field: 'tier_2', type: 'string', flex: 0.1, headerName: 'Tier 2' },
-  { field: 'tier_3', type: 'string', flex: 0.1, headerName: 'Tier 3' }
+  { field: 'rateName', type: 'string', flex: 0.3 },
+  { field: 'rateDescription', type: 'string', flex: 0.5 },
+  { field: 'standard', type: 'number', flex: 0.1 },
+  { field: 'tier_1', type: 'number', flex: 0.1, headerName: 'Tier 1' },
+  { field: 'tier_2', type: 'number', flex: 0.1, headerName: 'Tier 2' },
+  { field: 'tier_3', type: 'number', flex: 0.1, headerName: 'Tier 3' }
 ]
 
 function ItemsTasks() {
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    axios.get(`https://kendrix.kendrix.website/json/items_tasks.json`)
+      .then(res => {
+        setData(res.data)
+      })
+  }, []);
 
   let { id } = useParams();
   const selectedID = id;
@@ -69,7 +49,7 @@ function ItemsTasks() {
   useEffect(() => {
     if (id) {
       const dataSelect = data.filter(obj => {
-        return obj.id === parseInt(selectedID)
+        return obj.id == selectedID
       })
 
       setSelectedData(dataSelect[0])
@@ -104,7 +84,7 @@ function ItemsTasks() {
                         variant="outlined"
                         placeholder="Design Development"
                         {...field}
-                        value={selectedData ? selectedData.item_name : null}
+                        value={selectedData ? selectedData.rateName : null}
                       />
                     )}
                     control={control}
@@ -123,7 +103,7 @@ function ItemsTasks() {
                         variant="outlined"
                         placeholder="Enter the task description or what you intend in working on to allow a client to clearly understand the work you will do."
                         {...field}
-                        value={selectedData ? selectedData.description : null}
+                        value={selectedData ? selectedData.rateDescription : null}
                         onChange={handleChange}
                       />
                     )}
@@ -143,7 +123,7 @@ function ItemsTasks() {
                         variant="outlined"
                         placeholder="120.00"
                         {...field}
-                        value={selectedData ? selectedData.hourly_rate : null}
+                        value={selectedData ? selectedData.standard : null}
                       />
                     )}
                     control={control}
@@ -157,15 +137,16 @@ function ItemsTasks() {
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Rate</FormLabel>
                   <Select
-                    value={'Rate'}
+                    value={'Standard'}
                     style={{ width: '100%' }}
                   >
                     <MenuItem value="">
                       <em>Select</em>
                     </MenuItem>
-                    <MenuItem value={10}>1</MenuItem>
-                    <MenuItem value={20}>2</MenuItem>
-                    <MenuItem value={30}>3</MenuItem>
+                    <MenuItem value={'Standard'}>Standard</MenuItem>
+                    <MenuItem value={1}>Tier 1</MenuItem>
+                    <MenuItem value={2}>Tier 2</MenuItem>
+                    <MenuItem value={3}>Tier 3</MenuItem>
                   </Select>
                 </FormControl>
               </FormGroup>
@@ -175,7 +156,7 @@ function ItemsTasks() {
         </FormControl>
 
         <div className="modal-footer">
-          <div className="btn-group">
+          <div className="btn-group"> 
             <div className="btn-left">
               <button className="btn btn-light-gray btn-left">Cancel</button>
             </div>

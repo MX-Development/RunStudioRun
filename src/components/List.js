@@ -10,7 +10,7 @@ import PageTitle from './layout/PageTitle'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size }) {
+function List({ title, columns, data, modalTitle, modalContent, size, projectID }) {
 
   const centerModal = {
     content: {
@@ -44,6 +44,11 @@ function List({ title, columns, data, modalTitle, modalContent, size }) {
     setIsOpen(true)
   }
 
+  function showProject(GridCellParams) {
+    const estimateID = GridCellParams.row.id
+    history.push(`/projects/${projectID}/estimates/${estimateID}`);
+  }
+
   function afterOpenModal() {
 
   }
@@ -60,7 +65,8 @@ function List({ title, columns, data, modalTitle, modalContent, size }) {
         <DataGrid
           columns={columns}
           rows={data}
-          onCellClick={showItem}
+          onCellClick={projectID ? showProject : showItem}
+          autoHeight
         />
       </div>
 

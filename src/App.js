@@ -38,7 +38,7 @@ import People from './components/contacts/People';
 import YourTeam from './components/settings/YourTeam';
 import ItemsTasks from './components/settings/ItemsTasks';
 import Expenses from './components/settings/Expenses';
-import YourProfile from './components/settings/YourProfile';
+import Profile from './components/settings/Profile';
 
 import DragList from './components/DragList';
 import DragList2 from './components/DragList2';
@@ -96,7 +96,7 @@ function App() {
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />
                   {/* <Route path="/projects/:id" component={AddProject} /> */}
-                  <Route path="/projects/:id/:view?" component={Project} />
+                  <Route path="/projects/:id/:view?/:viewID?" component={Project} />
                   <Route exact path="/estimates" component={Estimates} />
                   <Route path="/estimates/:id" component={Estimates} />
                   <Route exact path="/purchases" component={Purchases} />
@@ -112,8 +112,15 @@ function App() {
                   <Route path="/people/:id" component={People} />
 
                   {/* Settings */}
-                  <Route exact path="/profile" component={YourProfile} />
+                  <Route exact path="/profile" component={Profile} />
                   <Route exact path="/team" component={YourTeam} />
+                  <Route
+                    exact
+                    path='/team/add'
+                    render={(props) => (
+                      <YourTeam {...props} addingMember={true} />
+                    )}
+                  />
                   <Route path="/team/:id" component={YourTeam} />
                   <Route exact path="/items-and-tasks" component={ItemsTasks} />
                   <Route path="/items-and-tasks/:id" component={ItemsTasks} />

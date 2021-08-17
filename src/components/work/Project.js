@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm, Controller } from "react-hook-form"
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from "react-router-dom"
 import styled from 'styled-components'
 
 import JobScroll from './JobScroll'
@@ -20,25 +20,24 @@ import ProjectInfo from './ProjectInfo'
 import Jobs from './Jobs'
 import ProjectEstimates from './ProjectEstimates'
 
-import EyeIcon from '../assets/icons/EyeIcon.svg'
-import PlusIcon from '../assets/icons/PlusIcon.svg'
-import AddNav from './projects/AddNav'
-
 import ModalBox from '../ModalBox'
+import Estimates from './Estimates'
+import Purchases from './Purchases'
+import Invoices from './Invoices'
+import CreateEstimate from './CreateEstimate'
 
 function Project() {
 
-  let { id, view } = useParams();
+  let { id, view, viewID } = useParams();
   const selectedID = id;
+
+  const history = useHistory();
 
   const { handleSubmit, control, setValue } = useForm();
 
   const onSubmit = data => { 
     console.log(selectedData)
   }
-
-  const [addNav, setAddNav] = useState(false)
-  const [openModal, setOpenModal] = useState(true)
 
   const [selectedData, setSelectedData] = useState(null)
 
@@ -59,10 +58,7 @@ function Project() {
     });
   }
 
-  const showPDF = () => {
-    console.log('Show PDF...')
-    setOpenModal(!openModal)
-  }
+  const jobs = [];
 
   return (
     <>
@@ -182,22 +178,24 @@ function Project() {
         </Grid>
       </FormControl>
       
-      <Grid container spacing={2}>
+      <Grid container spacing={2} style={{ marginTop: '60px' }}>
         <Grid item xs={12}>
+          
+          { 
+            view === 'jobs' ?
+              jobs.length > 0 ? 
+              <Jobs projectID={id} />
+              : 
+              <CreateEstimate id={id} />
+            : view === 'estimates' ?
+              <Estimates projectID={id} />
+            : view === 'purchases' ?
+              <Purchases projectID={id} />
+            : view === 'invoices' ?
+              <Invoices projectID={id} />
+            : null
+          }
 
-          <DividerWithIcon onClick={() => setAddNav(!addNav)}>
-            <img src={PlusIcon} alt="" />
-            <AddNav show={addNav ? true : false} />
-          </DividerWithIcon>
-
-          <ProjectEstimates />
-
-          <DividerWithIcon onClick={() => showPDF()}>
-            <img src={EyeIcon} alt="" />
-            <ModalBox modalOpened={openModal}>
-              PDF
-            </ModalBox>
-          </DividerWithIcon>
 
           {/* <ProjectView type={view ? view : 'timeline'} /> */}
           {/* <Jobs /> */}
@@ -208,23 +206,3 @@ function Project() {
 }
 
 export default Project
-
-const DividerWithIcon = styled.div`
-  width: 100%;
-  height: 1px;
-  background: #DDDBD7;
-  position: relative;
-  margin: 30px 0;
-  
-  :hover {
-    cursor: pointer;
-  }
-
-  > img {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 32px;
-  }
-`

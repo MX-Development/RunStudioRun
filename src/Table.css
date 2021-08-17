@@ -38,7 +38,7 @@
 }
 
 .MuiDataGrid-root .MuiDataGrid-columnHeaderWrapper {
-  background: #DDDBD7;
+  background: rgba(221, 219, 215, .5);
   margin-bottom: 7.5px;
   color: #3C3C3C;
   text-transform: uppercase;

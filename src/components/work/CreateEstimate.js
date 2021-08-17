@@ -1,24 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import AddIcon from '../assets/icons/AddIcon.svg'
+import { useHistory } from "react-router-dom"
 
-function CreateEstimate() {
+import AddIcon from '../assets/icons/AddIcon.svg'
+import ProjectEstimates from './ProjectEstimates';
+import ModalBox from '../ModalBox';
+
+import EyeIcon from '../assets/icons/EyeIcon.svg'
+import PlusIcon from '../assets/icons/PlusIcon.svg'
+import AddNav from './projects/AddNav'
+
+function CreateEstimate({ id }) {
+
+  const history = useHistory();
+
+  const [adding, setAdding] = useState(false)
+  const [addNav, setAddNav] = useState(false)
+  const [openModal, setOpenModal] = useState(true)
 
   const AddEstimate = () => {
     console.log('Adding an estimate')
+    setAdding(true)
+  }
+
+  const showPDF = () => {
+    console.log('Show PDF...')
+    setOpenModal(!openModal)
   }
 
   return (
     <Container>
-      <Inner>
-        <h2 style={{ color: 'var(--gold)' }}>CONGRATULATIONS ON STARTING A NEW PROJECT</h2>
+      { 
+        adding ?
+        <>
+          <DividerWithIcon onClick={() => setAddNav(!addNav)}>
+            <img src={PlusIcon} alt="" />
+            <AddNav show={addNav ? true : false} />
+          </DividerWithIcon>
 
-        <img src={AddIcon} alt="add icon" onClick={AddEstimate} />
+          <ProjectEstimates />
 
-        <h2 style={{ color: '#B1B0AF' }}>CREATE A NEW JOB ESTIMATE</h2>
-        <h6 style={{ color: '#B1B0AF' }}>WHEN APPROVED A JOB WILL APPEAR HERE</h6>
-      </Inner>
+          <DividerWithIcon onClick={() => showPDF()}>
+            <img src={EyeIcon} alt="" />
+            <ModalBox modalOpened={openModal}>
+              PDF
+            </ModalBox>
+          </DividerWithIcon>
+        </>
+        :
+        <Inner>
+          <h2 style={{ color: 'var(--gold)' }}>CONGRATULATIONS ON STARTING A NEW PROJECT</h2>
+  
+          <img src={AddIcon} alt="add icon" onClick={AddEstimate} />
+  
+          <h2 style={{ color: '#B1B0AF' }}>CREATE A NEW JOB ESTIMATE</h2>
+          <h6 style={{ color: '#B1B0AF' }}>WHEN APPROVED A JOB WILL APPEAR HERE</h6>
+        </Inner>
+      }
     </Container>
   )
 }
@@ -34,7 +73,6 @@ const Container = styled.div`
 `
 
 const Inner = styled.div`
-  margin-top: 90px;
   width: 30%;
   text-align: center;
 
@@ -45,5 +83,25 @@ const Inner = styled.div`
       cursor: pointer;
       opacity: 0.9;
     }
+  }
+`
+
+const DividerWithIcon = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #DDDBD7;
+  position: relative;
+  margin: 30px 0;
+  
+  :hover {
+    cursor: pointer;
+  }
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 32px;
   }
 `

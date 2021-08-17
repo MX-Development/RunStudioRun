@@ -14,7 +14,7 @@ import PageTitle from '../layout/PageTitle'
 
 import Avatar from '@material-ui/core/Avatar';
 
-function YourProfile() {
+function Profile() {
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
@@ -198,7 +198,7 @@ function YourProfile() {
   )
 }
 
-export default YourProfile
+export default Profile
 
 const MemberAvatar = styled.div`
   display: flex;

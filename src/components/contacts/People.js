@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import axios from 'axios';
+
 import List from '../List'
 
 import { useForm, Controller } from "react-hook-form"
@@ -15,66 +17,28 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
-const data = [
-  {
-    id: 1,
-    name: 'Taso Katsionis',
-    phone: '0424 059 513',
-    email: 'taso@ak-d.com.au',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...'
-  },
-  {
-    id: 2,
-    name: 'Lorem ipsum',
-    phone: '0424 059 513',
-    email: 'taso@ak-d.com.au',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...'
-  },
-  {
-    id: 3,
-    name: 'Mike Hendriks',
-    phone: '06 99 99 99 99',
-    email: 'mikehendriks94@gmail.com',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...'
-  },
-  {
-    id: 4,
-    name: 'Taso Katsionis',
-    phone: '0424 059 513',
-    email: 'taso@ak-d.com.au',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...'
-  },
-  {
-    id: 5,
-    name: 'Lorem ipsum',
-    phone: '0424 059 513',
-    email: 'taso@ak-d.com.au',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...'
-  },
-  {
-    id: 6,
-    name: 'Mike Hendriks',
-    phone: '06 99 99 99 99',
-    email: 'mikehendriks94@gmail.com',
-    company: 'Action Design',
-    notes: 'Notes to remember birthday and more...'
-  }
-];
-
 const columns = [
-  { field: 'name', type: 'string', flex: 0.3 },
+  { field: 'fullName', type: 'string', flex: 0.3 },
   { field: 'phone', type: 'string', flex: 0.2 },
   { field: 'email', type: 'string', flex: 0.3 },
-  { field: 'company', type: 'string', flex: 0.2 },
+  { field: 'companyName', type: 'string', flex: 0.2 },
   { field: 'notes', type: 'string', flex: 0.4 },
 ]
 
 function People() {
+
+  const [data, setData] = useState([])
+  const [companies, setCompanies] = useState([])
+  useEffect(() => {
+    axios.get(`https://kendrix.kendrix.website/json/people.json`)
+      .then(res => {
+        setData(res.data)
+      })
+    axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+      .then(res => {
+        setCompanies(res.data)
+      })
+  }, []);
 
   let { id } = useParams();
   const selectedID = id;
@@ -84,13 +48,32 @@ function People() {
 
   const [selectedData, setSelectedData] = useState(null)
 
+  const [commPreferences, setCommPreferences] = useState({
+    all: false,
+    marketing_emails: false,
+    email: false,
+    phone_call: false,
+    google_chat: false,
+    post: false,
+    text_sms: true,
+    skype_messenger: false
+  });
+
   useEffect(() => {
     if (id) {
+      console.log(selectedID)
+      console.log(id)
       const dataSelect = data.filter(obj => {
-        return obj.id === parseInt(selectedID)
+        return obj.id == selectedID
       })
 
       setSelectedData(dataSelect[0])
+      console.log(dataSelect[0])
+
+      setCommPreferences({
+        all: true,
+        phone_call: true
+      })
     }
   }, [id]);
 
@@ -100,10 +83,6 @@ function People() {
       [event.target.name]: event.target.value // This code replace the font object
     });
   }
-
-  const [state, setState] = useState({
-    all: true
-  });
 
   const modalContent = (      
       
@@ -117,15 +96,19 @@ function People() {
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Company</FormLabel>
                 <Select
-                  value={'Action Design'}
+                  value={selectedData ? selectedData.companyName : ''}
                   style={{ width: '100%' }}
                 >
                   <MenuItem value="">
-                    <em>Select</em>
+                    <em>Select a company</em>
                   </MenuItem>
-                  <MenuItem value={10}>1</MenuItem>
-                  <MenuItem value={20}>2</MenuItem>
-                  <MenuItem value={30}>3</MenuItem>
+                  { 
+                    companies ? 
+                      companies.map(company => (
+                        <MenuItem value={company.companyName} key={company.id}>{company.companyName}</MenuItem>
+                      ))
+                    : null
+                  }
                 </Select>
               </FormControl>
             </FormGroup>
@@ -140,7 +123,7 @@ function People() {
                       placeholder="Are you the leader of the pack?"
                       variant="outlined"
                       {...field}
-                      value={selectedData ? selectedData.job_title : ''}
+                      value={selectedData ? selectedData.jobTitle : ''}
                       onChange={handleChange}
                     />
                   )}
@@ -162,7 +145,7 @@ function People() {
                       variant="outlined"
                       placeholder="First and last name"
                       {...field}
-                      value={selectedData ? selectedData.full_name : ''}
+                      value={selectedData ? selectedData.fullName : ''}
                     />
                   )}
                   control={control}
@@ -240,7 +223,7 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.all}
                     onChange={handleChange}
                     name="all"
                   />
@@ -254,9 +237,9 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.marketing_emails}
                     onChange={handleChange}
-                    name="all"
+                    name="marketing_emails"
                   />
                 }
                 label="Consent to receiving marketing emails & collateral"
@@ -268,9 +251,9 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.email}
                     onChange={handleChange}
-                    name="all"
+                    name="email"
                   />
                 }
                 label="Email"
@@ -282,9 +265,9 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.phone_call}
                     onChange={handleChange}
-                    name="all"
+                    name="phone_call"
                   />
                 }
                 label="Phone Call"
@@ -296,9 +279,9 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.google_chat}
                     onChange={handleChange}
-                    name="all"
+                    name="google_chat"
                   />
                 }
                 label="Google Chat"
@@ -310,9 +293,9 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.post}
                     onChange={handleChange}
-                    name="all"
+                    name="post"
                   />
                 }
                 label="Post"
@@ -324,9 +307,9 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.text_sms}
                     onChange={handleChange}
-                    name="all"
+                    name="text_sms"
                   />
                 }
                 label="Text / SMS"
@@ -338,9 +321,9 @@ function People() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.all}
+                    checked={commPreferences.skype_messenger}
                     onChange={handleChange}
-                    name="all"
+                    name="skype_messenger"
                   />
                 }
                 label="Skype / Messenger"

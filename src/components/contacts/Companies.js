@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import axios from 'axios';
+
 import List from '../List'
 
 import { useForm, Controller } from "react-hook-form"
@@ -15,43 +17,24 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
-const data = [
-  {
-    id: 1,
-    company: 'Bad Boy Burgers 1',
-    phone: '02 8123 1234',
-    website: 'www.bbburgers.com.au',
-    physical_address: 'Chatswood NSW',
-    notes: 'These are notes to help with managing the client. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Praesent commodo…'
-  },
-  {
-    id: 2,
-    company: 'Bad Boy Burgers 2',
-    phone: '02 8123 1234',
-    website: 'www.bbburgers.com.au',
-    physical_address: 'Chatswood NSW',
-    notes: 'These are notes to help with managing the client. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Praesent commodo…'
-  },
-  {
-    id: 3,
-    company: 'Bad Boy Burgers 3',
-    phone: '02 8123 1234',
-    website: 'www.bbburgers.com.au',
-    physical_address: 'Chatswood NSW',
-    notes: 'These are notes to help with managing the client. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Praesent commodo…'
-  }
-];
-
 const columns = [
-  { field: 'company', type: 'string' },
+  { field: 'companyName', type: 'string' },
   { field: 'phone', type: 'string' },
   { field: 'website', type: 'string' },
-  { field: 'physical_address', type: 'string' },
+  { field: 'physicalAddress', type: 'string' },
   { field: 'notes', type: 'string', flex: 0.3 },
   { field: '', type: 'string', width: 50 }
 ]
 
 function Companies() {
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+      .then(res => {
+        setData(res.data)
+      })
+  }, []);
 
   let { id } = useParams();
   const selectedID = id;
@@ -98,7 +81,7 @@ function Companies() {
                       placeholder="Business Name"
                       variant="outlined"
                       {...field}
-                      value={selectedData ? selectedData.company : ''}
+                      value={selectedData ? selectedData.companyName : ''}
                       onChange={handleChange}
                     />
                   )}
@@ -139,7 +122,7 @@ function Companies() {
                       variant="outlined"
                       placeholder="000-000-0000"
                       {...field}
-                      value={selectedData ? selectedData.alt_phone : null}
+                      value={selectedData ? selectedData.altPhone : null}
                       onChange={handleChange}
                     />
                   )}
@@ -179,7 +162,7 @@ function Companies() {
                       variant="outlined"
                       placeholder="Where people can see you"
                       {...field}
-                      value={selectedData ? selectedData.physical_address : null}
+                      value={selectedData ? selectedData.physicalAddress : null}
                       onChange={handleChange}
                     />
                   )}
@@ -199,7 +182,7 @@ function Companies() {
                       variant="outlined"
                       placeholder="Where to post stuff"
                       {...field}
-                      value={selectedData ? selectedData.postal_address : null}
+                      value={selectedData ? selectedData.postalAddress : null}
                       onChange={handleChange}
                     />
                   )}
@@ -219,7 +202,7 @@ function Companies() {
                       variant="outlined"
                       placeholder="Australian business number (ABN) or equivalent (VAT)"
                       {...field}
-                      value={selectedData ? selectedData.company_tax_number : null}
+                      value={selectedData ? selectedData.companyTaxNumber : null}
                       onChange={handleChange}
                     />
                   )}
@@ -259,7 +242,7 @@ function Companies() {
                       variant="outlined"
                       placeholder="Add a 3 letter representation of the company"
                       {...field}
-                      value={selectedData ? selectedData.prefix : null}
+                      value={selectedData ? selectedData.companyPrefix : null}
                       onChange={handleChange}
                     />
                   )}
@@ -280,9 +263,9 @@ function Companies() {
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value={'Rate'}>Rate</MenuItem>
-                  <MenuItem value={20}>2</MenuItem>
-                  <MenuItem value={30}>3</MenuItem>
+                  <MenuItem value={100}>100</MenuItem>
+                  <MenuItem value={120}>120</MenuItem>
+                  <MenuItem value={130}>130</MenuItem>
                 </Select>
               </FormControl>
             </FormGroup>
