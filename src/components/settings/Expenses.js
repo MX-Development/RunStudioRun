@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import axios from 'axios';
+
 import List from '../List'
 
 import { useForm, Controller } from "react-hook-form"
@@ -14,40 +16,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
-const data = [
-  {
-    id: 1,
-    expense_name: 'Digital 1 Printing',
-    description: 'For the printing of 100 x A4 double sided flyers, printed on 150gsm gloss stock…',
-    cost: '$500.00',
-    markup: '30%',
-    sell: '$650.00'
-  },
-  {
-    id: 2,
-    expense_name: 'Digital 2 Printing',
-    description: 'For the printing of 100 x A4 double sided flyers, printed on 150gsm gloss stock…',
-    cost: '$500.00',
-    markup: '30%',
-    sell: '$650.00'
-  },
-  {
-    id: 3,
-    expense_name: 'Digital 3 Printing',
-    description: 'For the printing of 100 x A4 double sided flyers, printed on 150gsm gloss stock…',
-    cost: '$500.00',
-    markup: '30%',
-    sell: '$650.00'
-  },
-  {
-    id: 4,
-    expense_name: 'Digita 4 Printing',
-    description: 'For the printing of 100 x A4 double sided flyers, printed on 150gsm gloss stock…',
-    cost: '$500.00',
-    markup: '30%',
-    sell: '$650.00'
-  }
-];
+import ModalBox from '../ModalBox'
 
 const columns = [
   { field: 'expense_name', type: 'string', flex: 0.3 },
@@ -57,7 +26,21 @@ const columns = [
   { field: 'sell', type: 'string', flex: 0.3 }, 
 ]
 
-function Expenses() {
+function Expenses({ add }) {
+
+  const [openModal, setOpenModal] = useState(false)
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    axios.get(`https://kendrix.kendrix.website/json/expenses.json`)
+      .then(res => {
+        setData(res.data)
+      })
+
+    if (add) {
+      setOpenModal(!openModal)
+    }
+  }, []);
 
   let { id } = useParams();
   const selectedID = id;
@@ -105,7 +88,7 @@ function Expenses() {
                         placeholder="Name of the expense"
                         variant="outlined"
                         {...field}
-                        value={selectedData ? selectedData.expense_name : ''}
+                        value={selectedData ? selectedData.expenseName : ''}
                         onChange={handleChange}
                       />
                     )}
@@ -213,7 +196,12 @@ function Expenses() {
   )
 
   return (
-    <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} />
+    <>
+      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Item & Task'}>
+        { modalContent }
+      </ModalBox>
+      <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} />
+    </>
   )
 }
 

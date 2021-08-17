@@ -22,6 +22,8 @@ import { MenuItem, Select } from '@material-ui/core'
 
 import Avatar from '@material-ui/core/Avatar';
 
+import ModalBox from '../ModalBox'
+
 const columns = [
   { field: 'name', type: 'string', flex: 0.3 },
   { field: 'phone', type: 'string', flex: 0.2 },
@@ -31,7 +33,7 @@ const columns = [
   { field: 'subscription', type: 'string', flex: 0.2 }
 ]
 
-function YourTeam({ addingMember }) {
+function YourTeam({ add }) {
 
   const [user] = useAuthState(auth)
 
@@ -44,6 +46,8 @@ function YourTeam({ addingMember }) {
   const [selectedData, setSelectedData] = useState(null)
   const [data, setData] = useState([])
 
+  const [openModal, setOpenModal] = useState(false)
+
   useEffect(() => {
     axios.get(`https://kendrix.kendrix.website/json/team.json`)
       .then(res => {
@@ -51,10 +55,13 @@ function YourTeam({ addingMember }) {
         console.log(typeof res.data)
         setData(res.data.team)
       })
+
+    if (add) {
+      setOpenModal(!openModal)
+    }
   }, []);
 
   useEffect(() => {
-    console.log(addingMember)
     if (id) {
       const dataSelect = data.filter(obj => {
         return obj.id === parseInt(selectedID)
@@ -111,10 +118,19 @@ function YourTeam({ addingMember }) {
                 <FormGroup>
                   <FormControl variant="outlined">
                     <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Full Name</FormLabel>
-                    <TextField
-                      id="full_name"
-                      placeholder="First and last name"
-                      variant="outlined"
+                    <Controller
+                      render={({ field }) => (
+                        <TextField
+                          placeholder="First and last name"
+                          variant="outlined"
+                          {...field}
+                          value={selectedData ? selectedData.name : ''}
+                          onChange={handleChange}
+                        />
+                      )}
+                      control={control}
+                      name="full_name"
+                      defaultValue=""
                     />
                   </FormControl>
                 </FormGroup>
@@ -377,7 +393,12 @@ function YourTeam({ addingMember }) {
   )
 
   return (
-    <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} size={'large'} />
+    <>
+      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Team Member'} size={'large'}>
+        { modalContent }
+      </ModalBox>
+      <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} size={'large'} />
+    </>
   )
 }
 

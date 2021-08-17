@@ -174,13 +174,13 @@ function Header() {
                 </Column>
                 <Column>
                   <h3>Contacts</h3>
-                  <Link to="/companies/add">
+                  <Link to="/companies/add" onClick={() => setQuicknav(false)}>
                     Add Company
                   </Link>
                   <Link to="/companies/import">
                     Import Company
                   </Link>
-                  <Link to="/people/add">
+                  <Link to="/people/add" onClick={() => setQuicknav(false)}>
                     Add People
                   </Link>
                   <Link to="/people/import">
@@ -192,13 +192,13 @@ function Header() {
                 </Column>
                 <Column>
                   <h3>Profile & Settings</h3>
-                  <Link to="/your-team/add">
+                  <Link to="/team/add" onClick={() => setQuicknav(false)}>
                     Add Team Member
                   </Link>
-                  <Link to="/items/add">
+                  <Link to="/items-and-tasks/add" onClick={() => setQuicknav(false)}>
                     Add Item
                   </Link>
-                  <Link to="/expenses/add">
+                  <Link to="/expenses/add" onClick={() => setQuicknav(false)}>
                     Add Expense
                   </Link>
                 </Column>

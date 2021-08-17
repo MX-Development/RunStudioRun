@@ -32,10 +32,10 @@ function TestOrder({ estimateID }) {
     axios.get(`https://kendrix.kendrix.website/json/estimates.json`)
       .then(res => {
         res.data.map(item => {
-          if (item.id == 1) {
+          if (item.id == estimateID) {
             console.log(item.id)
             console.log(item)
-            setEstimateStructure(item)
+            setEstimateStructure(item.structure)
           }
         })
         }
@@ -85,17 +85,16 @@ function TestOrder({ estimateID }) {
       {
         estimateStructure ? (
         <>
-          <h3>{ estimateStructure.structure.overview }</h3>
+          <h3>{ estimateStructure.overview }</h3>
           {
-            estimateStructure.structure.stages.map(item => (
+            estimateStructure.stages.map(item => (
               <>
-                <h4>{ item.title }</h4>
-                <p>{ item.description }</p>
+                <EstimateList type={'title'} data={item} key={item.id} />
 
                 {
                   item.tasks.map(task => (
                     <>
-                      <h6>{ task.title }</h6>
+                      <EstimateList type={'item'} data={task} key={task.id} />
 
                       {
                         task.subtasks.map(task => (

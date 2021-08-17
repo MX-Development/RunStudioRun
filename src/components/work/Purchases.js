@@ -25,15 +25,18 @@ function Purchases({ projectID }) {
   useEffect(() => {
     axios.get(`https://kendrix.kendrix.website/json/purchases.json`)
       .then(res => {
-        res.data.map(item => {
-          if (item.projectID == projectID) {
-            console.log(item.projectID)
-            console.log(item)
-            setData(data => [...data, item])
-          }
-        })
-        console.log(data)
-      })
+        projectID ? 
+          res.data.map(item => {
+            if (item.projectID == projectID) {
+              console.log(item.projectID)
+              console.log(item)
+              setData(data => [...data, item])
+            }
+          })
+        :
+          setData(res.data)
+        }
+      )
   }, []);
 
   const modalContent = (          

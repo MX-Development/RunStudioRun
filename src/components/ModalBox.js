@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Modal from 'react-modal';
 
-const centerModal = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  },
-};
-
 Modal.setAppElement('#root');
 
-function ModalBox({ modalOpened, title, children, styling }) {
+function ModalBox({ modalOpened, title, children, styling, size }) {
+
+  const centerModal = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      maxWidth: size ? '850px' : '550px'
+    },
+  };
 
   console.log(modalOpened);
 

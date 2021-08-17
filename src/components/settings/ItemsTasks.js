@@ -17,6 +17,8 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
+import ModalBox from '../ModalBox'
+
 const columns = [
   { field: 'rateName', type: 'string', flex: 0.3 },
   { field: 'rateDescription', type: 'string', flex: 0.5 },
@@ -26,7 +28,9 @@ const columns = [
   { field: 'tier_3', type: 'number', flex: 0.1, headerName: 'Tier 3' }
 ]
 
-function ItemsTasks() {
+function ItemsTasks({ add }) {
+
+  const [openModal, setOpenModal] = useState(false)
 
   const [data, setData] = useState([])
   useEffect(() => {
@@ -34,6 +38,10 @@ function ItemsTasks() {
       .then(res => {
         setData(res.data)
       })
+
+    if (add) {
+      setOpenModal(!openModal)
+    }
   }, []);
 
   let { id } = useParams();
@@ -172,7 +180,12 @@ function ItemsTasks() {
   )
 
   return (
-    <List title={'Items & Tasks'} columns={columns} data={data} modalTitle={'Add/Edit Item & Task'} modalContent={modalContent} />
+    <>
+      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Item & Task'}>
+        { modalContent }
+      </ModalBox>
+      <List title={'Items & Tasks'} columns={columns} data={data} modalTitle={'Add/Edit Item & Task'} modalContent={modalContent} />
+    </>
   )
 }
 

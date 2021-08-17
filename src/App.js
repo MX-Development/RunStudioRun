@@ -107,6 +107,13 @@ function App() {
 
                   {/* Contacts */}
                   <Route exact path="/companies" component={Companies} />
+                  <Route
+                    exact
+                    path='/companies/add'
+                    render={(props) => (
+                      <Companies {...props} add={true} />
+                    )}
+                  />
                   <Route path="/companies/:id" component={Companies} />
                   <Route exact path="/people" component={People} />
                   <Route path="/people/:id" component={People} />
@@ -118,13 +125,27 @@ function App() {
                     exact
                     path='/team/add'
                     render={(props) => (
-                      <YourTeam {...props} addingMember={true} />
+                      <YourTeam {...props} add={true} />
                     )}
                   />
                   <Route path="/team/:id" component={YourTeam} />
                   <Route exact path="/items-and-tasks" component={ItemsTasks} />
+                  <Route
+                    exact
+                    path='/items-and-tasks/add'
+                    render={(props) => (
+                      <ItemsTasks {...props} add={true} />
+                    )}
+                  />
                   <Route path="/items-and-tasks/:id" component={ItemsTasks} />
                   <Route exact path="/expenses" component={Expenses} />
+                  <Route
+                    exact
+                    path='/expenses/add'
+                    render={(props) => (
+                      <Expenses {...props} add={true} />
+                    )}
+                  />
                   <Route path="/expenses/:id" component={Expenses} />
 
                 </Switch>

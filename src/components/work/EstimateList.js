@@ -5,7 +5,7 @@ import DragIcon from '../assets/icons/DragIcon.svg'
 import ActionIcon from '../assets/icons/ActionIcon.svg'
 import TeamToDelete from '../assets/icons/TeamToDelete.svg'
 
-function EstimateList({ type, title }) {
+function EstimateList({ type, data }) {
   return (
     <Container>
       <DragButton>
@@ -15,35 +15,39 @@ function EstimateList({ type, title }) {
       <Info>
         <Top>
           <div className="title">
-            <h3>{ type === 'item' ? 'Add an item/task' : type === 'expense' ? 'Add an expense' : type === 'title' ? title : null }</h3>
+            <h3>{ type === 'item' ? 'Add an item/task' : type === 'expense' ? 'Add an expense' : type === 'title' ? data.title : null }</h3>
             <span>Pending</span>
           </div>
-          <div className="team">
-            <img src={TeamToDelete} alt="team to delete" />
-          </div>
+          {
+            type !== 'title' ?
+              <div className="team">
+                <img src={TeamToDelete} alt="team to delete" />
+              </div>
+            : null
+          }
         </Top>
         <Bottom>
           { type === 'item' ? 
             <>
               <Item width={0.2}>
                 <h6>Hours</h6>
-                <span>0hr/0m</span>
+                <span>{ data.time }</span>
               </Item>
               <Item width={0.2}>
                 <h6>Rate</h6>
-                <span>$120</span>
+                <span>${ data.rate }</span>
               </Item>
               <Item width={0.2}>
                 <h6>Total</h6>
-                <span>$0</span>
+                <span>${ data.total }</span>
               </Item>
               <Item width={0.3}>
                 <h6>Start</h6>
-                <span>30 Sep 2017</span>
+                <span>{ data.startDate }</span>
               </Item>
               <Item width={0.3}>
                 <h6>End</h6>
-                <span>30 Sep 2017</span>
+                <span>{ data.endDate }</span>
               </Item>
             </>
           : type === 'expense' ?
@@ -84,11 +88,7 @@ function EstimateList({ type, title }) {
 
       <Description>
         <p>
-        { type === 'title' ? 
-          'The stage/phase text entry allows you to enter important information about how you will go about one part of the job. It also allows you to allocated this stage to a team member. This will also appear as a heading in your estimate.'
-        : 
-          'This description is the default text added in the EXPENSES settings. The user can add or edit to this text that may better describe the scope of work to the client. This may be multiple lines entry, perhaps the area expands as text is added.'
-        }
+          { data.description }
         </p>
       </Description>
       <ActionButton>

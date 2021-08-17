@@ -17,6 +17,8 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
+import ModalBox from '../ModalBox'
+
 const columns = [
   { field: 'fullName', type: 'string', flex: 0.3 },
   { field: 'phone', type: 'string', flex: 0.2 },
@@ -25,7 +27,9 @@ const columns = [
   { field: 'notes', type: 'string', flex: 0.4 },
 ]
 
-function People() {
+function People({ add }) {
+
+  const [openModal, setOpenModal] = useState(false)
 
   const [data, setData] = useState([])
   const [companies, setCompanies] = useState([])
@@ -38,6 +42,10 @@ function People() {
       .then(res => {
         setCompanies(res.data)
       })
+
+      if (add) {
+        setOpenModal(!openModal)
+      }
   }, []);
 
   let { id } = useParams();
@@ -372,7 +380,12 @@ function People() {
   )
 
   return (
-    <List title={'People'} columns={columns} data={data} modalTitle={'Add/Edit People'} modalContent={modalContent} />
+    <>
+      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit People'}>
+        { modalContent }
+      </ModalBox>
+      <List title={'People'} columns={columns} data={data} modalTitle={'Add/Edit People'} modalContent={modalContent} />
+    </>
   )
 }
 

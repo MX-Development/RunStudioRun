@@ -30,6 +30,8 @@ function Estimates({ projectID }) {
         projectID ? 
           res.data.map(item => {
             if (item.projectID == projectID) {
+              console.log(viewID)
+              console.log(projectID)
               console.log(item.projectID)
               console.log(item)
               setData(data => [...data, item])
@@ -43,9 +45,9 @@ function Estimates({ projectID }) {
 
   return (
       viewID ? 
-      <TestOrder estimateID={2} />
+      <TestOrder estimateID={viewID} key={1} />
       :
-      <List title={'Estimates'} columns={columns} data={data} projectID={projectID} />
+      <List title={'Estimates'} columns={columns} data={data} projectID={projectID} key={projectID} />
   )
 }
 
