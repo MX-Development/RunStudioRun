@@ -27,18 +27,49 @@ const dragReducer = produce((draft, action) => {
 function TestOrder({ estimateID }) { 
 
   const [data, setData] = useState([])
-  const [estimateStructure, setEstimateStructure] = useState()
+  const [estimateData, setEstimateData] = useState()
+  const [phases, setPhases] = useState([])
+  const [tasks, setTasks] = useState([])
+  const [subtasks, setSubtasks] = useState([])
+  
   useEffect(() => {
+    setPhases([])
+    setTasks([])
+    setSubtasks([])
     axios.get(`https://kendrix.kendrix.website/json/estimates.json`)
       .then(res => {
         res.data.map(item => {
           if (item.id == estimateID) {
-            console.log(item.id)
-            console.log(item)
-            setEstimateStructure(item.structure)
+            setEstimateData(item)
           }
         })
-        }
+      }).then(
+        axios.get(`https://kendrix.kendrix.website/json/estimates/phases.json`)
+          .then(res => {
+            res.data.map(item => {
+              if (item.jobId == estimateID) {
+                setPhases(phases => [...phases, item])
+
+                axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+                  .then(res => {
+                    res.data.map(task => {
+                      if (item.tasks.includes(task.id)) {
+                        setTasks(tasks => [...tasks, task])
+
+                        axios.get(`https://kendrix.kendrix.website/json/estimates/subitems.json`)
+                          .then(res => {
+                            res.data.map(subtask => {
+                              if (subtask.taskId == task.id) {
+                                setSubtasks(subtasks => [...subtasks, subtask])
+                              }
+                            })
+                          })
+                      }
+                    })
+                  })
+              }
+            })
+          })
       )
   }, []);
 
@@ -82,23 +113,55 @@ function TestOrder({ estimateID }) {
       display: 'flex',
       flexDirection: 'column'
     }}>
+      
       {
-        estimateStructure ? (
-        <>
-          <EstimateList type={'overview'} data={estimateStructure.overview} key={123312} />
-          {
-            estimateStructure.stages.map(item => (
+        estimateData ? (
+          <>
+            <EstimateList type={'overview'} data={estimateData.overview} key={estimateData.id} id={estimateID} />
+            {phases.map(phase => (
               <>
-                <EstimateList type={'title'} data={item} key={item.id} />
+                <EstimateList type={'title'} data={phase} key={phase.id} id={estimateID} />
+                {tasks.map(task => {
+                  if (phase.tasks.includes(task.id)) {
+                    return (
+                    <>
+                      <EstimateList type={'item'} data={task} key={task.id} id={estimateID} />
+                      {subtasks.map(subtask => {
+                        if (subtask.taskId == task.id) {
+                          return (
+                            <EstimateList type={'subitem'} data={subtask} key={subtask.id} id={estimateID} />
+                          )
+                        }
+                      })}
+                    </>
+                    )
+                  }
+                }
+              )}
+              </>
+            ))}
+          </>
+        )
+        : null
+      }
+
+      {/* {
+        estimateData ? (
+        <>
+          <EstimateList type={'overview'} data={estimateData.overview} key={estimateData.id} id={estimateID} />
+          {
+            estimateData.stages.map(item => (
+              <>
+                <EstimateList type={'title'} data={item} key={item.id} id={estimateID} />
 
                 {
                   item.tasks.map(task => (
                     <>
-                      <EstimateList type={'item'} data={task} key={task.id} />
+                      <EstimateList type={'item'} data={task} key={task.id} id={estimateID} />
 
                       {
                         task.subtasks.map(subtask => (
-                          <EstimateList type={'subitem'} data={subtask} key={subtask.id} />
+                          <EstimateList type={'subitem'} data={subtask} key={subtask.id} id={estimateID} />
                         ))
                       }
                     </>
@@ -110,7 +173,7 @@ function TestOrder({ estimateID }) {
         </>
         )
         : null
-      }
+      } */}
           
     </div>
   )

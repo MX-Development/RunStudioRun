@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import moment from 'moment'
@@ -7,24 +7,38 @@ import DragIcon from '../assets/icons/DragIcon.svg'
 import ActionIcon from '../assets/icons/ActionIcon.svg'
 import TeamToDelete from '../assets/icons/TeamToDelete.svg'
 
+import { useForm, Controller } from "react-hook-form"
+
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
-function EstimateList({ type, data }) {
+function EstimateList({ type, data, id }) {
+
+  const { handleSubmit, control, setValue } = useForm();
   
   const [edit, setEdit] = useState(null)
-  const [selectedData, setSelectedData] = useState(data)
+  const [selectedData, setSelectedData] = useState(null)
 
-  const editField = (e) => {
-    console.log(e)
-    console.log('Editing field...')
-    setEdit(e.target.name)
-  }
+  useEffect(() => {
+    console.log(id)
+    console.log(data)
+    // if (id) {
+    //   const dataSelect = data.filter(obj => {
+    //     return obj.id === parseInt(id)
+    //   })
+
+    //   console.log(dataSelect)
+
+    //   setSelectedData(dataSelect[0])
+    // }
+    setSelectedData(data)
+  }, [id]);
 
   const handleChange = event => {
+    console.log(selectedData)
     setSelectedData({
       ...selectedData,
       [event.target.name]: event.target.value // This code replace the font object
@@ -56,7 +70,7 @@ function EstimateList({ type, data }) {
           } 
         </Top>
         {
-          type !== 'overview' ?
+          type !== 'overview' && type !== 'title' ?
             <Bottom>
               { type === 'item' || type === 'subitem' ? 
                 <>
@@ -69,18 +83,24 @@ function EstimateList({ type, data }) {
                     <span>${ data.rate }</span>
                   </Item>
                   <Item width={0.2}>
-                    <h6>Total</h6>
-                    <span>
-                      <TextField
-                        variant="outlined"
-                        value={data ? data.total : null}
-                        disabled
-                        onClick={(e) => editField(e)}
-                        name="total"
-                        disabled={edit === 'total' ? false : true}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </span>
+                    <FormGroup>
+                      <FormControl variant="outlined">
+                        <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Total</FormLabel>
+                        <Controller
+                          render={({ field }) => (
+                            <TextField
+                              placeholder="$-"
+                              variant="outlined"
+                              {...field}
+                              value={selectedData ? selectedData.total : null}
+                              onChange={handleChange}
+                            />
+                          )}
+                          control={control}
+                          name="total"
+                        />
+                      </FormControl>
+                    </FormGroup>
                   </Item>
                   <Item width={0.3}>
                     <h6>Start</h6>
@@ -218,6 +238,12 @@ const Item = styled.div`
 
   .MuiOutlinedInput-notchedOutline {
     border: none !important;
+  }
+
+  .MuiFormLabel-root {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600 !important;
   }
 `
 
