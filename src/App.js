@@ -44,8 +44,8 @@ import DragList from './components/DragList';
 import DragList2 from './components/DragList2';
 
 import Calendar from './components/Calendar';
+import CalendarTest from './components/CalendarTest';
 import Reports from './components/work/Reports';
-import ProjectNav from './components/work/ProjectNav';
 
 function App() {
 
@@ -91,7 +91,7 @@ function App() {
                     <Subscription /> 
                   </Route>
 
-                  <Route exact path="/to-do" component={Calendar} />
+                  <Route exact path="/to-do" component={CalendarTest} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />

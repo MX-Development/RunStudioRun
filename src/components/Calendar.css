@@ -23,6 +23,8 @@
 
 .fc .fc-timegrid-slot-label {
   border: none;
+  position: relative;
+  top: -11.5px;
 }
 
 .fc .fc-scrollgrid {
@@ -31,11 +33,10 @@
 
 .fc-theme-standard th {
   border: none;
-  padding: 5px 10px;
+  padding: 5px 10px 15px;
 }
 
 .fc-theme-standard th .fc-scrollgrid-sync-inner {
-  background: #fff;
   text-align: left;
 }
 
@@ -53,6 +54,7 @@
   background: #DDDBD7;
   font-size: 12px;
   font-weight: 500;
+  border-radius: 0 0 4px 0;
 }
 
 .time-bar .bar {
@@ -63,6 +65,7 @@
   width: 60%;
   background: var(--gold);
   z-index: 0;
+  border-radius: 0 0 0 4px;
 }
 
 .time-worked,
@@ -137,4 +140,7 @@ a.fc-event.eventRed {
 /* Table heading */
 .table-heading .day {
   padding: 7.5px;
+  border-radius: 4px 4px 0 0;
+  background: #fff;
+  font-size: 12px;
 }

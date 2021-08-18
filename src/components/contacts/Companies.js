@@ -8,10 +8,8 @@ import List from '../List'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -31,17 +29,32 @@ const columns = [
 function Companies({ add }) {
 
   const [openModal, setOpenModal] = useState(false)
-
   const [data, setData] = useState([])
-  useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/companies.json`)
-      .then(res => {
-        setData(res.data)
-      })
+  const [isLoading, setIsLoading] = useState(false);
 
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+        .then(res => {
+          setData(res.data)
+        })
+
+        console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData().then({
       if (add) {
         setOpenModal(!openModal)
       }
+    })
   }, []);
 
   let { id } = useParams();

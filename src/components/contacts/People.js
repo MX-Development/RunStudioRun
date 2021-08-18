@@ -30,22 +30,37 @@ const columns = [
 function People({ add }) {
 
   const [openModal, setOpenModal] = useState(false)
-
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
   const [companies, setCompanies] = useState([])
-  useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/people.json`)
-      .then(res => {
-        setData(res.data)
-      })
-    axios.get(`https://kendrix.kendrix.website/json/companies.json`)
-      .then(res => {
-        setCompanies(res.data)
-      })
 
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/people.json`)
+        .then(res => {
+          setData(res.data)
+        })
+      await axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+        .then(res => {
+          setCompanies(res.data)
+        })
+
+        console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData().then({
       if (add) {
         setOpenModal(!openModal)
       }
+    })
   }, []);
 
   let { id } = useParams();
