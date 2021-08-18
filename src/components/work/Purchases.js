@@ -22,21 +22,37 @@ const columns = [
 function Purchases({ projectID }) {
 
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/purchases.json`)
+        .then(res => {
+          projectID ? 
+            res.data.map(item => {
+              if (item.projectID == projectID) {
+                console.log(item.projectID)
+                console.log(item)
+                setData(data => [...data, item])
+              }
+            })
+          :
+            setData(res.data)
+          }
+        )
+
+      console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+  }
+
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/purchases.json`)
-      .then(res => {
-        projectID ? 
-          res.data.map(item => {
-            if (item.projectID == projectID) {
-              console.log(item.projectID)
-              console.log(item)
-              setData(data => [...data, item])
-            }
-          })
-        :
-          setData(res.data)
-        }
-      )
+    fetchData()
   }, []);
 
   const modalContent = (          
@@ -52,7 +68,7 @@ function Purchases({ projectID }) {
   )
 
   return (
-    <List title={'Purchases'} columns={columns} data={data} modalTitle={'Add/Edit Purchases'} modalContent={modalContent} />
+    <List title={'Purchases'} columns={columns} data={data} modalTitle={'Add/Edit Purchases'} modalContent={modalContent} isLoading={isLoading} />
   )
 }
 

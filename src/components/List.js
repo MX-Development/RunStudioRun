@@ -10,7 +10,7 @@ import PageTitle from './layout/PageTitle'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size, projectID }) {
+function List({ title, columns, data, modalTitle, modalContent, size, projectID, ...rest }) {
 
   const centerModal = {
     content: {
@@ -67,6 +67,7 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID 
           rows={data}
           onCellClick={projectID ? showProject : showItem}
           autoHeight
+          {...rest}
         />
       </div>
 

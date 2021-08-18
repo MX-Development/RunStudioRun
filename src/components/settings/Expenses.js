@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 
 import axios from 'axios';
 
@@ -8,10 +7,8 @@ import List from '../List'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -29,17 +26,32 @@ const columns = [
 function Expenses({ add }) {
 
   const [openModal, setOpenModal] = useState(false)
-
   const [data, setData] = useState([])
-  useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/expenses.json`)
-      .then(res => {
-        setData(res.data)
-      })
+  const [isLoading, setIsLoading] = useState(false);
 
-    if (add) {
-      setOpenModal(!openModal)
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/expenses.json`)
+        .then(res => {
+          setData(res.data)
+        })
+
+        console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
     }
+
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData().then({
+      if (add) {
+        setOpenModal(!openModal)
+      }
+    })
   }, []);
 
   let { id } = useParams();
@@ -88,13 +100,11 @@ function Expenses({ add }) {
                         placeholder="Name of the expense"
                         variant="outlined"
                         {...field}
-                        value={selectedData ? selectedData.expenseName : ''}
-                        onChange={handleChange}
+                        value={selectedData ? selectedData.expenseName : null}
                       />
                     )}
                     control={control}
-                    name="expense_name"
-                    defaultValue=""
+                    name="expenseName"
                   />
                 </FormControl>
               </FormGroup>
@@ -109,7 +119,7 @@ function Expenses({ add }) {
                         variant="outlined"
                         placeholder="Enter the expense description"
                         {...field}
-                        value={selectedData ? selectedData.description : ''}
+                        value={selectedData ? selectedData.description : null}
                       />
                     )}
                     control={control}
@@ -196,28 +206,18 @@ function Expenses({ add }) {
   )
 
   return (
+      
+    isLoading ? 
+    'Loading...'
+    :
     <>
       <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Item & Task'}>
         { modalContent }
       </ModalBox>
       <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} />
     </>
+      
   )
 }
 
 export default Expenses
-
-const MemberAvatar = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-
-  > span {
-    font-size: 12px;
-  }
-`

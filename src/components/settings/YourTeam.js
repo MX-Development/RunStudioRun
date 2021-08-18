@@ -18,7 +18,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { MenuItem, Select } from '@material-ui/core'
 
 import Avatar from '@material-ui/core/Avatar';
 
@@ -37,6 +36,35 @@ function YourTeam({ add }) {
 
   const [user] = useAuthState(auth)
 
+  const [openModal, setOpenModal] = useState(false)
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/team.json`)
+        .then(res => {
+          setData(res.data)
+        })
+
+        console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData().then({
+      if (add) {
+        setOpenModal(!openModal)
+      }
+    })
+  }, []);
+
   let { id } = useParams();
   const selectedID = id;
 
@@ -44,22 +72,6 @@ function YourTeam({ add }) {
   const onSubmit = data => console.log(data);
 
   const [selectedData, setSelectedData] = useState(null)
-  const [data, setData] = useState([])
-
-  const [openModal, setOpenModal] = useState(false)
-
-  useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/team.json`)
-      .then(res => {
-        console.log(res.data.team)
-        console.log(typeof res.data)
-        setData(res.data.team)
-      })
-
-    if (add) {
-      setOpenModal(!openModal)
-    }
-  }, []);
 
   useEffect(() => {
     if (id) {
