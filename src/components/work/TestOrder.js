@@ -85,7 +85,7 @@ function TestOrder({ estimateID }) {
       {
         estimateStructure ? (
         <>
-          <h3>{ estimateStructure.overview }</h3>
+          <EstimateList type={'overview'} data={estimateStructure.overview} key={123312} />
           {
             estimateStructure.stages.map(item => (
               <>
@@ -97,8 +97,8 @@ function TestOrder({ estimateID }) {
                       <EstimateList type={'item'} data={task} key={task.id} />
 
                       {
-                        task.subtasks.map(task => (
-                          <p>{ task.title }</p>
+                        task.subtasks.map(subtask => (
+                          <EstimateList type={'subitem'} data={subtask} key={subtask.id} />
                         ))
                       }
                     </>

@@ -8,6 +8,7 @@ function ProjectNav() {
   let { id } = useParams();
   const location = useLocation();
   const pagePath = location.pathname.split('/')[1]
+  console.log(location.pathname)
 
   const [activeTab, setActiveTab] = useState(null)
 
@@ -36,10 +37,10 @@ const TabContainer = styled.div`
     border-radius: 2px;
     font-weight: bold;
     color: #B1B0AF;
+  }
 
-    .active {
-      background: var(--gold);
-      color: #fff;
-    }
+  > a.btn.btn-active {
+    background: var(--gold);
+    color: #fff;
   }
 `
