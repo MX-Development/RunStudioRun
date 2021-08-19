@@ -70,7 +70,7 @@ function BusinessInformation() {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Country</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Country</FormLabel>
                 <Select
                   value={age}
                   onChange={handleChange}
@@ -89,7 +89,7 @@ function BusinessInformation() {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Currency</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Currency</FormLabel>
                 <Select
                   value={age}
                   onChange={handleChange}
@@ -107,7 +107,7 @@ function BusinessInformation() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Company Name</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company Name</FormLabel>
                 <TextField
                   id="company_name"
                   placeholder="This is what appears on your paperwork"
@@ -119,7 +119,7 @@ function BusinessInformation() {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Phone</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Phone</FormLabel>
                 <TextField
                   id="phone"
                   placeholder="000-000-0000"
@@ -131,7 +131,7 @@ function BusinessInformation() {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Alternative Phone</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Alternative Phone</FormLabel>
                 <TextField
                   id="alt_phone"
                   placeholder="000-000-0000"
@@ -143,7 +143,7 @@ function BusinessInformation() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Physical Address</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Physical Address</FormLabel>
                 <TextField
                   id="physical_address"
                   placeholder="Where people can see you"
@@ -155,7 +155,7 @@ function BusinessInformation() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Postal Address</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
                 <TextField
                   id="postal_address"
                   placeholder="Where to post stuff"
@@ -167,7 +167,7 @@ function BusinessInformation() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Tax Number (Appears on Estimates & Invoices)</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Tax Number (Appears on Estimates & Invoices)</FormLabel>
                 <TextField
                   id="tax_nr"
                   placeholder="Australian business number (ABN) or equivalent (VAT)"
@@ -179,7 +179,7 @@ function BusinessInformation() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Website</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Website</FormLabel>
                 <TextField
                   id="website"
                   placeholder="Interwebs"
@@ -191,7 +191,7 @@ function BusinessInformation() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Company Prefix</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company Prefix</FormLabel>
                 <TextField
                   id="website"
                   placeholder="Add a 3 letter representation of the company"

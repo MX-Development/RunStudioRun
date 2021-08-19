@@ -17,7 +17,7 @@ function CreateEstimate({ id }) {
 
   const [adding, setAdding] = useState(false)
   const [addNav, setAddNav] = useState(false)
-  const [openModal, setOpenModal] = useState(true)
+  const [openModal, setOpenModal] = useState(false)
 
   const AddEstimate = () => {
     console.log('Adding an estimate')

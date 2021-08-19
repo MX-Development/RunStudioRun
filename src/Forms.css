@@ -63,6 +63,17 @@
   font-size: 14px !important;
 }
 
+.MuiOutlinedInput-notchedOutline {
+  border-color: #DDDBD7 !important;
+}
+
+.MuiFormHelperText-contained {
+  margin: 0 !important;
+  color: #3c3c3c !important;
+  font-weight: 500;
+  margin-top: 5px !important;
+}
+
 .MuiOutlinedInput-multiline {
   padding: 0 !important;
 }

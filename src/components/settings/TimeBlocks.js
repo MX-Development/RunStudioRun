@@ -58,7 +58,7 @@ function TimeBlocks() {
           </Grid>
 
           <Grid item xs={12} sm={4}>
-            <FormLabel style={{ lineHeight: '2', fontSize: '.85em' }}>JOB NUMBER</FormLabel>
+            <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>JOB NUMBER</FormLabel>
             <FormGroup row>
               <TextField
                 id="job_nr"
@@ -68,7 +68,7 @@ function TimeBlocks() {
             </FormGroup>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <FormLabel style={{ lineHeight: '2', fontSize: '.85em' }}>ESTIMATE NUMBER</FormLabel>
+            <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>ESTIMATE NUMBER</FormLabel>
             <FormGroup row>
               <TextField
                 id="estimate_nr"
@@ -78,7 +78,7 @@ function TimeBlocks() {
             </FormGroup>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <FormLabel style={{ lineHeight: '2', fontSize: '.85em' }}>INVOICE NUMBER</FormLabel>
+            <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>INVOICE NUMBER</FormLabel>
             <FormGroup row>
               <TextField
                 id="invoice_nr"

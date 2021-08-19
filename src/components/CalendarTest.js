@@ -34,35 +34,29 @@ function Calendar() {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/estimates.json`)
+      await axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
         .then(res => {
           setData(res.data)
           setEvents([])
 
-          const estimates = res.data
-          estimates.map(estimate => {
-            estimate.structure.stages.map(event => {
-              event.tasks.map(task => {
+          console.log(res.data)
 
-                let taskObject = {
-                  title: task.title, 
-                  start: moment(task.startDate).format(),
-                  end: moment(task.startDate).add(task.time, 'minutes').format(),
-                  description: task.description,
-                  time: moment.duration(task.time, "minutes").asSeconds(),
-                  jobTitle: estimate.structure.overview,
-                  editable: true,
-                  eventDurationEditable: true
-                }
+          const tasks = res.data
+          tasks.map(task => {
+            let taskObject = {
+              title: task.title, 
+              start: moment(task.startDate).format(),
+              end: moment(task.startDate).add(task.time, 'minutes').format(),
+              description: task.description,
+              time: moment.duration(task.time, "minutes").asSeconds(),
+              jobTitle: 'Job Title',
+              editable: true,
+              eventDurationEditable: true
+            }
 
-                console.log(moment(task.startDate).format())
-                console.log(moment(task.startDate).add(75, 'minutes').format())
+            setEvents(events => [...events, taskObject])
 
-                console.log(event)
-
-                setEvents(events => [...events, taskObject])
-              })
-            })
+            console.log(events)
           })
         })
 

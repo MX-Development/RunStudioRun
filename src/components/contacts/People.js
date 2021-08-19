@@ -41,10 +41,11 @@ function People({ add }) {
       await axios.get(`https://kendrix.kendrix.website/json/people.json`)
         .then(res => {
           setData(res.data)
-        })
-      await axios.get(`https://kendrix.kendrix.website/json/companies.json`)
-        .then(res => {
-          setCompanies(res.data)
+
+          axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+            .then(res => {
+              setCompanies(res.data)
+            })
         })
 
         console.log('Data fetched successfully.')
@@ -56,11 +57,7 @@ function People({ add }) {
   }
 
   useEffect(() => {
-    fetchData().then({
-      if (add) {
-        setOpenModal(!openModal)
-      }
-    })
+    fetchData()
   }, []);
 
   let { id } = useParams();
@@ -117,7 +114,7 @@ function People({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Company</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company</FormLabel>
                 <Select
                   value={selectedData ? selectedData.companyName : ''}
                   style={{ width: '100%' }}
@@ -139,7 +136,7 @@ function People({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Job Title</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Job Title</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -161,7 +158,7 @@ function People({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Full Name</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Full Name</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -180,7 +177,7 @@ function People({ add }) {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Email</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Email</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -199,7 +196,7 @@ function People({ add }) {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Phone</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Phone</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -218,7 +215,7 @@ function People({ add }) {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Birthday</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Birthday</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -359,7 +356,7 @@ function People({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Notes</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Notes</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -396,10 +393,7 @@ function People({ add }) {
 
   return (
     <>
-      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit People'}>
-        { modalContent }
-      </ModalBox>
-      <List title={'People'} columns={columns} data={data} modalTitle={'Add/Edit People'} modalContent={modalContent} />
+      <List title={'People'} columns={columns} data={data} modalTitle={'Add/Edit People'} modalContent={modalContent} add={add ? true : false} />
     </>
   )
 }

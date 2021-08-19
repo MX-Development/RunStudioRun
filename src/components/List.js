@@ -10,7 +10,7 @@ import PageTitle from './layout/PageTitle'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size, projectID, ...rest }) {
+function List({ title, columns, data, modalTitle, modalContent, size, projectID, add, ...rest }) {
 
   const centerModal = {
     content: {
@@ -37,6 +37,12 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
       <ArrowRightAltIcon />
     )
   })
+
+  useEffect(() => {
+    if (add) {
+      setIsOpen(true)
+    }
+  }, []);
 
   function showItem(GridCellParams) {
     const itemId = GridCellParams.id

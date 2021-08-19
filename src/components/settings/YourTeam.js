@@ -36,7 +36,6 @@ function YourTeam({ add }) {
 
   const [user] = useAuthState(auth)
 
-  const [openModal, setOpenModal] = useState(false)
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
 
@@ -58,11 +57,7 @@ function YourTeam({ add }) {
   }
 
   useEffect(() => {
-    fetchData().then({
-      if (add) {
-        setOpenModal(!openModal)
-      }
-    })
+    fetchData()
   }, []);
 
   let { id } = useParams();
@@ -129,7 +124,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={12}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Full Name</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Full Name</FormLabel>
                     <Controller
                       render={({ field }) => (
                         <TextField
@@ -150,7 +145,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={12}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Job Title</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Job Title</FormLabel>
                     <TextField
                       id="job_title"
                       placeholder="Are you the leader of the pack?"
@@ -162,7 +157,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={6}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Email</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Email</FormLabel>
                     <TextField
                       id="email"
                       placeholder="you@somehere.com"
@@ -174,7 +169,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={6}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Phone</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Phone</FormLabel>
                     <TextField
                       id="phone"
                       placeholder="000-000-0000"
@@ -186,7 +181,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={6}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Billable rate</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Billable rate</FormLabel>
                     <TextField
                       id="billable_rate"
                       placeholder="What are they worth"
@@ -198,7 +193,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={6}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Cost rate</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Cost rate</FormLabel>
                     <TextField
                       id="cost_rate"
                       placeholder="What it costs us"
@@ -224,7 +219,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={12}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Current Password</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Current Password</FormLabel>
                     <TextField
                       id="password"
                       placeholder="Don’t choose 1234"
@@ -236,7 +231,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={12}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>New Password</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>New Password</FormLabel>
                     <TextField
                       id="new_password"
                       placeholder="We know you chose 1234"
@@ -248,7 +243,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={12}>
                 <FormGroup>
                   <FormControl variant="outlined">
-                    <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Confirm Password</FormLabel>
+                    <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Confirm Password</FormLabel>
                     <TextField
                       id="confirm_password"
                       placeholder="Remember what you chose?"
@@ -406,10 +401,7 @@ function YourTeam({ add }) {
 
   return (
     <>
-      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Team Member'} size={'large'}>
-        { modalContent }
-      </ModalBox>
-      <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} size={'large'} />
+      <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} size={'large'} add={add ? true : false} />
     </>
   )
 }

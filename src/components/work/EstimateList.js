@@ -15,6 +15,13 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 function EstimateList({ type, data, id }) {
 
   const { handleSubmit, control, setValue } = useForm();
@@ -44,6 +51,33 @@ function EstimateList({ type, data, id }) {
       [event.target.name]: event.target.value // This code replace the font object
     });
   }
+
+  const [selectedDate, setSelectedDate] = useState({
+    startDate: new Date(moment(data.startDate).format()),
+    endDate: new Date(moment(data.startDate).format())
+  });
+
+  const handleDateChange = (id) => (date) => {
+    if (id === 'startDate') {
+      setSelectedDate({
+        ...selectedDate,
+        startDate: moment(date).format()
+      });
+      setSelectedData({
+        ...selectedData,
+        startDate: moment(date).format()
+      });
+    } else if (id === 'endDate') {
+      setSelectedDate({
+        ...selectedDate,
+        endDate: moment(date).format()
+      });
+      setSelectedData({
+        ...selectedData,
+        endDate: moment(date).format()
+      });
+    }
+  };
 
   return (
     <Container small={type === 'subitem' ? true : false}>
@@ -75,24 +109,53 @@ function EstimateList({ type, data, id }) {
               { type === 'item' || type === 'subitem' ? 
                 <>
                   <Item width={0.2}>
-                    <h6>Hours</h6>
-                    <span>{ data.time }</span>
-                  </Item>
-                  <Item width={0.2}>
-                    <h6>Rate</h6>
-                    <span>${ data.rate }</span>
+                    <FormGroup>
+                      <FormControl variant="outlined">
+                        <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Hours</FormLabel>
+                        <Controller
+                          render={({ field }) => (
+                            <TextField
+                              variant="outlined"
+                              {...field}
+                              value={selectedData ? selectedData.time : null}
+                              onChange={handleChange}
+                            />
+                          )}
+                          control={control}
+                          name="time"
+                        />
+                      </FormControl>
+                    </FormGroup>
                   </Item>
                   <Item width={0.2}>
                     <FormGroup>
                       <FormControl variant="outlined">
-                        <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Total</FormLabel>
+                        <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
                         <Controller
                           render={({ field }) => (
                             <TextField
-                              placeholder="$-"
                               variant="outlined"
                               {...field}
-                              value={selectedData ? selectedData.total : null}
+                              value={selectedData ? selectedData.rate : null}
+                              onChange={handleChange}
+                            />
+                          )}
+                          control={control}
+                          name="rate"
+                        />
+                      </FormControl>
+                    </FormGroup>
+                  </Item>
+                  <Item width={0.2}>
+                    <FormGroup>
+                      <FormControl variant="outlined">
+                        <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Total</FormLabel>
+                        <Controller
+                          render={({ field }) => (
+                            <TextField
+                              variant="outlined"
+                              {...field}
+                              value={selectedData ? '$' + selectedData.total : null}
                               onChange={handleChange}
                             />
                           )}
@@ -103,12 +166,42 @@ function EstimateList({ type, data, id }) {
                     </FormGroup>
                   </Item>
                   <Item width={0.3}>
-                    <h6>Start</h6>
-                    <span>{ moment(data.startDate).format("MMM Do YYYY") }</span>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <FormGroup>
+                        <FormControl variant="outlined">
+                          <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Start</FormLabel>
+                            <KeyboardDatePicker
+                              margin="normal"
+                              format="MM/dd/yyyy"
+                              value={selectedDate.startDate}
+                              onChange={handleDateChange('startDate')}
+                              KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                              }}
+                              name="startDate"
+                            />
+                        </FormControl>
+                      </FormGroup>
+                    </MuiPickersUtilsProvider>
                   </Item>
                   <Item width={0.3}>
-                    <h6>End</h6>
-                    <span>{ moment(data.endDate).format("MMM Do YYYY") }</span>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <FormGroup>
+                        <FormControl variant="outlined">
+                          <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>End</FormLabel>
+                            <KeyboardDatePicker
+                              margin="normal"
+                              format="MM/dd/yyyy"
+                              value={selectedDate.endDate}
+                              onChange={handleDateChange('endDate')}
+                              KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                              }}
+                              name="endDate"
+                            />
+                        </FormControl>
+                      </FormGroup>
+                    </MuiPickersUtilsProvider>
                   </Item>
                 </>
               : type === 'expense' ?
@@ -215,6 +308,7 @@ const Top = styled.div`
 const Bottom = styled.div`
   display: flex;
   height: 50px;
+  margin-bottom: 5px;
 `
 
 const Item = styled.div`
@@ -241,9 +335,20 @@ const Item = styled.div`
   }
 
   .MuiFormLabel-root {
-    font-size: 12px;
+    font-size: 0.67em;
+    margin-bottom: 2px;
     text-transform: uppercase;
     font-weight: 600 !important;
+  }
+
+  .MuiFormControl-marginNormal {
+    margin: 0;
+    top: -5px;
+  }
+
+  .MuiInput-underline:before,
+  .MuiInput-underline:after {
+    opacity: 0;
   }
 `
 

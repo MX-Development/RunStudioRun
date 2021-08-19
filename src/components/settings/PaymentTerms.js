@@ -83,7 +83,7 @@ function PaymentTerms() {
             <h3>Rates</h3>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <FormLabel style={{ lineHeight: '2', fontSize: '.85em' }}>Standard</FormLabel>
+            <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>Standard</FormLabel>
             <FormGroup row>
               <TextField
                 id="job_nr"
@@ -93,7 +93,7 @@ function PaymentTerms() {
             </FormGroup>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <FormLabel style={{ lineHeight: '2', fontSize: '.85em' }}>Tier 1</FormLabel>
+            <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>Tier 1</FormLabel>
             <FormGroup row>
               <TextField
                 id="estimate_nr"
@@ -103,7 +103,7 @@ function PaymentTerms() {
             </FormGroup>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <FormLabel style={{ lineHeight: '2', fontSize: '.85em' }}>Tier 2</FormLabel>
+            <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>Tier 2</FormLabel>
             <FormGroup row>
               <TextField
                 id="invoice_nr"
@@ -113,7 +113,7 @@ function PaymentTerms() {
             </FormGroup>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <FormLabel style={{ lineHeight: '2', fontSize: '.85em' }}>Tier 3</FormLabel>
+            <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>Tier 3</FormLabel>
             <FormGroup row>
               <TextField
                 id="invoice_nr"

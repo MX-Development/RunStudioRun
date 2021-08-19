@@ -143,11 +143,7 @@ function Header() {
               <Columns>
                 <Column>
                   <h3>Projects</h3>
-                  <Link onClick={(e) => {
-                    setModalTitle('New Project')
-                    setModalOpened(!modalOpened)
-                    setQuicknav(false)
-                  }}>
+                  <Link to="/projects/add" onClick={() => setQuicknav(false)}>
                     New Project
                   </Link>
                   <Link onClick={(e) => {

@@ -47,11 +47,7 @@ function Expenses({ add }) {
   }
 
   useEffect(() => {
-    fetchData().then({
-      if (add) {
-        setOpenModal(!openModal)
-      }
-    })
+    fetchData()
   }, []);
 
   let { id } = useParams();
@@ -93,7 +89,7 @@ function Expenses({ add }) {
             <Grid item xs={12}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Expense Name</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Expense Name</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -112,7 +108,7 @@ function Expenses({ add }) {
             <Grid item xs={12}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Description</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Description</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -131,7 +127,7 @@ function Expenses({ add }) {
             <Grid item xs={12}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>How much do you buy the goods?</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>How much do you buy the goods?</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -150,7 +146,7 @@ function Expenses({ add }) {
             <Grid item xs={12}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>What is your markup?</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>What is your markup?</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -169,7 +165,7 @@ function Expenses({ add }) {
             <Grid item xs={12}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Total Sell Rate is shown includes cost plus the markup</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Total Sell Rate is shown includes cost plus the markup</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -211,10 +207,7 @@ function Expenses({ add }) {
     'Loading...'
     :
     <>
-      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Item & Task'}>
-        { modalContent }
-      </ModalBox>
-      <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} />
+      <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} add={add ? true : false} />
     </>
       
   )

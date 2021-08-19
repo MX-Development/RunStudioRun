@@ -50,11 +50,7 @@ function Companies({ add }) {
   }
 
   useEffect(() => {
-    fetchData().then({
-      if (add) {
-        setOpenModal(!openModal)
-      }
-    })
+    fetchData()
   }, []);
 
   let { id } = useParams();
@@ -95,7 +91,7 @@ function Companies({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Company</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -116,7 +112,7 @@ function Companies({ add }) {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Phone</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Phone</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -136,7 +132,7 @@ function Companies({ add }) {
           <Grid item xs={6}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Alternative Phone</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Alternative Phone</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -156,7 +152,7 @@ function Companies({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Website</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Website</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -176,7 +172,7 @@ function Companies({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Physical Address</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Physical Address</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -196,7 +192,7 @@ function Companies({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Postal Address</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -216,7 +212,7 @@ function Companies({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Company Tax Number</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company Tax Number</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -236,7 +232,7 @@ function Companies({ add }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Notes</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Notes</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -256,7 +252,7 @@ function Companies({ add }) {
           <Grid item xs={9}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Company Prefix</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company Prefix</FormLabel>
                 <Controller
                   render={({ field }) => (
                     <TextField
@@ -276,7 +272,7 @@ function Companies({ add }) {
           <Grid item xs={3}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Rate</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
                 <Select
                   value={'Rate'}
                   style={{ width: '100%' }}
@@ -312,10 +308,7 @@ function Companies({ add }) {
 
   return (
     <>
-      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Company'}>
-        { modalContent }
-      </ModalBox>
-      <List title={'Companies'} columns={columns} data={data} modalTitle={'Add/Edit Company'} modalContent={modalContent} />
+      <List title={'Companies'} columns={columns} data={data} modalTitle={'Add/Edit Company'} modalContent={modalContent} add={add ? true : false} />
     </>
   )
 }

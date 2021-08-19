@@ -59,7 +59,7 @@ function Profile() {
                 <Grid item xs={12} sm={12}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Full Name</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Full Name</FormLabel>
                       <TextField
                         id="full_name"
                         placeholder="First and last name"
@@ -71,7 +71,7 @@ function Profile() {
                 <Grid item xs={12} sm={12}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Job Title</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Job Title</FormLabel>
                       <TextField
                         id="job_title"
                         placeholder="Are you the leader of the pack?"
@@ -83,7 +83,7 @@ function Profile() {
                 <Grid item xs={12} sm={6}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Email</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Email</FormLabel>
                       <TextField
                         id="email"
                         placeholder="you@somehere.com"
@@ -95,7 +95,7 @@ function Profile() {
                 <Grid item xs={12} sm={6}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Phone</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Phone</FormLabel>
                       <TextField
                         id="phone"
                         placeholder="000-000-0000"
@@ -107,7 +107,7 @@ function Profile() {
                 <Grid item xs={12} sm={6}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Billable rate</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Billable rate</FormLabel>
                       <TextField
                         id="billable_rate"
                         placeholder="What are they worth"
@@ -119,7 +119,7 @@ function Profile() {
                 <Grid item xs={12} sm={6}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Cost rate</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Cost rate</FormLabel>
                       <TextField
                         id="cost_rate"
                         placeholder="What it costs us"
@@ -145,7 +145,7 @@ function Profile() {
                 <Grid item xs={12} sm={12}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Current Password</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Current Password</FormLabel>
                       <TextField
                         id="password"
                         placeholder="Don’t choose 1234"
@@ -157,7 +157,7 @@ function Profile() {
                 <Grid item xs={12} sm={12}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>New Password</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>New Password</FormLabel>
                       <TextField
                         id="new_password"
                         placeholder="We know you chose 1234"
@@ -169,7 +169,7 @@ function Profile() {
                 <Grid item xs={12} sm={12}>
                   <FormGroup>
                     <FormControl variant="outlined">
-                      <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Confirm Password</FormLabel>
+                      <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Confirm Password</FormLabel>
                       <TextField
                         id="confirm_password"
                         placeholder="Remember what you chose?"

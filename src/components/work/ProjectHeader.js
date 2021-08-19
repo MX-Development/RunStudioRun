@@ -140,7 +140,7 @@ function ProjectHeader() {
 
               <FormGroup>
                 <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Project notes</FormLabel>
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Project notes</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField

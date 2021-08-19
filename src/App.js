@@ -47,6 +47,8 @@ import Calendar from './components/Calendar';
 import CalendarTest from './components/CalendarTest';
 import Reports from './components/work/Reports';
 
+import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
+
 function App() {
 
   const [user, loading] = useAuthState(auth)
@@ -58,7 +60,7 @@ function App() {
   }
 
   return (
-    <div className="app" id="test-modal">
+    <div className="app" id="test-modal" style={{ backgroundImage: `url(${ BackgroundImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
       <Router>
         {
           !user ? (
@@ -95,6 +97,13 @@ function App() {
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />
+                  <Route
+                    exact
+                    path='/projects/add'
+                    render={(props) => (
+                      <Projects {...props} add={true} />
+                    )}
+                  />
                   {/* <Route path="/projects/:id" component={AddProject} /> */}
                   <Route path="/projects/:id/:view?/:viewID?" component={Project} />
                   <Route exact path="/estimates" component={Estimates} />
@@ -116,6 +125,13 @@ function App() {
                   />
                   <Route path="/companies/:id" component={Companies} />
                   <Route exact path="/people" component={People} />
+                  <Route
+                    exact
+                    path='/people/add'
+                    render={(props) => (
+                      <People {...props} add={true} />
+                    )}
+                  />
                   <Route path="/people/:id" component={People} />
 
                   {/* Settings */}

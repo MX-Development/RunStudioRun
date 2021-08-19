@@ -6,6 +6,8 @@ Modal.setAppElement('#root');
 
 function ModalBox({ modalOpened, title, children, styling, size }) {
 
+  console.log(modalOpened)
+
   const centerModal = {
     content: {
       top: '50%',
@@ -18,14 +20,10 @@ function ModalBox({ modalOpened, title, children, styling, size }) {
     },
   };
 
-  console.log(modalOpened);
-
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (modalOpened === false) {
-      setIsOpen(!modalIsOpen)
-    }
+    setIsOpen(!modalIsOpen)
   }, [modalOpened]);
 
   function openModal() {

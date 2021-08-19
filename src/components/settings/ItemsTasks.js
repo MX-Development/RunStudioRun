@@ -50,11 +50,7 @@ function ItemsTasks({ add }) {
   }
 
   useEffect(() => {
-    fetchData().then({
-      if (add) {
-        setOpenModal(!openModal)
-      }
-    })
+    fetchData()
   }, []);
 
 
@@ -99,7 +95,7 @@ function ItemsTasks({ add }) {
             <Grid item xs={12}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Item Name</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Item Name</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -118,7 +114,7 @@ function ItemsTasks({ add }) {
             <Grid item xs={12}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Description</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Description</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -138,7 +134,7 @@ function ItemsTasks({ add }) {
             <Grid item xs={9}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>What is the hourly rate for this item?</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>What is the hourly rate for this item?</FormLabel>
                   <Controller
                     render={({ field }) => (
                       <TextField
@@ -157,7 +153,7 @@ function ItemsTasks({ add }) {
             <Grid item xs={3}>
               <FormGroup>
                 <FormControl variant="outlined">
-                  <FormLabel style={{ lineHeight: '2', fontWeight: '400 !important' }}>Rate</FormLabel>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
                   <Select
                     value={'Standard'}
                     style={{ width: '100%' }}
@@ -195,10 +191,7 @@ function ItemsTasks({ add }) {
 
   return (
     <>
-      <ModalBox modalOpened={openModal} modalTitle={'Add/Edit Item & Task'}>
-        { modalContent }
-      </ModalBox>
-      <List title={'Items & Tasks'} columns={columns} data={data} modalTitle={'Add/Edit Item & Task'} modalContent={modalContent} />
+      <List title={'Items & Tasks'} columns={columns} data={data} modalTitle={'Add/Edit Item & Task'} modalContent={modalContent} add={add ? true : false} />
     </>
   )
 }
