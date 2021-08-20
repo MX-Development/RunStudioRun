@@ -105,6 +105,11 @@ function TimeBlocks() {
               />
             </FormGroup>
           </Grid>
+          <Grid item xs={12}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button type="submit" className="btn btn-gold">Save</button>
+            </div>
+          </Grid>
         </Grid>
       </FormControl>
       

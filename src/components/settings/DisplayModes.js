@@ -30,9 +30,9 @@ function DisplayModes() {
         />
       </FormGroup>
 
-      <div style={{ position: 'absolute', top: '-7px', left: '10%' }}>
-        <img src={DarkHound} />
-        <img src={LightHound} />
+      <div style={{ position: 'absolute', top: '31px', left: '10%' }}>
+        <img src={DarkHound} style={{ width: '35%' }} />
+        <img src={LightHound} style={{ width: '38%' }} />
       </div>
 
       <FormGroup>

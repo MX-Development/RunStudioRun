@@ -20,10 +20,34 @@ import ModalBox from '../ModalBox'
 const columns = [
   { field: 'rateName', type: 'string', flex: 0.3 },
   { field: 'rateDescription', type: 'string', flex: 0.5 },
-  { field: 'standard', type: 'number', flex: 0.1 },
-  { field: 'tier_1', type: 'number', flex: 0.1, headerName: 'Tier 1' },
-  { field: 'tier_2', type: 'number', flex: 0.1, headerName: 'Tier 2' },
-  { field: 'tier_3', type: 'number', flex: 0.1, headerName: 'Tier 3' }
+  { 
+    field: 'standard', type: 'number', flex: 0.1, headerName: 'The Rate',
+    valueFormatter: (params) => {
+      const valueFormatted = Number(params.value).toFixed(2);
+      return `$${valueFormatted}`;
+    }
+  },
+  { 
+    field: 'tier_1', type: 'number', flex: 0.1, headerName: 'Tier 1', 
+    valueFormatter: (params) => {
+      const valueFormatted = Number(params.value).toFixed(2);
+      return `$${valueFormatted}`;
+    }
+  },
+  { 
+    field: 'tier_2', type: 'number', flex: 0.1, headerName: 'Tier 2', 
+    valueFormatter: (params) => {
+      const valueFormatted = Number(params.value).toFixed(2);
+      return `$${valueFormatted}`;
+    }
+  },
+  { 
+    field: 'tier_3', type: 'number', flex: 0.1, headerName: 'Tier 3', 
+    valueFormatter: (params) => {
+      const valueFormatted = Number(params.value).toFixed(2);
+      return `$${valueFormatted}`;
+    }
+  }
 ]
 
 function ItemsTasks({ add }) {

@@ -146,18 +146,10 @@ function Header() {
                   <Link to="/projects/add" onClick={() => setQuicknav(false)}>
                     New Project
                   </Link>
-                  <Link onClick={(e) => {
-                    setModalTitle('New Job')
-                    setModalOpened(!modalOpened)
-                    setQuicknav(false)
-                  }}>
+                  <Link to="/estimates/add" onClick={() => setQuicknav(false)}>
                     New Job
                   </Link>
-                  <Link onClick={(e) => {
-                    setModalTitle('New Purchases')
-                    setModalOpened(!modalOpened)
-                    setQuicknav(false)
-                  }}>
+                  <Link to="/purchases/add" onClick={() => setQuicknav(false)}>
                     New Purchases
                   </Link>
                   <Link onClick={(e) => {
@@ -230,6 +222,9 @@ function Header() {
           <LeftSpace />
           <SubnavLinks>
             {
+              activeNav === 'To dos' ?
+              <p>To dos</p>
+              :
               navItems.map(item => (
                 item.sub_items.map(sub_item => (
                   activeNav === item.item ?

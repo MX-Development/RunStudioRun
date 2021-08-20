@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import styled from 'styled-components'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -16,10 +16,11 @@ import Avatar from '@material-ui/core/Avatar';
 
 function Profile() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const { handleSubmit, control, setValue } = useForm();
 
-  console.log(watch("example")); // watch input value by passing the name of it
+  const onSubmit = data => { 
+    console.log(data)
+  }
 
   const [state, setState] = useState({
     job_nr_req: true
@@ -28,6 +29,8 @@ function Profile() {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
+
+  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
   return (
     <>
@@ -49,7 +52,7 @@ function Profile() {
 
           <FormControl component="fieldset">
 
-          <Grid container spacing={2}> 
+          <Grid container spacing={4}> 
             <Grid item xs={12} sm={6}>
               <Grid container spacing={2}>  
 
@@ -132,6 +135,36 @@ function Profile() {
                 <Grid item xs={12} sm={12}>
                   <h3>Hours I’m available to work</h3>
                 </Grid>
+
+                { days.map(day => (
+                  <Grid item sm={2}>
+                    <>
+                    <FormGroup>
+                      { state.type }
+                      <FormControlLabel
+                        control={<Checkbox checked={true} name={`day_${day}`} />}
+                        label={day[0].toUpperCase() + day.substring(1)}
+                        labelPlacement="top"
+                        style={{ margin: '0' }}
+                      />
+                    </FormGroup>
+                    <FormControl variant="outlined">
+                      <Controller
+                        render={({ field }) => (
+                          <TextField
+                            variant="outlined"
+                            {...field}
+                            value={0}
+                            onChange={handleChange}
+                          />
+                        )}
+                        control={control}
+                        name={`day_hours_${day}`}
+                      />
+                    </FormControl>
+                    </>
+                  </Grid>
+                ))}
 
               </Grid>
             </Grid>

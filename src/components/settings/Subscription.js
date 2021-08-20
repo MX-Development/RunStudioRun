@@ -15,12 +15,21 @@ import PaymentHistory from './PaymentHistory'
 import OutlineHound from '../assets/img/outline-hound.svg'
 import Users from './Users'
 
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../../config/firebase'
+
 function Subscription() {
+
+  const [user] = useAuthState(auth)
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of 
+
+  const uploadAvatar = () => {
+    console.log('Upload an avatar...')
+  }
 
   return (
     <>
@@ -29,14 +38,19 @@ function Subscription() {
       <BlockContainer>
         <StackedBlocks>
 
-          <Block>
+          <Block style={{ minHeight: 'none' }}>
             <MemberAvatar>
-              <Avatar alt="" src="">
-                MM
-              </Avatar>
+              <AvatarContainer>
+                <Avatar alt={ user?.displayName } src={ user?.photoURL }>
+                  { user?.displayName.charAt(0) } 
+                </Avatar>
+                <Overlay onClick={(e) => uploadAvatar()}>
+                  <span>Upload</span>
+                </Overlay>
+              </AvatarContainer>
               <MemberInfo>
-                <h5>Full Name</h5>
-                <span>Position</span> 
+                <h3>Full Name</h3>
+                <p>Position</p> 
               </MemberInfo>
             </MemberAvatar>
           </Block>
@@ -112,14 +126,46 @@ export default Subscription
 const MemberAvatar = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
+`
+
+const AvatarContainer = styled.div`
+  position: relative;
+`
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  border-radius: 50%;
+  transition: opacity .25s ease-in-out;
+  z-index: 5;
+  color: #fff;
+
+  > span {
+    font-size: 14px;
+  }
+
+  :hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  
 `
 
 const MemberInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 20px;
 
-  > span {
-    font-size: 12px;
+  > h3 {
+    margin-bottom: 5px;
   }
 `

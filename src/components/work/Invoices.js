@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import { useParams } from "react-router-dom"
 
 import axios from 'axios';
 
 import List from '../List'
-
-import Avatar from '@material-ui/core/Avatar';
 
 const columns = [
   { field: 'projectInfo', type: 'string', flex: 0.4,
@@ -35,15 +33,15 @@ const columns = [
 
 function Invoices({ projectID }) {
 
+  let { view, viewID } = useParams();
+
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/invoices.json`)
+    axios.get(`https://kendrix.kendrix.website/json/invocies.json`)
       .then(res => {
         projectID ? 
           res.data.map(item => {
             if (item.projectID == projectID) {
-              console.log(item.projectID)
-              console.log(item)
               setData(data => [...data, item])
             }
           })
@@ -53,36 +51,12 @@ function Invoices({ projectID }) {
       )
   }, []);
 
-  const modalContent = (          
-    <MemberAvatar>
-      <Avatar alt="" src="">
-        MM
-      </Avatar>
-      <MemberInfo>
-        <h5>Full Name</h5>
-        <span>Position</span> 
-      </MemberInfo>
-    </MemberAvatar>
-  )
-
   return (
-    <List title={'Invoices'} columns={columns} data={data} modalTitle={'Add/Edit Invoices'} modalContent={modalContent} />
+    viewID ? 
+    <h3>Invoice { viewID }</h3>
+    :
+    <List title={'Invoices'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />
   )
 }
 
 export default Invoices
-
-const MemberAvatar = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-
-  > span {
-    font-size: 12px;
-  }
-`

@@ -93,6 +93,8 @@ function YourTeam({ add }) {
     console.log('Upload an avatar...')
   }
 
+  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+
   const modalContent = (         
     <>
       <MemberAvatar>
@@ -105,8 +107,8 @@ function YourTeam({ add }) {
           </Overlay>
         </AvatarContainer>
         <MemberInfo>
-          <h5>Full Name</h5>
-          <span>Position</span> 
+          <h3>Full Name</h3>
+          <p>Position</p> 
         </MemberInfo>
       </MemberAvatar>
 
@@ -114,7 +116,7 @@ function YourTeam({ add }) {
 
         <FormControl component="fieldset">
 
-        <Grid container spacing={2}> 
+        <Grid container spacing={4}> 
           <Grid item xs={12} sm={6}>
             <Grid container spacing={2}>  
 
@@ -207,6 +209,36 @@ function YourTeam({ add }) {
                 <h3>Hours I’m available to work</h3>
               </Grid>
 
+              { days.map(day => (
+                <Grid item sm={2}>
+                  <>
+                  <FormGroup>
+                    { state.type }
+                    <FormControlLabel
+                      control={<Checkbox checked={true} name={`day_${day}`} />}
+                      label={day[0].toUpperCase() + day.substring(1)}
+                      labelPlacement="top"
+                      style={{ margin: '0' }}
+                    />
+                  </FormGroup>
+                  <FormControl variant="outlined">
+                    <Controller
+                      render={({ field }) => (
+                        <TextField
+                          variant="outlined"
+                          {...field}
+                          value={0}
+                          onChange={handleChange}
+                        />
+                      )}
+                      control={control}
+                      name={`day_hours_${day}`}
+                    />
+                  </FormControl>
+                  </>
+                </Grid>
+              ))}
+
             </Grid>
           </Grid>
 
@@ -260,7 +292,7 @@ function YourTeam({ add }) {
               </Grid>
 
               <Grid item xs={12} sm={12}>
-                <h3>Change Password</h3>
+                <h3>Team Member Access</h3>
               </Grid>
               <Grid item xs={4}>
                 <FormGroup>
@@ -412,6 +444,7 @@ const MemberAvatar = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  margin-bottom: 30px;
 `
 
 const AvatarContainer = styled.div`
@@ -448,9 +481,9 @@ const Overlay = styled.div`
 const MemberInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 20px;
 
-  > span {
-    font-size: 12px;
+  > h3 {
+    margin-bottom: 5px;
   }
 `

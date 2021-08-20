@@ -95,6 +95,10 @@
   font-weight: 400 !important;
 }
 
+.PrivateSwitchBase-root-8 {
+  padding: 5px 9px;
+}
+
 /* Avatar */
 .MuiAvatar-root {
   width: 60px !important;

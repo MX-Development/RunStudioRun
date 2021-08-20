@@ -10,7 +10,7 @@ import PageTitle from './layout/PageTitle'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size, projectID, add, ...rest }) {
+function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, ...rest }) {
 
   const centerModal = {
     content: {
@@ -52,7 +52,7 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
 
   function showProject(GridCellParams) {
     const estimateID = GridCellParams.row.id
-    history.push(`/projects/${projectID}/estimates/${estimateID}`);
+    history.push(`/projects/${projectID}/${view}/${estimateID}`);
   }
 
   function afterOpenModal() {

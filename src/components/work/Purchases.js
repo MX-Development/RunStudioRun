@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import { useParams } from "react-router-dom"
 
 import axios from 'axios';
 
 import List from '../List'
-
-import Avatar from '@material-ui/core/Avatar';
 
 const columns = [
   { field: 'supplier', type: 'string', flex: 0.4 },
@@ -21,70 +19,30 @@ const columns = [
 
 function Purchases({ projectID }) {
 
+  let { view, viewID } = useParams();
+
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-
-    try {
-      await axios.get(`https://kendrix.kendrix.website/json/purchases.json`)
-        .then(res => {
-          projectID ? 
-            res.data.map(item => {
-              if (item.projectID == projectID) {
-                console.log(item.projectID)
-                console.log(item)
-                setData(data => [...data, item])
-              }
-            })
-          :
-            setData(res.data)
-          }
-        )
-
-      console.log('Data fetched successfully.')
-    } catch (err) {
-      console.trace(err);
-    }
-
-    setIsLoading(false);
-  }
-
   useEffect(() => {
-    fetchData()
+    axios.get(`https://kendrix.kendrix.website/json/purchases.json`)
+      .then(res => {
+        projectID ? 
+          res.data.map(item => {
+            if (item.projectID == projectID) {
+              setData(data => [...data, item])
+            }
+          })
+        :
+          setData(res.data)
+        }
+      )
   }, []);
 
-  const modalContent = (          
-    <MemberAvatar>
-      <Avatar alt="" src="">
-        MM
-      </Avatar>
-      <MemberInfo>
-        <h5>Full Name</h5>
-        <span>Position</span> 
-      </MemberInfo>
-    </MemberAvatar>
-  )
-
   return (
-    <List title={'Purchases'} columns={columns} data={data} modalTitle={'Add/Edit Purchases'} modalContent={modalContent} isLoading={isLoading} />
+    viewID ? 
+    <h3>Purchase { viewID }</h3>
+    :
+    <List title={'Purchases'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />
   )
 }
 
 export default Purchases
-
-const MemberAvatar = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-
-  > span {
-    font-size: 12px;
-  }
-`

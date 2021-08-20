@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom"
 import axios from 'axios';
 
 import List from '../List'
-import ProjectEstimates from './ProjectEstimates';
 import TestOrder from './TestOrder';
 
 const columns = [
@@ -21,7 +20,7 @@ const columns = [
 
 function Estimates({ projectID }) {
 
-  let { viewID } = useParams();
+  let { view, viewID } = useParams();
 
   const [data, setData] = useState([])
   useEffect(() => {
@@ -30,10 +29,6 @@ function Estimates({ projectID }) {
         projectID ? 
           res.data.map(item => {
             if (item.projectID == projectID) {
-              console.log(viewID)
-              console.log(projectID)
-              console.log(item.projectID)
-              console.log(item)
               setData(data => [...data, item])
             }
           })
@@ -47,7 +42,7 @@ function Estimates({ projectID }) {
       viewID ? 
       <TestOrder estimateID={viewID} key={1} />
       :
-      <List title={'Estimates'} columns={columns} data={data} projectID={projectID} key={projectID} />
+      <List title={'Estimates'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />
   )
 }
 

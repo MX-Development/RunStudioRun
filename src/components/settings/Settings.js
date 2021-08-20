@@ -2,9 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { MenuItem, Select } from '@material-ui/core'
 
 import PageTitle from '../layout/PageTitle'
 
@@ -50,7 +52,19 @@ function Settings() {
           </Block>
 
           <Block title={'Export your data sets'}> 
-            <p>EXPORT DATA CSV</p>
+            <FormGroup>
+              <FormControl variant="outlined">
+                <Select
+                  value={'Export Data CSV'}
+                  style={{ width: '100%' }}
+                >
+                  <MenuItem value="">
+                    <em>Select</em>
+                  </MenuItem>
+                  <MenuItem value={'Export Data CSV'}>Export Data CSV</MenuItem>
+                </Select>
+              </FormControl>
+            </FormGroup>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <button type="submit" className="btn btn-gold">Export</button>
             </div>

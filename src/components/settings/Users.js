@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+
+import axios from 'axios';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -46,6 +49,30 @@ function Users() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/subscriptions.json`)
+        .then(res => {
+          setData(res.data)
+        })
+
+        console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
   return (
     <TableContainer>
       <Table aria-label="Users" style={{ width: '100%' }}>
@@ -57,7 +84,7 @@ function Users() {
           </TableRow>
         </TableHead>
         <TableBody> 
-          {rows.map((row, index) => {
+          {data.map((row, index) => {
             const isItemSelected = isSelected(row.id);
             const labelId = `enhanced-table-checkbox-${index}`;
             return (
@@ -77,10 +104,10 @@ function Users() {
                   />
                 </TableCell>
                 <TableCell component="th" scope="row" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>
-                  {row.name}
+                  {row.userName}
                 </TableCell>
                 <TableCell align="left" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>{row.status}</TableCell>
-                <TableCell align="right" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>{row.type}</TableCell>
+                <TableCell align="right" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>{row.type} / Renews {row.renewDate}</TableCell>
               </TableRow>
             )
           })}

@@ -104,11 +104,17 @@ function App() {
                       <Projects {...props} add={true} />
                     )}
                   />
-                  {/* <Route path="/projects/:id" component={AddProject} /> */}
                   <Route path="/projects/:id/:view?/:viewID?" component={Project} />
                   <Route exact path="/estimates" component={Estimates} />
                   <Route path="/estimates/:id" component={Estimates} />
                   <Route exact path="/purchases" component={Purchases} />
+                  <Route
+                    exact
+                    path='/purchases/add'
+                    render={(props) => (
+                      <Purchases {...props} add={true} />
+                    )}
+                  />
                   <Route path="/purchases/:id" component={Purchases} />
                   <Route exact path="/invoices" component={Invoices} />
                   <Route path="/invoices/:id" component={Invoices} />

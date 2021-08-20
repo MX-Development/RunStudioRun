@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import ModalBox from '../ModalBox'
 
 const columns = [
-  { field: 'expense_name', type: 'string', flex: 0.3 },
+  { field: 'expenseName', type: 'string', flex: 0.3 },
   { field: 'description', type: 'string', flex: 0.6 },
   { field: 'cost', type: 'string', flex: 0.2 },
   { field: 'markup', type: 'string', flex: 0.2 },
