@@ -37,7 +37,7 @@ function Invoices({ projectID }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/invocies.json`)
+    axios.get(`https://kendrix.kendrix.website/json/invoices.json`)
       .then(res => {
         projectID ? 
           res.data.map(item => {

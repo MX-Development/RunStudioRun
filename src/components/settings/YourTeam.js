@@ -294,7 +294,7 @@ function YourTeam({ add }) {
               <Grid item xs={12} sm={12}>
                 <h3>Team Member Access</h3>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -308,7 +308,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -322,7 +322,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -336,7 +336,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -350,7 +350,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -364,7 +364,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -378,7 +378,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -392,7 +392,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -406,7 +406,7 @@ function YourTeam({ add }) {
                   />
                 </FormGroup>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ padding: '2px' }}>
                 <FormGroup>
                   <FormControlLabel
                     control={

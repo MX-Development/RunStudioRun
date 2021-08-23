@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import HelpIcon from '@material-ui/icons/Help';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Avatar from '@material-ui/core/Avatar';
-
-import ModalBox from './ModalBox'
 
 import {
   Link,
@@ -16,6 +14,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../config/firebase'
 
 import RunStudioRunLogo from './assets/runstudiorun-logo.svg'
+import JobSelect from './JobSelect';
 
 function Header() {
 
@@ -223,7 +222,7 @@ function Header() {
           <SubnavLinks>
             {
               activeNav === 'To dos' ?
-              <p>To dos</p>
+              <JobSelect />
               :
               navItems.map(item => (
                 item.sub_items.map(sub_item => (
