@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid'
 
 import moment from 'moment'
@@ -70,6 +70,23 @@ function Calendar() {
 
   useEffect(() => {
     fetchData()
+    
+    let draggableEl = document.getElementById("task-list")
+    new Draggable(draggableEl, {
+      itemSelector: ".dragabble-task",
+      eventData: function(eventEl) {
+        let title = eventEl.getAttribute("title");
+        let id = eventEl.getAttribute("data");
+        let time = eventEl.getAttribute("data-time");
+        return {
+          title: title,
+          id: id,
+          time: time,
+          editable: true,
+          eventDurationEditable: true
+        };
+      }
+    })
   }, [])
 
   const handleDateClick = () => {
@@ -81,6 +98,7 @@ function Calendar() {
       <FullCalendar
         plugins={[ timeGridPlugin, interactionPlugin ]}
         initialView="timeGridWeek"
+        droppable={true}
         allDaySlot={false}
         weekends={false}
         eventClick={handleDateClick}
@@ -110,7 +128,8 @@ function Calendar() {
         dayHeaderContent={renderHeaderContent}
         events={events}
         eventDidMount={function(info) {
-          console.log(info.event.extendedProps);
+          // console.log(info.event.extendedProps);
+          console.log('Event did mount')
         }}
       />
     </>
@@ -132,7 +151,6 @@ export default Calendar
 function renderEventContent(eventInfo) {
 
   let seconds = eventInfo.event.extendedProps.time
-  console.log(eventInfo)
   return (
     <div className="event-container">
       <div className="event-header">
@@ -148,7 +166,7 @@ function renderEventContent(eventInfo) {
       <div className="event-footer">
         <div className="remaining">
           <img src={Clock} alt="Clock icon" />
-          <span>Remaining <strong>{new Date(seconds * 1000).toISOString().substr(11, 5)}m</strong></span>
+          <span>Remaining <strong>{seconds ? new Date(seconds * 1000).toISOString().substr(11, 5) : null}h</strong></span>
         </div>
       </div>
     </div>

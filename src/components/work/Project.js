@@ -26,10 +26,13 @@ function Project() {
           
           { 
             view === 'jobs' ?
-              jobs.length > 0 ? 
-              <Jobs projectID={id} />
+            jobs.length > 0 ? 
+            null
               : 
+              <>
+              <Jobs projectID={id} />
               <CreateEstimate id={id} />
+              </>
             : view === 'estimates' ?
               <Estimates projectID={id} />
             : view === 'purchases' ?

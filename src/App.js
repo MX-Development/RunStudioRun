@@ -70,7 +70,7 @@ function App() {
               <Header />
               <AppBody>
                 <Switch>
-                  <Route path="/draglist" exact>
+                  {/* <Route path="/draglist" exact>
                     <DragList />
                   </Route>
                   <Route path="/draglist2" exact>
@@ -91,7 +91,7 @@ function App() {
                   </Route>
                   <Route path="/subscription" exact>
                     <Subscription /> 
-                  </Route>
+                  </Route> */}
 
                   <Route exact path="/to-do" component={CalendarTest} />
 

@@ -7,18 +7,20 @@ import Avatar from '@material-ui/core/Avatar';
 
 import {
   Link,
-  useHistory
+  useHistory,
+  useLocation
 } from "react-router-dom"
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../config/firebase'
 
-import RunStudioRunLogo from './assets/runstudiorun-logo.svg'
+import RunStudioRunLogo from './assets/img/logo-hound.svg'
 import JobSelect from './JobSelect';
 
 function Header() {
 
   let history = useHistory()
+  let location = useLocation()
 
   const [user] = useAuthState(auth)
 
@@ -111,6 +113,11 @@ function Header() {
         <HeaderTop>
           <HeaderLogo>
             <img src={RunStudioRunLogo} alt="Run Studio Run logo" />
+            <span>
+              Run<br/>
+              Apple<br/>
+              Run
+            </span>
           </HeaderLogo>
           <HeaderNav>
             {
@@ -133,10 +140,13 @@ function Header() {
             }
           </HeaderNav>
           <HeaderActions>
-            <AddCircleIcon onClick={(e) => {
-              setQuicknav(!openQuickNav)
-              setNavOpen(false)
-            }} />
+            <AddCircleIcon 
+              onClick={(e) => {
+                setQuicknav(!openQuickNav)
+                setNavOpen(false)
+              }}
+              className={openQuickNav ? 'active' : null} 
+            />
             <QuickNav className={openQuickNav ? 'active' : ''}>
               <h2>Quick</h2>
               <Columns>
@@ -221,8 +231,8 @@ function Header() {
           <LeftSpace />
           <SubnavLinks>
             {
-              activeNav === 'To dos' ?
-              <JobSelect />
+              location.pathname === "/to-do" ?
+                <JobSelect />
               :
               navItems.map(item => (
                 item.sub_items.map(sub_item => (
@@ -264,6 +274,20 @@ const HeaderTop = styled.div`
 const HeaderLogo = styled.div`
   position: relative;
   top: 5px;
+  width: 12.5%;
+  display: flex;
+
+  > img {
+    margin-right: 2.5px;
+  }
+
+  > span {
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
 `
 
 const HeaderNav = styled.div`
@@ -299,6 +323,14 @@ const HeaderActions = styled.div`
     width: 1.5em !important;
     height: 1.5em !important;
     margin-right: 5px;
+    transition: background .25s ease-in-out, transform .25s ease-in-out;
+  }
+
+  > .MuiSvgIcon-root:first-child {
+    &.active {
+      transform: rotate(135deg);
+      fill: var(--gold)
+    }
   }
 
   > .MuiAvatar-root {
@@ -319,7 +351,7 @@ const ProfileDropdown = styled.div`
   display: none;
   flex-direction: column;
   position: absolute;
-  top: 40px;
+  top: 46px;
   right: 0;
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 0px 0px 4px 4px;
@@ -387,18 +419,21 @@ const SubnavLinks = styled.div`
 
 const SubnavSearch = styled.div`
   flex: 0.2;
+  margin-right: 20px;
 
   input {
     width: 100%;
     font-size: 12px;  
+    padding: 6px;
+    margin: 5px 0;
   }
 `
 
 const QuickNav = styled.div`
   display: none;
   position: absolute;
-  top: 40px;
-  right: 0;
+  top: 46px;
+  right: 85px;
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 0px 0px 4px 4px;
   padding: 15px;

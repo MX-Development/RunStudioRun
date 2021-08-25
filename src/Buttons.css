@@ -7,6 +7,11 @@
   box-shadow: none;
   border-radius: 2px;
   font-weight: bold;
+  transition: background .25s ease-in, color .25s ease-in;
+}
+
+a {
+  transition: background .25s ease-in, color .25s ease-in; 
 }
 
 .btn:hover {
