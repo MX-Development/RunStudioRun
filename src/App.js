@@ -48,6 +48,7 @@ import CalendarTest from './components/CalendarTest';
 import Reports from './components/work/Reports';
 
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
+import Components from './components/Components';
 
 function App() {
 
@@ -92,6 +93,8 @@ function App() {
                   <Route path="/subscription" exact>
                     <Subscription /> 
                   </Route> */}
+
+                  <Route exact path="/components" component={Components} />
 
                   <Route exact path="/to-do" component={CalendarTest} />
 

@@ -44,6 +44,12 @@
   padding: 0 10px !important;
 }
 
+.fc .fc-button-group > .fc-button {
+  background: transparent;
+  color: #B1B0AF;
+  border: 2px solid #B1B0AF;
+}
+
 /* Table headers */
 .time-bar {
   display: flex;
