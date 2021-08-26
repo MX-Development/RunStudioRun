@@ -95,6 +95,10 @@
   font-weight: 400 !important;
 }
 
+.MuiRadio-colorSecondary.Mui-checked {
+  color: var(--gold) !important;
+}
+
 .PrivateSwitchBase-root-8 {
   padding: 5px 9px;
 }
