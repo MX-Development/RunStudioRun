@@ -8,9 +8,9 @@ import moment from 'moment'
 
 import axios from 'axios';
 
-import './Calendar.css'
+import './ToDos.css'
 
-import Clock from './assets/icons/Clock.svg'
+import Clock from '../assets/icons/Clock.svg'
 
 function Calendar() {
   // title: 'Task', 
@@ -126,11 +126,15 @@ function Calendar() {
           weekday: 'long'
         }}
         dayHeaderContent={renderHeaderContent}
+        dayCellContent={renderDayContent}
         events={events}
-        eventDidMount={function(info) {
-          // console.log(info.event.extendedProps);
-          console.log('Event did mount')
-        }}
+        eventDidMount={
+          function(info) {
+            // console.log(info.event.extendedProps);
+            console.log('Event did mount')
+            renderHeaderContent(info, 'testing')
+          }
+        }
       />
     </>
   )
@@ -173,12 +177,12 @@ function renderEventContent(eventInfo) {
   )
 }
 
-function renderHeaderContent(eventInfo) {
-  // console.log(eventInfo)
+function renderHeaderContent(eventInfo, fftesten) {
+  console.log(eventInfo)
   return (
     <div className="table-heading">
       <div className="day">
-        { eventInfo.text }
+        { eventInfo.text } { fftesten }
       </div>
       <div className="time-bar">
         <span className="bar"></span>
@@ -187,4 +191,8 @@ function renderHeaderContent(eventInfo) {
       </div>
     </div>
   )
+}
+
+function renderDayContent(eventInfo) {
+  console.log(eventInfo)
 }

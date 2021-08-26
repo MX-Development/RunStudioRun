@@ -43,8 +43,7 @@ import Profile from './components/settings/Profile';
 import DragList from './components/DragList';
 import DragList2 from './components/DragList2';
 
-import Calendar from './components/Calendar';
-import CalendarTest from './components/CalendarTest';
+import ToDos from './components/to-dos/ToDos';
 import Reports from './components/work/Reports';
 
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
@@ -84,19 +83,14 @@ function App() {
                   <Route path="/form" exact>
                     <Form />
                   </Route>
-                  <Route path="/settings" exact>
-                    <Settings />
-                  </Route>
                   <Route path="/table" exact>
                     <MaterialTable /> 
-                  </Route>
-                  <Route path="/subscription" exact>
-                    <Subscription /> 
                   </Route> */}
+
 
                   <Route exact path="/components" component={Components} />
 
-                  <Route exact path="/to-do" component={CalendarTest} />
+                  <Route exact path="/to-do" component={ToDos} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />
@@ -172,6 +166,12 @@ function App() {
                     )}
                   />
                   <Route path="/expenses/:id" component={Expenses} />
+                  <Route path="/settings" exact>
+                    <Settings />
+                  </Route>
+                  <Route path="/subscription" exact>
+                    <Subscription /> 
+                  </Route>
 
                 </Switch>
               </AppBody>

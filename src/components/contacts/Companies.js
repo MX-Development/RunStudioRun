@@ -18,12 +18,11 @@ import { MenuItem, Select } from '@material-ui/core'
 import ModalBox from '../ModalBox'
 
 const columns = [
-  { field: 'companyName', type: 'string' },
-  { field: 'phone', type: 'string' },
-  { field: 'website', type: 'string' },
-  { field: 'physicalAddress', type: 'string' },
-  { field: 'notes', type: 'string', flex: 0.3 },
-  { field: '', type: 'string', width: 50 }
+  { field: 'companyName', type: 'string', headerName: 'Company', flex: 0.2 },
+  { field: 'phone', type: 'string', flex: 0.15 },
+  { field: 'website', type: 'string', flex: 0.15 },
+  { field: 'physicalAddress', type: 'string', headerName: 'Physical Address', flex: 0.15 },
+  { field: 'notes', type: 'string', flex: 0.4 }
 ]
 
 function Companies({ add }) {

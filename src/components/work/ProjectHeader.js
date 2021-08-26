@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select, TextareaAutosize } from '@material-ui/core'
 import ProjectInfo from './ProjectInfo'
 
-function ProjectHeader() {
+function ProjectHeader({ projectID }) {
 
   const [projects, setProjects] = useState([])
   useEffect(() => {
@@ -168,7 +168,7 @@ function ProjectHeader() {
         <Grid item xs={4}>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
             <NavIcons id={id} />
-            <JobScroll />
+            <JobScroll projectID={projectID} />
           </div>
         </Grid>
 

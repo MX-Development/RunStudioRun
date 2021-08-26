@@ -20,10 +20,10 @@ import { MenuItem, Select } from '@material-ui/core'
 import ModalBox from '../ModalBox'
 
 const columns = [
-  { field: 'fullName', type: 'string', flex: 0.3 },
-  { field: 'phone', type: 'string', flex: 0.2 },
-  { field: 'email', type: 'string', flex: 0.3 },
-  { field: 'companyName', type: 'string', flex: 0.2 },
+  { field: 'fullName', type: 'string', flex: 0.2, headerName: 'Name' },
+  { field: 'phone', type: 'string', flex: 0.15 },
+  { field: 'email', type: 'string', flex: 0.15 },
+  { field: 'companyName', type: 'string', flex: 0.15, headerName: 'Company' },
   { field: 'notes', type: 'string', flex: 0.4 },
 ]
 

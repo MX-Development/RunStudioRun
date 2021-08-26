@@ -1,55 +1,94 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-function JobScroll() {
+import axios from 'axios';
+
+function JobScroll({ projectID }) {
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    setData([])
+    axios.get(`https://kendrix.kendrix.website/json/jobs.json`)
+      .then(res => {
+        projectID ? 
+          res.data.map(item => {
+            if (item.projectID == projectID) {
+              setData(data => [...data, item])
+            }
+          })
+        :
+          setData(res.data)
+        }
+      )
+  }, []);
 
   return (
     <Blocks>
-      <Block>
-        <div className="top">
-          <div className="info">
-            <h6>Planned hours</h6>
-            <span>10hr</span>
-          </div>
-          <div className="info">
-            <h6>Used</h6>
-            <span>1hr/9hr</span>
-          </div>
-        </div>
-        <div className="bottom" style={{ background: '#8A8A8A'}}>
-          <span className="bar" first></span>
-        </div>
-      </Block>
-      <Block>
-        <div className="top">
-          <div className="info">
-            <h6>Planned hours</h6>
-            <span>10hr</span>
-          </div>
-          <div className="info">
-            <h6>Used</h6>
-            <span>1hr/9hr</span>
-          </div>
-        </div>
-        <div className="bottom" style={{ background: '#8A8A8A'}}>
-          <span className="bar "></span>
-        </div>
-      </Block>
-      <Block>
-        <div className="top">
-          <div className="info">
-            <h6>Planned hours</h6>
-            <span>10hr</span>
-          </div>
-          <div className="info">
-            <h6>Used</h6>
-            <span>1hr/9hr</span>
-          </div>
-        </div>
-        <div className="bottom" style={{ background: '#8A8A8A'}}>
-          <span className="bar" first></span>
-        </div>
-      </Block>
+      {
+        console.log(data)
+      }
+      {
+        data.map((job, index) => {
+          if (index === 1) {
+            return;
+          }
+          return (
+          <>
+            <Block>
+              <div className="top">
+                <div className="info">
+                  <h6>Planned hours</h6>
+                  <span>10hr</span>
+                </div>
+                <div className="info">
+                  <h6>Used</h6>
+                  <span>1hr/9hr</span>
+                </div>
+              </div>
+              <div className="bottom" style={{ background: '#8A8A8A'}}>
+                <span className="bar" first></span>
+              </div>
+            </Block>
+            <Block>
+              <div className="top">
+                <div className="info">
+                  <h6>Planned budget</h6>
+                  <span>10hr</span>
+                </div>
+                <div className="info">
+                  <h6>Used</h6>
+                  <span>$150/$1350</span>
+                </div>
+              </div>
+              <div className="bottom" style={{ background: '#8A8A8A'}}>
+                <span className="bar" first></span>
+              </div>
+            </Block>
+            {/* <Block>
+              <div className="top">
+                <div className="info">
+                  <h6>Entered</h6>
+                  <span>8 SEP 2017</span>
+                </div>
+                <div className="info">
+                  <div className="left">
+                    <h6>Start</h6>
+                    <span>1 SEP 2017</span>
+                  </div>
+                  <div className="right">
+                    <h6>Due date</h6>
+                    <span>30 SEP 2017</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bottom" style={{ background: '#8A8A8A'}}>
+                <span className="bar" first></span>
+              </div>
+            </Block> */}
+          </>
+          )
+        })
+      }
     </Blocks>
   )
 }
@@ -80,7 +119,7 @@ const Block = styled.div`
     }
   }
 
-  > h6 {
+  h6 {
     text-transform: uppercase;
     font-weight: bold;
   }

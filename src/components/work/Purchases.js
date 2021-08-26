@@ -7,12 +7,12 @@ import List from '../List'
 
 const columns = [
   { field: 'supplier', type: 'string', flex: 0.4 },
-  { field: 'jobNo', type: 'string', flex: 0.2 },
+  { field: 'jobNo', type: 'string', flex: 0.2, headerName: 'Job no' },
   { field: 'purchase', type: 'string', flex: 0.2 },
   { field: 'description', type: 'string', flex: 0.5 },
-  { field: 'enteredDate', type: 'date', flex: 0.2 },
-  { field: 'dueDate', type: 'string', flex: 0.2 },
-  { field: 'approvedDate', type: 'string', flex: 0.2 },
+  { field: 'enteredDate', type: 'date', flex: 0.2, headerName: 'Entered' },
+  { field: 'dueDate', type: 'string', flex: 0.2, headerName: 'Due' },
+  { field: 'approvedDate', type: 'string', flex: 0.2, headerName: 'Approved' },
   { field: 'budget', type: 'number', flex: 0.2 },
   { field: 'status', type: 'number', flex: 0.2 },
 ]

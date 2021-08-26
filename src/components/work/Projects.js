@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import List from '../List'
 
+import { useHistory, useParams, useLocation } from "react-router-dom";
+
 import { useForm, Controller } from "react-hook-form"
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -23,17 +25,34 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-const columns = [
-  { field: 'projectName', type: 'string', flex: 0.4, headerName: 'Project',},
-  { field: 'description', type: 'string', flex: 0.5 },
-  { field: 'team', type: 'string', flex: 0.1 },
-  { field: 'enteredDate', type: 'string', flex: 0.2, headerName: 'Entered' },
-  { field: 'dueDate', type: 'string', flex: 0.2, headerName: 'Due Date' },
-  { field: 'action', type: 'string', flex: 0.2 },
-  { field: 'status', type: 'string', flex: 0.2 },
-]
-
 function Projects({ add }) {
+
+  const columns = [
+    { field: 'projectInfo', type: 'string', flex: 0.4, headerName: 'Project',
+      renderCell: (params) => (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <p style={{
+            lineHeight: '1.3'
+          }}>{params.row.projectName}</p>
+          <p 
+            style={{
+              lineHeight: '1.3',
+              color: '#B1B0AF',
+              fontSize: '12px',
+              textDecoration: 'underline'
+            }}
+            onClick={showCompany}
+          >{params.row.companyName}</p>
+        </div>
+      )
+    },
+    { field: 'description', type: 'string', flex: 0.5 },
+    { field: 'team', type: 'string', flex: 0.1 },
+    { field: 'enteredDate', type: 'string', flex: 0.2, headerName: 'Entered' },
+    { field: 'dueDate', type: 'string', flex: 0.2, headerName: 'Due Date' },
+    { field: 'action', type: 'string', flex: 0.2 },
+    { field: 'status', type: 'string', flex: 0.2 },
+  ]
 
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +65,7 @@ function Projects({ add }) {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/expenses.json`)
+      await axios.get(`https://kendrix.kendrix.website/json/projects.json`)
         .then(res => {
           setData(res.data)
 
@@ -86,6 +105,16 @@ function Projects({ add }) {
       });
     }
   };
+
+  const history = useHistory();
+  const location = useLocation();
+  
+  const showCompany = (e) => {
+    e.stopPropagation();
+  
+    console.log('company')
+    history.push(`/companies/1`);
+  }
 
   const modalContent = (        
     <>     

@@ -73,14 +73,38 @@
   background-color: #fff;
   transition: all 1s;
   transition-timing-function: cubic-bezier(.17,.67,.83,.67);
+  width: 100% !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-viewport {
+  overflow: visible !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-window {
+  overflow: visible !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-row:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 15px rgb(0 0 0 / 50%);
-  background-color: #eee !important;
+  box-shadow: 0px 0px 15px rgb(0 0 0 / 20%);
+  background-color: #fff !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
   background-color: rgba(63, 81, 181, 0.12) !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row {
+  transition: all .5s !important;
+}
+
+.MuiDataGrid-iconButtonContainer {
+  position: absolute;
+  right: 7.5px;
+  top: -2px;
+  z-index: 5;
+}
+
+.MuiDataGrid-root .MuiDataGrid-footerContainer {
+  padding-top: 30px !important;
 }

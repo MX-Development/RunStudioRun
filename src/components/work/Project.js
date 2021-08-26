@@ -19,7 +19,7 @@ function Project() {
 
   return (
     <>
-      <ProjectHeader />
+      <ProjectHeader projectID={id} />
       
       <Grid container spacing={2} style={{ marginTop: '60px' }}>
         <Grid item xs={12}>
