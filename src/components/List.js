@@ -8,7 +8,7 @@ import PageTitle from './layout/PageTitle'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, ...rest }) {
+function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, ...rest }) {
 
   const centerModal = {
     content: {
@@ -44,7 +44,11 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
     if (add) {
       setIsOpen(true)
     }
-  }, []);
+
+    if (openModal) {
+      setIsOpen(true)
+    }
+  }, [add, openModal]);
 
   function showItem(GridCellParams) {
     const itemId = GridCellParams.id

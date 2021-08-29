@@ -27,7 +27,7 @@ const columns = [
   { field: 'notes', type: 'string', flex: 0.4 },
 ]
 
-function People({ add }) {
+function People({ add, importing, syncing }) {
 
   const [openModal, setOpenModal] = useState(false)
   const [data, setData] = useState([])
@@ -103,6 +103,44 @@ function People({ add }) {
       [event.target.name]: event.target.value // This code replace the font object
     });
   }
+
+  const modalSync = (
+    <>
+      <h3 style={{ marginBottom: '10px' }}>Allow Run Studio Run to access your contacts</h3>
+      <p>
+      Allowing will sync your iCal or Google contacts.
+      </p>
+      <div className="modal-footer">
+        <div className="btn-group">
+          <div className="btn-left">
+            <button className="btn btn-light-gray btn-left">Cancel</button>
+          </div>
+          <div className="btn-right">
+            <button type="submit" className="btn btn-dark-gray btn-right">Sync now</button>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+
+  const modalImport = (
+    <>
+      <h3 style={{ marginBottom: '10px' }}>Download and edit our sample CSV file</h3>
+      <p>
+        Download our CSV template file and add the people you want to import. Once you’re done upload your CSV and check each imported correct.
+      </p>
+      <div className="modal-footer">
+        <div className="btn-group">
+          <div className="btn-left">
+            <button className="btn btn-light-gray btn-left">Cancel</button>
+          </div>
+          <div className="btn-right">
+            <button type="submit" className="btn btn-dark-gray btn-right">SELECT CSV FILE TO UPLOAD</button>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 
   const modalContent = (      
       
@@ -393,7 +431,15 @@ function People({ add }) {
 
   return (
     <>
-      <List title={'People'} columns={columns} data={data} modalTitle={'Add/Edit People'} modalContent={modalContent} add={add ? true : false} />
+      <List 
+        title={'People'} 
+        columns={columns} 
+        data={data} 
+        modalTitle={importing ? 'Import People' : syncing ? 'Sync contacts' : 'Add/Edit People'} 
+        modalContent={importing ? modalImport : syncing ? modalSync : modalContent} 
+        add={add ? true : false} 
+        openModal={importing ? true : syncing ? true : false} 
+      />
     </>
   )
 }

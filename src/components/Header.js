@@ -174,16 +174,16 @@ function Header() {
                   <Link to="/companies/add" onClick={() => setQuicknav(false)}>
                     Add Company
                   </Link>
-                  <Link to="/companies/import">
+                  <Link to="/companies/import" onClick={() => setQuicknav(false)}>
                     Import Company
                   </Link>
                   <Link to="/people/add" onClick={() => setQuicknav(false)}>
                     Add People
                   </Link>
-                  <Link to="/people/import">
+                  <Link to="/people/import" onClick={() => setQuicknav(false)}>
                     Import People
                   </Link>
-                  <Link to="/contacts/sync">
+                  <Link to="/people/sync" onClick={() => setQuicknav(false)}>
                     Sync Contacts
                   </Link>
                 </Column>

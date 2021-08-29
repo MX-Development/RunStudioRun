@@ -13,7 +13,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -155,7 +155,10 @@ function EstimateList({ type, data, id }) {
                             <TextField
                               variant="outlined"
                               {...field}
-                              value={selectedData ? '$' + selectedData.total : null}
+                              value={selectedData ? selectedData.total : null}
+                              InputProps={{
+                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                              }}
                               onChange={handleChange}
                             />
                           )}
@@ -349,6 +352,10 @@ const Item = styled.div`
   .MuiInput-underline:before,
   .MuiInput-underline:after {
     opacity: 0;
+  }
+
+  .MuiOutlinedInput-adornedStart {
+    padding-left: 0;
   }
 `
 

@@ -25,7 +25,7 @@ const columns = [
   { field: 'notes', type: 'string', flex: 0.4 }
 ]
 
-function Companies({ add }) {
+function Companies({ add, importing }) {
 
   const [openModal, setOpenModal] = useState(false)
   const [data, setData] = useState([])
@@ -65,6 +65,7 @@ function Companies({ add }) {
 
   useEffect(() => {
     if (id) {
+      console.log('Company ID is in URL')
       const dataSelect = data.filter(obj => {
         return obj.id === parseInt(selectedID)
       })
@@ -79,6 +80,25 @@ function Companies({ add }) {
       [event.target.name]: event.target.value // This code replace the font object
     });
   }
+
+  const modalImport = (
+    <>
+      <h3 style={{ marginBottom: '10px' }}>Download and edit our sample CSV file</h3>
+      <p>
+        Download our CSV template file and add the companies you want to import. Once you’re done upload your CSV and check each imported correct.
+      </p>
+      <div className="modal-footer">
+        <div className="btn-group">
+          <div className="btn-left">
+            <button className="btn btn-light-gray btn-left">Cancel</button>
+          </div>
+          <div className="btn-right">
+            <button type="submit" className="btn btn-dark-gray btn-right">SELECT CSV FILE TO UPLOAD</button>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 
   const modalContent = (        
       
@@ -307,7 +327,15 @@ function Companies({ add }) {
 
   return (
     <>
-      <List title={'Companies'} columns={columns} data={data} modalTitle={'Add/Edit Company'} modalContent={modalContent} add={add ? true : false} />
+      <List 
+        title={'Companies'} 
+        columns={columns} 
+        data={data} 
+        modalTitle={importing ? 'Import Companies' : 'Add/Edit Company'} 
+        modalContent={importing ? modalImport : modalContent} 
+        add={add ? true : false} 
+        openModal={importing ? true : false} 
+      />
     </>
   )
 }

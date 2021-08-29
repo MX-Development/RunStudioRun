@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import List from '../List'
 
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { useForm, Controller } from "react-hook-form"
 
@@ -21,7 +21,6 @@ import { MenuItem, Select } from '@material-ui/core'
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
@@ -41,7 +40,10 @@ function Projects({ add }) {
               fontSize: '12px',
               textDecoration: 'underline'
             }}
-            onClick={showCompany}
+            onClick={(e) => {
+              e.stopPropagation()
+              showCompany(2)
+            }}
           >{params.row.companyName}</p>
         </div>
       )
@@ -57,8 +59,9 @@ function Projects({ add }) {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
   const [companies, setCompanies] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState(null)
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
 
   const fetchData = async () => {
@@ -107,12 +110,9 @@ function Projects({ add }) {
   };
 
   const history = useHistory();
-  const location = useLocation();
   
-  const showCompany = (e) => {
-    e.stopPropagation();
-  
-    console.log('company')
+  const showCompany = (company) => {  
+    console.log(company)
     history.push(`/companies/1`);
   }
 
@@ -286,18 +286,3 @@ function Projects({ add }) {
 }
 
 export default Projects
-
-const MemberAvatar = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-
-  > span {
-    font-size: 12px;
-  }
-`

@@ -41,7 +41,7 @@ function CreateEstimate({ id }) {
 
           <ProjectEstimates />
 
-          <DividerWithIcon onClick={() => showPDF()}>
+          <DividerWithIcon onClick={showPDF}>
             <img src={EyeIcon} alt="" />
             <ModalBox modalOpened={openModal}>
               PDF

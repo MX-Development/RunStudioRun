@@ -60,6 +60,7 @@ function JobSelect() {
               className="dragabble-task"
               title={task.title}
               data-time={moment.duration(task.time, "minutes").asSeconds()}
+              data-description={task.description}
               data={task.id}
               key={task.id}
             >

@@ -11,7 +11,8 @@ import { auth } from './config/firebase'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 import LoadingScreen from './components/LoadingScreen';
@@ -87,6 +88,9 @@ function App() {
                     <MaterialTable /> 
                   </Route> */}
 
+                  <Route exact path="/">
+                      <Redirect to="/to-do" />
+                  </Route>
 
                   <Route exact path="/components" component={Components} />
 
@@ -126,6 +130,13 @@ function App() {
                       <Companies {...props} add={true} />
                     )}
                   />
+                  <Route
+                    exact
+                    path='/companies/import'
+                    render={(props) => (
+                      <Companies {...props} importing={true} />
+                    )}
+                  />
                   <Route path="/companies/:id" component={Companies} />
                   <Route exact path="/people" component={People} />
                   <Route
@@ -133,6 +144,20 @@ function App() {
                     path='/people/add'
                     render={(props) => (
                       <People {...props} add={true} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path='/people/import'
+                    render={(props) => (
+                      <People {...props} importing={true} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path='/people/sync'
+                    render={(props) => (
+                      <People {...props} syncing={true} />
                     )}
                   />
                   <Route path="/people/:id" component={People} />

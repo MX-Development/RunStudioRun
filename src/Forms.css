@@ -108,3 +108,19 @@
   width: 60px !important;
   height: 60px !important;
 }
+
+/* Datepicker */
+.MuiPickersToolbar-toolbar,
+.MuiPickersDay-daySelected {
+  background: var(--gold) !important;
+}
+
+.MuiButton-textPrimary {
+  background: #F4F2F0 !important;
+  color: #B1B0AF !important;
+}
+
+.MuiDialogActions-spacing > :not(:first-child) {
+  background: #DDDBD7 !important;
+  color: #3C3C3C !important;
+}

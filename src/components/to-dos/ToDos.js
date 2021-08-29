@@ -43,6 +43,7 @@ function Calendar() {
 
           const tasks = res.data
           tasks.map(task => {
+            console.log(task)
             let taskObject = {
               title: task.title, 
               start: moment(task.startDate).format(),
@@ -78,10 +79,12 @@ function Calendar() {
         let title = eventEl.getAttribute("title");
         let id = eventEl.getAttribute("data");
         let time = eventEl.getAttribute("data-time");
+        let description = eventEl.getAttribute("data-description");
         return {
           title: title,
           id: id,
           time: time,
+          description: description,
           editable: true,
           eventDurationEditable: true
         };

@@ -28,12 +28,13 @@ const styling = {
 
 function NavIcons({ id }) {
 
-  const [openDraftModal, setOpenDraftModal] = useState(true)
-  const [openPDFModal, setOpenPDFModal] = useState(true)
+  const [openDraftModal, setOpenDraftModal] = useState(false)
+  const [openPDFModal, setOpenPDFModal] = useState(false)
 
   const [activeNav, setActiveNav] = useState(null)
 
   const saveDraft = () => {
+    console.log('Saving draft...')
     // Show draft modal
     setOpenDraftModal(true)
 
@@ -53,9 +54,9 @@ function NavIcons({ id }) {
       <ModalBox modalOpened={openDraftModal} styling={styling}>
         <img src={SavingDraft} alt="saving draft" />
       </ModalBox>
-      <ModalBox modalOpened={openPDFModal}>
+      {/* <ModalBox modalOpened={openPDFModal}>
         PDF
-      </ModalBox>
+      </ModalBox> */}
       <Icons>
         <Link to={`/projects/${id}/timeline`} onClick={(e) => setActiveNav('timeline')} className={activeNav === 'timeline' ? 'active' : ''}>
           <img src={TimelineIcon} alt="timeline icon" />
