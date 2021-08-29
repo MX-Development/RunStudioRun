@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+
+import axios from 'axios'
 
 import Avatar from '@material-ui/core/Avatar'
 
 import Grid from '@material-ui/core/Grid';
 
 function ProjectInfo() {
+
+  const [teamMembers, setTeamMembers] = useState([])
+
+  useEffect(() => {
+    axios.get(`https://kendrix.kendrix.website/json/team.json`)
+    .then(res => {
+      setTeamMembers([])
+      res.data.map(member => {
+      //  if (task.team.includes(member.id)) {
+        setTeamMembers(teamMembers => [...teamMembers, member])
+      //  }
+      })
+    })
+  }, [])
+
   return (
     <Info>
       <Grid container spacing={2}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import moment from 'moment'
+import axios from 'axios'
 
 import DragIcon from '../assets/icons/DragIcon.svg'
 import ActionIcon from '../assets/icons/ActionIcon.svg'
@@ -15,6 +16,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+import Avatar from '@material-ui/core/Avatar';
+
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -22,7 +25,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-function EstimateList({ type, data, id }) {
+function EstimateList({ type, data, id, team }) {
 
   const { handleSubmit, control, setValue } = useForm();
   
@@ -79,6 +82,33 @@ function EstimateList({ type, data, id }) {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(false)
+  const [teamMembers, setTeamMembers] = useState([])
+
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      axios.get(`https://kendrix.kendrix.website/json/team.json`)
+      .then(res => {
+        setTeamMembers([])
+        res.data.map(member => {
+          setTeamMembers(teamMembers => [...teamMembers, member])
+        })
+      })
+
+      console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
     <Container small={type === 'subitem' ? true : false}>
       <DragButton>
@@ -97,9 +127,17 @@ function EstimateList({ type, data, id }) {
           </div>
           {
             type !== 'title' && type !== 'overview' ?
-              <div className="team">
-                <img src={TeamToDelete} alt="team to delete" />
-              </div>
+              <Members>
+                { teamMembers.map(member => {
+                  if (team && team.includes(member.id)) {
+                    return (
+                      <Avatar alt={ member.name } src={ member.avatar }>
+                        M
+                      </Avatar>
+                    )
+                  }
+                })}
+              </Members>
             : null
           } 
         </Top>
@@ -380,5 +418,15 @@ const ActionButton = styled.div`
 
   > img {
     max-height: 50px;
+  }
+`
+
+const Members = styled.div`
+  display: flex;
+
+  .MuiAvatar-root {
+    width: 30px !important;
+    height: 30px !important;
+    margin-left: 5px;
   }
 `

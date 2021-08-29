@@ -122,14 +122,15 @@ function TestOrder({ estimateID }) {
               <>
                 <EstimateList type={'title'} data={phase} key={phase.id} id={estimateID} />
                 {tasks.map(task => {
+                  console.log(task)
                   if (phase.tasks.includes(task.id)) {
                     return (
                     <>
-                      <EstimateList type={'item'} data={task} key={task.id} id={estimateID} />
+                      <EstimateList type={'item'} data={task} key={task.id} id={estimateID} team={task.team} />
                       {subtasks.map(subtask => {
                         if (subtask.taskId == task.id) {
                           return (
-                            <EstimateList type={'subitem'} data={subtask} key={subtask.id} id={estimateID} />
+                            <EstimateList type={'subitem'} data={subtask} key={subtask.id} id={estimateID} team={subtask.team} />
                           )
                         }
                       })}

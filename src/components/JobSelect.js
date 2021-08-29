@@ -5,12 +5,15 @@ import axios from 'axios';
 
 import moment from 'moment'
 
+import Avatar from '@material-ui/core/Avatar';
+
 function JobSelect() {
   
   const [openNav, setOpenNav] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false);
   const [tasks, setTasks] = useState([])
+  const [teamMembers, setTeamMembers] = useState([])
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -33,6 +36,16 @@ function JobSelect() {
 
               task.projectName = job[0].projectName
               setTasks(tasks => [...tasks, task])
+
+              axios.get(`https://kendrix.kendrix.website/json/team.json`)
+              .then(res => {
+                setTeamMembers([])
+                res.data.map(member => {
+                 if (task.team.includes(member.id)) {
+                  setTeamMembers(teamMembers => [...teamMembers, member])
+                 }
+                })
+              })
             })
           })
         })
@@ -64,10 +77,23 @@ function JobSelect() {
               data={task.id}
               key={task.id}
             >
-              <p>
-                { task.title }
-              </p>
-              <span>{ task.projectName ? task.projectName : null }</span>
+              <TaskInfo>
+                <p> 
+                  { task.title }
+                </p>
+                <span>{ task.projectName ? task.projectName : null }</span>
+              </TaskInfo>
+              <Members>
+                { teamMembers.map(member => {
+                  if (task.team.includes(member.id)) {
+                    return (
+                      <Avatar alt={ member.name } src={ member.avatar }>
+                        M
+                      </Avatar>
+                    )
+                  }
+                })}
+              </Members>
             </SelectItem>
           ))
         : null
@@ -94,7 +120,7 @@ const SelectContainer = styled.div`
   position: absolute;
   left: -50%;
   top: 32.5px;
-  width: 250px;
+  width: 425px;
   align-items: center;
   z-index: 5;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
@@ -107,10 +133,14 @@ const SelectContainer = styled.div`
 `
 
 const SelectItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   border-radius: 2px;
   border: 1px solid #F4F2F0;
   padding: 10px;
+  border-left: 8px solid #FCDB6E;
 
   &:hover {
     cursor: pointer;
@@ -120,11 +150,11 @@ const SelectItem = styled.div`
     margin-bottom: 10px
   }
 
-  > p {
+  p {
     font-weight: 400;
   }
 
-  > span {
+  span {
     color: #B1B0AF;
     text-decoration: underline;
     font-size: 12px;
@@ -139,5 +169,21 @@ const SelectButton = styled.div`
 
   &.active {
     background: var(--gold);
+  }
+`
+
+const TaskInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+const Members = styled.div`
+  display: flex;
+
+  .MuiAvatar-root {
+    width: 40px !important;
+    height: 40px !important;
+    margin-left: 5px;
   }
 `
