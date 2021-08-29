@@ -33,8 +33,6 @@ function EstimateList({ type, data, id, team }) {
   const [selectedData, setSelectedData] = useState(null)
 
   useEffect(() => {
-    console.log(id)
-    console.log(data)
     // if (id) {
     //   const dataSelect = data.filter(obj => {
     //     return obj.id === parseInt(id)
@@ -48,7 +46,6 @@ function EstimateList({ type, data, id, team }) {
   }, [id]);
 
   const handleChange = event => {
-    console.log(selectedData)
     setSelectedData({
       ...selectedData,
       [event.target.name]: event.target.value // This code replace the font object

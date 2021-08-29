@@ -50,11 +50,11 @@ function CreateEstimate({ id }) {
         </>
         :
         <Inner>
-          <h2 style={{ color: 'var(--gold)' }}>CONGRATULATIONS ON STARTING A NEW PROJECT</h2>
+          <h3 style={{ color: 'var(--gold)' }}>CONGRATULATIONS ON STARTING A NEW PROJECT</h3>
   
           <img src={AddIcon} alt="add icon" onClick={AddEstimate} />
   
-          <h2 style={{ color: '#B1B0AF' }}>CREATE A NEW JOB ESTIMATE</h2>
+          <h3 style={{ color: '#B1B0AF' }}>CREATE A NEW JOB ESTIMATE</h3>
           <h6 style={{ color: '#B1B0AF' }}>WHEN APPROVED A JOB WILL APPEAR HERE</h6>
         </Inner>
       }

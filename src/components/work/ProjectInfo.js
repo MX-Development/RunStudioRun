@@ -7,18 +7,29 @@ import Avatar from '@material-ui/core/Avatar'
 
 import Grid from '@material-ui/core/Grid';
 
-function ProjectInfo() {
+function ProjectInfo({ projectID }) {
 
+  const [tasks, setTasks] = useState([])
   const [teamMembers, setTeamMembers] = useState([])
 
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/team.json`)
+    setTasks([])
+    axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
     .then(res => {
       setTeamMembers([])
-      res.data.map(member => {
-      //  if (task.team.includes(member.id)) {
-        setTeamMembers(teamMembers => [...teamMembers, member])
-      //  }
+      res.data.map(task => {
+       if (task.projectID === parseInt(projectID)) {
+        setTasks(tasks => [...tasks, task])
+
+        axios.get(`https://kendrix.kendrix.website/json/team.json`)
+        .then(res => {
+          res.data.map(member => {
+            if (task.team.includes(member.id)) {
+              setTeamMembers(teamMembers => [...teamMembers, member])
+            }
+          })
+        })
+       }
       })
     })
   }, [])
@@ -29,23 +40,15 @@ function ProjectInfo() {
 
         <Grid item xs={5}>
           <h6>Team</h6>
-          <TeamContainer>
-            <Avatar alt="" src="">
-              M
-            </Avatar>
-            <Avatar alt="" src="">
-              M
-            </Avatar>
-            <Avatar alt="" src="">
-              M
-            </Avatar>
-            <Avatar alt="" src="">
-              M
-            </Avatar>
-            <Avatar alt="" src="">
-              M
-            </Avatar>
-          </TeamContainer>
+          <Members>
+            { teamMembers ? teamMembers.map(member => {
+              return (
+                <Avatar alt={ member.name } src={ member.avatar }>
+                  M
+                </Avatar>
+              )
+            }) : null}
+          </Members>
         </Grid>
 
         <Grid item xs={7}>
@@ -103,4 +106,14 @@ const Info = styled.div`
   background: #fff;
   padding: 10px;
   border-radius: 2px;
+`
+
+const Members = styled.div`
+  display: flex;
+
+  .MuiAvatar-root {
+    width: 30px !important;
+    height: 30px !important;
+    margin-left: 5px;
+  }
 `

@@ -161,7 +161,7 @@ function ProjectHeader({ projectID }) {
                 </FormControl>
               </FormGroup>  
 
-              <ProjectInfo />
+              <ProjectInfo projectID={projectID} />
 
             </div>
 

@@ -122,7 +122,6 @@ function TestOrder({ estimateID }) {
               <>
                 <EstimateList type={'title'} data={phase} key={phase.id} id={estimateID} />
                 {tasks.map(task => {
-                  console.log(task)
                   if (phase.tasks.includes(task.id)) {
                     return (
                     <>
