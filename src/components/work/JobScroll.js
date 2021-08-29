@@ -45,8 +45,8 @@ function JobScroll({ projectID }) {
                   <span>1hr/9hr</span>
                 </div>
               </div>
-              <div className="bottom" style={{ background: '#8A8A8A'}}>
-                <span className="bar" first></span>
+              <div className="bottom">
+                <span className="bar"></span>
               </div>
             </Block>
             <Block>
@@ -60,31 +60,33 @@ function JobScroll({ projectID }) {
                   <span>$150/$1350</span>
                 </div>
               </div>
-              <div className="bottom" style={{ background: '#8A8A8A'}}>
-                <span className="bar" first></span>
+              <div className="bottom">
+                <span className="bar"></span>
               </div>
             </Block>
-            {/* <Block>
+            <Block>
               <div className="top">
                 <div className="info">
                   <h6>Entered</h6>
                   <span>8 SEP 2017</span>
                 </div>
                 <div className="info">
-                  <div className="left">
-                    <h6>Start</h6>
-                    <span>1 SEP 2017</span>
-                  </div>
-                  <div className="right">
-                    <h6>Due date</h6>
-                    <span>30 SEP 2017</span>
+                  <div className="sub">
+                    <div className="left">
+                      <h6>Start</h6>
+                      <span>1 SEP 2017</span>
+                    </div>
+                    <div className="right">
+                      <h6>Due date</h6>
+                      <span>30 SEP 2017</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="bottom" style={{ background: '#8A8A8A'}}>
-                <span className="bar" first></span>
+              <div className="bottom">
+                <span className="bar"></span>
               </div>
-            </Block> */}
+            </Block>
           </>
           )
         })
@@ -96,21 +98,17 @@ function JobScroll({ projectID }) {
 export default JobScroll
 
 const Block = styled.div`
-  width: 30%;
+  width: 31.5%;
   display: flex;
   flex-direction: column;
-
-  :first {
-    background: blue !important;
-  }
+  justify-content: space-between;
 
   > .top {
 
     > .info {
       display: flex;
       flex-direction: column;
-      padding: 10px 20px;
-      background: red;
+      padding: 7.5px;
       color: #fff;
 
       > span {
@@ -144,15 +142,65 @@ const Blocks = styled.div`
   display: flex;
   justify-content: space-between;
   
-  ${Block}:nth-child(1) .info {
+  ${Block}:nth-child(1) {
     background: #3C3C3C;
+
+    .bottom {
+      background: rgba(255,255,255,0.4);
+    }
   }
   
-  ${Block}:nth-child(2) .info {
+  ${Block}:nth-child(2) {
     background: #DDDBD7;
+
+    .info {
+      span {
+        color: #3C3C3C;
+      }
+    }
+
+    .bottom {
+      background: rgba(255,255,255,0.4);
+    }
   }
   
-  ${Block}:nth-child(3) .info {
-    background: #FFFFFF;
+  ${Block}:nth-child(3) { 
+    .info {
+      background: #FFFFFF;
+
+      > .sub {
+        display: flex;
+        justify-content: space-between;
+
+        > .right {
+          text-align: right;
+        }
+      }
+
+      h6 {
+        color: #B1B0AF;
+      }
+
+      span {
+        color: #292724;
+      }
+    }
+
+    .info:nth-child(2) {
+      padding-top: 11px;
+      
+      span {
+        font-size: 9px;
+        font-weight: bold;
+      }
+    }
+
+    .bottom {
+      background: #B1B0AF;
+    }
+
+    .bar {
+      background: #519151;
+    }
   }
 `

@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import ModalBox from '../../ModalBox'
 import SavingDraft from './SavingDraft.svg'
 
+import LoadingDots from '../../LoadingDots'
+
 import {
   Link
 } from "react-router-dom"
@@ -12,6 +14,9 @@ import TimelineIcon from '../../assets/icons/TimelineIcon.svg'
 import BookIcon from '../../assets/icons/BookIcon.svg'
 import DiscIcon from '../../assets/icons/DiscIcon.svg'
 import EyeIcon from '../../assets/icons/EyeIcon.svg'
+
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 const styling = {
   content: {
@@ -28,32 +33,64 @@ const styling = {
 
 function NavIcons({ id }) {
 
-  const [openDraftModal, setOpenDraftModal] = useState(false)
-  const [openPDFModal, setOpenPDFModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
+  const [modalContent, setModalContent] = useState(null)
 
   const [activeNav, setActiveNav] = useState(null)
 
   const saveDraft = () => {
     console.log('Saving draft...')
     // Show draft modal
-    setOpenDraftModal(true)
+    setModalContent(Draft)
+    setOpenModal(true)
 
     // Close draft modal after 3 seconds
     setTimeout(() => {
-      setOpenDraftModal(false)
+      setOpenModal(false)
     }, 3000);
   }
 
   const showPDF = () => {
     console.log('Show PDF...')
-    setOpenPDFModal(!openPDFModal)
+    setModalContent(PDF)
+    setOpenModal(!openModal)
   }
+
+  function afterOpenModal() {
+
+  }
+
+  function closeModal() {
+    setOpenModal(false)
+    setModalContent(null)
+  }
+
+  const PDF = (
+    <h1>PDF</h1>
+  )
+
+  const Draft = (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <img src={SavingDraft} alt="saving draft" />
+      <LoadingDots />
+    </div>
+  )
   
   return (
     <>
-      <ModalBox modalOpened={openDraftModal} styling={styling}>
+      <Modal
+        isOpen={openModal}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={styling}
+        contentLabel="Example Modal"
+      >
+        { modalContent }
+      </Modal>
+
+      {/* <ModalBox modalOpened={openDraftModal} styling={styling}>
         <img src={SavingDraft} alt="saving draft" />
-      </ModalBox>
+      </ModalBox> */}
       {/* <ModalBox modalOpened={openPDFModal}>
         PDF
       </ModalBox> */}
@@ -64,14 +101,14 @@ function NavIcons({ id }) {
         <Link to={`/projects/${id}/book`} onClick={(e) => setActiveNav('book')} className={activeNav === 'book' ? 'active' : ''}>
           <img src={BookIcon} alt="book icon" />
         </Link>
-        <Link to={`/projects/${id}/disc`} onClick={(e) => {
+        <Link to={`/projects/${id}`} onClick={(e) => {
           // Set the button to active and run the saving draft function
           setActiveNav('disc')
           saveDraft()
         }} className={activeNav === 'disc' ? 'active' : ''}>
           <img src={DiscIcon} alt="disc icon" />
         </Link>
-        <Link to={`/projects/${id}/eye`} onClick={(e) => {
+        <Link to={`/projects/${id}`} onClick={(e) => {
           setActiveNav('eye')
           showPDF()
         }} className={activeNav === 'eye' ? 'active' : ''}>
@@ -94,7 +131,7 @@ const Icons = styled.div`
   }
 
   > a.active img {
-    fill: red;
-    background: black;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
   }
 `

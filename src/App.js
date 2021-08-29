@@ -4,6 +4,7 @@ import './App.css';
 import './Buttons.css';
 import './Forms.css';
 import './Table.css';
+import './Typography.css';
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './config/firebase'

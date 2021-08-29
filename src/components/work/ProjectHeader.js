@@ -55,7 +55,7 @@ function ProjectHeader({ projectID }) {
 
   return (
     <FormControl component="fieldset">
-      <Grid container spacing={6}>
+      <Grid container spacing={5}>
 
         <Grid item xs={4}>
 
@@ -65,7 +65,7 @@ function ProjectHeader({ projectID }) {
                 <FormControl variant="outlined">
                   <Select
                     value={''}
-                    style={{ width: '100%' }}
+                    style={{ width: '100%', background: '#fff' }}
                     onChange={changeProject}
                   >
                     <MenuItem value="">
@@ -84,12 +84,12 @@ function ProjectHeader({ projectID }) {
             </Grid>
             <Grid item xs={12}>  
               <div className="text-row">
-                <h4>PREFIX <strong>Project Master</strong></h4>
+                <h3>PREFIX <strong>Project Master</strong></h3>
               </div>
             </Grid>
             <Grid item xs={12}>  
               <div className="text-row">
-                <h4>Comapny Name</h4>
+                <h3>Comapny Name</h3>
               </div>
             </Grid>
             <Grid item xs={12}>  
@@ -97,7 +97,7 @@ function ProjectHeader({ projectID }) {
                 <FormControl variant="outlined">
                   <Select
                     value={'Who requested the work?'}
-                    style={{ width: '100%' }}
+                    style={{ width: '100%', background: '#fff' }}
                   >
                     <MenuItem value="">
                       <em>Select</em>
@@ -120,6 +120,7 @@ function ProjectHeader({ projectID }) {
                         {...field}
                         value={selectedData ? selectedData.order_nr : null}
                         onChange={handleChange}
+                        style={{ background: '#fff' }}
                       />
                     )}
                     control={control}
@@ -151,6 +152,7 @@ function ProjectHeader({ projectID }) {
                         onChange={handleChange}
                         multiline
                         rows={4}
+                        style={{ background: '#fff' }}
                       />
                     )}
                     control={control}

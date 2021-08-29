@@ -11,7 +11,7 @@ function ProjectInfo() {
       <Grid container spacing={2}>
 
         <Grid item xs={5}>
-          <h6 style={{ textTransform: 'uppercase', marginBottom: '5px' }}>Team</h6>
+          <h6>Team</h6>
           <TeamContainer>
             <Avatar alt="" src="">
               M
@@ -34,19 +34,19 @@ function ProjectInfo() {
         <Grid item xs={7}>
           <Grid container spacing={2}>
             <Grid item xs={4}>
-              <h6 style={{ textTransform: 'uppercase', marginBottom: '5px' }}>Rate</h6>
+              <h6>Rate</h6>
               <Button>
                 Standard
               </Button>
             </Grid>
             <Grid item xs={4}>
-              <h6 style={{ textTransform: 'uppercase', marginBottom: '5px' }}>Rate</h6>
+              <h6>Rate</h6>
               <Button>
                 Standard
               </Button>
             </Grid>
             <Grid item xs={4}>
-              <h6 style={{ textTransform: 'uppercase', marginBottom: '5px' }}>Rate</h6>
+              <h6>Rate</h6>
               <Button>
                 Standard
               </Button>
@@ -64,7 +64,7 @@ export default ProjectInfo
 const Button = styled.div`
   border: 1px solid;
   border-radius: 2px;
-  padding: 5px;
+  padding: 5px 0;
   font-weight: bold;
   font-size: 12px;
   text-align: center;
