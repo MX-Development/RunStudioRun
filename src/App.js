@@ -50,6 +50,7 @@ import Reports from './components/work/Reports';
 
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
 import Components from './components/Components';
+import PDF from './components/PDF';
 
 function App() {
 
@@ -93,6 +94,7 @@ function App() {
                       <Redirect to="/to-do" />
                   </Route>
 
+                  <Route exact path="/pdf" component={PDF} />
                   <Route exact path="/components" component={Components} />
 
                   <Route exact path="/to-do" component={ToDos} />

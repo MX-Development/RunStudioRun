@@ -72,7 +72,8 @@ function JobSelect() {
             <SelectItem 
               className="dragabble-task"
               title={task.title}
-              data-time={moment.duration(task.time, "minutes").asSeconds()}
+              data-time={task.time}
+              data-time-worked={task.time_worked}
               data-description={task.description}
               data={task.id}
               key={task.id}

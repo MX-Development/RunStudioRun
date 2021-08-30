@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
@@ -10,7 +10,8 @@ import axios from 'axios';
 
 import './ToDos.css'
 
-import Clock from '../assets/icons/Clock.svg'
+import CardPlayButton from '../assets/icons/CardPlayButton.svg'
+import CardStopButton from '../assets/icons/CardStopButton.svg'
 
 function Calendar() {
   // title: 'Task', 
@@ -21,6 +22,8 @@ function Calendar() {
   // extendedProps: {
   //   department: 'BioChemistry'
   // }
+
+  const activeSlideRef = useRef(null);
 
   const eventOptions = {
     editable: true,
@@ -39,25 +42,20 @@ function Calendar() {
           setData(res.data)
           setEvents([])
 
-          console.log(res.data)
-
           const tasks = res.data
           tasks.map(task => {
-            console.log(task)
             let taskObject = {
               title: task.title, 
               start: moment(task.startDate).format(),
               end: moment(task.startDate).add(task.time, 'minutes').format(),
               description: task.description,
-              time: moment.duration(task.time, "minutes").asSeconds(),
+              time: task.time,
               jobTitle: 'Job Title',
               editable: true,
               eventDurationEditable: true
             }
 
             setEvents(events => [...events, taskObject])
-
-            console.log(events)
           })
         })
 
@@ -79,11 +77,13 @@ function Calendar() {
         let title = eventEl.getAttribute("title");
         let id = eventEl.getAttribute("data");
         let time = eventEl.getAttribute("data-time");
+        let time_worked = eventEl.getAttribute("data-time-worked");
         let description = eventEl.getAttribute("data-description");
         return {
           title: title,
           id: id,
           time: time,
+          time_worked: time_worked,
           description: description,
           editable: true,
           eventDurationEditable: true
@@ -106,10 +106,11 @@ function Calendar() {
         weekends={false}
         eventClick={handleDateClick}
         eventContent={renderEventContent}
-        // eventDragStart={(info) => eventDragging(info)}
-        // eventDragStop={(info) => eventStopDragging(info)}
         eventDragStart={function( info ) {
-          // info.el.style.transform = 'rotate(45deg)'
+          console.log(info)
+        }}
+        eventDragStop={function( info ) {
+          console.log(info)
         }}
         scrollTime={'08:45:00'}
         slotDuration={'00:15:00'}
@@ -133,9 +134,7 @@ function Calendar() {
         events={events}
         eventDidMount={
           function(info) {
-            // console.log(info.event.extendedProps);
             console.log('Event did mount')
-            renderHeaderContent(info, 'testing')
           }
         }
       />
@@ -157,11 +156,15 @@ export default Calendar
 
 function renderEventContent(eventInfo) {
 
-  let seconds = eventInfo.event.extendedProps.time
+  let totalTime = eventInfo.event.extendedProps.time
+  let timeWorked = eventInfo.event.extendedProps.time_worked
+  let remaining = totalTime - timeWorked
+  let percentage = timeWorked / totalTime * 100
+
   return (
     <div className="event-container">
       <div className="event-header">
-        <h3>{eventInfo.event.title}</h3>
+        <h5>{eventInfo.event.title}</h5>
         <h6 style={{ fontWeight: '500', margin: '2.5px 0' }}>{eventInfo.event.extendedProps.jobTitle}</h6>
         <span className="type" style={{ fontWeight: '400' }}>Client</span>
       </div>
@@ -171,21 +174,38 @@ function renderEventContent(eventInfo) {
         </p>
       </div>
       <div className="event-footer">
-        <div className="remaining">
-          <img src={Clock} alt="Clock icon" />
-          <span>Remaining <strong>{seconds ? new Date(seconds * 1000).toISOString().substr(11, 5) : null}h</strong></span>
+        <div className="event-time">
+          <div className="time-meta">
+            <span>{(new Date(timeWorked * 1000)).toUTCString().match(/(\d:\d\d:)/)[0].replace(':', 'h').replace(':', 'm')}</span>
+            <span>{(new Date(totalTime * 1000)).toUTCString().match(/(\d:\d\d:)/)[0].replace(':', 'h').replace(':', 'm')}</span>
+          </div>
+          <div className="card-time">
+            <span className="total-bar"></span>
+            <span className="worked-bar" style={{ width: percentage + '%' }}></span>
+          </div>
         </div>
+        <div className="event-buttons">
+          <span className="play-button" onClick={() => console.log('Start timing event...')}>
+            <img src={CardPlayButton} alt="play button" /> Start
+          </span>
+          <span className="stop-button" onClick={() => console.log('Stop timing event...')}>
+            <img src={CardStopButton} alt="stop button" /> Stop
+          </span>
+        </div>
+        {/* <div className="remaining">
+          <img src={Clock} alt="Clock icon" />
+          <span>Remaining <strong>{new Date(remaining * 1000).toISOString().substr(11, 8)}h</strong></span>
+        </div> */}
       </div>
     </div>
   )
 }
 
-function renderHeaderContent(eventInfo, fftesten) {
-  console.log(eventInfo)
+function renderHeaderContent(eventInfo) {
   return (
     <div className="table-heading">
       <div className="day">
-        { eventInfo.text } { fftesten }
+        { eventInfo.text } 
       </div>
       <div className="time-bar">
         <span className="bar"></span>
@@ -197,5 +217,5 @@ function renderHeaderContent(eventInfo, fftesten) {
 }
 
 function renderDayContent(eventInfo) {
-  console.log(eventInfo)
+  // console.log(eventInfo)
 }
