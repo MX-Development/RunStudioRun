@@ -35,7 +35,7 @@ function PDF() {
           </View>
 
           {/* Meta */}
-          <View style={{ marginTop: '60px' }}>
+          <View style={{ marginTop: '40px' }}>
             <Text style={[styles.light_title, { marginBottom: '15px' }]}>Estimate</Text>
           </View>
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -64,38 +64,70 @@ function PDF() {
           </View>
 
           {/* Items */}
-          <View style={{ marginTop: '60px' }}>
+          <View style={{ marginTop: '40px' }}>
             <Text style={[styles.light_title, { marginBottom: '15px', borderBottom: '1px solid #000', paddingBottom: '15px' }]}>Prefix Job Name</Text>
           </View>
 
-          <View style={{ marginBottom: '30px' }}>
-            <Text style={{ fontSize: '16px', marginBottom: '10px' }}>Item Description</Text>
+          <View>
+            <View style={{ marginBottom: '30px' }}>
+              <Text style={{ fontSize: '16px', marginBottom: '10px' }}>Item Description</Text>
+              <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ fontSize: '10px', width: '60%' }}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </Text>
+                <Text style={{ fontSize: '10px' }}>$1000</Text>
+              </View>
+            </View>
+
+            <View style={{ marginBottom: '30px' }}>
+              <Text style={{ fontSize: '16px', marginBottom: '10px' }}>Item Description</Text>
+              <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ fontSize: '10px', width: '60%' }}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </Text>
+                <Text style={{ fontSize: '10px' }}>$1000</Text>
+              </View>
+            </View>
+
+            <View style={{ marginBottom: '30px' }}>
+              <Text style={{ fontSize: '16px', marginBottom: '10px' }}>Item Description</Text>
+              <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ fontSize: '10px', width: '60%' }}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </Text>
+                <Text style={{ fontSize: '10px' }}>$1000</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Total */}
+          <View style={{ padding: '7.5px 0', borderTop: '1px solid #eee', borderBottom: '1px solid #eee' }}>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={{ fontSize: '10px', width: '60%' }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </Text>
+              <Text style={{ fontSize: '10px', textTransform: 'uppercase' }}>Subtotal</Text>
+              <Text style={{ fontSize: '10px' }}>$1000</Text>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: '10px', textTransform: 'uppercase' }}>GST</Text>
+              <Text style={{ fontSize: '10px' }}>$1000</Text>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: '10px', textTransform: 'uppercase', color: '#B1B0AF' }}>Total</Text>
               <Text style={{ fontSize: '10px' }}>$1000</Text>
             </View>
           </View>
 
-          <View style={{ marginBottom: '30px' }}>
-            <Text style={{ fontSize: '16px', marginBottom: '10px' }}>Item Description</Text>
-            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={{ fontSize: '10px', width: '60%' }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </Text>
-              <Text style={{ fontSize: '10px' }}>$1000</Text>
-            </View>
+          {/* Terms */}
+          <View style={{ padding: '7.5px 0', borderTop: '1px solid #eee', borderBottom: '1px solid #eee' }}>
+            <Text style={{ fontSize: '10px', color: '#B1B0AF' }}>Payment Terms: 30 Days from invoice date</Text>
+            <Text style={{ fontSize: '10px', color: '#B1B0AF' }}>Due: Friday, 20 December 2019</Text>
           </View>
 
-          <View style={{ marginBottom: '30px' }}>
-            <Text style={{ fontSize: '16px', marginBottom: '10px' }}>Item Description</Text>
-            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={{ fontSize: '10px', width: '60%' }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </Text>
-              <Text style={{ fontSize: '10px' }}>$1000</Text>
-            </View>
+          {/* Footnotes */}
+          <View style={{ padding: '7.5px 0' }}>
+            <Text style={{ fontSize: '10px', color: '#B1B0AF' }}>Footnotes</Text>
+            <Text style={{ fontSize: '10px' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </Text>
           </View>
 
         </Page>
