@@ -90,6 +90,11 @@
   background-color: #fff !important;
 }
 
+.MuiDataGrid-renderingZone {
+  position: relative;
+  top: -1px;
+}
+
 .MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
   background-color: rgba(63, 81, 181, 0.12) !important;
 }

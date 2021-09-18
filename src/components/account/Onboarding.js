@@ -7,7 +7,7 @@ import { useSpring, animated } from 'react-spring'
 
 import GoogleLogo from './google-logo.svg'
 
-import './Login.css'
+import './Onboarding.css'
 
 import {
   Link
@@ -19,7 +19,7 @@ const trans2 = (x, y) => `translate3d(${x / 8 + 435}px,${y / 8 + 430}px,0)`
 const trans3 = (x, y) => `translate3d(${x / 6 + 250}px,${y / 6 + 200}px,0)`
 const trans4 = (x, y) => `translate3d(${x / 3.5 + 800}px,${y / 3.5 + 200}px,0)`
 
-function Login() {
+function Onboarding() {
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
@@ -50,8 +50,20 @@ function Login() {
           </h1>
         </ModalHeader>
         <ModalBody>
-          <h3>Log in to your account</h3>
+          <h3>Create your account</h3>
+          <GoogleButton onClick={signIn}>
+            <img src={GoogleLogo} /> Continue with Google
+          </GoogleButton>
+          <Divider>
+            <span>Or</span>
+          </Divider>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group">
+              <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
+            </div>
+            <div className="form-group">
+              <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
+            </div>
             <div className="form-group">
               <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
             </div>
@@ -74,12 +86,6 @@ function Login() {
               </div>
             </div>
           </form>
-          <Divider>
-            <span>Or</span>
-          </Divider>
-          <GoogleButton onClick={signIn}>
-            <img src={GoogleLogo} /> Sign in with Google
-          </GoogleButton>
         </ModalBody>
         <ModalFooter>
           <p>2021 © Run Studio Run | <Link to="/terms">Terms</Link> | <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/help">Need Help?</Link></p>
@@ -89,7 +95,7 @@ function Login() {
   )
 }
 
-export default Login
+export default Onboarding
 
 const LoginContainer = styled.div`
   position: relative;

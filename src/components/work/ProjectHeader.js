@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import { useForm, Controller } from "react-hook-form"
 import { useHistory, useParams, useLocation } from "react-router-dom"
 
@@ -16,7 +17,12 @@ import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select, TextareaAutosize } from '@material-ui/core'
 import ProjectInfo from './ProjectInfo'
 
+import EllipsisIcon from '../assets/icons/EllipsisIcon.svg'
+import PlusIcon from '../assets/icons/PlusIcon.svg'
+
 function ProjectHeader({ projectID }) {
+
+  const [projectNav, showProjectNav] = useState(false);
 
   const [projects, setProjects] = useState([])
   useEffect(() => {
@@ -82,10 +88,33 @@ function ProjectHeader({ projectID }) {
                 </FormControl>
               </FormGroup>
             </Grid>
-            <Grid item xs={12}>  
-              <div className="text-row">
+            <Grid item xs={12} style={{ position: 'relative' }}>  
+              <div className="text-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3>PREFIX <strong>Project Master</strong></h3>
+                <div style={{ width: '30px', borderLeft: '1px solid rgba(0,0,0,0.35)', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '24px' }} 
+                  onClick={() => showProjectNav(!projectNav)}>
+                    {
+                      projectNav ?
+                      <span>X</span>
+                      :
+                      <img src={EllipsisIcon} alt="Ellipsis icon" onClick={() => console.log('clicked')} style={{ height: '16px', opacity: '0.25' }} />
+                    }
+                </div>
               </div>
+              <ProjectMenu className={projectNav ? 'active' : ''}>
+                <NavItem>
+                  Rename Project
+                </NavItem>
+                <NavItem>
+                  Change Company
+                </NavItem>
+                <NavItem>
+                  Duplicate Project
+                </NavItem>
+                <NavItem>
+                  Delete Project
+                </NavItem>
+              </ProjectMenu>
             </Grid>
             <Grid item xs={12}>  
               <div className="text-row">
@@ -180,3 +209,32 @@ function ProjectHeader({ projectID }) {
 }
 
 export default ProjectHeader
+
+const ProjectMenu = styled.div`
+  display: none;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 0 8px rgb(0 0 0 / 25%);
+  position: absolute;
+  right: 0;
+  transform: translate(100%, -67.5%);
+  z-index: 2;
+
+  &.active {
+    display: block;
+  }
+`
+
+const NavItem = styled.div`
+  padding: 7.5px 10px;
+  font-size: 15px;
+  color: #292724;
+  font-size: 14px;
+  transition: background .25s ease-in, color .25s ease-in;
+
+  &:hover {
+    cursor: pointer;
+    background: #F4F2F0;
+    transition: background .25s ease-in, color .25s ease-in;
+  }
+`

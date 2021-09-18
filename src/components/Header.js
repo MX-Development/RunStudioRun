@@ -35,7 +35,7 @@ function Header() {
 
   const navItems = [
     {
-      item: 'To dos',
+      item: 'To Dos',
       sub_items: []
     },
     {
@@ -126,7 +126,7 @@ function Header() {
                   
                   setActiveNav(item.item)
 
-                  if (item.item == 'To dos') {
+                  if (item.item == 'To Dos') {
                     history.push(`/to-do`)
                   } else {
                     history.push(`${item.sub_items[0].path}`)
@@ -151,7 +151,7 @@ function Header() {
               <h2>Quick</h2>
               <Columns>
                 <Column>
-                  <h3>Projects</h3>
+                  <h5>Projects</h5>
                   <Link to="/projects/add" onClick={() => setQuicknav(false)}>
                     New Project
                   </Link>
@@ -170,7 +170,7 @@ function Header() {
                   </Link>
                 </Column>
                 <Column>
-                  <h3>Contacts</h3>
+                  <h5>Contacts</h5>
                   <Link to="/companies/add" onClick={() => setQuicknav(false)}>
                     Add Company
                   </Link>
@@ -188,7 +188,7 @@ function Header() {
                   </Link>
                 </Column>
                 <Column>
-                  <h3>Profile & Settings</h3>
+                  <h5>Profile & Settings</h5>
                   <Link to="/team/add" onClick={() => setQuicknav(false)}>
                     Add Team Member
                   </Link>
@@ -268,7 +268,7 @@ const HeaderTop = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #3C3C3C;
-  padding: 0 15px;
+  padding: 0 30px;
 `
 
 const HeaderLogo = styled.div`
@@ -283,7 +283,7 @@ const HeaderLogo = styled.div`
 
   > span {
     color: #fff;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 1px;
     line-height: 1;
     text-transform: uppercase;
@@ -348,24 +348,25 @@ const HeaderActions = styled.div`
 `
 
 const ProfileDropdown = styled.div`
-  display: none;
+  display: flex;
   flex-direction: column;
   position: absolute;
   top: 46px;
-  right: 0;
+  right: -999px;
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 0px 0px 4px 4px;
   padding: 15px;
   background: #fff;
   min-width: 175px;
   z-index: 1;
+  opacity: 0;
+  transition: opacity .35s ease-in-out;
 
   > a {
     padding: 5px 10px;
     text-decoration: none;
     color: #292724;
     font-size: 14px;
-    display: flex;
     word-wrap: none;
   }
 
@@ -375,6 +376,9 @@ const ProfileDropdown = styled.div`
 
   &.active {
     display: flex;
+    opacity: 1;
+    transition: opacity .35s ease-in-out;
+    right: 0;
   }
 `
 
@@ -430,19 +434,23 @@ const SubnavSearch = styled.div`
 `
 
 const QuickNav = styled.div`
-  display: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 46px;
-  right: 85px;
+  right: -999px;
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 0px 0px 4px 4px;
   padding: 15px;
   background: #fff;
   z-index: 5;
+  opacity: 0;
+  transition: opacity .35s ease-in-out;
 
   &.active {
-    display: flex;
-    flex-direction: column;
+    opacity: 1;
+    right: 85px;
+    transition: opacity .35s ease-in-out;
   }
 
   > h2 {
@@ -459,9 +467,10 @@ const Columns = styled.div`
 const Column = styled.div`
   min-width: 150px;
 
-  > h3 {
+  > h5 {
     color: #E0BC77;
     margin-bottom: 20px;
+    font-weight: 500;
   }
 
   > a {

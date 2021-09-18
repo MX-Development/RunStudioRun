@@ -7,7 +7,16 @@ import moment from 'moment'
 
 import Avatar from '@material-ui/core/Avatar';
 
+import { useForm, Controller } from "react-hook-form"
+
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
+
 function JobSelect() {
+
+  const { handleSubmit, control, setValue } = useForm();
   
   const [openNav, setOpenNav] = useState(false)
 
@@ -62,10 +71,32 @@ function JobSelect() {
     fetchData()
   }, [])
 
+  const handleChange = event => {
+    console.log(event.target.value)
+  }
+
   return (
     <Container>
-      <SelectButton className={openNav ? 'btn btn-gold' : 'btn'} onClick={(e) => setOpenNav(!openNav)}>Select job</SelectButton>
+      <SelectButton className={openNav ? 'btn btn-gold' : 'btn'} onClick={(e) => setOpenNav(!openNav)}>Select task</SelectButton>
       <SelectContainer className={openNav ? 'active' : null} id="task-list">
+            <FormGroup>
+              <FormControl variant="outlined">
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="Search..."
+                      variant="outlined"
+                      {...field}
+                      value={''}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="company"
+                  defaultValue=""
+                />
+              </FormControl>
+            </FormGroup>
       {
         tasks ?
           tasks.map(task => (
@@ -117,7 +148,7 @@ const SelectContainer = styled.div`
   flex-direction: column;
   max-height: 70vh; 
   background: #fff;
-  padding: 15px;
+  padding: 7.5px;
   position: absolute;
   left: -50%;
   top: 32.5px;
@@ -126,10 +157,15 @@ const SelectContainer = styled.div`
   z-index: 5;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
   border-radius: 4px;
-  transform: translate(-22.5%, 0);
+  transform: translate(-32.5%, 0);
 
   &.active {
     display: flex;
+  }
+
+  .MuiFormGroup-root {
+    width: 100%;
+    margin-bottom: 5px;
   }
 `
 

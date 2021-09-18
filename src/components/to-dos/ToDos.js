@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
+import styled from 'styled-components'
+import { useHistory } from "react-router-dom"
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
@@ -13,15 +15,41 @@ import './ToDos.css'
 import CardPlayButton from '../assets/icons/CardPlayButton.svg'
 import CardStopButton from '../assets/icons/CardStopButton.svg'
 
-function Calendar() {
-  // title: 'Task', 
-  // start: '2021-08-09T09:00:00',
-  // end: '2021-08-09T11:00:00',
-  // description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.',
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
+import { MenuItem, Select } from '@material-ui/core'
 
-  // extendedProps: {
-  //   department: 'BioChemistry'
-  // }
+import Clock from '../assets/icons/Clock.svg'
+
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
+function Calendar() {
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const centerModal = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      maxWidth: '550px'
+    },
+  };
+
+  function afterOpenModal() {
+
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  
+  const history = useHistory();
 
   const activeSlideRef = useRef(null);
 
@@ -96,13 +124,65 @@ function Calendar() {
     console.log('test')
   }
 
+  const changeMember = event => {
+    const memberID = event.target.value
+    history.push(`/to-do/${memberID}`)
+  }
+
   return (
-    <>
+    <div style={{ position: 'relative' }}>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={centerModal}
+        contentLabel="Example Modal"
+      >
+        <ModalBody>
+          <h2>Additional Time</h2>
+          
+        </ModalBody>
+      </Modal>
+    
+      <MemberSelect>
+        <FormGroup>
+          <FormControl variant="outlined">
+            <Select
+              value={'Taso Katsionis'}
+              style={{ width: '100%', background: '#fff' }}
+              onChange={changeMember}
+            >
+              <MenuItem value="">
+                <em>Select member</em>
+              </MenuItem>
+              <MenuItem value={'Taso Katsionis'} key={1}>Taso Katsionis</MenuItem>
+            </Select>
+          </FormControl>
+        </FormGroup>
+        <AdditionalTime onClick={() => setIsOpen(true)}>
+          <img src={Clock} alt="clock icon" />
+        </AdditionalTime>
+      </MemberSelect>
+
       <FullCalendar
         plugins={[ timeGridPlugin, interactionPlugin ]}
         initialView="timeGridWeek"
         droppable={true}
         allDaySlot={false}
+        // customButtons={{
+        //   myCustomButton: {
+        //     text: 'custom!',
+        //     click: function() {
+        //       alert('clicked the custom button!');
+        //     }
+        //   }
+        // }}
+        headerToolbar={{
+          left: 'prev,next today',
+          center: 'title',
+          right: ''
+        }}
         weekends={false}
         eventClick={handleDateClick}
         eventContent={renderEventContent}
@@ -138,7 +218,7 @@ function Calendar() {
           }
         }
       />
-    </>
+    </div>
   )
 }
 
@@ -185,12 +265,12 @@ function renderEventContent(eventInfo) {
           </div>
         </div>
         <div className="event-buttons">
-          <span className="play-button" onClick={() => console.log('Start timing event...')}>
+          {/* <span className="play-button" onClick={() => console.log('Start timing event...')}>
             <img src={CardPlayButton} alt="play button" /> Start
           </span>
           <span className="stop-button" onClick={() => console.log('Stop timing event...')}>
             <img src={CardStopButton} alt="stop button" /> Stop
-          </span>
+          </span> */}
         </div>
         {/* <div className="remaining">
           <img src={Clock} alt="Clock icon" />
@@ -219,3 +299,37 @@ function renderHeaderContent(eventInfo) {
 function renderDayContent(eventInfo) {
   // console.log(eventInfo)
 }
+
+const MemberSelect = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 3px;
+`
+
+const AdditionalTime = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+
+  &:hover { 
+    cursor: pointer;
+  }
+`
+
+const ModalBody = styled.div`
+  position: relative;
+
+  > h2 {
+    font-weight: 300;
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+` 

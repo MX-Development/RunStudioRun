@@ -48,12 +48,12 @@ function Projects({ add }) {
         </div>
       )
     },
-    { field: 'description', type: 'string', flex: 0.5 },
-    { field: 'team', type: 'string', flex: 0.1 },
-    { field: 'enteredDate', type: 'string', flex: 0.2, headerName: 'Entered' },
-    { field: 'dueDate', type: 'string', flex: 0.2, headerName: 'Due Date' },
-    { field: 'action', type: 'string', flex: 0.2 },
-    { field: 'status', type: 'string', flex: 0.2 },
+    { field: 'description', type: 'string', flex: 0.85 },
+    { field: 'team', type: 'string', flex: 0.15 },
+    { field: 'enteredDate', type: 'string', flex: 0.15, headerName: 'Entered' },
+    { field: 'dueDate', type: 'string', flex: 0.15, headerName: 'Due Date' },
+    { field: 'action', type: 'string', flex: 0.15 },
+    { field: 'status', type: 'string', flex: 0.15 },
   ]
 
   const [data, setData] = useState([])
@@ -281,7 +281,7 @@ function Projects({ add }) {
   )
 
   return (
-    <List title={'Projects'} columns={columns} data={data} modalTitle={'New Project'} modalContent={modalContent} add={add ? true : false} />
+    <List title={'Projects'} columns={columns} data={data} headerButton={'Print'} modalTitle={'New Project'} modalContent={modalContent} add={add ? true : false} />
   )
 }
 

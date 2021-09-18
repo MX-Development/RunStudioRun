@@ -15,8 +15,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
-import ModalBox from '../ModalBox'
-
 const columns = [
   { field: 'companyName', type: 'string', headerName: 'Company', flex: 0.2 },
   { field: 'phone', type: 'string', flex: 0.15 },
@@ -27,7 +25,6 @@ const columns = [
 
 function Companies({ add, importing }) {
 
-  const [openModal, setOpenModal] = useState(false)
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
 

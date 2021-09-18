@@ -211,3 +211,45 @@ a.fc-event.eventRed {
   background: #fff;
   font-size: 12px;
 }
+
+.fc .fc-toolbar-title {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.fc .fc-button {
+  padding: 0;
+}
+
+.fc .fc-button:nth-child(1) {
+  margin-right: 5px;
+}
+
+.fc .fc-button-group > .fc-button {
+  border-radius: 0.25em !important;
+}
+
+.fc .fc-button .fc-icon::before {
+  font-size: 18px;
+  position: relative;
+  top: -2.5px;
+}
+
+.fc .fc-button-group > .fc-button {
+  border: 1px solid #B1B0AF;
+}
+
+.fc-today-button {
+  background: transparent !important;
+  color: #B1B0AF !important;
+  padding: 1.5px 7.5px !important;
+  text-transform: uppercase !important;
+  border-color: #B1B0AF !important;
+}
+
+.fc .fc-button-primary:not(:disabled):active:focus, .fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+  box-shadow: none !important;
+  background: inherit !important;
+  outline: none !important;
+  color: inherit !important;
+}

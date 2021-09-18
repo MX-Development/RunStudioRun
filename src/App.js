@@ -51,6 +51,7 @@ import Reports from './components/work/Reports';
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
 import Components from './components/Components';
 import PDF from './components/PDF';
+import Onboarding from './components/account/Onboarding';
 
 function App() {
 
@@ -67,7 +68,10 @@ function App() {
       <Router>
         {
           !user ? (
-            <Login />
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route exact path="/sign-up" component={Onboarding} />
+            </Switch>
           ) : (
             <>
               <Header />

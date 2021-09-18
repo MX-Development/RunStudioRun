@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
 import { MenuItem, Select } from '@material-ui/core'
 
 import PageTitle from '../layout/PageTitle'
@@ -22,15 +21,154 @@ import LineArrow from '../assets/icons/LineArrow.svg'
 import BusinessInformation from './BusinessInformation'
 import DisplayModes from './DisplayModes';
 
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 function Settings() {
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const centerModal = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: '425px'
+    },
+  };
+
+  function afterOpenModal() {
+
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of it
 
-  return (
+  const estimateBody = (
+    <> 
+      <ModalHeader>
+        <Tab onClick={() => {
+              setModalContent(estimateBody)
+              setIsOpen(true)
+            }}>
+          <h2>Estimates</h2>
+        </Tab>
+        <Tab onClick={() => {
+              setModalContent(invoiceBody)
+              setIsOpen(true)
+            }}>
+          <h2>Invoices</h2>
+        </Tab>
+      </ModalHeader>
+      <h1>Estimate</h1>
+      <p style={{ margin: '10px 0' }}>
+        Custom Terms & Conditions
+      </p>
+
+      <FormGroup>
+        <FormControl variant="outlined">
+          <TextField
+            id="content"
+            placeholder="Paste text here..."
+            variant="outlined"
+            multiline
+            minRows={20}
+          />
+        </FormControl>
+      </FormGroup>
+    </>
+  )
+
+  const invoiceBody = (
     <>
+      <ModalHeader>
+        <Tab onClick={() => {
+              setModalContent(estimateBody)
+              setIsOpen(true)
+            }}>
+          <h2>Estimates</h2>
+        </Tab>
+        <Tab onClick={() => {
+              setModalContent(invoiceBody)
+              setIsOpen(true)
+            }}>
+          <h2>Invoices</h2>
+        </Tab>
+      </ModalHeader>
+      <h1>Invoice</h1>
+      <p style={{ margin: '10px 0' }}>
+        Custom Terms & Conditions
+      </p>
+
+      <FormGroup>
+        <FormControl variant="outlined">
+          <TextField
+            id="content"
+            placeholder="Paste text here..."
+            variant="outlined"
+            multiline
+            minRows={20}
+          />
+        </FormControl>
+      </FormGroup>
+    </>
+  )
+
+  const customFooterBody = (
+    <>
+      <h2 style={{ fontWeight: '400' }}>Footer text</h2>
+      <p style={{ margin: '10px 0' }}>
+        Custom footer info such as payment advice.
+      </p>
+
+      <FormGroup>
+        <FormControl variant="outlined">
+          <TextField
+            id="content"
+            placeholder="Paste text here..."
+            variant="outlined"
+            multiline
+            minRows={20}
+          />
+        </FormControl>
+      </FormGroup>
+    </>
+  )
+
+  return ( 
+    <>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={centerModal}
+        contentLabel="Example Modal"
+      >
+        <div style={{ background: '#fff' }}>
+          { modalContent }
+          <div className="modal-footer">
+            <div className="btn-group">
+              <div className="btn-left">
+                <button className="btn btn-light-gray btn-left">Cancel</button>
+              </div>
+              <div className="btn-right">
+                <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
+                <button className="btn btn-gold btn-right">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
       <PageTitle title={'Settings'} />
 
       <BlockContainer>
@@ -91,9 +229,18 @@ function Settings() {
 
           <Block title={'Terms & Conditions'}>
             {/* TODO: Create buttons */}
-            <TermButton>Estimates</TermButton>
-            <TermButton>Invoices</TermButton>
-            <TermButton>Custom Payment Advice</TermButton>
+            <TermButton onClick={() => {
+              setModalContent(estimateBody)
+              setIsOpen(true)
+            }}>Estimates</TermButton>
+            <TermButton onClick={() => {
+              setModalContent(invoiceBody)
+              setIsOpen(true)
+            }}>Invoices</TermButton>
+            <TermButton onClick={() => {
+              setModalContent(customFooterBody)
+              setIsOpen(true)
+            }}>Custom Payment Advice</TermButton>
           </Block>
 
           <Block title={'Job Numbers + Time Blocks'}>
@@ -149,5 +296,22 @@ const TermButton = styled.div`
     right: 0;
     top: -3.5px;
     height: 100%;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const ModalHeader = styled.div`
+  display: flex;
+`
+
+const Tab = styled.div`
+  border-radius: 2px 2px 0 0;
+  width: 50%;
+
+  &:hover {
+    cursor: pointer;
   }
 `

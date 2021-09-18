@@ -8,7 +8,7 @@ import PageTitle from './layout/PageTitle'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, ...rest }) {
+function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, ...rest }) {
 
   const centerModal = {
     content: {
@@ -71,7 +71,10 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
 
   return (
     <>
-      <PageTitle title={title} />
+      <ListHeader>
+        <PageTitle title={title} />
+        { headerButton ? <button>{ headerButton }</button> : null }
+      </ListHeader>
       
       <div style={{ height: '100%', width: '100%' }}>
         <DataGrid
@@ -111,3 +114,22 @@ const ModalBody = styled.div`
     margin-bottom: 15px;
   }
 ` 
+
+const ListHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > button {
+    border: 1px solid #B1B0AF;
+    color: #B1B0AF;
+    border-radius: 2px;
+    background: transparent;
+    font-size: 12px;
+    padding: 4px 6px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`
