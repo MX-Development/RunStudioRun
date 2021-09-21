@@ -52,6 +52,7 @@ import BackgroundImage from './components/assets/img/greyhounds/corner-left-houn
 import Components from './components/Components';
 import PDF from './components/PDF';
 import Onboarding from './components/account/Onboarding';
+import KanbanBoard from './components/to-dos/KanbanBoard';
 
 function App() {
 
@@ -102,6 +103,7 @@ function App() {
                   <Route exact path="/components" component={Components} />
 
                   <Route exact path="/to-do" component={ToDos} />
+                  <Route exact path="/kanban" component={KanbanBoard} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />
@@ -221,7 +223,8 @@ const AppBody = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
   margin-top: 30px;
+  padding: 0 15px;
 `

@@ -231,7 +231,7 @@ function Header() {
           <LeftSpace />
           <SubnavLinks>
             {
-              location.pathname === "/to-do" ?
+              location.pathname === "/to-do" || location.pathname === '/kanban' ?
                 <JobSelect />
               :
               navItems.map(item => (
@@ -246,6 +246,8 @@ function Header() {
                 ))
               ))
             }
+            <Link to="/to-do">Timeline</Link>
+            <Link to="/kanban">Kanban</Link>
           </SubnavLinks>
           <SubnavSearch>
             <input id="search" name="search" className="form-control" placeholder="Search..." />
@@ -273,20 +275,22 @@ const HeaderTop = styled.div`
 
 const HeaderLogo = styled.div`
   position: relative;
-  top: 5px;
+  top: 4px;
   width: 12.5%;
   display: flex;
 
   > img {
     margin-right: 2.5px;
+    max-height: 50px;
   }
 
   > span {
     color: #fff;
-    font-weight: 800;
-    letter-spacing: 1px;
-    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .65px;
+    line-height: .95;
     text-transform: uppercase;
+    font-size: 15px;
   }
 `
 

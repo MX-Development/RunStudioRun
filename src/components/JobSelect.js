@@ -119,7 +119,7 @@ function JobSelect() {
                 { teamMembers.map(member => {
                   if (task.team.includes(member.id)) {
                     return (
-                      <Avatar alt={ member.name } src={ member.avatar }>
+                      <Avatar alt={ member.name } src={ member.avatar } key={ member.id }>
                         M
                       </Avatar>
                     )

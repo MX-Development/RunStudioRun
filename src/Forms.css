@@ -68,6 +68,28 @@
   padding-right: 32px !important;
 }
 
+.MuiSelect-icon {
+  border-left: 1px solid rgba(0,0,0,0.35) !important;
+  border-right: none !important;
+  padding-left: 5px !important;
+  padding-right: 0 !important;
+  height: 15px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.MuiSelect-iconOpen {
+  transform: translateY(-50%) rotate(180deg) !important;
+  border-left: none !important;
+  border-right: 1px solid rgba(0,0,0,0.35) !important;
+  padding-right: 5px !important;
+  padding-left: 0 !important;
+}
+
+.MuiSelect-outlined.MuiSelect-outlined {
+  padding-right: 42px !important;
+}
+
 .MuiOutlinedInput-notchedOutline {
   border-color: #DDDBD7 !important;
 }

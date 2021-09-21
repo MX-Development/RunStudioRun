@@ -96,7 +96,7 @@ a.fc-event.eventRed {
 
 
 .event-container {
-  padding: 0 7.5px 7.5px;
+  padding: 0 8px 8px;
   position: relative;
   height: 100%;
 }
@@ -105,14 +105,21 @@ a.fc-event.eventRed {
   background: red;
 } */
 
+.fc-timegrid-event .fc-event-main {
+  padding: 0 !important;
+}
+
 .event-container .event-header {
   background: #fff;
   z-index: 5;
   position: relative;
+  top: -1px;
 }
 
 .event-container .event-header h5 {
   font-weight: 700;
+  font-size: 15px;
+  padding: 4px 0;
 }
 
 .event-container .event-header h6 {
@@ -135,7 +142,7 @@ a.fc-event.eventRed {
   bottom: 0;
   left: 0;
   background: #fff;
-  padding: 7.5px;
+  padding: 8px 8px 16px;
   width: 100%;
 }
 
@@ -252,4 +259,14 @@ a.fc-event.eventRed {
   background: inherit !important;
   outline: none !important;
   color: inherit !important;
+}
+
+/* Kanban Board */
+.fc .fc-daygrid-event {
+  border: none;
+  margin-bottom: 7.5px;
+}
+
+.fc .fc-daygrid-day-frame {
+  padding: 0 10px;
 }

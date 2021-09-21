@@ -70,11 +70,22 @@ function ProjectHeader({ projectID }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <Select
-                    value={''}
+                    value={'Select project'}
                     style={{ width: '100%', background: '#fff' }}
                     onChange={changeProject}
+                    MenuProps={{
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      transformOrigin: {
+                        vertical: "top",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null
+                    }}
                   >
-                    <MenuItem value="">
+                    <MenuItem value="Select project">
                       <em>Select project</em>
                     </MenuItem>
                     {
@@ -118,20 +129,30 @@ function ProjectHeader({ projectID }) {
             </Grid>
             <Grid item xs={12}>  
               <div className="text-row">
-                <h3>Comapny Name</h3>
+                <h3>Company Name</h3>
               </div>
             </Grid>
             <Grid item xs={12}>  
               <FormGroup>
                 <FormControl variant="outlined">
                   <Select
+                    MenuProps={{
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      transformOrigin: {
+                        vertical: "top",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null
+                    }}
                     value={'Who requested the work?'}
                     style={{ width: '100%', background: '#fff' }}
                   >
-                    <MenuItem value="">
-                      <em>Select</em>
+                    <MenuItem value="Who requested the work?">
+                      <em>Who requested the work?</em>
                     </MenuItem>
-                    <MenuItem value={'Who requested the work?'}>Who requested the work?</MenuItem>
                     <MenuItem value={20}>2</MenuItem>
                     <MenuItem value={30}>3</MenuItem>
                   </Select>

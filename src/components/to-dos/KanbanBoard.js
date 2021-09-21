@@ -26,7 +26,7 @@ import Clock from '../assets/icons/Clock.svg'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function Calendar() {
+function KanbanBoard() {
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const centerModal = {
@@ -177,23 +177,16 @@ function Calendar() {
       </MemberSelect>
 
       <FullCalendar
-        plugins={[ timeGridPlugin, interactionPlugin ]}
-        initialView="timeGridWeek"
+        plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
+        initialView="dayGridWeek"
         droppable={true}
         allDaySlot={false}
-        // customButtons={{
-        //   myCustomButton: {
-        //     text: 'custom!',
-        //     click: function() {
-        //       alert('clicked the custom button!');
-        //     }
-        //   }
-        // }}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
           right: ''
         }}
+        eventOrder={false}
         weekends={false}
         eventClick={handleDateClick}
         eventContent={renderEventContent}
@@ -202,20 +195,6 @@ function Calendar() {
         }}
         eventDragStop={function( info ) {
           console.log(info)
-        }}
-        scrollTime={'08:45:00'}
-        slotDuration={'00:15:00'}
-        slotLabelInterval={'01:00'}
-        slotLabelFormat={{
-          hour: '2-digit',
-          minute: '2-digit',
-          omitZeroMinute: false,
-          meridiem: false
-        }}
-        businessHours={{
-          dow: [1, 2, 3],
-          start: '08:00',
-          end: '18:00'
         }}
         dayHeaderFormat={{
           weekday: 'long'
@@ -233,7 +212,7 @@ function Calendar() {
   )
 }
 
-export default Calendar
+export default KanbanBoard
 
 // const eventDragging = (info) => {
 //   info.el.querySelector('.event-container').classList.add('dragged')
@@ -253,7 +232,7 @@ function renderEventContent(eventInfo) {
   let percentage = timeWorked / totalTime * 100
 
   return (
-    <div className="event-container">
+    <div className="event-container" style={{ height: `${totalTime / 25}px` }}>
       <div className="event-header">
         <h5>{eventInfo.event.title}</h5>
         <h6 style={{ fontWeight: '500', margin: '2.5px 0' }}>{eventInfo.event.extendedProps.jobTitle}</h6>

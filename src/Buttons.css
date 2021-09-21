@@ -15,6 +15,8 @@ a {
 }
 
 .btn:hover {
+  background: var(--gold);
+  color: #fff;
   cursor: pointer;
 }
 
