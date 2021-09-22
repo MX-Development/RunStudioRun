@@ -5,6 +5,8 @@ import { DataGrid } from '@material-ui/data-grid';
 
 import PageTitle from './layout/PageTitle'
 
+import './List.css';
+
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
@@ -73,7 +75,7 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
     <>
       <ListHeader>
         <PageTitle title={title} />
-        { headerButton ? <button>{ headerButton }</button> : null }
+        { headerButton ? <button className="btn">{ headerButton }</button> : null }
       </ListHeader>
       
       <div style={{ height: '100%', width: '100%' }}>
