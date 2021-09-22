@@ -197,8 +197,7 @@ function KanbanBoard() {
         droppable={true}
         allDaySlot={false}
         headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
+          left: 'prev,next today title',
           right: ''
         }}
         eventOrder={false}

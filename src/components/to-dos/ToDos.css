@@ -50,6 +50,16 @@
   border: 2px solid #B1B0AF;
 }
 
+.fc .fc-button {
+  opacity: 1;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.fc .fc-button:disabled {
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+
 /* Table headers */
 .time-bar {
   display: flex;
@@ -259,6 +269,10 @@ a.fc-event.eventRed {
   background: inherit !important;
   outline: none !important;
   color: inherit !important;
+}
+
+.fc-header-toolbar .fc-toolbar-chunk:nth-child(1) {
+  display: flex;
 }
 
 /* Kanban Board */

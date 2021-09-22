@@ -190,8 +190,7 @@ function Calendar() {
         //   }
         // }}
         headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
+          left: 'prev,next today title',
           right: ''
         }}
         weekends={false}
