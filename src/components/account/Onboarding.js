@@ -35,63 +35,63 @@ function Onboarding() {
 
   return (
     <LoginContainer>
-    <div class="container" onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
-      <animated.div class="card1" style={{ transform: props.xy.interpolate(trans1) }} />
-      <animated.div class="card2" style={{ transform: props.xy.interpolate(trans2) }} />
-      <animated.div class="card3" style={{ transform: props.xy.interpolate(trans3) }} />
-      <animated.div class="card4" style={{ transform: props.xy.interpolate(trans4) }} />
-    </div>
-      <LoginModal>
-        <ModalHeader>
-          <h1>
-            Run<br/>
-            Studio<br/>
-            Run
-          </h1>
-        </ModalHeader>
-        <ModalBody>
-          <h3>Create your account</h3>
-          <GoogleButton onClick={signIn}>
-            <img src={GoogleLogo} /> Continue with Google
-          </GoogleButton>
-          <Divider>
-            <span>Or</span>
-          </Divider>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
-            </div>
-            <div className="form-group">
-              <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
-            </div>
-            <div className="form-group">
-              <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
-            </div>
-            <div className="form-group">
-              <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
-            </div>
-            <div className="form-footer">
-              <div className="btn-group">
-                <div className="btn-left">
-                  <Link to="/forgot-password">
-                    Forgot password?
-                  </Link>
-                  <Link to="/sign-up">
-                    Sign up for an account
-                  </Link>
-                </div>
-                <div className="btn-right">
-                  <button type="submit" className="btn btn-gold btn-right">Log in</button>
+      <div class="container" onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
+        <animated.div class="card1" style={{ transform: props.xy.interpolate(trans1) }} />
+        <animated.div class="card2" style={{ transform: props.xy.interpolate(trans2) }} />
+        <animated.div class="card3" style={{ transform: props.xy.interpolate(trans3) }} />
+        <animated.div class="card4" style={{ transform: props.xy.interpolate(trans4) }} />
+      </div>
+        <LoginModal>
+          <ModalHeader>
+            <h1>
+              Run<br/>
+              Studio<br/>
+              Run
+            </h1>
+          </ModalHeader>
+          <ModalBody>
+            <h3>Create your account</h3>
+            <GoogleButton onClick={signIn}>
+              <img src={GoogleLogo} /> Continue with Google
+            </GoogleButton>
+            <Divider>
+              <span>Or</span>
+            </Divider>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-group">
+                <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
+              </div>
+              <div className="form-group">
+                <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
+              </div>
+              <div className="form-group">
+                <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
+              </div>
+              <div className="form-group">
+                <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
+              </div>
+              <div className="form-footer">
+                <div className="btn-group">
+                  <div className="btn-left">
+                    <Link to="/forgot-password">
+                      Forgot password?
+                    </Link>
+                    <Link to="/sign-up">
+                      Sign up for an account
+                    </Link>
+                  </div>
+                  <div className="btn-right">
+                    <button type="submit" className="btn btn-gold btn-right">Log in</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
-        </ModalBody>
-        <ModalFooter>
-          <p>2021 © Run Studio Run | <Link to="/terms">Terms</Link> | <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/help">Need Help?</Link></p>
-        </ModalFooter>
-      </LoginModal>
-    </LoginContainer>
+            </form>
+          </ModalBody>
+          <ModalFooter>
+            <p>2021 © Run Studio Run | <Link to="/terms">Terms</Link> | <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/help">Need Help?</Link></p>
+          </ModalFooter>
+        </LoginModal>
+      </LoginContainer>
   )
 }
 

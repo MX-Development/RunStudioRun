@@ -53,6 +53,7 @@ import Components from './components/Components';
 import PDF from './components/PDF';
 import Onboarding from './components/account/Onboarding';
 import KanbanBoard from './components/to-dos/KanbanBoard';
+import Verify from './components/account/Verify';
 
 function App() {
 
@@ -72,6 +73,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Login} />
               <Route exact path="/sign-up" component={Onboarding} />
+              <Route exact path="/verify" component={Verify} />
             </Switch>
           ) : (
             <>

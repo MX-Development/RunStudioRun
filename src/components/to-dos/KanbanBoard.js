@@ -129,6 +129,20 @@ function KanbanBoard() {
     history.push(`/to-do/${memberID}`)
   }
 
+  const changeEvent = () => {
+    console.log("Change event");
+    let newEvents = [];
+    events.forEach((event, index) => {
+      if (index === 2) {
+        event.start = "2021-08-29T12:15:23+02:00";
+      }
+      newEvents.push(event);
+    })
+    console.log(newEvents);
+    setEvents([]);
+    setEvents(newEvents);
+  }
+
   return (
     <div style={{ position: 'relative' }}>
 
@@ -174,6 +188,7 @@ function KanbanBoard() {
         <AdditionalTime onClick={() => setIsOpen(true)}>
           <img src={Clock} alt="clock icon" />
         </AdditionalTime>
+        {/* <h1 onClick={() => changeEvent()}>Halo</h1> */}
       </MemberSelect>
 
       <FullCalendar
