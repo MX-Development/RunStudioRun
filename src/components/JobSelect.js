@@ -64,8 +64,9 @@ function JobSelect() {
     fetchData()
   }, [])
 
+  const [searchQuery, setSearchQuery] = useState('')
   const handleChange = event => {
-    console.log(event.target.value)
+    setSearchQuery(event.target.value)
   }
 
   return (
@@ -80,7 +81,7 @@ function JobSelect() {
                       placeholder="Search..."
                       variant="outlined"
                       {...field}
-                      value={''}
+                      value={searchQuery}
                       onChange={handleChange}
                     />
                   )}
@@ -92,35 +93,40 @@ function JobSelect() {
             </FormGroup>
       {
         tasks ?
-          tasks.map(task => (
-            <SelectItem 
-              className="dragabble-task"
-              title={task.title}
-              data-time={task.time}
-              data-time-worked={task.time_worked}
-              data-description={task.description}
-              data={task.id}
-              key={task.id}
-            >
-              <TaskInfo>
-                <p> 
-                  { task.title }
-                </p>
-                <span>{ task.projectName ? task.projectName : null }</span>
-              </TaskInfo>
-              <Members>
-                { teamMembers.forEach(member => {
-                  if (task.team.includes(member.id)) {
-                    return (
-                      <Avatar alt={ member.name } src={ member.avatar } key={ member.id }>
-                        M
-                      </Avatar>
-                    )
-                  }
-                })}
-              </Members>
-            </SelectItem>
-          ))
+          tasks.map(task => {
+
+            if (task.title.toLowerCase().includes(searchQuery.toLowerCase()) || task.projectName.toLowerCase().includes(searchQuery.toLowerCase())) {
+              return (
+                <SelectItem 
+                  className="dragabble-task"
+                  title={task.title}
+                  data-time={task.time}
+                  data-time-worked={task.time_worked}
+                  data-description={task.description}
+                  data={task.id}
+                  key={task.id}
+                >
+                  <TaskInfo>
+                    <p> 
+                      { task.title }
+                    </p>
+                    <span>{ task.projectName ? task.projectName : null }</span>
+                  </TaskInfo>
+                  <Members>
+                    { teamMembers.forEach(member => {
+                      if (task.team.includes(member.id)) {
+                        return (
+                          <Avatar alt={ member.name } src={ member.avatar } key={ member.id }>
+                            M
+                          </Avatar>
+                        )
+                      }
+                    })}
+                  </Members>
+                </SelectItem>
+              )
+            }
+          })
         : null
       }
       </SelectContainer>

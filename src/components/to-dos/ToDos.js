@@ -176,16 +176,6 @@ function Calendar() {
         weekends={false}
         eventClick={handleDateClick}
         eventContent={renderEventContent}
-        eventDragStart={function( info ) {
-          let parent = info.el.parentNode;
-
-          // parent.classList.remove('not-dragged');
-        }}
-        eventDragStop={function( info ) {
-          let parent = info.el.parentNode;
-
-          parent.classList.add('not-dragged');
-        }}
         scrollTime={'08:45:00'}
         slotDuration={'00:15:00'}
         slotLabelInterval={'01:00'}
@@ -206,11 +196,24 @@ function Calendar() {
         dayHeaderContent={renderHeaderContent}
         dayCellContent={renderDayContent}
         events={events}
+        eventDragStart={function( info ) {
+          let parent = info.el.parentNode;
+
+          console.log(info.jsEvent.target)
+
+          // parent.classList.remove('not-dragged');
+        }}
+        eventDragStop={function( info ) {
+          console.log(info);
+          let parent = info.el.parentNode;
+
+          parent.classList.add('not-dragged');
+        }}
         eventDidMount={
           function(info) {
             console.log('Event did mount')
             let parent = info.el.parentNode;
-  
+
             parent.classList.remove('not-dragged');
           }
         }
