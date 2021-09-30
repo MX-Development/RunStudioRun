@@ -2,20 +2,18 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 import BusinessLogo from '../assets/img/business-logo.svg'
-import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { MenuItem, Select } from '@material-ui/core';
 
 function BusinessInformation() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { handleSubmit, watch } = useForm();
   const onSubmit = data => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of it

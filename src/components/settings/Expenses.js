@@ -13,8 +13,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
-import ModalBox from '../ModalBox'
-
 const columns = [
   { field: 'expenseName', type: 'string', flex: 0.3 },
   { field: 'description', type: 'string', flex: 0.6 },
@@ -25,7 +23,6 @@ const columns = [
 
 function Expenses({ add }) {
 
-  const [openModal, setOpenModal] = useState(false)
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,7 +50,7 @@ function Expenses({ add }) {
   let { id } = useParams();
   const selectedID = id;
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
 
   const [selectedData, setSelectedData] = useState(null)
@@ -66,14 +63,14 @@ function Expenses({ add }) {
 
       setSelectedData(dataSelect[0])
     }
-  }, [id]);
+  }, [id, data, selectedID]);
 
-  const handleChange = event => {
-    setSelectedData({
-      ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
-    });
-  }
+  // const handleChange = event => {
+  //   setSelectedData({
+  //     ...selectedData,
+  //     [event.target.name]: event.target.value // This code replace the font object
+  //   });
+  // }
 
   const modalContent = (     
     <>     

@@ -72,9 +72,9 @@ function Components() {
         Buttons
       </Heading>
       <Elements>
-        <a href="#" className="btn btn-gold">Button</a>
-        <a href="#" className="btn btn-dark-gray">Button</a>
-        <a href="#" className="btn btn-light-gray">Button</a>
+        <a href="/" disabled className="btn btn-gold">Button</a>
+        <a href="/" disabled className="btn btn-dark-gray">Button</a>
+        <a href="/" disabled className="btn btn-light-gray">Button</a>
       </Elements>
 
       <Heading>

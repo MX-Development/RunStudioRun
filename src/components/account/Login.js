@@ -21,7 +21,7 @@ const trans4 = (x, y) => `translate3d(${x / 3.5 + 800}px,${y / 3.5 + 200}px,0)`
 
 function Login() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
 
   const signIn = (e) => {
@@ -78,7 +78,7 @@ function Login() {
             <span>Or</span>
           </Divider>
           <GoogleButton onClick={signIn}>
-            <img src={GoogleLogo} /> Sign in with Google
+            <img src={GoogleLogo} alt="google logo" /> Sign in with Google
           </GoogleButton>
         </ModalBody>
         <ModalFooter>

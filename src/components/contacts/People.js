@@ -17,8 +17,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
-import ModalBox from '../ModalBox'
-
 const columns = [
   { field: 'fullName', type: 'string', flex: 0.2, headerName: 'Name' },
   { field: 'phone', type: 'string', flex: 0.15 },
@@ -28,14 +26,10 @@ const columns = [
 ]
 
 function People({ add, importing, syncing }) {
-
-  const [openModal, setOpenModal] = useState(false)
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
   const [companies, setCompanies] = useState([])
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/people.json`)
@@ -52,8 +46,6 @@ function People({ add, importing, syncing }) {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -63,7 +55,7 @@ function People({ add, importing, syncing }) {
   let { id } = useParams();
   const selectedID = id;
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
 
   const [selectedData, setSelectedData] = useState(null)
@@ -84,7 +76,7 @@ function People({ add, importing, syncing }) {
       console.log(selectedID)
       console.log(id)
       const dataSelect = data.filter(obj => {
-        return obj.id == selectedID
+        return obj.id === selectedID
       })
 
       setSelectedData(dataSelect[0])
@@ -95,7 +87,7 @@ function People({ add, importing, syncing }) {
         phone_call: true
       })
     }
-  }, [id]);
+  }, [id, selectedID, data]);
 
   const handleChange = event => {
     setSelectedData({

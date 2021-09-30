@@ -84,6 +84,16 @@
   overflow: visible !important;
 }
 
+@media (max-width: 768px) {
+  .MuiDataGrid-root .MuiDataGrid-window {
+    overflow-x: scroll !important;
+  }
+  /* .MuiDataGrid-root .MuiDataGrid-columnHeader {
+    width: 200px !important;
+    max-width: 200px !important;
+  } */
+}
+
 .MuiDataGrid-root .MuiDataGrid-row:hover {
   cursor: pointer;
   box-shadow: 0px 0px 15px rgb(0 0 0 / 20%);

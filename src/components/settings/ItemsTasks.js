@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 
 import axios from 'axios';
 
@@ -14,8 +13,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
-
-import ModalBox from '../ModalBox'
 
 const columns = [
   { field: 'rateName', type: 'string', flex: 0.3 },
@@ -51,13 +48,9 @@ const columns = [
 ]
 
 function ItemsTasks({ add }) {
-
-  const [openModal, setOpenModal] = useState(false)
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/items_tasks.json`)
@@ -69,8 +62,6 @@ function ItemsTasks({ add }) {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -81,7 +72,7 @@ function ItemsTasks({ add }) {
   let { id } = useParams();
   const selectedID = id;
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control } = useForm();
   const onSubmit = data => { 
     console.log(selectedData)
   }
@@ -91,12 +82,12 @@ function ItemsTasks({ add }) {
   useEffect(() => {
     if (id) {
       const dataSelect = data.filter(obj => {
-        return obj.id == selectedID
+        return obj.id === selectedID
       })
 
       setSelectedData(dataSelect[0])
     }
-  }, [id]);
+  }, [id, data, selectedID]);
 
   const handleChange = event => {
     setSelectedData({
@@ -221,13 +212,3 @@ function ItemsTasks({ add }) {
 }
 
 export default ItemsTasks
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-
-  > span {
-    font-size: 12px;
-  }
-`

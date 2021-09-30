@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom"
 import FullCalendar from '@fullcalendar/react' // must go before plugins
@@ -12,13 +12,8 @@ import axios from 'axios';
 
 import './ToDos.css'
 
-import CardPlayButton from '../assets/icons/CardPlayButton.svg'
-import CardStopButton from '../assets/icons/CardStopButton.svg'
-
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
 import Clock from '../assets/icons/Clock.svg'
@@ -51,27 +46,16 @@ function KanbanBoard() {
   
   const history = useHistory();
 
-  const activeSlideRef = useRef(null);
-
-  const eventOptions = {
-    editable: true,
-    eventDurationEditable: true,
-  }
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState([])
   const [events, setEvents] = useState([])
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
         .then(res => {
-          setData(res.data)
           setEvents([])
 
           const tasks = res.data
-          tasks.map(task => {
+          tasks.forEach(task => {
             let taskObject = {
               title: task.title, 
               start: moment(task.startDate).format(),
@@ -91,8 +75,6 @@ function KanbanBoard() {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -129,19 +111,19 @@ function KanbanBoard() {
     history.push(`/to-do/${memberID}`)
   }
 
-  const changeEvent = () => {
-    console.log("Change event");
-    let newEvents = [];
-    events.forEach((event, index) => {
-      if (index === 2) {
-        event.start = "2021-08-29T12:15:23+02:00";
-      }
-      newEvents.push(event);
-    })
-    console.log(newEvents);
-    setEvents([]);
-    setEvents(newEvents);
-  }
+  // const changeEvent = () => {
+  //   console.log("Change event");
+  //   let newEvents = [];
+  //   events.forEach((event, index) => {
+  //     if (index === 2) {
+  //       event.start = "2021-08-29T12:15:23+02:00";
+  //     }
+  //     newEvents.push(event);
+  //   })
+  //   console.log(newEvents);
+  //   setEvents([]);
+  //   setEvents(newEvents);
+  // }
 
   return (
     <div style={{ position: 'relative' }}>
@@ -242,7 +224,7 @@ function renderEventContent(eventInfo) {
 
   let totalTime = eventInfo.event.extendedProps.time
   let timeWorked = eventInfo.event.extendedProps.time_worked
-  let remaining = totalTime - timeWorked
+  // let remaining = totalTime - timeWorked
   let percentage = timeWorked / totalTime * 100
 
   return (

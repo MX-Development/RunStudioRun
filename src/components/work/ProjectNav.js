@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import { Link, useLocation, useParams } from "react-router-dom"
@@ -9,8 +9,6 @@ function ProjectNav() {
   const location = useLocation();
   const pagePath = location.pathname.split('/')[1]
   console.log(location.pathname)
-
-  const [activeTab, setActiveTab] = useState(null)
 
   return (
     <TabContainer>

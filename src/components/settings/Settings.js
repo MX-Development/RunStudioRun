@@ -13,7 +13,6 @@ import StackedBlocks from './StackedBlocks'
 import Block from './Block'
 import BlockContainer from './BlockContainer'
 
-import BusinessLogo from '../assets/img/business-logo.svg'
 import TimeBlocks from './TimeBlocks'
 import PaymentTerms from './PaymentTerms'
 
@@ -48,8 +47,7 @@ function Settings() {
     setIsOpen(false);
   }
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const { watch } = useForm();
 
   console.log(watch("example")); // watch input value by passing the name of it
 

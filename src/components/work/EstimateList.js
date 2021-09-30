@@ -6,7 +6,6 @@ import axios from 'axios'
 
 import DragIcon from '../assets/icons/DragIcon.svg'
 import ActionIcon from '../assets/icons/ActionIcon.svg'
-import TeamToDelete from '../assets/icons/TeamToDelete.svg'
 
 import { useForm, Controller } from "react-hook-form"
 
@@ -21,15 +20,13 @@ import Avatar from '@material-ui/core/Avatar';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
 function EstimateList({ type, data, id, team }) {
 
-  const { handleSubmit, control, setValue } = useForm();
-  
-  const [edit, setEdit] = useState(null)
+  const { control } = useForm();
+
   const [selectedData, setSelectedData] = useState(null)
 
   useEffect(() => {
@@ -43,7 +40,7 @@ function EstimateList({ type, data, id, team }) {
     //   setSelectedData(dataSelect[0])
     // }
     setSelectedData(data)
-  }, [id]);
+  }, [id, data]);
 
   const handleChange = event => {
     setSelectedData({
@@ -79,17 +76,15 @@ function EstimateList({ type, data, id, team }) {
     }
   };
 
-  const [isLoading, setIsLoading] = useState(false)
   const [teamMembers, setTeamMembers] = useState([])
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       axios.get(`https://kendrix.kendrix.website/json/team.json`)
       .then(res => {
         setTeamMembers([])
-        res.data.map(member => {
+        res.data.forEach(member => {
           setTeamMembers(teamMembers => [...teamMembers, member])
         })
       })
@@ -98,8 +93,6 @@ function EstimateList({ type, data, id, team }) {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -125,7 +118,7 @@ function EstimateList({ type, data, id, team }) {
           {
             type !== 'title' && type !== 'overview' ?
               <Members>
-                { teamMembers.map(member => {
+                { teamMembers.forEach(member => {
                   if (team && team.includes(member.id)) {
                     return (
                       <Avatar alt={ member.name } src={ member.avatar }>

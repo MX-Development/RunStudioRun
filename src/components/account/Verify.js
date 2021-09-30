@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { auth, provider } from '../../config/firebase'
 
 import {
   Link
@@ -119,51 +118,5 @@ const ModalFooter = styled.div`
   > p a {
     text-decoration: none;
     color: inherit;
-  }
-`
-
-const GoogleButton = styled.div`
-  width: 100%;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  padding: 7.5px;
-  border-radius: 2px;
-
-  :hover {
-    cursor: pointer;
-  }
-
-  > img {
-    margin-right: 7.5px;
-  }
-`
-
-const Divider = styled.div`
-  display: flex;
-  justify-content: center;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 10px 0;
-
-  :before {
-    content: '';
-    width: 20px;
-    height: 1px;
-    background: #fff;
-    position: relative;
-    top: 6px;
-    margin-right: 10px;
-  }
-
-  :after {
-    content: '';
-    width: 20px;
-    height: 1px;
-    background: #fff;
-    position: relative;
-    top: 6px;
-    margin-left: 10px;
   }
 `

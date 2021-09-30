@@ -21,7 +21,7 @@ const trans4 = (x, y) => `translate3d(${x / 3.5 + 800}px,${y / 3.5 + 200}px,0)`
 
 function Onboarding() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
 
   const signIn = (e) => {
@@ -52,7 +52,7 @@ function Onboarding() {
           <ModalBody>
             <h3>Create your account</h3>
             <GoogleButton onClick={signIn}>
-              <img src={GoogleLogo} /> Continue with Google
+              <img src={GoogleLogo} alt="google logo" /> Continue with Google
             </GoogleButton>
             <Divider>
               <span>Or</span>

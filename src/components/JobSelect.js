@@ -3,29 +3,24 @@ import styled from 'styled-components'
 
 import axios from 'axios';
 
-import moment from 'moment'
-
 import Avatar from '@material-ui/core/Avatar';
 
 import { useForm, Controller } from "react-hook-form"
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 
 function JobSelect() {
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { control } = useForm();
   
   const [openNav, setOpenNav] = useState(false)
 
-  const [isLoading, setIsLoading] = useState(false);
   const [tasks, setTasks] = useState([])
   const [teamMembers, setTeamMembers] = useState([])
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       setTasks([])
@@ -36,7 +31,7 @@ function JobSelect() {
 
           axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
           .then(res => {
-            res.data.map(task => {
+            res.data.forEach(task => {
 
               let jobId = task.jobId
               const job = jobs.filter(obj => {
@@ -49,7 +44,7 @@ function JobSelect() {
               axios.get(`https://kendrix.kendrix.website/json/team.json`)
               .then(res => {
                 setTeamMembers([])
-                res.data.map(member => {
+                res.data.forEach(member => {
                  if (task.team.includes(member.id)) {
                   setTeamMembers(teamMembers => [...teamMembers, member])
                  }
@@ -63,8 +58,6 @@ function JobSelect() {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -116,7 +109,7 @@ function JobSelect() {
                 <span>{ task.projectName ? task.projectName : null }</span>
               </TaskInfo>
               <Members>
-                { teamMembers.map(member => {
+                { teamMembers.forEach(member => {
                   if (task.team.includes(member.id)) {
                     return (
                       <Avatar alt={ member.name } src={ member.avatar } key={ member.id }>

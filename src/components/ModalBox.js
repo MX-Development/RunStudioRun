@@ -25,11 +25,11 @@ function ModalBox({ modalOpened, title, children, styling, size }) {
   useEffect(() => {
     console.log('Setting modal box...')
     setIsOpen(!modalIsOpen)
-  }, []);
+  }, [modalIsOpen]);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
   function afterOpenModal() {
 

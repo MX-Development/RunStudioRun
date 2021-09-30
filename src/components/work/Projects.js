@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 
 import moment from 'moment'
 
@@ -7,7 +6,7 @@ import axios from 'axios';
 
 import List from '../List'
 
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { useForm, Controller } from "react-hook-form"
 
@@ -57,15 +56,12 @@ function Projects({ add }) {
   ]
 
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
   const [companies, setCompanies] = useState(false);
-  const [selectedCompany, setSelectedCompany] = useState(null)
 
   const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/projects.json`)
@@ -83,7 +79,6 @@ function Projects({ add }) {
       console.trace(err);
     }
 
-    setIsLoading(false);
   }
 
   useEffect(() => {

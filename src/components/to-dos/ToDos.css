@@ -60,6 +60,17 @@
   transition: opacity 0.25s ease-in-out;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.fc .fc-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.fc .fc-scroller {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /* Table headers */
 .time-bar {
   display: flex;
@@ -283,4 +294,20 @@ a.fc-event.eventRed {
 
 .fc .fc-daygrid-day-frame {
   padding: 0 10px;
+}
+
+/* Dragging */
+/* .fc-v-event .fc-event-main.test {
+  background: red;
+} */
+/* .fc-unselectable {
+  transform: rotate(90deg);
+} */
+.fc-timegrid-event-harness {
+  transform: rotate(-10deg) translate(5px, -25px);
+  /* transition: transform 0.5s ease-in-out; */
+}
+
+.fc-timegrid-event-harness.not-dragged {
+  transform: rotate(0) translate(0, 0);
 }

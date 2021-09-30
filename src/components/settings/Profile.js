@@ -16,7 +16,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 function Profile() {
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control } = useForm();
 
   const onSubmit = data => { 
     console.log(data)
@@ -136,8 +136,8 @@ function Profile() {
                   <h3>Hours I’m available to work</h3>
                 </Grid>
 
-                { days.map(day => (
-                  <Grid item sm={2}>
+                { days.map((day, index) => (
+                  <Grid item sm={2} key={index}>
                     <>
                     <FormGroup>
                       { state.type }
@@ -255,16 +255,4 @@ const ProfileContainer = styled.div`
   background: #fff;
   padding: 20px;
   width: 66.6%;
-`
-
-const DaysAvailable = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
-const Day = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 5px;
 `

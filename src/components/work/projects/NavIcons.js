@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import ModalBox from '../../ModalBox'
 import SavingDraft from './SavingDraft.svg'
 
 import LoadingDots from '../../LoadingDots'

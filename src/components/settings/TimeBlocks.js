@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 
 function TimeBlocks() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { handleSubmit, watch } = useForm();
   const onSubmit = data => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of it

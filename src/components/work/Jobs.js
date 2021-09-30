@@ -27,8 +27,8 @@ function Jobs({ projectID }) {
     axios.get(`https://kendrix.kendrix.website/json/jobs.json`)
       .then(res => {
         projectID ? 
-          res.data.map(item => {
-            if (item.projectID == projectID) {
+          res.data.forEach(item => {
+            if (item.projectID === projectID) {
               setData(data => [...data, item])
             }
           })
@@ -36,7 +36,7 @@ function Jobs({ projectID }) {
           setData(res.data)
         }
       )
-  }, []);
+  }, [projectID]);
 
   return (
     viewID ? 

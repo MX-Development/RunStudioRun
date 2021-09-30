@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { useHistory } from "react-router-dom"
-
 import AddIcon from '../assets/icons/AddIcon.svg'
 import ProjectEstimates from './ProjectEstimates';
 import ModalBox from '../ModalBox';
@@ -12,8 +10,6 @@ import PlusIcon from '../assets/icons/PlusIcon.svg'
 import AddNav from './projects/AddNav'
 
 function CreateEstimate({ id }) {
-
-  const history = useHistory();
 
   const [adding, setAdding] = useState(false)
   const [addNav, setAddNav] = useState(false)

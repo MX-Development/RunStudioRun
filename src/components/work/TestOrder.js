@@ -39,7 +39,7 @@ function TestOrder({ estimateID }) {
     axios.get(`https://kendrix.kendrix.website/json/estimates.json`)
       .then(res => {
         res.data.map(item => {
-          if (item.id == estimateID) {
+          if (item.id === estimateID) {
             setEstimateData(item)
           }
         })
@@ -47,7 +47,7 @@ function TestOrder({ estimateID }) {
         axios.get(`https://kendrix.kendrix.website/json/estimates/phases.json`)
           .then(res => {
             res.data.map(item => {
-              if (item.jobId == estimateID) {
+              if (item.jobId === estimateID) {
                 setPhases(phases => [...phases, item])
 
                 axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
@@ -59,7 +59,7 @@ function TestOrder({ estimateID }) {
                         axios.get(`https://kendrix.kendrix.website/json/estimates/subitems.json`)
                           .then(res => {
                             res.data.map(subtask => {
-                              if (subtask.taskId == task.id) {
+                              if (subtask.taskId === task.id) {
                                 setSubtasks(subtasks => [...subtasks, subtask])
                               }
                             })
@@ -127,7 +127,7 @@ function TestOrder({ estimateID }) {
                     <>
                       <EstimateList type={'item'} data={task} key={task.id} id={estimateID} team={task.team} />
                       {subtasks.map(subtask => {
-                        if (subtask.taskId == task.id) {
+                        if (subtask.taskId === task.id) {
                           return (
                             <EstimateList type={'subitem'} data={subtask} key={subtask.id} id={estimateID} team={subtask.team} />
                           )

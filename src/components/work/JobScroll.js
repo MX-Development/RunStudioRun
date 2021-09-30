@@ -11,8 +11,8 @@ function JobScroll({ projectID }) {
     axios.get(`https://kendrix.kendrix.website/json/jobs.json`)
       .then(res => {
         projectID ? 
-          res.data.map(item => {
-            if (item.projectID == projectID) {
+          res.data.forEach(item => {
+            if (item.projectID === projectID) {
               setData(data => [...data, item])
             }
           })
@@ -20,7 +20,7 @@ function JobScroll({ projectID }) {
           setData(res.data)
         }
       )
-  }, []);
+  }, [projectID]);
 
   return (
     <Blocks>
@@ -28,7 +28,7 @@ function JobScroll({ projectID }) {
         console.log(data)
       }
       {
-        data.map((job, index) => {
+        data.forEach((job, index) => {
           if (index === 1) {
             return;
           }

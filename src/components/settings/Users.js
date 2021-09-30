@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 
 import axios from 'axios';
 
@@ -11,17 +10,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import Checkbox from '@material-ui/core/Checkbox';
-
-function createData(id, name, status, type) {
-  return { id, name, status, type }
-}
-
-const rows = [
-  createData(1, 'Taso Katsionis', 'Active', 'Monthly / Renews Oct 2020'),
-  createData(2, 'Taso Katsionis', 'Active', 'Monthly / Renews Oct 2020'),
-  createData(3, 'Taso Katsionis', 'Active', 'Monthly / Renews Oct 2020'),
-  createData(4, 'Select user', 'Inactive', 'Not Assign / Renews Sep 2021')
-]
 
 function Users() {
 
@@ -50,10 +38,8 @@ function Users() {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/subscriptions.json`)
@@ -65,8 +51,6 @@ function Users() {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {

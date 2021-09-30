@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import LightHound from '../assets/img/light-hound.svg'
@@ -31,8 +29,8 @@ function DisplayModes() {
       </FormGroup>
 
       <div style={{ position: 'absolute', top: '31px', left: '10%' }}>
-        <img src={DarkHound} style={{ width: '35%' }} />
-        <img src={LightHound} style={{ width: '38%' }} />
+        <img src={DarkHound} style={{ width: '35%' }} alt="dark hound" />
+        <img src={LightHound} style={{ width: '38%' }} alt="light hound" />
       </div>
 
       <FormGroup>

@@ -14,11 +14,10 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { MenuItem, Select, TextareaAutosize } from '@material-ui/core'
+import { MenuItem, Select } from '@material-ui/core'
 import ProjectInfo from './ProjectInfo'
 
 import EllipsisIcon from '../assets/icons/EllipsisIcon.svg'
-import PlusIcon from '../assets/icons/PlusIcon.svg'
 
 function ProjectHeader({ projectID }) {
 
@@ -32,15 +31,11 @@ function ProjectHeader({ projectID }) {
       })
   }, []);
 
-  let { id, view, viewID } = useParams();
+  let { id } = useParams();
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { control } = useForm();
 
   const [selectedData, setSelectedData] = useState(null)
-
-  const onSubmit = data => { 
-    console.log(selectedData)
-  }
 
   const handleChange = event => {
     setSelectedData({

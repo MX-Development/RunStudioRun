@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom"
 import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid'
 
@@ -12,13 +11,8 @@ import axios from 'axios';
 
 import './ToDos.css'
 
-import CardPlayButton from '../assets/icons/CardPlayButton.svg'
-import CardStopButton from '../assets/icons/CardStopButton.svg'
-
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
 import Clock from '../assets/icons/Clock.svg'
@@ -50,28 +44,16 @@ function Calendar() {
   }
   
   const history = useHistory();
-
-  const activeSlideRef = useRef(null);
-
-  const eventOptions = {
-    editable: true,
-    eventDurationEditable: true,
-  }
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState([])
   const [events, setEvents] = useState([])
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
         .then(res => {
-          setData(res.data)
           setEvents([])
 
           const tasks = res.data
-          tasks.map(task => {
+          tasks.forEach(task => {
             let taskObject = {
               title: task.title, 
               start: moment(task.startDate).format(),
@@ -91,8 +73,6 @@ function Calendar() {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -197,10 +177,14 @@ function Calendar() {
         eventClick={handleDateClick}
         eventContent={renderEventContent}
         eventDragStart={function( info ) {
-          console.log(info)
+          let parent = info.el.parentNode;
+
+          // parent.classList.remove('not-dragged');
         }}
         eventDragStop={function( info ) {
-          console.log(info)
+          let parent = info.el.parentNode;
+
+          parent.classList.add('not-dragged');
         }}
         scrollTime={'08:45:00'}
         slotDuration={'00:15:00'}
@@ -225,6 +209,9 @@ function Calendar() {
         eventDidMount={
           function(info) {
             console.log('Event did mount')
+            let parent = info.el.parentNode;
+  
+            parent.classList.remove('not-dragged');
           }
         }
       />
@@ -248,7 +235,7 @@ function renderEventContent(eventInfo) {
 
   let totalTime = eventInfo.event.extendedProps.time
   let timeWorked = eventInfo.event.extendedProps.time_worked
-  let remaining = totalTime - timeWorked
+  // let remaining = totalTime - timeWorked
   let percentage = timeWorked / totalTime * 100
 
   return (

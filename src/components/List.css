@@ -5,3 +5,10 @@
 .MuiTablePagination-toolbar .MuiTablePagination-input .MuiTablePagination-caption {
   display: flex;
 } */
+
+.MuiDataGrid-root .MuiDataGrid-footerContainer {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+}

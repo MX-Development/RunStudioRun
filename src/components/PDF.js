@@ -1,5 +1,5 @@
 import React from 'react'
-import { Document, Page, Text, View, StyleSheet, PDFViewer, Font, Image } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, PDFViewer, Image } from '@react-pdf/renderer';
 
 // Register font
 // Font.register({ family: 'Roboto', src: 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100,200,300,400,500,600,700,800,900&display=swap' });

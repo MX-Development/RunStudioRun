@@ -22,7 +22,7 @@ function Subscription() {
 
   const [user] = useAuthState(auth)
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch } = useForm();
   const onSubmit = data => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of 
@@ -75,7 +75,7 @@ function Subscription() {
                   <input className="form-control" placeholder="CVC" id="name" {...register("name")} />
                 </div>
                 <div className="form-group">
-                  <a href="#">What’s this</a>
+                  <a href="/whats-this">What’s this</a>
                 </div>
               </div>
               <Checkbox
@@ -108,7 +108,7 @@ function Subscription() {
               <h4 style={{ color: 'white' }}>28 Days Remaining</h4>
             </div>
 
-            <img src={OutlineHound} style={{ position: 'absolute', right: '30px', top: '0', height: '100%' }} />
+            <img src={OutlineHound} style={{ position: 'absolute', right: '30px', top: '0', height: '100%' }} alt="outline hound" />
           </Block>
 
           <Block>

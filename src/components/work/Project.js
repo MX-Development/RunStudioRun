@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useHistory, useParams } from "react-router-dom"
+import React from 'react'
+import { useParams } from "react-router-dom"
 
 import Estimates from './Estimates'
 import Purchases from './Purchases'
@@ -12,8 +12,7 @@ import Grid from '@material-ui/core/Grid';
 
 function Project() {
 
-  let { id, view, viewID } = useParams();
-  const selectedID = id;
+  let { id, view } = useParams();
 
   const jobs = [];
 

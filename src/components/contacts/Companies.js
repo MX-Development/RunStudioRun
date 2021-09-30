@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 
 import axios from 'axios';
 
@@ -26,10 +25,8 @@ const columns = [
 function Companies({ add, importing }) {
 
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/companies.json`)
@@ -41,8 +38,6 @@ function Companies({ add, importing }) {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -52,7 +47,7 @@ function Companies({ add, importing }) {
   let { id } = useParams();
   const selectedID = id;
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control } = useForm();
 
   const onSubmit = data => { 
     console.log(selectedData)
@@ -69,7 +64,7 @@ function Companies({ add, importing }) {
 
       setSelectedData(dataSelect[0])
     }
-  }, [id]);
+  }, [id, data, selectedID]);
 
   const handleChange = event => {
     setSelectedData({
@@ -338,18 +333,3 @@ function Companies({ add, importing }) {
 }
 
 export default Companies
-
-const MemberAvatar = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-
-  > span {
-    font-size: 12px;
-  }
-`

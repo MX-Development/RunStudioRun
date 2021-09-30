@@ -21,8 +21,6 @@ import Grid from '@material-ui/core/Grid';
 
 import Avatar from '@material-ui/core/Avatar';
 
-import ModalBox from '../ModalBox'
-
 const columns = [
   { field: 'name', type: 'string', flex: 0.3 },
   { field: 'phone', type: 'string', flex: 0.2 },
@@ -37,10 +35,8 @@ function YourTeam({ add }) {
   const [user] = useAuthState(auth)
 
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`https://kendrix.kendrix.website/json/team.json`)
@@ -52,8 +48,6 @@ function YourTeam({ add }) {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -63,7 +57,7 @@ function YourTeam({ add }) {
   let { id } = useParams();
   const selectedID = id;
 
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
 
   const [selectedData, setSelectedData] = useState(null)
@@ -76,7 +70,7 @@ function YourTeam({ add }) {
 
       setSelectedData(dataSelect[0])
     }
-  }, [id]);
+  }, [id, data, selectedID]);
 
   const handleChange = event => {
     setSelectedData({

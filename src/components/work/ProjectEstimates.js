@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useState } from 'react'
+import React, { useCallback, useReducer } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 // https://codedaily.io/tutorials/Multi-List-Drag-and-Drop-With-react-beautiful-dnd-Immer-and-useReducer
@@ -16,10 +16,13 @@ const dragReducer = produce((draft, action) => {
       const [removed] = draft[action.from].splice(action.fromIndex, 1);
       draft[action.to].splice(action.toIndex, 0, removed);
     }
+    break;
     case "ADD":
       // Copy over root state
       // draft.push({ id: "id3", done: false, body: "Buy bananas" });
-  }
+    break;
+    default: return
+    }
 });
 
 function ProjectEstimates() { 
@@ -83,20 +86,20 @@ function ProjectEstimates() {
     items2: data2
   });
 
-  const addData = () => {
-    console.log('adding...')
-    dispatch({
-      type: "ADD",
-      items: [...data, {
-        id: "5f832341cc119a50d1adb9727",
-        picture: "http://placehold.it/32x3232",
-        name: {
-          first: "Goff53",
-          last: "Robbin5325s",
-        },                                        
-      }]
-    });
-  }
+  // const addData = () => {
+  //   console.log('adding...')
+  //   dispatch({
+  //     type: "ADD",
+  //     items: [...data, {
+  //       id: "5f832341cc119a50d1adb9727",
+  //       picture: "http://placehold.it/32x3232",
+  //       name: {
+  //         first: "Goff53",
+  //         last: "Robbin5325s",
+  //       },                                        
+  //     }]
+  //   });
+  // }
 
   const onDragEnd = useCallback((result) => {
     console.log(result)

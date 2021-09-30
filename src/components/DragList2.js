@@ -15,6 +15,8 @@ const dragReducer = produce((draft, action) => {
       const [removed] = draft[action.from].splice(action.fromIndex, 1);
       draft[action.to].splice(action.toIndex, 0, removed);
     }
+    break;
+    default: return;
   }
 });
 
@@ -22,7 +24,7 @@ const data = [
   {
     id: "5f832341cc119a50d1adb972",
     picture: "http://placehold.it/32x32",
-    name: {
+    name: { 
       first: "Goff",
       last: "Robbins",
     },
@@ -97,6 +99,7 @@ function DragList2() {
                               <img
                                 src={person.picture}
                                 className="dragger-icon"
+                                alt="person picture"
                               />
                               <span>
                                 {person.name.first} {person.name.last}
@@ -139,6 +142,7 @@ function DragList2() {
                               <img
                                 src={person.picture}
                                 className="dragger-icon"
+                                alt="person picture"
                               />
                               <span>
                                 {person.name.first} {person.name.last}

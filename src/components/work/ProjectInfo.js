@@ -9,21 +9,18 @@ import Grid from '@material-ui/core/Grid';
 
 function ProjectInfo({ projectID }) {
 
-  const [tasks, setTasks] = useState([])
   const [teamMembers, setTeamMembers] = useState([])
 
   useEffect(() => {
-    setTasks([])
     axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
     .then(res => {
       setTeamMembers([])
-      res.data.map(task => {
+      res.data.forEach(task => {
        if (task.projectID === parseInt(projectID)) {
-        setTasks(tasks => [...tasks, task])
 
         axios.get(`https://kendrix.kendrix.website/json/team.json`)
         .then(res => {
-          res.data.map(member => {
+          res.data.forEach(member => {
             if (task.team.includes(member.id)) {
               setTeamMembers(teamMembers => [...teamMembers, member])
             }
@@ -32,7 +29,7 @@ function ProjectInfo({ projectID }) {
        }
       })
     })
-  }, [])
+  }, [projectID])
 
   return (
     <Info>
@@ -88,18 +85,6 @@ const Button = styled.div`
   font-weight: bold;
   font-size: 12px;
   text-align: center;
-`
-
-const TeamContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-
-  > .MuiAvatar-root {
-    width: 25px !important;
-    height: 25px !important;
-    font-size: 12px;
-  }
 `
 
 const Info = styled.div`

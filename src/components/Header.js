@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import HelpIcon from '@material-ui/icons/Help';
@@ -31,7 +31,6 @@ function Header() {
   const [openQuickNav, setQuicknav] = useState(false)
 
   const [modalOpened, setModalOpened] = useState(false)
-  const [modalTitle, setModalTitle] = useState(null)
 
   const navItems = [
     {
@@ -126,9 +125,9 @@ function Header() {
                   
                   setActiveNav(item.item)
 
-                  if (item.item == 'To Dos') {
+                  if (item.item === 'To Dos') {
                     history.push(`/to-do`)
-                  } else {
+                  } else { 
                     history.push(`${item.sub_items[0].path}`)
                     setActiveSubitem(item.sub_items[0].title)
                   }
@@ -162,7 +161,7 @@ function Header() {
                     New Purchases
                   </Link>
                   <Link onClick={(e) => {
-                    setModalTitle('Additional Time')
+                    // setModalTitle('Additional Time')
                     setModalOpened(!modalOpened)
                     setQuicknav(false)
                   }}>
