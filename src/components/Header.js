@@ -245,8 +245,15 @@ function Header() {
                 ))
               ))
             }
-            <Link to="/to-do">Timeline</Link>
-            <Link to="/kanban">Kanban</Link>
+            {
+              location.pathname === "/to-do" || location.pathname === '/kanban' ?
+                <>
+                  <Link to="/to-do">Timeline</Link>
+                  <Link to="/kanban">Kanban</Link>
+                </>
+              :
+              null
+            }
           </SubnavLinks>
           <SubnavSearch>
             <input id="search" name="search" className="form-control" placeholder="Search..." />
