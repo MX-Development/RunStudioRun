@@ -16,6 +16,7 @@ import { auth } from '../config/firebase'
 
 import RunStudioRunLogo from './assets/img/logo-hound.svg'
 import JobSelect from './JobSelect';
+import Tooltips from './Tooltips';
 
 function Header() {
 
@@ -109,6 +110,7 @@ function Header() {
   return (
     <>
       <HeaderContainer>
+        <Tooltips />
         <HeaderTop>
           <HeaderLogo>
             <img src={RunStudioRunLogo} alt="Run Studio Run logo" />

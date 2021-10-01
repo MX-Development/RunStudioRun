@@ -1,0 +1,46 @@
+.introjs-tooltipReferenceLayer * {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+}
+
+.introjs-tooltiptext {
+  padding: 0 20px;
+}
+
+.introjs-tooltip-header {
+  padding-right: 10px;
+}
+
+.introjs-tooltip {
+  left: 0 !important;
+  transform: translate(-37.5%, 10px);
+}
+
+.introjs-arrow.top {
+  top: -21px;
+}
+
+.introjs-arrow {
+  border: 12.5px solid transparent;
+}
+
+.introjs-arrow.top {
+  top: -20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.introjs-fullbutton {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 5px 7.5px;
+  text-decoration: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 2px;
+  transition: background .25s ease-in, color .25s ease-in;
+  background-color: var(--gold);
+  color: #fff;
+}
