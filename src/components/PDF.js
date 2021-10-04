@@ -1,6 +1,8 @@
 import React from 'react'
 import { Document, Page, Text, View, StyleSheet, PDFViewer, Image } from '@react-pdf/renderer';
 
+import Logo from '../components/assets/runstudiorun-logo.svg';
+
 // Register font
 // Font.register({ family: 'Roboto', src: 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100,200,300,400,500,600,700,800,900&display=swap' });
 
@@ -22,7 +24,7 @@ function PDF() {
           {/* Logo & Address */}
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
             <View>
-              <Image style={{ width: '150px' }} src="https://www.amstelveenrepair.nl/assets/img/amstelveenrepair-2018-logo.png" />
+              <Image style={{ width: '150px' }} src={Logo} />
             </View>
             <View>
               <Text style={{ fontSize: '10px' }}>A. Katsionis Design</Text>

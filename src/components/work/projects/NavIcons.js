@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import SavingDraft from './SavingDraft.svg'
 
 import LoadingDots from '../../LoadingDots'
+import PDF from '../../PDF'
 
 import {
   Link
@@ -51,7 +52,7 @@ function NavIcons({ id }) {
 
   const showPDF = () => {
     console.log('Show PDF...')
-    setModalContent(PDF)
+    setModalContent(<PDF />)
     setOpenModal(!openModal)
   }
 
@@ -63,10 +64,6 @@ function NavIcons({ id }) {
     setOpenModal(false)
     setModalContent(null)
   }
-
-  const PDF = (
-    <h1>PDF</h1>
-  )
 
   const Draft = (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
