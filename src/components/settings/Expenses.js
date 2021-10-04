@@ -204,7 +204,7 @@ function Expenses({ add }) {
     'Loading...'
     :
     <>
-      <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} add={add ? true : false} />
+      <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} add={add ? true : false} nocolor={true} />
     </>
       
   )

@@ -10,7 +10,7 @@ import './List.css';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, ...rest }) {
+function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
 
   const centerModal = {
     content: {
@@ -80,6 +80,7 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
       
       <div style={{ height: '100%', width: '100%' }}>
         <DataGrid
+          className={nocolor ? 'no-color' : defaultcolor ? 'default-color' : ''}
           columns={columns}
           rows={data}
           onCellClick={projectID ? showProject : showItem}

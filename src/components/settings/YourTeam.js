@@ -427,7 +427,7 @@ function YourTeam({ add }) {
 
   return (
     <>
-      <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} size={'large'} add={add ? true : false} />
+      <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} size={'large'} add={add ? true : false} defaultcolor={true} />
     </>
   )
 }

@@ -206,7 +206,7 @@ function ItemsTasks({ add }) {
 
   return (
     <>
-      <List title={'Items & Tasks'} columns={columns} data={data} modalTitle={'Add/Edit Item & Task'} modalContent={modalContent} add={add ? true : false} />
+      <List title={'Items & Tasks'} columns={columns} data={data} modalTitle={'Add/Edit Item & Task'} modalContent={modalContent} add={add ? true : false} nocolor={true} />
     </>
   )
 }
