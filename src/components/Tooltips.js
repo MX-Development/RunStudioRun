@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Steps, Hints } from 'intro.js-react';
-import 'intro.js/introjs.css';
+import 'intro.js/minified/introjs.min.css';
 import './Tooltips.css';
 
 function Tooltips() {
