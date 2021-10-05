@@ -59,14 +59,10 @@ function Users() {
 
   return (
     <TableContainer>
-      <Table aria-label="Users" style={{ width: '100%' }}>
-        <TableHead>
-          <TableRow style={{ borderBottom: '1px solid rgba(224, 224, 224, 1)' }}>
-            <TableCell style={{ paddingLeft: '0', borderBottom: 'none', fontWeight: 'bold', fontSize: '1.15em' }}>
-              Total 5 Users / 1 Yearly Remaining / 0 Monthly Subscriptions
-            </TableCell>
-          </TableRow>
-        </TableHead>
+      <p style={{ paddingLeft: '0', borderBottom: 'none', fontWeight: 'bold', fontSize: '16px' }}>
+        Total 5 Users / 1 Yearly Remaining / 0 Monthly Subscriptions
+      </p>
+      <Table aria-label="Users" style={{ width: '100%', marginTop: '8px' }}>
         <TableBody> 
           {data.map((row, index) => {
             const isItemSelected = isSelected(row.id);

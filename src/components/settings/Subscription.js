@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 import Checkbox from '@material-ui/core/Checkbox'
@@ -17,8 +17,11 @@ import Users from './Users'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../config/firebase'
+import StripeElement from './StripeElement'
 
 function Subscription() {
+
+  const [activeType, setActiveType] = useState(null);
 
   const [user] = useAuthState(auth)
 
@@ -56,10 +59,36 @@ function Subscription() {
           </Block>
 
           <Block>
-            <h3>Payment</h3>
-            <p>
-              <strong>You currently have 5 subscriptions and to add more please select an option below, proceed to payment and then assign to your user.</strong>
+            <h2 style={{ fontWeight: '400', marginBottom: '8px' }}>Payment</h2>
+
+            {/* <StripeElement /> */}
+
+            <p style={{ marginBottom: '16px' }}>
+              <strong>You currently have <span style={{ color: '#E0BC77' }}>5 subscriptions</span> and to add more please select an option below, proceed to payment and then assign to your user.</strong>
             </p>
+
+            <SubscriptionTypes>
+              <Option className={activeType === 1 ? 'active' : ''} onClick={() => setActiveType(1)}>
+                <h1>$10</h1>
+                <h4>USD</h4>
+                <h5>Per Month</h5>
+                <Button>Select</Button>
+              </Option>
+              <Option className={activeType === 2 ? 'active' : ''} onClick={() => setActiveType(2)}>
+                <h1>$100</h1>
+                <h4>USD</h4>
+                <h5>Per Year</h5>
+                <Button>Select</Button>
+              </Option>
+            </SubscriptionTypes>
+
+            <Total>
+              <span>Total</span>
+              <span>${ activeType === 2 ? '100.00' : '10.00' }</span>
+            </Total>
+
+            <Helper>Inc TAX (GST/VAT)</Helper>
+
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-group">
                 <input className="form-control" placeholder="Name as appears on your card" id="name" {...register("name")} />
@@ -95,16 +124,18 @@ function Subscription() {
           </Block>
 
           <Block>
-            <PaymentHistory />
+            <div style={{ maxHeight: '350px', overflowY: 'scroll' }}>
+              <PaymentHistory />
+            </div>
           </Block>
 
         </StackedBlocks>
         <StackedBlocks>
 
           <Block background={'#DDDBD7'}>
-            <div style={{ padding: '10px' }}>
-              <h3 style={{ marginBottom: '10px' }}>30 Days Free Trial</h3>
-              <h3 style={{ fontWeight: 'lighter' }}>6 Dec 2020 - 6 Jan 2021</h3>
+            <div style={{ padding: '10px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <h3 style={{ marginBottom: '8px', fontSize: '22px', fontWeight: 'bold' }}>30 Days Free Trial</h3>
+              <h3 style={{ fontWeight: 'lighter', marginBottom: '8px' }}>6 Dec 2020 - 6 Jan 2021</h3>
               <h4 style={{ color: 'white' }}>28 Days Remaining</h4>
             </div>
 
@@ -168,4 +199,79 @@ const MemberInfo = styled.div`
   > h3 {
     margin-bottom: 5px;
   }
+`
+
+const SubscriptionTypes = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+`
+
+const Option = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #DDDBD7;
+  border-radius: 4px;
+  padding: 20px;
+
+  > h4 {
+    font-size: 18px;
+    margin-top: 2px;
+  }
+
+  > h5 {
+    font-weight: bold;
+    margin-top: 2px;
+  }
+
+  &:first-child {
+    margin-right: 20px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.active {
+    border-color: #E0BC77;
+
+    > div {
+      background: #E0BC77; 
+      border-color: #E0BC77;
+      color: #fff;
+    }
+  }
+`
+
+const Button = styled.div`
+  border: 1px solid #B1B0AF;
+  color: #B1B0AF;
+  font-weight: 500;
+  border-radius: 2px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-top: 10px;
+`
+
+const Total = styled.div`
+  color: #292724;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-weight: bold;
+  border-bottom: 1px solid #E0BC77;
+  margin-bottom: 8px;
+`
+
+const Helper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 16px;
 `

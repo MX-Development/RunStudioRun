@@ -32,7 +32,7 @@
 
 .introjs-fullbutton {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: uppercase;
   font-size: 12px;
   padding: 5px 7.5px;
@@ -43,4 +43,6 @@
   transition: background .25s ease-in, color .25s ease-in;
   background-color: var(--gold);
   color: #fff;
+  outline: none !important;
+  text-shadow: none !important;
 }

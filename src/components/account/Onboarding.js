@@ -3,6 +3,15 @@ import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 import { auth, provider } from '../../config/firebase'
 
+import Checkbox from '@material-ui/core/Checkbox'
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
 import { useSpring, animated } from 'react-spring'
 
 import GoogleLogo from './google-logo.svg'
@@ -57,39 +66,83 @@ function Onboarding() {
             <Divider>
               <span>Or</span>
             </Divider>
+
+
+
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-group">
-                <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
-              </div>
-              <div className="form-group">
-                <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
-              </div>
-              <div className="form-group">
-                <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
-              </div>
-              <div className="form-group">
-                <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
-              </div>
-              <div className="form-footer">
-                <div className="btn-group">
-                  <div className="btn-left">
-                    <Link to="/forgot-password">
-                      Forgot password?
-                    </Link>
-                    <Link to="/sign-up">
-                      Sign up for an account
-                    </Link>
-                  </div>
-                  <div className="btn-right">
-                    <button type="submit" className="btn btn-gold btn-right">Log in</button>
-                  </div>
-                </div>
-              </div>
+
+              <Grid container spacing={1}> 
+
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <TextField
+                        id="email"
+                        placeholder="Enter email"
+                        variant="outlined"
+                        style={{ background: '#fff' }}
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <TextField
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        variant="outlined"
+                        style={{ background: '#fff' }}
+                      />
+                    </FormControl>
+                    <FormHelperText id="outlined-weight-helper-text">Password strength: strong</FormHelperText>
+                  </FormGroup>
+                </Grid>
+                
+                <Grid item xs={12} sm={6}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <TextField
+                        type="first_name"
+                        id="first_name"
+                        placeholder="First name"
+                        variant="outlined"
+                        style={{ background: '#fff' }}
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <TextField
+                        type="last_name"
+                        id="last_name"
+                        placeholder="Last name"
+                        variant="outlined"
+                        style={{ background: '#fff' }}
+                      />
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <p style={{ fontSize: '12px', textAlign: 'center', margin: '8px 0' }}>By clicking below, you agree to our Terms and Privacy Policy.</p>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <button type="submit" className="btn btn-gold btn-right" style={{ color: '#292724', width: '100%', padding: '10px', marginBottom: '8px' }}>Agree</button>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <p style={{ fontSize: '16px', textAlign: 'center', fontWeight: 'bold' }}>
+                    <span style={{ color: '#fff' }}>30 DAY FREE TRIAL</span> NO CREDIT CARD REQUIRED</p>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <p style={{ fontSize: '12px', textAlign: 'center', margin: '8px 0', width: '80%', display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop: '10px' }}>This site is protected by reCAPTACHA and the Google Privacy Policy and Terms of Service apply.</p>
+                </Grid>
+
+              </Grid>
             </form>
           </ModalBody>
-          <ModalFooter>
-            <p>2021 © Run Studio Run | <Link to="/terms">Terms</Link> | <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/help">Need Help?</Link></p>
-          </ModalFooter>
         </LoginModal>
       </LoginContainer>
   )
@@ -127,7 +180,7 @@ const ModalHeader = styled.div`
 
 const ModalBody = styled.div`
   background: #DDDBD7;
-  padding: 15px;
+  padding: 25px 15px;
   border-radius: 0 0 2px 2px;
 
   > .form-footer {
