@@ -27,6 +27,7 @@ function Settings() {
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
+  const [openTab, setOpenTab] = useState(null);
   const centerModal = {
     content: {
       top: '50%',
@@ -55,22 +56,30 @@ function Settings() {
     <> 
       <ModalHeader>
         <Tab onClick={() => {
+              setOpenTab(1)
               setModalContent(estimateBody)
               setIsOpen(true)
-            }}>
+            }}
+            className={openTab === 2 ? 'active' : ''}
+          >
           <h2>Estimates</h2>
         </Tab>
         <Tab onClick={() => {
+              setOpenTab(2)
               setModalContent(invoiceBody)
               setIsOpen(true)
-            }}>
+            }}
+            className={openTab === 1 ? 'active' : ''}
+          >
           <h2>Invoices</h2>
         </Tab>
       </ModalHeader>
-      <h1>Estimate</h1>
-      <p style={{ margin: '10px 0' }}>
-        Custom Terms & Conditions
-      </p>
+      <ModalBody>
+        <h1>Estimate</h1>
+        <p style={{ margin: '10px 0' }}>
+          Custom Terms & Conditions
+        </p>
+      </ModalBody>
 
       <FormGroup>
         <FormControl variant="outlined">
@@ -90,24 +99,32 @@ function Settings() {
     <>
       <ModalHeader>
         <Tab onClick={() => {
+              setOpenTab(1)
               setModalContent(estimateBody)
               setIsOpen(true)
-            }}>
+            }}
+            className={openTab === 2 ? 'active' : ''}
+          >
           <h2>Estimates</h2>
         </Tab>
         <Tab onClick={() => {
+              setOpenTab(2)
               setModalContent(invoiceBody)
               setIsOpen(true)
-            }}>
+            }}
+            className={openTab === 1 ? 'active' : ''}
+          >
           <h2>Invoices</h2>
         </Tab>
       </ModalHeader>
-      <h1>Invoice</h1>
-      <p style={{ margin: '10px 0' }}>
-        Custom Terms & Conditions
-      </p>
+      <ModalBody>
+        <h1>Invoice</h1>
+        <p style={{ margin: '10px 0' }}>
+          Custom Terms & Conditions
+        </p>
+      </ModalBody>
 
-      <FormGroup>
+      <FormGroup> 
         <FormControl variant="outlined">
           <TextField
             id="content"
@@ -151,7 +168,7 @@ function Settings() {
         style={centerModal}
         contentLabel="Example Modal"
       >
-        <div style={{ background: '#fff' }}>
+        <div style={{ background: '#fff', position: 'relative' }}>
           { modalContent }
           <div className="modal-footer">
             <div className="btn-group">
@@ -230,10 +247,12 @@ function Settings() {
             <TermButton onClick={() => {
               setModalContent(estimateBody)
               setIsOpen(true)
+              setOpenTab(1)
             }}>Estimates</TermButton>
             <TermButton onClick={() => {
               setModalContent(invoiceBody)
               setIsOpen(true)
+              setOpenTab(2)
             }}>Invoices</TermButton>
             <TermButton onClick={() => {
               setModalContent(customFooterBody)
@@ -301,15 +320,34 @@ const TermButton = styled.div`
   }
 `
 
+const ModalBody = styled.div`
+  padding-top: 50px;
+`
+
 const ModalHeader = styled.div`
   display: flex;
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: calc(100% + 40px);
 `
 
 const Tab = styled.div`
   border-radius: 2px 2px 0 0;
   width: 50%;
+  padding: 10px 15px;
+    background: #999;
+
+  > h2 {
+    font-size: 24px;
+    font-weight: 400;
+  }
 
   &:hover {
     cursor: pointer;
+  }
+
+  &.active {
+    background: #fff;
   }
 `
