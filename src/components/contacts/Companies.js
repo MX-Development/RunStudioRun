@@ -330,7 +330,7 @@ function Companies({ add, importing }) {
         modalTitle={importing ? 'Import Companies' : 'Add/Edit Company'} 
         modalContent={importing ? modalImport : modalContent} 
         add={add ? true : false} 
-        openModal={importing || id !== null ? true : false} 
+        openModal={importing || id !== undefined ? true : false} 
       />
     </>
   )
