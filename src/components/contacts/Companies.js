@@ -47,6 +47,10 @@ function Companies({ add, importing }) {
   let { id } = useParams();
   const selectedID = id;
 
+  useEffect(() => {
+    console.log('ID is: ' + id);
+  }, [id]);
+
   const { handleSubmit, control } = useForm();
 
   const onSubmit = data => { 
@@ -326,7 +330,7 @@ function Companies({ add, importing }) {
         modalTitle={importing ? 'Import Companies' : 'Add/Edit Company'} 
         modalContent={importing ? modalImport : modalContent} 
         add={add ? true : false} 
-        openModal={importing ? true : false} 
+        openModal={importing || id !== null ? true : false} 
       />
     </>
   )

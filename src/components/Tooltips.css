@@ -4,7 +4,7 @@
 }
 
 .introjs-tooltiptext {
-  padding: 0 20px;
+  padding: 20px;
 }
 
 .introjs-tooltip-header {
@@ -45,5 +45,14 @@
   color: #fff;
   outline: none !important;
   text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.introjs-bullets,
+.introjs-tooltip-header {
+  display: none;
+}
+
+.introjs-helperLayer {
   box-shadow: none !important;
 }

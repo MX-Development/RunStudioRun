@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
@@ -15,6 +16,10 @@ function DisplayModes() {
   });
 
   const handleChange = (event) => {
+    setState({
+      light: false,
+      dark: false
+    })
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
@@ -28,10 +33,10 @@ function DisplayModes() {
         />
       </FormGroup>
 
-      <div style={{ position: 'absolute', top: '31px', left: '10%' }}>
-        <img src={DarkHound} style={{ width: '35%' }} alt="dark hound" />
-        <img src={LightHound} style={{ width: '38%' }} alt="light hound" />
-      </div>
+      <ModeContainer>
+        <img src={DarkHound} style={{ height: '145px' }} alt="dark hound" />
+        <img src={LightHound} style={{ height: '155px' }} alt="light hound" />
+      </ModeContainer>
 
       <FormGroup>
         <FormControlLabel
@@ -44,3 +49,14 @@ function DisplayModes() {
 }
 
 export default DisplayModes
+
+const ModeContainer = styled.div`
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+`

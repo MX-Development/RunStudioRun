@@ -10,11 +10,20 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
+import {
+  Link
+} from "react-router-dom"
+
 import PageTitle from '../layout/PageTitle'
 
 import Avatar from '@material-ui/core/Avatar';
 
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../../config/firebase'
+
 function Profile() {
+
+  const [user] = useAuthState(auth)
 
   const { handleSubmit, control } = useForm();
 
@@ -30,6 +39,10 @@ function Profile() {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
+  const uploadAvatar = () => {
+    console.log('Upload an avatar...')
+  }
+
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
   return (
@@ -39,12 +52,17 @@ function Profile() {
       <ProfileContainer>   
 
         <MemberAvatar>
-          <Avatar alt="" src="">
-            MM
-          </Avatar>
+          <AvatarContainer>
+            <Avatar alt={ user?.displayName } src={ user?.photoURL }>
+              { user?.displayName.charAt(0) } 
+            </Avatar>
+            <Overlay onClick={(e) => uploadAvatar()}>
+              <span>Upload</span>
+            </Overlay>
+          </AvatarContainer>
           <MemberInfo>
             <h5>Full Name</h5>
-            <span>Position</span> 
+            <p>Position</p> 
           </MemberInfo>
         </MemberAvatar>
 
@@ -57,7 +75,7 @@ function Profile() {
               <Grid container spacing={2}>  
 
                 <Grid item xs={12} sm={12}>
-                  <h3>Your Profile</h3>
+                  <h5>Your Profile</h5>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <FormGroup>
@@ -133,7 +151,7 @@ function Profile() {
                 </Grid>
                 
                 <Grid item xs={12} sm={12}>
-                  <h3>Hours I’m available to work</h3>
+                  <h5 style={{ marginTop: '16px' }}>Hours I’m available to work</h5>
                 </Grid>
 
                 { days.map((day, index) => (
@@ -173,7 +191,7 @@ function Profile() {
               <Grid container spacing={2}>  
 
                 <Grid item xs={12} sm={12}>
-                  <h3>Change Password</h3>
+                  <h5>Change Password</h5>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <FormGroup>
@@ -224,6 +242,11 @@ function Profile() {
 
           </FormControl>
 
+          <ProfileFooter>
+            <Link to="/team/add" className="btn btn-light-gray" style={{ marginRight: '12px' }}>Add team member</Link>
+            <button type="submit" className="btn btn-gold">Save profile</button>
+          </ProfileFooter>
+
         </form>
         
       </ProfileContainer>
@@ -236,16 +259,49 @@ export default Profile
 const MemberAvatar = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 30px;
+`
+
+const AvatarContainer = styled.div`
+  position: relative;
+`
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  border-radius: 50%;
+  transition: opacity .25s ease-in-out;
+  z-index: 5;
+  color: #fff;
+
+  > span {
+    font-size: 14px;
+  }
+
+  :hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  
 `
 
 const MemberInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 20px;
 
-  > span {
-    font-size: 12px;
+  > h5 {
+    margin-bottom: 5px;
+    font-weight: bold;
   }
 `
 
@@ -255,4 +311,14 @@ const ProfileContainer = styled.div`
   background: #fff;
   padding: 20px;
   width: 66.6%;
+
+  h5 {
+    font-weight: bold;
+  }
+`
+
+const ProfileFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
 `

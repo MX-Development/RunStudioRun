@@ -80,7 +80,7 @@ function PaymentTerms() {
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <h3>Rates</h3>
+            <h5>Rates</h5>
           </Grid>
           <Grid item xs={12} sm={3}>
             <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>Standard</FormLabel>
@@ -124,7 +124,7 @@ function PaymentTerms() {
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <h3>Tax</h3>
+            <h5>Tax</h5>
           </Grid>
           <Grid item xs={12} sm={3}>
             <FormGroup row>

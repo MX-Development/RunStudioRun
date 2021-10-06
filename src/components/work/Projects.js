@@ -41,7 +41,11 @@ function Projects({ add }) {
             }}
             onClick={(e) => {
               e.stopPropagation()
-              showCompany(2)
+              if (companies) {
+                let c = companies.filter((company) => company.companyName === params.row.companyName);
+                let companyID = c[0].id;
+                showCompany(companyID)
+              }
             }}
           >{params.row.companyName}</p>
         </div>
@@ -56,7 +60,7 @@ function Projects({ add }) {
   ]
 
   const [data, setData] = useState([])
-  const [companies, setCompanies] = useState(false);
+  const [companies, setCompanies] = useState(null);
 
   const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
@@ -106,9 +110,8 @@ function Projects({ add }) {
 
   const history = useHistory();
   
-  const showCompany = (company) => {  
-    console.log(company)
-    history.push(`/companies/1`);
+  const showCompany = (id) => {  
+    history.push(`/companies/${id}`);
   }
 
   const modalContent = (        

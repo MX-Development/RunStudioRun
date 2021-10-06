@@ -64,6 +64,15 @@
   font-size: 14px !important;
 }
 
+.MuiInputBase-input:focus {
+  transition: background 0.5s linear;
+}
+
+.MuiInputBase-input:focus {
+  outline: 0;
+  background: rgba(0,0,0,0.05);
+}
+
 .MuiSelect-select {
   padding-right: 32px !important;
 }
@@ -128,6 +137,10 @@
 
 .PrivateSwitchBase-root-8 {
   padding: 5px 9px;
+}
+
+.MuiIconButton-root:hover {
+  background-color: transparent !important;
 }
 
 /* Avatar */

@@ -52,7 +52,7 @@ function Subscription() {
                 </Overlay>
               </AvatarContainer>
               <MemberInfo>
-                <h3>Full Name</h3>
+                <h5>Full Name</h5>
                 <p>Position</p> 
               </MemberInfo>
             </MemberAvatar>
@@ -158,6 +158,7 @@ const MemberAvatar = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  margin-bottom: 30px;
 `
 
 const AvatarContainer = styled.div`
@@ -196,7 +197,8 @@ const MemberInfo = styled.div`
   flex-direction: column;
   margin-left: 20px;
 
-  > h3 {
+  > h5 {
+    font-weight: bold;
     margin-bottom: 5px;
   }
 `

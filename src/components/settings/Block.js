@@ -4,7 +4,7 @@ import styled from 'styled-components'
 function Block({ background, title, children }) {
   return (
     <Container style={{ background: background ? background : '#fff' }}>
-      { title ? ( <h3>{ title }</h3> ) : null}
+      { title ? ( <h5>{ title }</h5> ) : null}
       { children }
     </Container>
   )
@@ -21,7 +21,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  > h3 {
+  h5 {
     margin-bottom: 10px;
+    font-weight: bold;
   }
 `

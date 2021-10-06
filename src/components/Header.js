@@ -26,6 +26,7 @@ function Header() {
   const [user] = useAuthState(auth)
 
   const [navOpen, setNavOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
   const [activeNav, setActiveNav] = useState(null)
   const [activeSubitem, setActiveSubitem] = useState(null)
   
@@ -145,6 +146,7 @@ function Header() {
               onClick={(e) => {
                 setQuicknav(!openQuickNav)
                 setNavOpen(false)
+                setHelpOpen(false)
               }}
               className={openQuickNav ? 'active' : null} 
             />
@@ -202,14 +204,30 @@ function Header() {
                 </Column>
               </Columns>
             </QuickNav>
-            <HelpIcon />
+            <HelpIcon onClick={(e) => {
+              setHelpOpen(!helpOpen)
+              setQuicknav(false)
+              setNavOpen(false)
+            }} />
+            <Dropdown className={helpOpen ? 'help-dropdown active' : 'help-dropdown'}>
+              <Link to="#">
+                Support Guide
+              </Link>
+              <Link to="#">
+                Show Tooltips
+              </Link>
+              <Link to="#">
+                Email us
+              </Link>
+            </Dropdown>
             <Avatar alt={ user?.displayName } src={ user?.photoURL } onClick={(e) => {
               setNavOpen(!navOpen)
               setQuicknav(false)
+              setHelpOpen(false)
             }}>
               { user?.displayName.charAt(0) } 
             </Avatar>
-            <ProfileDropdown className={navOpen ? 'active' : ''}>
+            <Dropdown className={navOpen ? 'active' : ''}>
               <Link to="/profile">
                 Your Profile
               </Link>
@@ -225,7 +243,7 @@ function Header() {
               <Link to="#" onClick={() => auth.signOut()}>
                 Sign Out
               </Link>
-            </ProfileDropdown>
+            </Dropdown>
           </HeaderActions>
         </HeaderTop>
         <HeaderSubnav> 
@@ -359,7 +377,7 @@ const HeaderActions = styled.div`
   }
 `
 
-const ProfileDropdown = styled.div`
+const Dropdown = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -391,6 +409,10 @@ const ProfileDropdown = styled.div`
     opacity: 1;
     transition: opacity .35s ease-in-out;
     right: 0;
+  }
+
+  &.help-dropdown.active {
+    right: 42.5px;
   }
 `
 
