@@ -28,7 +28,7 @@ function Jobs({ projectID }) {
       .then(res => {
         projectID ? 
           res.data.forEach(item => {
-            if (item.projectID === projectID) { 
+            if (item.projectID === parseInt(projectID)) { 
               setData(data => [...data, item])
             }
           })

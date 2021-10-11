@@ -12,3 +12,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.MuiTablePagination-toolbar p:nth-child(2) {
+  display: none;
+}

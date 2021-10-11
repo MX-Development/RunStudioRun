@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 function ProjectInfo({ projectID }) {
 
   const [teamMembers, setTeamMembers] = useState([])
+  const [showExtended, setShowExtended] = useState(false)
 
   useEffect(() => {
     axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
@@ -38,13 +39,27 @@ function ProjectInfo({ projectID }) {
         <Grid item xs={5}>
           <h6>Team</h6>
           <Members>
-            { teamMembers ? teamMembers.map(member => {
+            { teamMembers ? teamMembers.map((member, index) => {
+              if (index > 2) return false;
               return (
                 <Avatar alt={ member.name } src={ member.avatar }>
                   M
                 </Avatar>
               )
             }) : null}
+            <Avatar className="open-ext" onClick={() => setShowExtended(!showExtended)}>
+              +
+            </Avatar>
+            <ExtendedMembers className={showExtended ? 'active' : ''}>
+            { teamMembers ? teamMembers.map((member, index) => {
+              if (index < 2) return false;
+              return (
+                <Avatar alt={ member.name } src={ member.avatar }>
+                  M
+                </Avatar>
+              )
+            }) : null}
+            </ExtendedMembers>
           </Members>
         </Grid>
 
@@ -94,11 +109,34 @@ const Info = styled.div`
 `
 
 const Members = styled.div`
+  position: relative;
   display: flex;
 
   .MuiAvatar-root {
     width: 30px !important;
     height: 30px !important;
     margin-left: 5px;
+  }
+
+  .open-ext {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`
+
+const ExtendedMembers = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  display: none;
+
+  &.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  > .MuiAvatar-root {
+    margin-bottom: 5px;
   }
 `

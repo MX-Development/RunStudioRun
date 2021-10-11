@@ -42,6 +42,7 @@ import Profile from './components/settings/Profile';
 
 import ToDos from './components/to-dos/ToDos';
 import Reports from './components/work/Reports';
+import Timeliner from './components/to-dos/Timeline';
 
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
 import Components from './components/Components';
@@ -101,6 +102,7 @@ function App() {
 
                   <Route exact path="/to-do" component={ToDos} />
                   <Route exact path="/kanban" component={KanbanBoard} />
+                  <Route exact path="/timeline" component={Timeliner} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />

@@ -99,6 +99,18 @@
   padding-right: 42px !important;
 }
 
+.MuiTablePagination-select {
+  border: 1px solid #B1B0AF;
+  border-radius: 2px;
+  padding: 6px !important;
+  color: #B1B0AF;
+  font-size: 12px;
+}
+
+.MuiTablePagination-input .MuiTablePagination-selectIcon {
+  display: none;
+}
+
 .MuiOutlinedInput-notchedOutline {
   border-color: #DDDBD7 !important;
 }

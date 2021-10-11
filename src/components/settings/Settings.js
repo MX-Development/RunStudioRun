@@ -21,6 +21,7 @@ import BusinessInformation from './BusinessInformation'
 import DisplayModes from './DisplayModes';
 
 import Modal from 'react-modal';
+import Labels from './Labels';
 Modal.setAppElement('#root');
 
 function Settings() {
@@ -266,6 +267,10 @@ function Settings() {
 
           <Block title={'Payment Terms'}>
             <PaymentTerms />
+          </Block>
+
+          <Block title={'Labels'}>
+            <Labels />
           </Block>
 
         </StackedBlocks>

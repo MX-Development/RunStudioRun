@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
 import axios from 'axios';
 
 function JobScroll({ projectID }) {
@@ -12,7 +16,8 @@ function JobScroll({ projectID }) {
       .then(res => {
         projectID ? 
           res.data.forEach(item => {
-            if (item.projectID === projectID) {
+            if (item.projectID === parseInt(projectID)) {
+              console.log(item);
               setData(data => [...data, item])
             }
           })
@@ -23,75 +28,80 @@ function JobScroll({ projectID }) {
   }, [projectID]);
 
   return (
-    <Blocks>
-      {
-        console.log(data)
-      }
-      {
-        data.forEach((job, index) => {
-          if (index === 1) {
-            return;
-          }
-          return (
-          <>
-            <Block>
-              <div className="top">
-                <div className="info">
-                  <h6>Planned hours</h6>
-                  <span>10hr</span>
-                </div>
-                <div className="info">
-                  <h6>Used</h6>
-                  <span>1hr/9hr</span>
-                </div>
-              </div>
-              <div className="bottom">
-                <span className="bar"></span>
-              </div>
-            </Block>
-            <Block>
-              <div className="top">
-                <div className="info">
-                  <h6>Planned budget</h6>
-                  <span>10hr</span>
-                </div>
-                <div className="info">
-                  <h6>Used</h6>
-                  <span>$150/$1350</span>
-                </div>
-              </div>
-              <div className="bottom">
-                <span className="bar"></span>
-              </div>
-            </Block>
-            <Block>
-              <div className="top">
-                <div className="info">
-                  <h6>Entered</h6>
-                  <span>8 SEP 2017</span>
-                </div>
-                <div className="info">
-                  <div className="sub">
-                    <div className="left">
-                      <h6>Start</h6>
-                      <span>1 SEP 2017</span>
+      <Swiper
+        spaceBetween={30}
+        slidesPerView={1}
+        navigation
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+        style={{ width: '100%' }}
+      >
+        {
+          data ?
+            data.map(job => {
+              return (
+              <SwiperSlide>
+                <JobContainer>
+                  <Block>
+                    <div className="top">
+                      <div className="info">
+                        <h6>Planned hours</h6>
+                        <span>10hr</span>
+                      </div>
+                      <div className="info">
+                        <h6>Used</h6>
+                        <span>1hr/9hr</span>
+                      </div>
                     </div>
-                    <div className="right">
-                      <h6>Due date</h6>
-                      <span>30 SEP 2017</span>
+                    <div className="bottom">
+                      <span className="bar"></span>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bottom">
-                <span className="bar"></span>
-              </div>
-            </Block>
-          </>
-          )
-        })
-      }
-    </Blocks>
+                  </Block>
+                  <Block>
+                    <div className="top">
+                      <div className="info">
+                        <h6>Planned budget</h6>
+                        <span>10hr</span>
+                      </div>
+                      <div className="info">
+                        <h6>Used</h6>
+                        <span>$150/$1350</span>
+                      </div>
+                    </div>
+                    <div className="bottom">
+                      <span className="bar"></span>
+                    </div>
+                  </Block>
+                  <Block>
+                    <div className="top">
+                      <div className="info">
+                        <h6>Entered</h6>
+                        <span>8 SEP 2017</span>
+                      </div>
+                      <div className="info">
+                        <div className="sub">
+                          <div className="left">
+                            <h6>Start</h6>
+                            <span>1 SEP 2017</span>
+                          </div>
+                          <div className="right">
+                            <h6>Due date</h6>
+                            <span>30 SEP 2017</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bottom">
+                      <span className="bar"></span>
+                    </div>
+                  </Block>
+                </JobContainer>
+              </SwiperSlide>
+              )
+            })
+          : null
+        }
+      </Swiper>
   )
 }
 
@@ -138,7 +148,8 @@ const Block = styled.div`
   }
 `
 
-const Blocks = styled.div`
+const JobContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   

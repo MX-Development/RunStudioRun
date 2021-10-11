@@ -5,11 +5,19 @@ import {
   Link
 } from "react-router-dom";
 
+import RunStudioRunLogo from '../assets/img/logo-hound-blurred.svg'
+
 function Verify() {
+
+  function resendEmail() {
+    console.log('Resending email...');
+  }
+
   return (
     <LoginContainer>
         <LoginModal>
           <ModalHeader>
+            <img src={RunStudioRunLogo} alt="Run Studio Run logo" />
             <h1>
               Run<br/>
               Studio<br/>
@@ -17,7 +25,7 @@ function Verify() {
             </h1>
           </ModalHeader>
           <ModalBody>
-            <h3>Great, check your inbox</h3>
+            <h1>Great, check your inbox</h1>
             <p>
               We've emailed a verification link to:
             </p>
@@ -34,20 +42,19 @@ function Verify() {
             Remeber to check your spam folder.
             </p>
                     
-            <button type="submit" className="btn btn-gold">Resend email</button>
+            <button type="submit" className="btn btn-gold" onClick={resendEmail}>Resend email</button>
 
             <br/>
 
             <p>
-              <strong>Need to change your email address?</strong>
-              <br/>
-              You’ll need a <Link to="/sign-up">sign up again</Link>
+              <small>
+                <strong>Need to change your email address?</strong>
+                <br/>
+                <span>You’ll need a <a href="#">sign up again</a></span>
+              </small>
             </p>
 
           </ModalBody>
-          <ModalFooter>
-            <p>2021 © Run Studio Run | <Link to="/terms">Terms</Link> | <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/help">Need Help?</Link></p>
-          </ModalFooter>
         </LoginModal>
       </LoginContainer>
   )
@@ -71,22 +78,24 @@ const LoginModal = styled.div`
 `
 
 const ModalHeader = styled.div`
-  padding: 15px;
+  padding: 45px 45px 0;
   background: #fff; 
-  border-radius: 2px 2px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   > h1 {
     font-weight: 900;
     text-transform: uppercase;
     line-height: .85;
-    font-size: 40px;
+    font-size: 24px;
   }
 `
 
 const ModalBody = styled.div`
   text-align: center;
-  background: #DDDBD7;
-  padding: 15px;
+  background: #fff;
+  padding: 45px;
   border-radius: 0 0 2px 2px;
 
   > .form-footer {
@@ -95,28 +104,29 @@ const ModalBody = styled.div`
     align-items: center;
   }
 
-  > h3 {
-    font-size: 28px;
-    font-weight: 300;
-    color: #fff;
-    margin-bottom: 20px;
+  > h1 {
+    font-weight: bold;
+    margin-bottom: 40px;
   }
 
   a {
-    font-size: 12px;
-    text-decoration: none;
+    text-decoration: underline;
     color: inherit;
-    display: block;
+    margin-left: 3.5px;
   }
-`
 
-const ModalFooter = styled.div`
-  font-size: 12px;
-  text-align: center;
-  margin-top: 15px;
+  p {
+    margin-bottom: 8px;
+  }
 
-  > p a {
-    text-decoration: none;
-    color: inherit;
+  button {
+    margin: 32px 0;
+  }
+
+  small {
+    span {
+    text-align: center;
+    justify-content: center;
+    }
   }
 `
