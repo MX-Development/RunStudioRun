@@ -1,0 +1,52 @@
+.react-calendar-timeline .rct-vertical-lines .rct-vl {
+  border: none;
+}
+
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-even, .react-calendar-timeline .rct-horizontal-lines .rct-hl-odd {
+  border: none;
+}
+
+.react-calendar-timeline .rct-horizontal-lines {
+  margin-bottom: 5px;
+}
+
+.react-calendar-timeline .rct-vertical-lines .rct-vl:nth-child(odd) {
+  background: rgba(60, 60, 60, 0.03);
+}
+
+.react-calendar-timeline .rct-vertical-lines .rct-vl:nth-child(even) {
+  background: rgba(60, 60, 60, 0.06);
+}
+
+.react-calendar-timeline .rct-header-root {
+  background: transparent;
+  color: #333;
+  border: none;
+}
+
+.react-calendar-timeline .rct-dateHeader-primary {
+  color: #333;
+}
+
+.react-calendar-timeline .rct-dateHeader {
+  border: none;
+}
+
+.react-calendar-timeline .rct-calendar-header {
+  margin: 10px 0;
+  border: none;
+}
+
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row {
+  line-height: inherit !important;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: #fff !important;
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.react-calendar-timeline .rct-dateHeader {
+  background-color: transparent;
+}

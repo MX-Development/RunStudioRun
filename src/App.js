@@ -42,7 +42,6 @@ import Profile from './components/settings/Profile';
 
 import ToDos from './components/to-dos/ToDos';
 import Reports from './components/work/Reports';
-import Timeliner from './components/to-dos/Timeline';
 
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
 import Components from './components/Components';
@@ -50,6 +49,7 @@ import PDF from './components/PDF';
 import Onboarding from './components/account/Onboarding';
 import KanbanBoard from './components/to-dos/KanbanBoard';
 import Verify from './components/account/Verify';
+import Trello from './components/to-dos/Trello';
 
 function App() {
 
@@ -100,9 +100,9 @@ function App() {
                   <Route exact path="/pdf" component={PDF} />
                   <Route exact path="/components" component={Components} />
 
-                  <Route exact path="/to-do" component={ToDos} />
+                  <Route exact path="/to-do" component={ToDos} /> 
                   <Route exact path="/kanban" component={KanbanBoard} />
-                  <Route exact path="/timeline" component={Timeliner} />
+                  <Route exact path="/trello" component={Trello} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />

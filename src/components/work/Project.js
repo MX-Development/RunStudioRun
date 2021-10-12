@@ -7,6 +7,7 @@ import Invoices from './Invoices'
 import CreateEstimate from './CreateEstimate'
 import ProjectHeader from './ProjectHeader'
 import Jobs from './Jobs'
+import ProjectView from './projects/ProjectView'
 
 import Grid from '@material-ui/core/Grid';
 
@@ -42,7 +43,7 @@ function Project() {
           }
 
 
-          {/* <ProjectView type={view ? view : 'timeline'} /> */}
+          <ProjectView type={view ? view : 'timeline'} />
           {/* <Jobs /> */}
         </Grid>
       </Grid>

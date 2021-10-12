@@ -39,7 +39,7 @@ function TestOrder({ estimateID }) {
     axios.get(`https://kendrix.kendrix.website/json/estimates.json`)
       .then(res => {
         res.data.map(item => {
-          if (item.id === estimateID) {
+          if (item.id === parseInt(estimateID)) {
             setEstimateData(item)
           }
         })
@@ -47,7 +47,7 @@ function TestOrder({ estimateID }) {
         axios.get(`https://kendrix.kendrix.website/json/estimates/phases.json`)
           .then(res => {
             res.data.map(item => {
-              if (item.jobId === estimateID) {
+              if (item.jobId === parseInt(estimateID)) {
                 setPhases(phases => [...phases, item])
 
                 axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
