@@ -1,0 +1,35 @@
+.swiper-button-next {
+  background-image: url('../assets/icons/ScrollArrowRight.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-prev {
+  background-image: url('../assets/icons/ScrollArrowLeft.svg');
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.swiper-button-prev::after {
+  display: none;
+}
+
+.swiper-container {
+  padding-top: 35px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  top: 15px;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}

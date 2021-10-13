@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
+import './JobScroll.css'
+
 import axios from 'axios';
 
 function JobScroll({ projectID }) {
@@ -29,7 +31,7 @@ function JobScroll({ projectID }) {
 
   return (
       <Swiper
-        spaceBetween={30}
+        spaceBetween={30} 
         slidesPerView={1}
         navigation
         onSlideChange={() => console.log('slide change')}

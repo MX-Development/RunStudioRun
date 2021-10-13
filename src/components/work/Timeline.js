@@ -66,8 +66,8 @@ function Timeliner() {
       id: 1,
       group: 1,
       title: 'item 1',
-      start_time: moment(),
-      end_time: moment().add(7, 'hour'),
+      start_time: moment('2021-10-13'),
+      end_time: moment('2021-10-21'),
       itemProps: {
         style: {
           background: '#E0BC77',
@@ -79,8 +79,8 @@ function Timeliner() {
       id: 2,
       group: 2,
       title: 'item 2',
-      start_time: moment().add(-0.5, 'hour'),
-      end_time: moment().add(5.5, 'hour'),
+      start_time: moment('2021-10-14'),
+      end_time: moment('2021-10-25'),
       itemProps: {
         style: {
           background: '#E0BC77',
@@ -92,8 +92,8 @@ function Timeliner() {
       id: 3,
       group: 1,
       title: 'item 3',
-      start_time: moment().add(2, 'hour'),
-      end_time: moment().add(9, 'hour'),
+      start_time: moment('2021-10-17'),
+      end_time: moment('2021-10-30'),
       itemProps: {
         style: {
           background: '#E0BC77',
@@ -115,18 +115,17 @@ function Timeliner() {
       >
 
         <TimelineHeaders>
-          <SidebarHeader>
+          {/* <SidebarHeader>
             {({ getRootProps }) => {
               return <div {...getRootProps()}>Job</div>
             }}
-          </SidebarHeader>
-          <DateHeader unit="month" />
+          </SidebarHeader> */}
+          <DateHeader unit="primaryHeader" />
           <DateHeader />
         </TimelineHeaders>
 
         <TimelineMarkers>
           <TodayMarker />
-          <CursorMarker />
         </TimelineMarkers>
 
       </Timeline>

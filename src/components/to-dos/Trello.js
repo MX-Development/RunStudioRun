@@ -81,13 +81,26 @@ function Trello() {
   }, [])
 
   const handleDateClick = () => {
-    console.log('test')
+    //To add a card
+    eventBus.publish({type: 'ADD_CARD', laneId: 'monday', card: 
+    {
+      id: '11', 
+      title: 'Task234', 
+      client: 'Client',
+      prefix: 'Project prefix',
+      time: 1000,
+      time_worked: 700,
+      description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+      label: '30 mins',
+    }})
   }
 
   const changeMember = event => {
     const memberID = event.target.value
     history.push(`/to-do/${memberID}`)
   }
+
+  const [eventBus, setEventBus] = useState(undefined);
 
   const data = {
     lanes: [
@@ -107,11 +120,21 @@ function Trello() {
             label: '30 mins',
           },
           {
+            id: '14', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 500,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          },
+          {
             id: '2', 
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 750,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -128,7 +151,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 250,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -138,7 +161,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 800,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -155,7 +178,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 725,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -165,7 +188,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 750,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -182,7 +205,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 950,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -192,7 +215,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 150,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -209,7 +232,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 600,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -219,7 +242,7 @@ function Trello() {
             title: 'Task', 
             client: 'Client',
             prefix: 'Project prefix',
-            time: 1000,
+            time: 975,
             time_worked: 700,
             description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
             label: '30 mins',
@@ -277,6 +300,8 @@ function Trello() {
         {/* <h1 onClick={() => changeEvent()}>Halo</h1> */}
       </MemberSelect>
 
+      <button type="button" onClick={handleDateClick}>Test</button>
+
       <Board 
         data={data} 
         components={{
@@ -294,6 +319,7 @@ function Trello() {
           marginBottom: 15,
           borderLeft: '6px solid gold'
         }}
+        eventBusHandle={setEventBus}
       />
     </div>
   )

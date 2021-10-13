@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 function PDF() {
 
   return (
-    <PDFViewer style={{ height: '85vh' }}>
+    <PDFViewer style={{ height: '90vh', width: '80vw' }}>
       <Document>
         <Page style={{ padding: '20px' }}>
 

@@ -250,7 +250,7 @@ function Header() {
           <LeftSpace />
           <SubnavLinks>
             {
-              location.pathname === "/to-do" || location.pathname === '/kanban' ?
+              location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
                 <JobSelect />
               :
               navItems.map(item => (
@@ -266,10 +266,11 @@ function Header() {
               ))
             }
             {
-              location.pathname === "/to-do" || location.pathname === '/kanban' ?
+              location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
                 <>
                   <Link to="/to-do">Timeline</Link>
                   <Link to="/kanban">Kanban</Link>
+                  <Link to="/trello">Trello</Link>
                 </>
               :
               null

@@ -116,13 +116,25 @@ a.fc-event.eventRed {
 }
 
 
+.react-trello-lane {
+  width: calc(20% - 10px);
+}
+
+.react-trello-board > div {
+  width: 100%;
+}
+
 .event-outer {
   background: #fff;
   color: #333 !important;
   border-left: 10px solid var(--gold);
   padding: 10px;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin: 0 10px 10px;
+}
+
+.event-outer:hover {
+  cursor: pointer;
 }
 
 .event-container {
@@ -247,6 +259,7 @@ a.fc-event.eventRed {
   border-radius: 4px 4px 0 0;
   background: #fff;
   font-size: 12px;
+  font-weight: 600;
 }
 
 .fc .fc-toolbar-title {
@@ -312,11 +325,11 @@ a.fc-event.eventRed {
 /* .fc-unselectable {
   transform: rotate(90deg);
 } */
-.fc-timegrid-event-harness {
+
+/* .fc-timegrid-event-harness {
   transform: rotate(-10deg) translate(5px, -32.5px);
-  /* transition: transform 0.5s ease-in-out; */
 }
 
 .fc-timegrid-event-harness.not-dragged {
   transform: rotate(0) translate(0, 0);
-}
+} */
