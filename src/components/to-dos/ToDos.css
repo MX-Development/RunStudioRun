@@ -116,6 +116,15 @@ a.fc-event.eventRed {
 }
 
 
+.event-outer {
+  background: #fff;
+  color: #333 !important;
+  border-left: 10px solid var(--gold);
+  padding: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
 .event-container {
   padding: 0 8px 8px;
   position: relative;

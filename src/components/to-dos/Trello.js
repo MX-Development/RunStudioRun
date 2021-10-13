@@ -16,6 +16,8 @@ import { MenuItem, Select } from '@material-ui/core'
 import Clock from '../assets/icons/Clock.svg'
 
 import Modal from 'react-modal';
+import MyCard from './MyCard'
+import MyHeader from './MyHeader'
 Modal.setAppElement('#root');
 
 function Trello() {
@@ -90,20 +92,140 @@ function Trello() {
   const data = {
     lanes: [
       {
-        id: 'lane1',
-        title: 'Planned Tasks',
+        id: 'monday',
+        title: 'Monday',
         label: '2/2',
         cards: [
-          {id: 'Card1', title: 'Write Blog', description: 'Can AI make memes', label: '30 mins', draggable: false},
-          {id: 'Card2', title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins', metadata: {sha: 'be312a1'}}
+          {
+            id: '1', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          },
+          {
+            id: '2', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          }
         ]
       },
       {
-        id: 'lane2',
-        title: 'Completed',
-        label: '0/0',
-        cards: []
-      }
+        id: 'tuesday',
+        title: 'Tuesday',
+        label: '2/2',
+        cards: [
+          {
+            id: '3', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          },
+          {
+            id: '4', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          }
+        ]
+      },
+      {
+        id: 'wednesday',
+        title: 'Wednesday',
+        label: '2/2',
+        cards: [
+          {
+            id: '5', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          },
+          {
+            id: '6', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          }
+        ]
+      },
+      {
+        id: 'thursday',
+        title: 'Thursday',
+        label: '2/2',
+        cards: [
+          {
+            id: '7', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          },
+          {
+            id: '8', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          }
+        ]
+      },
+      {
+        id: 'friday',
+        title: 'Friday',
+        label: '2/2',
+        cards: [
+          {
+            id: '9', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          },
+          {
+            id: '10', 
+            title: 'Task', 
+            client: 'Client',
+            prefix: 'Project prefix',
+            time: 1000,
+            time_worked: 700,
+            description: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.', 
+            label: '30 mins',
+          }
+        ]
+      },
     ]
   }
 
@@ -155,7 +277,24 @@ function Trello() {
         {/* <h1 onClick={() => changeEvent()}>Halo</h1> */}
       </MemberSelect>
 
-      <Board data={data} />
+      <Board 
+        data={data} 
+        components={{
+          Card: MyCard,
+          LaneHeader: MyHeader
+        }}
+        style={{
+          background: 'transparent'
+        }}
+        laneStyle={{
+          background: 'transparent'
+        }}
+        cardStyle={{
+          borderRadius: 0, 
+          marginBottom: 15,
+          borderLeft: '6px solid gold'
+        }}
+      />
     </div>
   )
 }
