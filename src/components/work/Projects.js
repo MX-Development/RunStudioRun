@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 
 import moment from 'moment'
 
 import axios from 'axios';
 
-import List from '../List'
+import ProjectListing from './ProjectListing'
+
+import PageTitle from '../layout/PageTitle'
 
 import { useHistory } from "react-router-dom";
-
+ 
 import { useForm, Controller } from "react-hook-form"
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -22,6 +25,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { compareAsc } from 'date-fns';
 
 function Projects({ add }) {
 
@@ -60,7 +64,9 @@ function Projects({ add }) {
   ]
 
   const [data, setData] = useState([])
+  const [projects, setProjects] = useState(null);
   const [companies, setCompanies] = useState(null);
+  const [companyProjects, setCompanyProjects] = useState(null);
 
   const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
@@ -70,12 +76,24 @@ function Projects({ add }) {
     try {
       await axios.get(`https://kendrix.kendrix.website/json/projects.json`)
         .then(res => {
-          setData(res.data)
 
-          axios.get(`https://kendrix.kendrix.website/json/companies.json`)
-            .then(res => {
-              setCompanies(res.data)
-            })
+          setProjects(res.data);
+
+          let companies = [];
+          res.data.forEach(project => {
+            var companyExists = companies.findIndex(x => x == project.companyName); 
+
+            if (companyExists === -1) companies.push(project.companyName)
+          })
+
+          setCompanies(companies);
+
+          // axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+          //   .then(res => {
+          //     // companies.push(res.data);
+          //   })
+
+          // setData(res.data)
         })
 
         console.log('Data fetched successfully.')
@@ -279,8 +297,46 @@ function Projects({ add }) {
   )
 
   return (
-    <List title={'Projects'} columns={columns} data={data} headerButton={'Print'} modalTitle={'New Project'} modalContent={modalContent} add={add ? true : false} />
+    <>
+      <ListHeader>
+        <PageTitle title={'Projects'} />
+        <button className="btn">Print</button>
+      </ListHeader>
+
+      { companies ?
+        companies.map(company => {
+          let companyProjects = [];
+          projects.forEach(project => {
+            if (project.companyName === company) {
+              companyProjects.push(project);
+            }
+          })
+          return (
+            <ProjectListing company={company} columns={columns} data={companyProjects} headerButton={'Print'} modalTitle={'New Project'} modalContent={modalContent} add={add ? true : false} />
+          ) 
+        })
+      : <h1>No companies</h1> }
+    </>
   )
 }
 
 export default Projects
+
+const ListHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > button {
+    border: 1px solid #B1B0AF;
+    color: #B1B0AF;
+    border-radius: 2px;
+    background: transparent;
+    font-size: 12px;
+    padding: 4px 6px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`
