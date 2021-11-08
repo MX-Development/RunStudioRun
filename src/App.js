@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import './App.css';
 import './Buttons.css';
@@ -10,10 +10,10 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './config/firebase'
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  useLocation
 } from "react-router-dom";
 
 import LoadingScreen from './components/LoadingScreen';
@@ -43,7 +43,13 @@ import Profile from './components/settings/Profile';
 import ToDos from './components/to-dos/ToDos';
 import Reports from './components/work/Reports';
 
+// Background images
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
+import PurchasesBg from './components/assets/img/greyhounds/PurchasesHounds.svg'
+import LoveHounds from './components/assets/img/greyhounds/LoveHounds.svg'
+import BabyHounds from './components/assets/img/greyhounds/BabyHounds.svg'
+import SideHounds from './components/assets/img/greyhounds/SideHounds.svg'
+
 import Components from './components/Components';
 import PDF from './components/PDF';
 import Onboarding from './components/account/Onboarding';
@@ -52,6 +58,24 @@ import Verify from './components/account/Verify';
 import Trello from './components/to-dos/Trello';
 
 function App() {
+
+  const location = useLocation();
+  const [bgImage, setBgImage] = useState('')
+
+  useEffect(() => {
+    console.log('Location changed');
+    if (window.location.href.includes('projects') && window.location.href.includes('purchases') || window.location.href.includes('projects') && window.location.href.includes('team')) {
+      setBgImage(PurchasesBg);
+    } else if (window.location.href.includes('subscription')) {
+      setBgImage(LoveHounds);
+    } else if (window.location.href.includes('jobs')) {
+      setBgImage(BabyHounds);
+    } else if (window.location.href.includes('settings')) {
+      setBgImage(SideHounds);
+    } else {
+      setBgImage(BackgroundImage);
+    }
+  }, [location]);
 
   const [user, loading] = useAuthState(auth)
 
@@ -62,8 +86,8 @@ function App() {
   }
 
   return (
-    <div className="app" id="test-modal" style={{ backgroundImage: `url(${ BackgroundImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
-      <Router>
+    <div className="app" id="test-modal" style={{ backgroundImage: `url(${ bgImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
+      
         {
           !user ? (
             <Switch>
@@ -211,7 +235,6 @@ function App() {
             </>
           )
         }
-      </Router>
     </div>
   );
 }

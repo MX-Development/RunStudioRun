@@ -6,7 +6,8 @@ const MyCard = ({
   prefix,
   description,
   time,
-  time_worked
+  time_worked,
+  hexBlock
 }) => {
 
   let totalTime = time
@@ -16,7 +17,7 @@ const MyCard = ({
   let cardHeight = (time / 4) + 'px'
 
   return (
-    <div className="event-outer" style={{ height: cardHeight }}>
+    <div className="event-outer" style={{ height: cardHeight, borderColor: '#' + hexBlock }}>
       <div className="event-container">
         <div className="event-header">
           <h5>{title}</h5>

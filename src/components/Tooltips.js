@@ -48,7 +48,7 @@ function Tooltips() {
   const location = window.location.href;
 
   const onExit = () => {
-    // setStepsEnabled(false);
+    setStepsEnabled(false);
   }
 
   return (

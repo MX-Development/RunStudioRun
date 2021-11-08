@@ -248,7 +248,7 @@ function Header() {
         </HeaderTop>
         <HeaderSubnav> 
           <LeftSpace />
-          <SubnavLinks>
+          <SubnavLinks className={location.pathname.includes("/projects/") ? 'hidden' : 'shown'}>
             {
               location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
                 <JobSelect />
@@ -453,6 +453,14 @@ const SubnavLinks = styled.div`
   > a.active {
     background-color: var(--gold);
     color: #fff;
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  &.shown {
+    display: flex;
   }
 `
 
