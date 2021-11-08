@@ -60,6 +60,7 @@ function Tooltips() {
             steps={contacts}
             initialStep={initialStep}
             onExit={onExit}
+            skipLabel={'Test'}
           />
         :
         location.includes('/profile') || location.includes('/team') || location.includes('/settings') || location.includes('/items-and-tasks') || location.includes('/expenses') || location.includes('/subscription') ?
@@ -68,6 +69,7 @@ function Tooltips() {
             steps={settings}
             initialStep={initialStep}
             onExit={onExit}
+            skipLabel={'Test'}
           />
         : null
         

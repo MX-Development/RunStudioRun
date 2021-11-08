@@ -339,8 +339,8 @@ const HeaderNav = styled.div`
   }
 
   > a.active {
-    background: var(--gold);
-    color: #fff;
+    background: #fff;
+    color: #3C3C3C;
   }
 `
 
