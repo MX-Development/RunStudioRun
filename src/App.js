@@ -55,6 +55,7 @@ import PDF from './components/PDF';
 import Onboarding from './components/account/Onboarding';
 import KanbanBoard from './components/to-dos/KanbanBoard';
 import Verify from './components/account/Verify';
+import GettingStarted from './components/account/GettingStarted';
 import Trello from './components/to-dos/Trello';
 
 function App() {
@@ -94,6 +95,7 @@ function App() {
               <Route exact path="/" component={Login} />
               <Route exact path="/sign-up" component={Onboarding} />
               <Route exact path="/verify" component={Verify} />
+              <Route exact path="/getting-started" component={GettingStarted} />
             </Switch>
           ) : (
             <>

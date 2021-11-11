@@ -72,7 +72,7 @@ const LoginModal = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: 550px;
+  max-width: 425px;
   width: 100%;
   border-radius: 2px;
 `
@@ -95,7 +95,7 @@ const ModalHeader = styled.div`
 const ModalBody = styled.div`
   text-align: center;
   background: #fff;
-  padding: 45px;
+  padding: 45px 15px 15px;
   border-radius: 0 0 2px 2px;
 
   > .form-footer {
@@ -107,6 +107,7 @@ const ModalBody = styled.div`
   > h1 {
     font-weight: bold;
     margin-bottom: 40px;
+    font-size: 32px;
   }
 
   a {

@@ -3,6 +3,17 @@ import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 import { auth, provider } from '../../config/firebase'
 
+import Checkbox from '@material-ui/core/Checkbox'
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
+import Hound from '../assets/img/logo-hound-blurred.svg';
+
 import { useSpring, animated } from 'react-spring'
 
 import GoogleLogo from './google-logo.svg'
@@ -48,37 +59,68 @@ function Login() {
             Studio<br/>
             Run
           </h1>
+          <img src={Hound} alt="" />
         </ModalHeader>
         <ModalBody>
           <h3>Log in to your account</h3>
+
+
+
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <input className="form-control" id="name" {...register("name")} placeholder="Enter email" />
-            </div>
-            <div className="form-group">
-              <input type="password" className="form-control" id="name" {...register("name")} placeholder="Password" />
-            </div>
-            <div className="form-footer">
-              <div className="btn-group">
-                <div className="btn-left">
-                  <Link to="/forgot-password">
-                    Forgot password?
-                  </Link>
-                  <Link to="/sign-up">
-                    Sign up for an account
-                  </Link>
+
+            <Grid container spacing={1}> 
+
+              <Grid item xs={12} sm={12}>
+                <FormGroup>
+                  <FormControl variant="outlined">
+                    <TextField
+                      id="email"
+                      placeholder="Enter email"
+                      variant="outlined"
+                      style={{ background: '#fff' }}
+                    />
+                  </FormControl>
+                </FormGroup>
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <FormGroup>
+                  <FormControl variant="outlined">
+                    <TextField
+                      type="password"
+                      id="password"
+                      placeholder="Password"
+                      variant="outlined"
+                      style={{ background: '#fff' }}
+                    />
+                  </FormControl>
+                </FormGroup>
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <div className="form-footer">
+                  <div className="btn-group">
+                    <div className="btn-left">
+                      <Link to="/forgot-password" style={{ marginBottom: '5px' }}>
+                        Forgot password?
+                      </Link>
+                      <Link to="/sign-up">
+                        Sign up for an account
+                      </Link>
+                    </div>
+                    <div className="btn-right">
+                      <button type="submit" className="btn btn-gold gray-text btn-lg btn-right">Log in</button>
+                    </div>
+                  </div>
                 </div>
-                <div className="btn-right">
-                  <button type="submit" className="btn btn-gold btn-right">Log in</button>
-                </div>
-              </div>
-            </div>
+              </Grid>
+
+            </Grid>
           </form>
+
           <Divider>
             <span>Or</span>
           </Divider>
           <GoogleButton onClick={signIn}>
-            <img src={GoogleLogo} alt="google logo" /> Sign in with Google
+            <img src={GoogleLogo} alt="google logo" /> Continue with Google
           </GoogleButton>
         </ModalBody>
         <ModalFooter>
@@ -101,21 +143,31 @@ const LoginModal = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: 550px;
+  max-width: 425px;
   width: 100%;
   border-radius: 2px;
 `
 
 const ModalHeader = styled.div`
-  padding: 15px;
+  padding: 30px 15px;
   background: #fff; 
   border-radius: 2px 2px 0 0;
+  position: relative;
 
   > h1 {
     font-weight: 900;
     text-transform: uppercase;
-    line-height: .85;
-    font-size: 40px;
+    line-height: .825;
+    font-size: 32px;
+  }
+
+  > img {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-right: 30px;
+    padding-top: 15px;
   }
 `
 

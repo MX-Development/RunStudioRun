@@ -14,6 +14,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { useSpring, animated } from 'react-spring'
 
+import Hound from '../assets/img/logo-hound-blurred.svg';
+
 import GoogleLogo from './google-logo.svg'
 
 import './Onboarding.css'
@@ -57,6 +59,7 @@ function Onboarding() {
               Studio<br/>
               Run
             </h1>
+            <img src={Hound} alt="" />
           </ModalHeader>
           <ModalBody>
             <h3>Create your account</h3>
@@ -66,8 +69,6 @@ function Onboarding() {
             <Divider>
               <span>Or</span>
             </Divider>
-
-
 
             <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -130,7 +131,7 @@ function Onboarding() {
                   <p style={{ fontSize: '12px', textAlign: 'center', margin: '8px 0' }}>By clicking below, you agree to our Terms and Privacy Policy.</p>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <button type="submit" className="btn btn-gold btn-right" style={{ color: '#292724', width: '100%', padding: '10px', marginBottom: '8px' }}>Agree</button>
+                  <button type="submit" className="btn btn-gold gray-text btn-lg btn-right" style={{ color: '#292724', width: '100%', padding: '10px', marginBottom: '8px' }}>Agree</button>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <p style={{ fontSize: '16px', textAlign: 'center', fontWeight: 'bold' }}>
@@ -160,21 +161,31 @@ const LoginModal = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: 550px;
+  max-width: 425px;
   width: 100%;
   border-radius: 2px;
 `
 
 const ModalHeader = styled.div`
-  padding: 15px;
+  padding: 30px 15px;
   background: #fff; 
   border-radius: 2px 2px 0 0;
+  position: relative;
 
   > h1 {
     font-weight: 900;
     text-transform: uppercase;
-    line-height: .85;
-    font-size: 40px;
+    line-height: .825;
+    font-size: 32px;
+  }
+
+  > img {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-right: 30px;
+    padding-top: 15px;
   }
 `
 
