@@ -72,7 +72,7 @@ function App() {
       setBgImage(BabyHounds);
     } else if (window.location.href.includes('settings')) {
       setBgImage(SideHounds);
-    } else {
+    } else if (window.location.href.includes('profile') || window.location.href.includes('report') || window.location.href.includes('invoice')) {
       setBgImage(BackgroundImage);
     }
   }, [location]);
