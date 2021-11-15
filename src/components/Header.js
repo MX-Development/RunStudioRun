@@ -266,14 +266,14 @@ function Header() {
               ))
             }
             {
-              location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
-                <>
-                  <Link to="/to-do">Timeline</Link>
-                  <Link to="/kanban">Kanban</Link>
-                  <Link to="/trello">Trello</Link>
-                </>
-              :
-              null
+              // location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
+              //   <>
+              //     <Link to="/to-do">Timeline</Link>
+              //     <Link to="/kanban">Kanban</Link>
+              //     <Link to="/trello">Trello</Link>
+              //   </>
+              // :
+              // null
             }
           </SubnavLinks>
           <SubnavSearch>

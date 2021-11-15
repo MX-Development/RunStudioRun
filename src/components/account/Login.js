@@ -191,7 +191,7 @@ const ModalBody = styled.div`
 
   a {
     font-size: 12px;
-    text-decoration: none;
+    text-decoration: underline;
     color: inherit;
     display: block;
   }

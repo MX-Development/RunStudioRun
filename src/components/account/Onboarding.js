@@ -128,7 +128,7 @@ function Onboarding() {
                   </FormGroup>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <p style={{ fontSize: '12px', textAlign: 'center', margin: '8px 0' }}>By clicking below, you agree to our Terms and Privacy Policy.</p>
+                  <p style={{ fontSize: '12px', textAlign: 'center', margin: '8px 0', display: 'flex' }}>By clicking below, you agree to our <Link to="#" style={{ margin: '0 3px' }}>Terms</Link> and <Link to="#" style={{ margin: '0 3px', marginRight: '0' }}>Privacy Policy</Link>.</p>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <button type="submit" className="btn btn-gold gray-text btn-lg btn-right" style={{ color: '#292724', width: '100%', padding: '10px', marginBottom: '8px' }}>Agree</button>
@@ -209,7 +209,7 @@ const ModalBody = styled.div`
 
   a {
     font-size: 12px;
-    text-decoration: none;
+    text-decoration: underline;
     color: inherit;
     display: block;
   }

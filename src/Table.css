@@ -134,3 +134,26 @@
 .MuiDataGrid-root .MuiDataGrid-footerContainer {
   padding-top: 30px !important;
 }
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
+  padding: 0;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaderWrapper {
+  margin-bottom: 0;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnsContainer {
+  min-height: 30px !important;
+  max-height: 30px !important;
+  line-height: 30px !important;
+  border-bottom: 0 !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnSeparator {
+  min-height: 30px !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-window {
+  top: 38px !important;
+}

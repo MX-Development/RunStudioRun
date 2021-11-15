@@ -42,7 +42,7 @@ function Verify() {
             Remeber to check your spam folder.
             </p>
                     
-            <button type="submit" className="btn btn-gold" onClick={resendEmail}>Resend email</button>
+            <button type="submit" className="btn btn-gold gray-text" onClick={resendEmail}>Resend email</button>
 
             <br/>
 
