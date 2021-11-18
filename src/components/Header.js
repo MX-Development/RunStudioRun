@@ -18,6 +18,14 @@ import RunStudioRunLogo from './assets/img/logo-hound.svg'
 import JobSelect from './JobSelect';
 import Tooltips from './Tooltips';
 
+import Checkbox from '@material-ui/core/Checkbox'
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+
 function Header() {
 
   let history = useHistory()
@@ -277,7 +285,24 @@ function Header() {
             }
           </SubnavLinks>
           <SubnavSearch>
-            <input id="search" name="search" className="form-control" placeholder="Search..." />
+
+            <Grid item xs={12} sm={12}>
+              <FormGroup style={{ position: 'relative' }}>
+                <FormControl variant="outlined">
+                  <TextField
+                    id="search"
+                    placeholder="Search..."
+                    variant="outlined"
+                  />
+                </FormControl>
+                <SearchIcon>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11.998" height="12" viewBox="0 0 11.998 12">
+                    <path id="Path_2496" data-name="Path 2496" d="M11.835-5.375,9.5-7.712a.562.562,0,0,0-.4-.164H8.718a4.851,4.851,0,0,0,1.031-3A4.874,4.874,0,0,0,4.875-15.75,4.874,4.874,0,0,0,0-10.875,4.874,4.874,0,0,0,4.875-6a4.851,4.851,0,0,0,3-1.031v.382a.562.562,0,0,0,.164.4l2.336,2.336a.56.56,0,0,0,.794,0l.663-.663A.565.565,0,0,0,11.835-5.375Zm-6.96-2.5a3,3,0,0,1-3-3,3,3,0,0,1,3-3,3,3,0,0,1,3,3A3,3,0,0,1,4.875-7.876Z" transform="translate(0 15.75)" fill="#b1b0af"/>
+                  </svg>
+                </SearchIcon>
+              </FormGroup>
+            </Grid>
+
           </SubnavSearch>
         </HeaderSubnav>
       </HeaderContainer>
@@ -470,10 +495,20 @@ const SubnavSearch = styled.div`
 
   input {
     width: 100%;
-    font-size: 12px;  
-    padding: 6px;
-    margin: 5px 0;
+    padding: 4px !important;
+    margin: 4px !important;
   }
+
+  .MuiOutlinedInput-notchedOutline {
+    border: 0;
+  }
+`
+
+const SearchIcon = styled.div`
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-100%, -50%);
 `
 
 const QuickNav = styled.div`

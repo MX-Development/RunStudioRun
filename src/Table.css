@@ -117,7 +117,7 @@
 }
 
 .MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
-  background-color: rgba(63, 81, 181, 0.12) !important;
+  background-color: rgba(255,255,255,0.5) !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-row {
@@ -156,4 +156,42 @@
 
 .MuiDataGrid-root .MuiDataGrid-window {
   top: 38px !important;
+}
+
+.MuiDataGrid-selectedRowCount {
+  opacity: 0 !important;
+}
+
+.MuiTablePagination-root .MuiTablePagination-select {
+  border: 2px solid #B1B0AF;
+  border-radius: 4px;
+  color: #B1B0AF;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8px !important;
+}
+
+.MuiTablePagination-caption {
+  font-weight: bold !important;
+  position: relative !important;
+  right: 42px !important;
+  width: 70px !important;
+  text-align: center !important;
+}
+
+.MuiTablePagination-actions {
+  position: absolute !important;
+  right: 0 !important;
+  width: 157.5px !important;
+}
+
+.MuiTablePagination-actions > button:nth-child(2) {
+  position: absolute !important;
+  right: 0 !important;
+}
+
+.MuiTablePagination-selectRoot {
+  margin-right: 95px !important;
 }

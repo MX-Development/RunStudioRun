@@ -33,7 +33,12 @@ function BusinessInformation() {
           <Grid item xs={12} sm={12}>
             <Header>
               <div className="business-image">
-                <img src={BusinessLogo} alt="logo" />
+                <UploadContainer>
+                  <img src={BusinessLogo} alt="logo" />
+                  <UploadFilter>
+                    <span>Upload</span>
+                  </UploadFilter>
+                </UploadContainer>
                 <small>Image size 000 x 000 px (JPG/PNG)</small>
               </div>
               <div className="business-info">
@@ -62,8 +67,12 @@ function BusinessInformation() {
             </FormGroup>
           </Grid>
 
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
             <h3>Company Settings</h3>
+            <ColorPicker>
+              <span>Your Colour</span>
+              <Color />
+            </ColorPicker>
           </Grid>
           <Grid item xs={6}>
             <FormGroup>
@@ -217,6 +226,7 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  position: relative;
 
   > .business-image {
     display: flex;
@@ -225,9 +235,62 @@ const Header = styled.div`
     > small {
       margin-top: 10px;
     }
+
+    img {
+      width: 100%;
+    }
   }
 
   > .business-info {
     margin-left: 15px;
   }
+`
+
+const UploadContainer = styled.div`
+  position: relative;
+  display: flex;
+`
+
+const UploadFilter = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    cursor: pointer;
+  }
+
+  > span {
+    margin-top: 3px;
+  }
+`
+
+const ColorPicker = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-right: 8px;
+    font-size: 12px;
+    font-weight: 100;
+  }
+`
+
+const Color = styled.div`
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: #FCDB6E;
 `

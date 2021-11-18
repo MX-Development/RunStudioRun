@@ -113,6 +113,8 @@ function Expenses({ add }) {
                         placeholder="Enter the expense description"
                         {...field}
                         value={selectedData ? selectedData.description : null}
+                        multiline
+                        rows={4}
                       />
                     )}
                     control={control}

@@ -138,6 +138,8 @@ function ItemsTasks({ add }) {
                         {...field}
                         value={selectedData ? selectedData.rateDescription : null}
                         onChange={handleChange}
+                        multiline
+                        rows={4}
                       />
                     )}
                     control={control}
