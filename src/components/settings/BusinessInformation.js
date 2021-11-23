@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 
+import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -48,12 +50,38 @@ function BusinessInformation() {
                   Second Address Line<br/>
                   Country
                 </p>
+                <Grid container spacing={0} style={{ marginTop: '1rem' }}>  
+                  <Grid item xs={4} sm={4}>
+                    <FormControlLabel
+                      control={<Checkbox checked={true} />}
+                      label={'Align Left'}
+                      labelPlacement="right"
+                      style={{ margin: '0', marginRight: '12.5px' }}
+                    />
+                  </Grid>
+                  <Grid item xs={4} sm={4}>
+                    <FormControlLabel
+                      control={<Checkbox checked={true} />}
+                      label={'Align Left'}
+                      labelPlacement="right"
+                      style={{ margin: '0', marginRight: '12.5px' }}
+                    />
+                  </Grid>
+                  <Grid item xs={4} sm={4}>
+                    <FormControlLabel
+                      control={<Checkbox checked={true} />}
+                      label={'Replace STUDIO'}
+                      labelPlacement="right"
+                      style={{ margin: '0', marginRight: '12.5px', fontSize: '10px !important' }}
+                    />
+                  </Grid>
+                </Grid>
               </div>
             </Header>
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <h3>App URL</h3>
+            <h3 style={{ fontWeight: 'bold' }}>App URL</h3>
           </Grid>
           <Grid item xs={12}>
             <FormGroup>
@@ -68,7 +96,7 @@ function BusinessInformation() {
           </Grid>
 
           <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h3>Company Settings</h3>
+            <h3 style={{ fontWeight: 'bold' }}>Company Settings</h3>
             <ColorPicker>
               <span>Your Colour</span>
               <Color />
@@ -155,6 +183,8 @@ function BusinessInformation() {
                   id="physical_address"
                   placeholder="Where people can see you"
                   variant="outlined"
+                  multiline
+                  rows={4}
                 />
               </FormControl>
             </FormGroup>
@@ -162,11 +192,23 @@ function BusinessInformation() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox checked={true} />}
+                      label={'As above'}
+                      labelPlacement="right"
+                      style={{ margin: '0', marginLeft: '12.5px' }}
+                    />
+                  </FormGroup>
+                </div>
                 <TextField
                   id="postal_address"
                   placeholder="Where to post stuff"
                   variant="outlined"
+                  multiline
+                  rows={4}
                 />
               </FormControl>
             </FormGroup>
@@ -234,6 +276,7 @@ const Header = styled.div`
     
     > small {
       margin-top: 10px;
+      font-size: 12px;
     }
 
     img {
@@ -243,6 +286,24 @@ const Header = styled.div`
 
   > .business-info {
     margin-left: 15px;
+
+    h3 {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .MuiCheckbox-root {
+    padding: 0;
+    margin-right: 5px;
+  }
+
+  .MuiTypography-root {
+    font-size: 10px !important;
   }
 `
 

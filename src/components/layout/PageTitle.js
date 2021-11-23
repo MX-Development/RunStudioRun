@@ -13,5 +13,5 @@ export default PageTitle
 
 const Title = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 7.5px;
 `

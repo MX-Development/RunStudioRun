@@ -120,7 +120,6 @@ const GridHeading = styled.div`
   display: flex;
   background: #B1B0AF;
   padding: 7.5px 15px;
-  margin-top: 15px;
   margin-bottom: 5px;
   border-radius: 2px;
 

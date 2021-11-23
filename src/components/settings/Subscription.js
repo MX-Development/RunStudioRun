@@ -13,11 +13,19 @@ import Avatar from '@material-ui/core/Avatar';
 import PaymentHistory from './PaymentHistory'
 
 import OutlineHound from '../assets/img/outline-hound.svg'
+import PaymentIcons from '../assets/img/payment-icons.svg'
 import Users from './Users'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../config/firebase'
 import StripeElement from './StripeElement'
+
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import { MenuItem, Select } from '@material-ui/core'
 
 function Subscription() {
 
@@ -42,20 +50,23 @@ function Subscription() {
         <StackedBlocks>
 
           <Block style={{ minHeight: 'none' }}>
-            <MemberAvatar>
-              <AvatarContainer>
-                <Avatar alt={ user?.displayName } src={ user?.photoURL }>
-                  { user?.displayName.charAt(0) } 
-                </Avatar>
-                <Overlay onClick={(e) => uploadAvatar()}>
-                  <span>Upload</span>
-                </Overlay>
-              </AvatarContainer>
-              <MemberInfo>
-                <h5>Full Name</h5>
-                <p>Position</p> 
-              </MemberInfo>
-            </MemberAvatar>
+            <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+              <MemberAvatar>
+                <AvatarContainer>
+                  <Avatar alt={ user?.displayName } src={ user?.photoURL }>
+                    { user?.displayName.charAt(0) } 
+                  </Avatar>
+                  <Overlay onClick={(e) => uploadAvatar()}>
+                    <span>Upload</span>
+                  </Overlay>
+                </AvatarContainer>
+                <MemberInfo>
+                  <h5>Full Name <Badge>Admin</Badge></h5>
+                  <p>Position</p> 
+                  <button style={{ marginTop: '10px', width: 'fit-content' }} className="btn gray-border">Change admin</button>
+                </MemberInfo>
+              </MemberAvatar>
+            </div>
           </Block>
 
           <Block>
@@ -72,15 +83,41 @@ function Subscription() {
                 <h1>$10</h1>
                 <h4>USD</h4>
                 <h5>Per Month</h5>
-                <Button>Select</Button>
+                <ButtonCustom>Select</ButtonCustom>
               </Option>
               <Option className={activeType === 2 ? 'active' : ''} onClick={() => setActiveType(2)}>
                 <h1>$100</h1>
                 <h4>USD</h4>
                 <h5>Per Year</h5>
-                <Button>Select</Button>
+                <ButtonCustom>Select</ButtonCustom>
               </Option>
             </SubscriptionTypes>
+
+            <Grid item xs={12} sm={12}>
+              <Grid container spacing={2}>  
+
+                <Grid item xs={12} sm={12}>
+                  <FormGroup>
+                    <FormControl variant="outlined">
+                      <Select
+                        value={'Quantity'}
+                        style={{ width: '100%', marginBottom: '1rem' }}
+                      >
+                        <MenuItem value="Quantity">
+                          <em>Quantity</em>
+                        </MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </FormGroup>
+                </Grid>
+                
+              </Grid>
+            </Grid>
 
             <Total>
               <span>Total</span>
@@ -89,42 +126,92 @@ function Subscription() {
 
             <Helper>Inc TAX (GST/VAT)</Helper>
 
+            <SmallText style={{ marginBottom: '1rem' }}>
+              All data is transmitted encrypted via a secure TLS connection
+            </SmallText>
+
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-group">
-                <input className="form-control" placeholder="Name as appears on your card" id="name" {...register("name")} />
+
+              <Grid item xs={12} sm={12}>
+                <Grid container spacing={2}>  
+
+                  <Grid item xs={12} sm={12}>
+                    <FormGroup>
+                      <FormControl variant="outlined">
+                        <TextField
+                          id="text"
+                          placeholder="Name as appears on your card"
+                          variant="outlined"
+                        />
+                      </FormControl>
+                    </FormGroup>
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    <FormGroup>
+                      <FormControl variant="outlined">
+                        <TextField
+                          id="text"
+                          placeholder="Card Number"
+                          variant="outlined"
+                        />
+                      </FormControl>
+                    </FormGroup>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <FormGroup>
+                      <FormControl variant="outlined">
+                        <TextField
+                          id="text"
+                          placeholder="MM /YY"
+                          variant="outlined"
+                        />
+                      </FormControl>
+                    </FormGroup>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <FormGroup>
+                      <FormControl variant="outlined">
+                        <TextField
+                          id="text"
+                          placeholder="CVC"
+                          variant="outlined"
+                        />
+                      </FormControl>
+                    </FormGroup>
+                  </Grid>
+                  <Grid item xs={12} sm={4} style={{ display: 'flex' }} alignItems={"center"}>
+                    <a href="#" style={{ color: '#3C3C3C' }}>What’s this</a>
+                  </Grid>
+
+                </Grid>
+              </Grid>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '1rem 0' }}>
+                <SmallText>
+                  <Checkbox
+                    defaultChecked
+                    color="primary"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                  />
+                  I agree with the <a href="#" style={{ color: '#3C3C3C' }}>Terms & Conditions</a>
+                </SmallText>
+                <img src={ PaymentIcons } alt="payment icons" style={{ width: '50%' }} />
               </div>
-              <div className="form-group">
-                <input className="form-control" placeholder="Card Number" id="name" {...register("name")} />
-              </div>
-              <div className="form-row" style={{ display: 'flex', alignItems: 'center' }}>
-                <div className="form-group" style={{ width: '20%' }}>
-                  <input className="form-control" placeholder="MM /YY" id="name" {...register("name")} />
-                </div>
-                <div className="form-group" style={{ width: '20%' }}>
-                  <input className="form-control" placeholder="CVC" id="name" {...register("name")} />
-                </div>
-                <div className="form-group">
-                  <a href="/whats-this">What’s this</a>
-                </div>
-              </div>
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              I agree with the Terms & Conditions
             </form>
-            <small>
+            <SmallText>
               Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.
               <br/><br/>
               Your billing statement may display Katsionis Pty Ltd trading as Run Studio Run. We are located in Melbourne, Australia.
               <br/><br/>
               Your credit card issuer may charge foreign transaction or cross-border fees in addition to the total price above.
-            </small>
+            </SmallText>
           </Block>
 
           <Block>
-            <div style={{ maxHeight: '350px', overflowY: 'scroll' }}>
+            <BlockHeading>
+              <h3 style={{ fontWeight: '400', marginBottom: '8px', color: '#E0BC77', fontWeight: 'bold', fontSize: '18px' }}>Payment History</h3>
+              <button className="btn btn-light-gray">Export</button>
+            </BlockHeading>
+            <div style={{ maxHeight: '350px', overflowY: 'scroll', paddingRight: '15px' }}>
               <PaymentHistory />
             </div>
           </Block>
@@ -158,7 +245,11 @@ const MemberAvatar = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  margin-bottom: 30px;
+
+  .MuiAvatar-root {
+    width: 100px !important;
+    height: 100px !important;
+  }
 `
 
 const AvatarContainer = styled.div`
@@ -200,6 +291,8 @@ const MemberInfo = styled.div`
   > h5 {
     font-weight: bold;
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
   }
 `
 
@@ -248,7 +341,7 @@ const Option = styled.div`
   }
 `
 
-const Button = styled.div`
+const ButtonCustom = styled.div`
   border: 1px solid #B1B0AF;
   color: #B1B0AF;
   font-weight: 500;
@@ -276,4 +369,26 @@ const Helper = styled.div`
   width: 100%;
   font-size: 12px;
   margin-bottom: 16px;
+`
+
+const SmallText = styled.div`
+  font-size: 0.7em;
+  font-family: 'Roboto', sans-serif;
+`
+
+const BlockHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Badge = styled.div`
+  padding: 5px 15px;
+  background: #B1B0AF;
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 2px;
+  margin-left: 10px;
 `

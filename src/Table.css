@@ -117,7 +117,11 @@
 }
 
 .MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
-  background-color: rgba(255,255,255,0.5) !important;
+  background-color: rgba(247, 247, 247, 1) !important;
+}
+
+.MuiTableRow-root.Mui-selected, .MuiTableRow-root.Mui-selected:hover {
+  background-color: #F4F2F0 !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-row {

@@ -196,6 +196,8 @@ function Companies({ add, importing }) {
                       {...field}
                       value={selectedData ? selectedData.physicalAddress : null}
                       onChange={handleChange}
+                      multiline
+                      rows={4}
                     />
                   )}
                   control={control}
@@ -216,6 +218,8 @@ function Companies({ add, importing }) {
                       {...field}
                       value={selectedData ? selectedData.postalAddress : null}
                       onChange={handleChange}
+                      multiline
+                      rows={4}
                     />
                   )}
                   control={control}
@@ -256,6 +260,8 @@ function Companies({ add, importing }) {
                       {...field}
                       value={selectedData ? selectedData.notes : null}
                       onChange={handleChange}
+                      multiline
+                      rows={4}
                     />
                   )}
                   control={control}
