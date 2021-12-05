@@ -1,40 +1,31 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useForm } from "react-hook-form"
 
 import QuickbooksLogo from '../../assets/logos/quickbooks.svg';
 import MYOBLogo from '../../assets/logos/myob.svg';
 import XeroLogo from '../../assets/logos/xero.svg';
 
 import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 function AccountingIntegrations() {
 
-  const [selected, setSelected] = useState([]);
+  const { register, handleSubmit } = useForm();
+  const onSubmit = data => console.log(data);
+
+  const [integrationStep, setIntegrationStep] = useState(1);
+  const [selected, setSelected] = useState(null);
 
   const handleClick = (id) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
+    setSelected(id);
   };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const integrations = [
     {
@@ -77,11 +68,17 @@ function AccountingIntegrations() {
 
   function closeModal() {
     setIsOpen(false);
+    setIntegrationStep(1);
   }
 
   function openIntegrations() {
     console.log('Open integrations...');
     setIsOpen(true);
+  }
+
+  const selectIntegration = (id) => {
+    console.log(id);
+    setIntegrationStep(2);
   }
 
   return (
@@ -101,30 +98,88 @@ function AccountingIntegrations() {
             </p>
           </div>
           {
+            integrationStep === 1 ?
+            <>
+              { integrations.map(item => {
+                return (
+                  <Item>
+                    <Checkbox
+                      name={`integration[${item.id}]`}
+                      checked={selected === item.id ? true : false}
+                      onClick={() => handleClick(item.id)}
+                    />
+                    <img src={item.logo} alt={item.title} />
+                  </Item>
+                )
+              })}
+              <div className="modal-footer" style={{ marginTop: '20px' }}>
+                <div className="btn-group">
+                  <div className="btn-left">
+                    <button className="btn btn-light-gray btn-left btn-lg" onClick={closeModal}>Cancel</button>
+                  </div>
+                  <div className="btn-right">
+                    <button className="btn btn-gold btn-right btn-lg" onClick={(id) => selectIntegration(selected)}>Next</button>
+                  </div>
+                </div>
+              </div>
+            </>
+            :
             integrations.map(item => {
-              const isItemSelected = isSelected(item.id);
-              return (
-                <Item>
-                  <Checkbox
-                    name={`integration[${item.id}]`}
-                    checked={isItemSelected}
-                    onClick={() => handleClick(item.id)}
-                  />
-                  <img src={item.logo} alt={item.title} />
-                </Item>
-              )
+              if (item.id === selected) {
+                return (
+                  <>
+                    <Item large>
+                      <img src={item.logo} alt={item.title} />
+                    </Item>
+
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <Grid container spacing={1}> 
+
+                        <Grid item xs={12} sm={12}>
+                          <FormGroup>
+                            <FormControl variant="outlined">
+                              <TextField
+                                id="username"
+                                placeholder="Username"
+                                variant="outlined"
+                                style={{ background: '#fff' }}
+                                {...register("username")}
+                              />
+                            </FormControl>
+                          </FormGroup>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                          <FormGroup>
+                            <FormControl variant="outlined">
+                              <TextField
+                                type="password"
+                                id="password"
+                                placeholder="Password"
+                                variant="outlined"
+                                style={{ background: '#fff' }}
+                                {...register("password")}
+                              />
+                            </FormControl>
+                          </FormGroup>
+                        </Grid>
+
+                      </Grid>
+                      <div className="modal-footer" style={{ marginTop: '20px' }}>
+                        <div className="btn-group">
+                          <div className="btn-left">
+                            <button className="btn btn-light-gray btn-left btn-lg" onClick={closeModal}>Cancel</button>
+                          </div>
+                          <div className="btn-right">
+                            <button className="btn btn-gold btn-right btn-lg" type="submit">Connect</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </>
+                )
+              }
             })
           }
-        </div>
-        <div className="modal-footer" style={{ marginTop: '20px' }}>
-          <div className="btn-group">
-            <div className="btn-left">
-              <button className="btn btn-light-gray btn-left btn-lg">Cancel</button>
-            </div>
-            <div className="btn-right">
-              <button className="btn btn-gold btn-right btn-lg">Next</button>
-            </div>
-          </div>
         </div>
       </Modal>
 
@@ -173,7 +228,7 @@ const Integrations = styled.div`
 
 const Item = styled.div`
   background: rgba(60, 60, 60, 0.05);
-  padding: 20px 30px;
+  padding: ${props => props.large ? "45px 30px" : "20px 30px"};
   display: flex;
   justify-content: center;
   align-items: center;

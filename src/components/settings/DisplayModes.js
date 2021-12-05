@@ -10,25 +10,22 @@ import DarkHound from '../assets/img/dark-hound.svg'
 
 function DisplayModes() {
 
-  const [state, setState] = useState({
-    light: true,
-    dark: false 
-  });
-
-  const handleChange = (event) => {
-    setState({
-      light: false,
-      dark: false
-    })
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const [selectedState, setSelectedState] = useState('light');
+  const handleClick = (id) => {
+    setSelectedState(id);
   };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
       <FormGroup>
-        { state.type }
         <FormControlLabel
-          control={<Checkbox checked={state.light} onChange={handleChange} name="light" />}
+          control={
+            <Checkbox 
+              checked={selectedState === 'light' ? true : false} 
+              onClick={() => handleClick('light')} 
+              name="light" 
+            />
+          }
           label="Light"
         />
       </FormGroup>
@@ -40,7 +37,13 @@ function DisplayModes() {
 
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox checked={state.dark} onChange={handleChange} name="dark" />}
+          control={
+            <Checkbox 
+            checked={selectedState === 'dark' ? true : false} 
+              onClick={() => handleClick('dark')} 
+              name="dark" 
+            />
+          }
           label="Dark"
         />
       </FormGroup>
