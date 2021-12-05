@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Steps, Hints } from 'intro.js-react';
 import 'intro.js/introjs.css';
 import './Tooltips.css';
 
 function Tooltips() {
 
-  const [stepsEnabled, setStepsEnabled] = useState(true);
+  const [stepsEnabled, setStepsEnabled] = useState(false);
+
+  useEffect(() => {
+    setStepsEnabled(true);
+  }, [])
+
   const [initialStep, setInitialStep] = useState(0);
   const contacts = [
     {
@@ -61,9 +66,9 @@ function Tooltips() {
             initialStep={initialStep}
             onExit={onExit}
             options={{
-              nextLabel: 'test next',
-              prevLabel: 'test previous',
-              skipLabel: 'test skip'
+              nextLabel: 'next',
+              prevLabel: 'back',
+              skipLabel: 'skip'
             }}
           />
         :

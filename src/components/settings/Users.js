@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useForm } from "react-hook-form";
 
 import axios from 'axios';
 
@@ -11,7 +12,12 @@ import TableRow from '@material-ui/core/TableRow';
 
 import Checkbox from '@material-ui/core/Checkbox';
 
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 function Users() {
+
+  const { register, setValue, handleSubmit } = useForm();
 
   const [selected, setSelected] = React.useState([]);
 
@@ -65,20 +71,21 @@ function Users() {
       <Table aria-label="Users" style={{ width: '100%', marginTop: '8px' }}>
         <TableBody> 
           {data.map((row, index) => {
-            const isItemSelected = isSelected(row.id);
+            const isItemSelected = isSelected(row.user);
             const labelId = `enhanced-table-checkbox-${index}`;
             return (
               <TableRow 
                 hover
-                onClick={() => handleClick(row.id)}
+                onClick={() => handleClick(row.user)}
                 role="checkbox"
                 aria-checked={isItemSelected}
                 tabIndex={-1}
-                key={row.id}
+                key={row.user}
                 selected={isItemSelected}
               >
                 <TableCell padding="checkbox">
                   <Checkbox
+                    name={`user[${row.user}]`}
                     checked={isItemSelected}
                     inputProps={{ 'aria-labelledby': labelId }}
                   />

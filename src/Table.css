@@ -2,6 +2,17 @@
   max-height: 100% !important;
 }
 
+.MuiDataGrid-root {
+  position: relative;
+}
+
+.MuiDataGrid-root > div:nth-child(3) {
+  position: absolute;
+  bottom: calc(0px - 52px);
+  transform: translate(0, 75%);
+  width: 100%;
+}
+
 .MuiDataGrid-root .MuiDataGrid-row {
   margin-bottom: 7.5px;
   background-color: #fff;
@@ -46,6 +57,10 @@
 
 .MuiDataGrid-root {
   border: none !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within, .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+  outline: none !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-columnHeaderWrapper {
@@ -137,6 +152,7 @@
 
 .MuiDataGrid-root .MuiDataGrid-footerContainer {
   padding-top: 30px !important;
+  justify-content: center !important;
 }
 
 .MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
@@ -164,6 +180,7 @@
 
 .MuiDataGrid-selectedRowCount {
   opacity: 0 !important;
+  display: none !important;
 }
 
 .MuiTablePagination-root .MuiTablePagination-select {

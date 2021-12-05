@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import HelpIcon from '@material-ui/icons/Help';
@@ -41,6 +41,72 @@ function Header() {
   const [openQuickNav, setQuicknav] = useState(false)
 
   const [modalOpened, setModalOpened] = useState(false)
+
+  // Set active nav from page URL
+  useEffect(() => {
+    // Contacts
+    if (location.pathname === '/companies') {
+      setActiveNav('Contacts')
+      setActiveSubitem('Companies')
+    }
+    else if (location.pathname === '/people') {
+      setActiveNav('Contacts')
+      setActiveSubitem('People')
+    }
+
+    // To Dos
+    else if (location.pathname === '/to-do') {
+      setActiveNav('To Dos')
+    }
+
+    // Work
+    else if (location.pathname === '/projects') {
+      setActiveNav('Work')
+      setActiveSubitem('Projects')
+    }
+    else if (location.pathname === '/estimates') {
+      setActiveNav('Work')
+      setActiveSubitem('Estimates')
+    }
+    else if (location.pathname === '/purchases') {
+      setActiveNav('Work')
+      setActiveSubitem('Purchases')
+    }
+    else if (location.pathname === '/invoices') {
+      setActiveNav('Work')
+      setActiveSubitem('Invoices')
+    }
+    else if (location.pathname === '/reports') {
+      setActiveNav('Work')
+      setActiveSubitem('Reports')
+    }
+
+    // Settings
+    else if (location.pathname === '/profile') {
+      setActiveNav('Settings')
+      setActiveSubitem('Your profile')
+    }
+    else if (location.pathname === '/team') {
+      setActiveNav('Settings')
+      setActiveSubitem('Your team')
+    }
+    else if (location.pathname === '/settings') {
+      setActiveNav('Settings')
+      setActiveSubitem('Company settings')
+    }
+    else if (location.pathname === '/items-and-tasks') {
+      setActiveNav('Settings')
+      setActiveSubitem('Items & Tasks')
+    }
+    else if (location.pathname === '/expenses') {
+      setActiveNav('Settings')
+      setActiveSubitem('Expenses')
+    }
+    else if (location.pathname === '/subscription') {
+      setActiveNav('Settings')
+      setActiveSubitem('Subscription')
+    }
+  }, [])
 
   const navItems = [
     {

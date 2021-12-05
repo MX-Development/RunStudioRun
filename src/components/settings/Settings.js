@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import { MenuItem, Select } from '@material-ui/core'
 
 import PageTitle from '../layout/PageTitle'
@@ -16,174 +15,21 @@ import BlockContainer from './BlockContainer'
 import TimeBlocks from './TimeBlocks'
 import PaymentTerms from './PaymentTerms'
 
-import LineArrow from '../assets/icons/LineArrow.svg'
 import BusinessInformation from './BusinessInformation'
 import DisplayModes from './DisplayModes';
 
-import Modal from 'react-modal';
-import Labels from './Labels';
-Modal.setAppElement('#root');
+import Labels from './components/Labels';
+import TermsAndConditions from './components/TermsAndConditions';
+import AccountingIntegrations from './components/AccountingIntegrations';
 
 function Settings() {
-
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
-  const [openTab, setOpenTab] = useState(null);
-  const centerModal = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      width: '425px'
-    },
-  };
-
-  function afterOpenModal() {
-
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   const { watch } = useForm();
 
   console.log(watch("example")); // watch input value by passing the name of it
 
-  const estimateBody = (
-    <> 
-      <ModalHeader>
-        <Tab onClick={() => {
-              setOpenTab(1)
-              setModalContent(estimateBody)
-              setIsOpen(true)
-            }}
-            className={openTab === 2 ? 'active' : ''}
-          >
-          <h2>Estimates</h2>
-        </Tab>
-        <Tab onClick={() => {
-              setOpenTab(2)
-              setModalContent(invoiceBody)
-              setIsOpen(true)
-            }}
-            className={openTab === 1 ? 'active' : ''}
-          >
-          <h2>Invoices</h2>
-        </Tab>
-      </ModalHeader>
-      <ModalBody>
-        <h1>Estimate</h1>
-        <p style={{ margin: '10px 0' }}>
-          Custom Terms & Conditions
-        </p>
-      </ModalBody>
-
-      <FormGroup>
-        <FormControl variant="outlined">
-          <TextField
-            id="content"
-            placeholder="Paste text here..."
-            variant="outlined"
-            multiline
-            minRows={20}
-          />
-        </FormControl>
-      </FormGroup>
-    </>
-  )
-
-  const invoiceBody = (
-    <>
-      <ModalHeader>
-        <Tab onClick={() => {
-              setOpenTab(1)
-              setModalContent(estimateBody)
-              setIsOpen(true)
-            }}
-            className={openTab === 2 ? 'active' : ''}
-          >
-          <h2>Estimates</h2>
-        </Tab>
-        <Tab onClick={() => {
-              setOpenTab(2)
-              setModalContent(invoiceBody)
-              setIsOpen(true)
-            }}
-            className={openTab === 1 ? 'active' : ''}
-          >
-          <h2>Invoices</h2>
-        </Tab>
-      </ModalHeader>
-      <ModalBody>
-        <h1>Invoice</h1>
-        <p style={{ margin: '10px 0' }}>
-          Custom Terms & Conditions
-        </p>
-      </ModalBody>
-
-      <FormGroup> 
-        <FormControl variant="outlined">
-          <TextField
-            id="content"
-            placeholder="Paste text here..."
-            variant="outlined"
-            multiline
-            minRows={20}
-          />
-        </FormControl>
-      </FormGroup>
-    </>
-  )
-
-  const customFooterBody = (
-    <>
-      <h2 style={{ fontWeight: '400' }}>Footer text</h2>
-      <p style={{ margin: '10px 0' }}>
-        Custom footer info such as payment advice.
-      </p>
-
-      <FormGroup>
-        <FormControl variant="outlined">
-          <TextField
-            id="content"
-            placeholder="Paste text here..."
-            variant="outlined"
-            multiline
-            minRows={20}
-          />
-        </FormControl>
-      </FormGroup>
-    </>
-  )
-
   return ( 
     <>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={centerModal}
-        contentLabel="Example Modal"
-      >
-        <div style={{ background: '#fff', position: 'relative' }}>
-          { modalContent }
-          <div className="modal-footer">
-            <div className="btn-group">
-              <div className="btn-left">
-                <button className="btn btn-light-gray btn-left">Cancel</button>
-              </div>
-              <div className="btn-right">
-                <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
-                <button className="btn btn-gold btn-right">Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Modal>
 
       <PageTitle title={'Settings'} />
 
@@ -229,36 +75,11 @@ function Settings() {
         <StackedBlocks>
 
           <Block background={'#DDDBD7'}>
-            <Integrations>
-              <div className="top">
-                <p>Quickbooks Online Connected</p>
-              </div>
-              <div className="bottom">
-                <h3>ACCOUNTING INTEGRATIONS</h3>
-                <svg id="right-arrow-button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                  <circle id="Ellipse_412" data-name="Ellipse 412" cx="16" cy="16" r="16" fill="#fff"/>
-                  <path id="Path_10" data-name="Path 10" d="M8,0,6.545,1.455l5.506,5.506H0V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(8 8)" fill="#b1b0af"/>
-                </svg>
-              </div>
-            </Integrations>
+            <AccountingIntegrations />
           </Block>
 
           <Block title={'Terms & Conditions'}>
-            {/* TODO: Create buttons */}
-            <TermButton onClick={() => {
-              setModalContent(estimateBody)
-              setIsOpen(true)
-              setOpenTab(1)
-            }}>Estimates</TermButton>
-            <TermButton onClick={() => {
-              setModalContent(invoiceBody)
-              setIsOpen(true)
-              setOpenTab(2)
-            }}>Invoices</TermButton>
-            <TermButton onClick={() => {
-              setModalContent(customFooterBody)
-              setIsOpen(true)
-            }}>Custom Payment Advice</TermButton>
+            <TermsAndConditions />
           </Block>
 
           <Block title={'Job Numbers + Time Blocks'}>
@@ -280,79 +101,3 @@ function Settings() {
 }
 
 export default Settings
-
-const Integrations = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  > .top {
-    width: 30%;
-    margin-bottom: auto;
-  }
-
-  > .bottom {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    > svg {
-      margin-left: 10px;
-    }
-  }
-`
-
-const TermButton = styled.div`
-  padding: 15px;
-  border: 1px solid #DDDBD7;
-  border-radius: 2px;
-  position: relative;
-
-  :not(:last-child) {
-    margin-bottom: 7.5px;
-  }
-
-  :after {
-    content: url(${LineArrow});
-    position: absolute;
-    right: 0;
-    top: -3.5px;
-    height: 100%;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-`
-
-const ModalBody = styled.div`
-  padding-top: 50px;
-`
-
-const ModalHeader = styled.div`
-  display: flex;
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  width: calc(100% + 40px);
-`
-
-const Tab = styled.div`
-  border-radius: 2px 2px 0 0;
-  width: 50%;
-  padding: 10px 15px;
-    background: #999;
-
-  > h2 {
-    font-size: 24px;
-    font-weight: 400;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &.active {
-    background: #fff;
-  }
-`

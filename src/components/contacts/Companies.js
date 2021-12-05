@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import Picker from '../settings/components/ColorPicker'
+
 import axios from 'axios';
 
 import List from '../List'
@@ -334,6 +336,7 @@ function Companies({ add, importing }) {
         columns={columns} 
         data={data} 
         modalTitle={importing ? 'Import Companies' : 'Add/Edit Company'} 
+        modalAction={<Picker position={'bottom'} />}
         modalContent={importing ? modalImport : modalContent} 
         add={add ? true : false} 
         openModal={importing || id !== undefined ? true : false} 

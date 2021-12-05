@@ -10,7 +10,7 @@ import './List.css';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
+function List({ title, columns, data, modalTitle, modalContent, modalAction, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
 
   const centerModal = {
     content: {
@@ -98,7 +98,10 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
         contentLabel="Example Modal"
       >
         <ModalBody>
-          <h2>{ modalTitle }</h2>
+          <ModalHeading>
+            <h2>{ modalTitle }</h2>
+            { modalAction ? modalAction : null}
+          </ModalHeading>
           { modalContent }
         </ModalBody>
       </Modal>
@@ -107,6 +110,11 @@ function List({ title, columns, data, modalTitle, modalContent, size, projectID,
 }
 
 export default List
+
+const ModalHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
 const ModalBody = styled.div`
   position: relative;

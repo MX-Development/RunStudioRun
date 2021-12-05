@@ -59,6 +59,7 @@
 
 /* Material UI */
 .MuiOutlinedInput-input {
+  border-radius: 4px !important;
   border: 1px solid #DDDBD7 !important;
   padding: 7.5px !important;
   font-size: 14px !important;

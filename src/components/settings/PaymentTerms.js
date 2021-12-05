@@ -17,13 +17,13 @@ function PaymentTerms() {
   console.log(watch("example")); // watch input value by passing the name of it
 
   const [state, setState] = React.useState({
-    job_nr_req: true,
-    job_nr_auto: true,
-    job_nr_combo: false,
+    invoice_date_30: true,
+    end_of_month_30: true,
+    invoice_date_14: false,
 
-    time_grid: true,
-    min_15: false,
-    min_30: true
+    invoice_date_7: true,
+    cod: false,
+    other: true
   });
 
   const handleChange = (event) => {
@@ -39,15 +39,15 @@ function PaymentTerms() {
           <Grid item xs={12} sm={6}>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_req} onChange={handleChange} name="job_nr_req" />}
+                control={<Checkbox checked={state.invoice_date_30} onChange={handleChange} name="invoice_date_30" />}
                 label="30 days from invoice date"
               />
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_auto} onChange={handleChange} name="job_nr_auto" />}
+                control={<Checkbox checked={state.end_of_month_30} onChange={handleChange} name="end_of_month_30" />}
                 label="30 days from end of month"
               />
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_combo} onChange={handleChange} name="job_nr_combo" />}
+                control={<Checkbox checked={state.invoice_date_14} onChange={handleChange} name="invoice_date_14" />}
                 label="14 days from invoice date"
               />
             </FormGroup>
@@ -55,15 +55,15 @@ function PaymentTerms() {
           <Grid item xs={12} sm={6}>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_req} onChange={handleChange} name="job_nr_req" />}
+                control={<Checkbox checked={state.invoice_date_7} onChange={handleChange} name="invoice_date_7" />}
                 label="7 days from invoice date"
               />
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_auto} onChange={handleChange} name="job_nr_auto" />}
+                control={<Checkbox checked={state.cod} onChange={handleChange} name="cod" />}
                 label="COD / Payment prior to delivery"
               />
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_combo} onChange={handleChange} name="job_nr_combo" />}
+                control={<Checkbox checked={state.other} onChange={handleChange} name="other" />}
                 label="Other"
               />
             </FormGroup>
