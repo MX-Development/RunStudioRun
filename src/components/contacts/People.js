@@ -264,11 +264,11 @@ function People({ add, importing, syncing }) {
 
           <Divider />
 
-          <Grid item xs={12}>
-            <h3>Communication Preferences</h3>
+          <Grid item xs={12} style={{ paddingBottom: '0' }}>
+            <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Communication preferences</FormLabel>
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={4} style={{ paddingBottom: '0' }}>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -281,22 +281,6 @@ function People({ add, importing, syncing }) {
                 label="Select all"
               />
             </FormGroup>
-          </Grid>
-          <Grid item xs={8}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={commPreferences.marketing_emails}
-                    onChange={handleChange}
-                    name="marketing_emails"
-                  />
-                }
-                label="Consent to receiving marketing emails & collateral"
-              />
-            </FormGroup>
-          </Grid>
-          <Grid item xs={4}>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -310,7 +294,7 @@ function People({ add, importing, syncing }) {
               />
             </FormGroup>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={4} style={{ paddingBottom: '0' }}>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -323,36 +307,6 @@ function People({ add, importing, syncing }) {
                 label="Phone Call"
               />
             </FormGroup>
-          </Grid>
-          <Grid item xs={4}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={commPreferences.google_chat}
-                    onChange={handleChange}
-                    name="google_chat"
-                  />
-                }
-                label="Google Chat"
-              />
-            </FormGroup>
-          </Grid>
-          <Grid item xs={4}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={commPreferences.post}
-                    onChange={handleChange}
-                    name="post"
-                  />
-                }
-                label="Post"
-              />
-            </FormGroup>
-          </Grid>
-          <Grid item xs={4}>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -366,7 +320,19 @@ function People({ add, importing, syncing }) {
               />
             </FormGroup>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={4} style={{ paddingBottom: '0' }}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={commPreferences.google_chat}
+                    onChange={handleChange}
+                    name="google_chat"
+                  />
+                }
+                label="Google Chat"
+              />
+            </FormGroup>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -377,6 +343,34 @@ function People({ add, importing, syncing }) {
                   />
                 }
                 label="Skype / Messenger"
+              />
+            </FormGroup>
+          </Grid>
+          <Grid item xs={4} style={{ paddingTop: '0' }}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={commPreferences.post}
+                    onChange={handleChange}
+                    name="post"
+                  />
+                }
+                label="Post"
+              />
+            </FormGroup>
+          </Grid>
+          <Grid item xs={8} style={{ paddingTop: '0' }}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={commPreferences.marketing_emails}
+                    onChange={handleChange}
+                    name="marketing_emails"
+                  />
+                }
+                label="Consent to receiving marketing emails & collateral"
               />
             </FormGroup>
           </Grid>
@@ -394,6 +388,8 @@ function People({ add, importing, syncing }) {
                       placeholder="Important things to remember"
                       {...field}
                       value={selectedData ? selectedData.notes : null}
+                      multiline
+                      rows={4}
                     />
                   )}
                   control={control}
@@ -427,7 +423,7 @@ function People({ add, importing, syncing }) {
         title={'People'} 
         columns={columns} 
         data={data} 
-        modalTitle={importing ? 'Import People' : syncing ? 'Sync contacts' : 'Add/Edit People'} 
+        modalTitle={importing ? 'Import People' : syncing ? 'Sync contacts' : selectedData.fullName} 
         modalContent={importing ? modalImport : syncing ? modalSync : modalContent} 
         add={add ? true : false} 
         openModal={importing ? true : syncing ? true : false} 
@@ -443,4 +439,5 @@ const Divider = styled.div`
   height: 1px;
   background: var(--gold);
   margin-top: 10px;
+  margin-bottom: 10px;
 `

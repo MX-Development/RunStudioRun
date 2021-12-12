@@ -65,6 +65,22 @@
   font-size: 14px !important;
 }
 
+.MuiOutlinedInput-root [type="number"] {
+  text-align: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.MuiOutlinedInput-root [type="number"]::-webkit-outer-spin-button,
+.MuiOutlinedInput-root [type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.MuiOutlinedInput-root [type="number"] {
+  -moz-appearance: textfield;
+}
+
 .MuiInputBase-input:focus {
   transition: background 0.5s linear;
 }
@@ -176,4 +192,11 @@
 .MuiDialogActions-spacing > :not(:first-child) {
   background: #DDDBD7 !important;
   color: #3C3C3C !important;
+}
+
+/* Typography */
+form h5 {
+  margin-top: 16px;
+  font-weight: bold;
+  margin-bottom: 0;
 }

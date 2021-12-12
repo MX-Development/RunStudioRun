@@ -16,6 +16,10 @@ h2 {
   font-size: 28px;
 }
 
+.ReactModal__Content h2 {
+  font-weight: bold;
+}
+
 h3 {
   font-size: 22px;
 }

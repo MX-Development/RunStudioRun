@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import './Labels.css'
 
+import Grid from '@material-ui/core/Grid';
+
 function Labels() {
 
   const jobs = [
@@ -117,45 +119,53 @@ function Labels() {
   ]
 
   return (
-    <LabelContainer>
+    <>
+      <LabelContainer>
 
-      <Column>
-        <Heading>Jobs</Heading>
-        {
-          jobs.map(label => (
-            <Label style={{ background: label.color}}>{label.title}</Label>
-          ))
-        }
-      </Column>
+        <Column>
+          <Heading>Jobs</Heading>
+          {
+            jobs.map(label => (
+              <Label style={{ background: label.color}}>{label.title}</Label>
+            ))
+          }
+        </Column>
 
-      <Column>
-        <Heading>Invoices</Heading>
-        {
-          invoices.map(label => (
-            <Label style={{ background: label.color}}>{label.title}</Label>
-          ))
-        }
-      </Column>
+        <Column>
+          <Heading>Invoices</Heading>
+          {
+            invoices.map(label => (
+              <Label style={{ background: label.color}}>{label.title}</Label>
+            ))
+          }
+        </Column>
 
-      <Column>
-        <Heading>Projects</Heading>
-        {
-          projects.map(label => (
-            <Label style={{ background: label.color, color: '#3C3C3C' }}>{label.title}</Label>
-          ))
-        }
-      </Column>
+        <Column>
+          <Heading>Projects</Heading>
+          {
+            projects.map(label => (
+              <Label style={{ background: label.color, color: '#3C3C3C' }}>{label.title}</Label>
+            ))
+          }
+        </Column>
 
-      <Column>
-        <Heading>Contacts</Heading>
-        {
-          contacts.map(label => (
-            <Label style={{ background: label.color}}>{label.title}</Label>
-          ))
-        }
-      </Column>
+        <Column>
+          <Heading>Contacts</Heading>
+          {
+            contacts.map(label => (
+              <Label style={{ background: label.color}}>{label.title}</Label>
+            ))
+          }
+        </Column>
 
-    </LabelContainer>
+      </LabelContainer>
+
+      <Grid item xs={12}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button type="submit" className="btn btn-gold">Save</button>
+        </div>
+      </Grid>
+    </>
   )
 }
 
@@ -164,6 +174,7 @@ export default Labels
 const LabelContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 `
 
 const Column = styled.div`

@@ -114,6 +114,7 @@ export default List
 const ModalHeading = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 24px;
 `
 
 const ModalBody = styled.div`

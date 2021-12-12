@@ -16,8 +16,8 @@
 }
 
 .introjs-tooltip {
-  left: 0 !important;
-  transform: translate(-37.5%, 10px);
+  left: 50% !important;
+  transform: translate(-50%, 10px);
 }
 
 .introjs-skipbutton {

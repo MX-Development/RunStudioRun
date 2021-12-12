@@ -31,7 +31,7 @@ function Settings() {
   return ( 
     <>
 
-      <PageTitle title={'Settings'} />
+      <PageTitle title={'Company Settings'} />
 
       <BlockContainer>
         <StackedBlocks>

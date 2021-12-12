@@ -15,7 +15,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../config/firebase'
 
 import RunStudioRunLogo from './assets/img/logo-hound.svg'
-import JobSelect from './JobSelect';
+import JobSelect from './to-dos/components/JobSelect';
 import Tooltips from './Tooltips';
 
 import Checkbox from '@material-ui/core/Checkbox'

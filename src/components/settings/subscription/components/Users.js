@@ -94,7 +94,7 @@ function Users() {
                   {row.userName}
                 </TableCell>
                 <TableCell align="left" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>{row.status}</TableCell>
-                <TableCell align="right" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>{row.type} / Renews {row.renewDate}</TableCell>
+                <TableCell align="right" style={{ padding: '8px', paddingLeft: '0' }}>{row.type} / Renews {row.renewDate}</TableCell>
               </TableRow>
             )
           })}

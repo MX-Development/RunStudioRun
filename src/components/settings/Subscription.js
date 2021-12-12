@@ -9,15 +9,11 @@ import StackedBlocks from './StackedBlocks'
 import Block from './Block'
 import BlockContainer from './BlockContainer'
 
-import Avatar from '@material-ui/core/Avatar';
 import PaymentHistory from './PaymentHistory'
 
 import OutlineHound from '../assets/img/outline-hound.svg'
 import PaymentIcons from '../assets/img/payment-icons.svg'
-import Users from './Users'
-
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../../config/firebase'
+import Users from './subscription/components/Users'
 import StripeElement from './StripeElement'
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -26,21 +22,16 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
+import ProfileBadge from './components/ProfileBadge'
 
 function Subscription() {
 
   const [activeType, setActiveType] = useState(null);
 
-  const [user] = useAuthState(auth)
-
   const { register, handleSubmit, watch } = useForm();
   const onSubmit = data => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of 
-
-  const uploadAvatar = () => {
-    console.log('Upload an avatar...')
-  }
 
   return (
     <>
@@ -50,23 +41,7 @@ function Subscription() {
         <StackedBlocks>
 
           <Block style={{ minHeight: 'none' }}>
-            <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-              <MemberAvatar>
-                <AvatarContainer>
-                  <Avatar alt={ user?.displayName } src={ user?.photoURL }>
-                    { user?.displayName.charAt(0) } 
-                  </Avatar>
-                  <Overlay onClick={(e) => uploadAvatar()}>
-                    <span>Upload</span>
-                  </Overlay>
-                </AvatarContainer>
-                <MemberInfo>
-                  <h5>Full Name <Badge>Admin</Badge></h5>
-                  <p>Position</p> 
-                  <button style={{ marginTop: '10px', width: 'fit-content' }} className="btn gray-border">Change admin</button>
-                </MemberInfo>
-              </MemberAvatar>
-            </div>
+            <ProfileBadge />
           </Block>
 
           <Block>
@@ -241,61 +216,6 @@ function Subscription() {
 
 export default Subscription
 
-const MemberAvatar = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-
-  .MuiAvatar-root {
-    width: 100px !important;
-    height: 100px !important;
-  }
-`
-
-const AvatarContainer = styled.div`
-  position: relative;
-`
-
-const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  border-radius: 50%;
-  transition: opacity .25s ease-in-out;
-  z-index: 5;
-  color: #fff;
-
-  > span {
-    font-size: 14px;
-  }
-
-  :hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-  
-`
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-
-  > h5 {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-  }
-`
-
 const SubscriptionTypes = styled.div`
   display: flex;
   justify-content: space-between;
@@ -380,15 +300,4 @@ const BlockHeading = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
-
-const Badge = styled.div`
-  padding: 5px 15px;
-  background: #B1B0AF;
-  color: #fff;
-  font-size: 12px;
-  text-transform: uppercase;
-  text-align: center;
-  border-radius: 2px;
-  margin-left: 10px;
 `
