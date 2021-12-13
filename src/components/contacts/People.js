@@ -423,7 +423,7 @@ function People({ add, importing, syncing }) {
         title={'People'} 
         columns={columns} 
         data={data} 
-        modalTitle={importing ? 'Import People' : syncing ? 'Sync contacts' : selectedData.fullName} 
+        modalTitle={importing ? 'Import People' : syncing ? 'Sync contacts' : selectedData?.fullName} 
         modalContent={importing ? modalImport : syncing ? modalSync : modalContent} 
         add={add ? true : false} 
         openModal={importing ? true : syncing ? true : false} 
