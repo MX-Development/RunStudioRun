@@ -46,7 +46,7 @@ function BusinessInformation() {
                 <small>Image size 000 x 000 px (JPG/PNG)</small>
               </div>
               <div className="business-info">
-                <h3>Business Name</h3>
+                <h3 style={{ fontSize: '18px' }}>Business Name</h3>
                 <p>
                   Address Line<br/>
                   Second Address Line<br/>
@@ -83,7 +83,7 @@ function BusinessInformation() {
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <h3 style={{ fontWeight: 'bold' }}>App URL</h3>
+            <h3 style={{ fontWeight: 'bold', fontSize: '18px' }}>App URL</h3>
           </Grid>
           <Grid item xs={12}>
             <FormGroup>
@@ -98,7 +98,7 @@ function BusinessInformation() {
           </Grid>
 
           <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h3 style={{ fontWeight: 'bold' }}>Company Settings</h3>
+            <h3 style={{ fontWeight: 'bold', fontSize: '18px' }}>Company Settings</h3>
             <Picker />
           </Grid>
           <Grid item xs={6}>

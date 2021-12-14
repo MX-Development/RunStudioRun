@@ -20,7 +20,9 @@ function List({ title, columns, data, modalTitle, modalContent, modalAction, siz
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      maxWidth: size ? '850px' : '550px'
+      maxWidth: size ? '850px' : '550px',
+      maxHeight: '90vh',
+      overflowY: 'scroll'
     },
   };
 
