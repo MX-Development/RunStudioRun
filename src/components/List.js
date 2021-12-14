@@ -10,7 +10,7 @@ import './List.css';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function List({ title, columns, data, modalTitle, modalContent, modalAction, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
+function List({ title, buttons, columns, data, modalTitle, modalContent, modalAction, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
 
   const centerModal = {
     content: {
@@ -71,12 +71,29 @@ function List({ title, columns, data, modalTitle, modalContent, modalAction, siz
 
   function closeModal() {
     setIsOpen(false);
+    const selectedRow = document.querySelector('.Mui-selected');
+    selectedRow.classList.remove('Mui-selected');
   }
+
+  const ROW_HEIGHT = 52;
+  const ROW_MARGIN = 7.5;
+  const containerHeight = (data.length + 1) * (ROW_HEIGHT + ROW_MARGIN);
+
+  // const tableStyle = makeStyles(() =>
+  //   createStyles({
+  //     root: {
+  //       height: containerHeight,
+  //       "& .MuiDataGrid-renderingZone": {
+  //         maxHeight: `${containerHeight}px !important`,
+  //       },
+  //     },
+  //   })
+  // );
 
   return (
     <>
       <ListHeader>
-        <PageTitle title={title} />
+        <PageTitle title={title} buttons={buttons} />
         { headerButton ? <button className="btn">{ headerButton }</button> : null }
       </ListHeader>
       

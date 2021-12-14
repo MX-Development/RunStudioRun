@@ -8,6 +8,10 @@ import List from '../List'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
+import {
+  useHistory
+} from "react-router-dom"
+
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
@@ -26,6 +30,9 @@ const columns = [
 ]
 
 function People({ add, importing, syncing }) {
+
+  let history = useHistory()
+
   const [data, setData] = useState([])
   const [companies, setCompanies] = useState([])
 
@@ -421,6 +428,20 @@ function People({ add, importing, syncing }) {
     <>
       <List 
         title={'People'} 
+        buttons={[
+          {
+            "label": "Add",
+            "action": function() { history.push(`/people/add`) }
+          },
+          {
+            "label": "Export",
+            "action": function() { alert('Export...') }
+          },
+          {
+            "label": "Print",
+            "action": function() { alert('Print...') }
+          }
+        ]}
         columns={columns} 
         data={data} 
         modalTitle={importing ? 'Import People' : syncing ? 'Sync contacts' : selectedData ? selectedData.fullName : ''} 

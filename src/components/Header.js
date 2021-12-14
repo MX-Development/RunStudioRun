@@ -45,11 +45,11 @@ function Header() {
   // Set active nav from page URL
   useEffect(() => {
     // Contacts
-    if (location.pathname === '/companies') {
+    if (location.pathname.includes('/companies')) {
       setActiveNav('Contacts')
       setActiveSubitem('Companies')
     }
-    else if (location.pathname === '/people') {
+    else if (location.pathname.includes('/people')) {
       setActiveNav('Contacts')
       setActiveSubitem('People')
     }
@@ -60,19 +60,19 @@ function Header() {
     }
 
     // Work
-    else if (location.pathname === '/projects') {
+    else if (location.pathname.includes('/projects')) {
       setActiveNav('Work')
       setActiveSubitem('Projects')
     }
-    else if (location.pathname === '/estimates') {
+    else if (location.pathname.includes('/estimates')) {
       setActiveNav('Work')
       setActiveSubitem('Estimates')
     }
-    else if (location.pathname === '/purchases') {
+    else if (location.pathname.includes('/purchases')) {
       setActiveNav('Work')
       setActiveSubitem('Purchases')
     }
-    else if (location.pathname === '/invoices') {
+    else if (location.pathname.includes('/invoices')) {
       setActiveNav('Work')
       setActiveSubitem('Invoices')
     }
@@ -86,7 +86,7 @@ function Header() {
       setActiveNav('Settings')
       setActiveSubitem('Your profile')
     }
-    else if (location.pathname === '/team') {
+    else if (location.pathname.includes('/team')) {
       setActiveNav('Settings')
       setActiveSubitem('Your team')
     }
@@ -94,11 +94,11 @@ function Header() {
       setActiveNav('Settings')
       setActiveSubitem('Company settings')
     }
-    else if (location.pathname === '/items-and-tasks') {
+    else if (location.pathname.includes('/items-and-tasks')) {
       setActiveNav('Settings')
       setActiveSubitem('Items & Tasks')
     }
-    else if (location.pathname === '/expenses') {
+    else if (location.pathname.includes('/expenses')) {
       setActiveNav('Settings')
       setActiveSubitem('Expenses')
     }

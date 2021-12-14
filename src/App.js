@@ -6,6 +6,12 @@ import './Forms.css';
 import './Table.css';
 import './Typography.css';
 
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@material-ui/core/styles';
+
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './config/firebase'
 
@@ -58,6 +64,53 @@ import Verify from './components/account/Verify';
 import GettingStarted from './components/account/GettingStarted';
 import Trello from './components/to-dos/Trello';
 
+// Create theme
+let theme = createTheme({
+  palette: {
+    primary: { // works
+      main: '#165788',
+      contrastText: '#fff',
+    }
+  },
+  typography: {
+    fontWeightLight: 200,
+    fontWeightRegular: 400,
+    fontWeightBold: 700,
+    h1: {
+      fontSize: '42px',
+      lineHeight: '1'
+    },
+    h2: {
+      fontSize: '28px',
+      lineHeight: '1'
+    },
+    h3: {
+      fontSize: '24px',
+      lineHeight: '1'
+    },
+    h4: {
+      fontSize: '22px',
+      lineHeight: '1'
+    },
+    h5: {
+      fontSize: '18px',
+      lineHeight: '1'
+    },
+    body1: {
+      fontSize: '16px'
+    },
+    small: {
+      fontSize: '12px'
+    },
+    caps: {
+      fontSize: '9px',
+      textTransform: 'uppercase'
+    }
+  },
+});
+
+theme = responsiveFontSizes(theme);
+
 function App() {
 
   const location = useLocation();
@@ -81,7 +134,7 @@ function App() {
   }, [location]);
 
   const [user, loading] = useAuthState(auth)
-
+ 
   if (loading) {
     return (
       <LoadingScreen />
@@ -89,157 +142,159 @@ function App() {
   }
 
   return (
-    <div className="app" id="test-modal" style={{ backgroundImage: `url(${ bgImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
-      
-        {
-          !user ? (
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/sign-up" component={Onboarding} />
-              <Route exact path="/verify" component={Verify} />
-              <Route exact path="/getting-started" component={GettingStarted} />
-            </Switch>
-          ) : (
-            <>
-              <Header />
-              <AppBody>
-                <Switch>
-                  {/* <Route path="/draglist" exact>
-                    <DragList />
-                  </Route>
-                  <Route path="/draglist2" exact>
-                    <DragList2 />
-                  </Route>
+    <ThemeProvider theme={theme}>
+      <div className="app" id="test-modal" style={{ backgroundImage: `url(${ bgImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
+        
+          {
+            !user ? (
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/sign-up" component={Onboarding} />
+                <Route exact path="/verify" component={Verify} />
+                <Route exact path="/getting-started" component={GettingStarted} />
+              </Switch>
+            ) : (
+              <>
+                <Header />
+                <AppBody>
+                  <Switch>
+                    {/* <Route path="/draglist" exact>
+                      <DragList />
+                    </Route>
+                    <Route path="/draglist2" exact>
+                      <DragList2 />
+                    </Route>
 
-                  <Route path="/projects" exact>
-                    <Projects />
-                  </Route>
-                  <Route path="/form" exact>
-                    <Form />
-                  </Route>
-                  <Route path="/table" exact>
-                    <MaterialTable /> 
-                  </Route> */}
+                    <Route path="/projects" exact>
+                      <Projects />
+                    </Route>
+                    <Route path="/form" exact>
+                      <Form />
+                    </Route>
+                    <Route path="/table" exact>
+                      <MaterialTable /> 
+                    </Route> */}
 
-                  <Route exact path="/">
-                      <Redirect to="/to-do" />
-                  </Route>
+                    <Route exact path="/">
+                        <Redirect to="/to-do" />
+                    </Route>
 
-                  <Route exact path="/pdf" component={PDF} />
-                  <Route exact path="/components" component={Components} />
+                    <Route exact path="/pdf" component={PDF} />
+                    <Route exact path="/components" component={Components} />
 
-                  <Route exact path="/to-do" component={ToDos} /> 
-                  <Route exact path="/kanban" component={KanbanBoard} />
-                  <Route exact path="/trello" component={Trello} />
+                    <Route exact path="/to-do" component={ToDos} /> 
+                    <Route exact path="/kanban" component={KanbanBoard} />
+                    <Route exact path="/trello" component={Trello} />
 
-                  {/* Work */}
-                  <Route exact path="/projects" component={Projects} />
-                  <Route
-                    exact
-                    path='/projects/add'
-                    render={(props) => (
-                      <Projects {...props} add={true} />
-                    )}
-                  />
-                  <Route path="/projects/:id/:view?/:viewID?" component={Project} />
-                  <Route exact path="/estimates" component={Estimates} />
-                  <Route path="/estimates/:id" component={Estimates} />
-                  <Route exact path="/purchases" component={Purchases} />
-                  <Route
-                    exact
-                    path='/purchases/add'
-                    render={(props) => (
-                      <Purchases {...props} add={true} />
-                    )}
-                  />
-                  <Route path="/purchases/:id" component={Purchases} />
-                  <Route exact path="/invoices" component={Invoices} />
-                  <Route path="/invoices/:id" component={Invoices} />
-                  <Route exact path="/reports" component={Reports} />
+                    {/* Work */}
+                    <Route exact path="/projects" component={Projects} />
+                    <Route
+                      exact
+                      path='/projects/add'
+                      render={(props) => (
+                        <Projects {...props} add={true} />
+                      )}
+                    />
+                    <Route path="/projects/:id/:view?/:viewID?" component={Project} />
+                    <Route exact path="/estimates" component={Estimates} />
+                    <Route path="/estimates/:id" component={Estimates} />
+                    <Route exact path="/purchases" component={Purchases} />
+                    <Route
+                      exact
+                      path='/purchases/add'
+                      render={(props) => (
+                        <Purchases {...props} add={true} />
+                      )}
+                    />
+                    <Route path="/purchases/:id" component={Purchases} />
+                    <Route exact path="/invoices" component={Invoices} />
+                    <Route path="/invoices/:id" component={Invoices} />
+                    <Route exact path="/reports" component={Reports} />
 
-                  {/* Contacts */}
-                  <Route exact path="/companies" component={Companies} />
-                  <Route
-                    exact
-                    path='/companies/add'
-                    render={(props) => (
-                      <Companies {...props} add={true} />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path='/companies/import'
-                    render={(props) => (
-                      <Companies {...props} importing={true} />
-                    )}
-                  />
-                  <Route path="/companies/:id" component={Companies} />
-                  <Route exact path="/people" component={People} />
-                  <Route
-                    exact
-                    path='/people/add'
-                    render={(props) => (
-                      <People {...props} add={true} />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path='/people/import'
-                    render={(props) => (
-                      <People {...props} importing={true} />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path='/people/sync'
-                    render={(props) => (
-                      <People {...props} syncing={true} />
-                    )}
-                  />
-                  <Route path="/people/:id" component={People} />
+                    {/* Contacts */}
+                    <Route exact path="/companies" component={Companies} />
+                    <Route
+                      exact
+                      path='/companies/add'
+                      render={(props) => (
+                        <Companies {...props} add={true} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path='/companies/import'
+                      render={(props) => (
+                        <Companies {...props} importing={true} />
+                      )}
+                    />
+                    <Route path="/companies/:id" component={Companies} />
+                    <Route exact path="/people" component={People} />
+                    <Route
+                      exact
+                      path='/people/add'
+                      render={(props) => (
+                        <People {...props} add={true} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path='/people/import'
+                      render={(props) => (
+                        <People {...props} importing={true} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path='/people/sync'
+                      render={(props) => (
+                        <People {...props} syncing={true} />
+                      )}
+                    />
+                    <Route path="/people/:id" component={People} />
 
-                  {/* Settings */}
-                  <Route exact path="/profile" component={Profile} />
-                  <Route exact path="/team" component={YourTeam} />
-                  <Route
-                    exact
-                    path='/team/add'
-                    render={(props) => (
-                      <YourTeam {...props} add={true} />
-                    )}
-                  />
-                  <Route path="/team/:id" component={YourTeam} />
-                  <Route exact path="/items-and-tasks" component={ItemsTasks} />
-                  <Route
-                    exact
-                    path='/items-and-tasks/add'
-                    render={(props) => (
-                      <ItemsTasks {...props} add={true} />
-                    )}
-                  />
-                  <Route path="/items-and-tasks/:id" component={ItemsTasks} />
-                  <Route exact path="/expenses" component={Expenses} />
-                  <Route
-                    exact
-                    path='/expenses/add'
-                    render={(props) => (
-                      <Expenses {...props} add={true} />
-                    )}
-                  />
-                  <Route path="/expenses/:id" component={Expenses} />
-                  <Route path="/settings" exact>
-                    <Settings />
-                  </Route>
-                  <Route path="/subscription" exact>
-                    <Subscription /> 
-                  </Route>
+                    {/* Settings */}
+                    <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/team" component={YourTeam} />
+                    <Route
+                      exact
+                      path='/team/add'
+                      render={(props) => (
+                        <YourTeam {...props} add={true} />
+                      )}
+                    />
+                    <Route path="/team/:id" component={YourTeam} />
+                    <Route exact path="/items-and-tasks" component={ItemsTasks} />
+                    <Route
+                      exact
+                      path='/items-and-tasks/add'
+                      render={(props) => (
+                        <ItemsTasks {...props} add={true} />
+                      )}
+                    />
+                    <Route path="/items-and-tasks/:id" component={ItemsTasks} />
+                    <Route exact path="/expenses" component={Expenses} />
+                    <Route
+                      exact
+                      path='/expenses/add'
+                      render={(props) => (
+                        <Expenses {...props} add={true} />
+                      )}
+                    />
+                    <Route path="/expenses/:id" component={Expenses} />
+                    <Route path="/settings" exact>
+                      <Settings />
+                    </Route>
+                    <Route path="/subscription" exact>
+                      <Subscription /> 
+                    </Route>
 
-                </Switch>
-              </AppBody>
-            </>
-          )
-        }
-    </div>
+                  </Switch>
+                </AppBody>
+              </>
+            )
+          }
+      </div>
+    </ThemeProvider>
   );
 }
 

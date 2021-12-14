@@ -12,6 +12,10 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
+import Button from '@material-ui/core/Button';
+
+import Typography from '@material-ui/core/Typography';
+
 import BusinessLogo from '../assets/img/business-logo.svg'
 import { MenuItem, Select } from '@material-ui/core';
 
@@ -46,7 +50,7 @@ function BusinessInformation() {
                 <small>Image size 000 x 000 px (JPG/PNG)</small>
               </div>
               <div className="business-info">
-                <h3 style={{ fontSize: '18px' }}>Business Name</h3>
+                <Typography gutterBottom variant="h4" style={{ fontWeight: '600' }}>Business Name</Typography>
                 <p>
                   Address Line<br/>
                   Second Address Line<br/>
@@ -83,7 +87,7 @@ function BusinessInformation() {
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <h3 style={{ fontWeight: 'bold', fontSize: '18px' }}>App URL</h3>
+            <Typography variant="h4" style={{ fontWeight: '600' }}>App URL</Typography>
           </Grid>
           <Grid item xs={12}>
             <FormGroup>
@@ -98,7 +102,7 @@ function BusinessInformation() {
           </Grid>
 
           <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <h3 style={{ fontWeight: 'bold', fontSize: '18px' }}>Company Settings</h3>
+            <Typography variant="h4" style={{ fontWeight: '600' }}>Company Settings</Typography>
             <Picker />
           </Grid>
           <Grid item xs={6}>
@@ -250,6 +254,7 @@ function BusinessInformation() {
           </Grid>
           <Grid item xs={12}>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button color="primary">Test</Button>
               <button type="submit" className="btn btn-gold">Save</button>
             </div>
           </Grid>
@@ -286,11 +291,6 @@ const Header = styled.div`
   > .business-info {
     margin-left: 15px;
 
-    h3 {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
     p {
       font-size: 14px;
     }
@@ -301,9 +301,9 @@ const Header = styled.div`
     margin-right: 5px;
   }
 
-  .MuiTypography-root {
+  /* .MuiTypography-root {
     font-size: 10px !important;
-  }
+  } */
 `
 
 const UploadContainer = styled.div`

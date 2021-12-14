@@ -1,4 +1,5 @@
 .btn {
+  font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
   font-size: 12px;
   padding: 5px 7.5px;
@@ -22,6 +23,13 @@ a {
   background: var(--gold);
   color: #fff;
   cursor: pointer;
+}
+
+.btn.btn-grey {
+  color: #B1B0AF;
+  background: transparent;
+  border: 1px solid #B1B0AF;
+  text-transform: none;
 }
 
 .btn.btn-gold {

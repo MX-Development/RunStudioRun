@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Typography from '@material-ui/core/Typography';
+
 function Block({ background, title, children }) {
   return (
     <Container style={{ background: background ? background : '#fff' }}>
-      { title ? ( <h5>{ title }</h5> ) : null}
+      { title ? ( <Typography gutterBottom variant="h4" style={{ fontWeight: '600' }}>{ title }</Typography> ) : null}
       { children }
     </Container>
   )
@@ -20,9 +22,4 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  h5 {
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
 `
