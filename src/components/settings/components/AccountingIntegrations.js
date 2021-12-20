@@ -90,7 +90,7 @@ function AccountingIntegrations() {
         style={centerModal}
         contentLabel="Example Modal"
       >
-        <div style={{ background: '#fff', position: 'relative' }}>
+        <div style={{ background: 'var(--white)', position: 'relative' }}>
           <div style={{ marginBottom: '20px' }}>
             <h2 style={{ fontWeight: '400' }}>Integrate your Accounting Software</h2>
             <p style={{ margin: '10px 0' }}>
@@ -142,7 +142,7 @@ function AccountingIntegrations() {
                                 id="username"
                                 placeholder="Username"
                                 variant="outlined"
-                                style={{ background: '#fff' }}
+                                style={{ background: 'var(--white)' }}
                                 {...register("username")}
                               />
                             </FormControl>
@@ -156,7 +156,7 @@ function AccountingIntegrations() {
                                 id="password"
                                 placeholder="Password"
                                 variant="outlined"
-                                style={{ background: '#fff' }}
+                                style={{ background: 'var(--white)' }}
                                 {...register("password")}
                               />
                             </FormControl>

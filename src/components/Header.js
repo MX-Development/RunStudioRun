@@ -387,7 +387,7 @@ const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3C3C3C;
+  background-color: var(--text-gray);
   padding: 0 30px;
 `
 
@@ -431,7 +431,7 @@ const HeaderNav = styled.div`
 
   > a.active {
     background: #fff;
-    color: #3C3C3C;
+    color: var(--text-gray);
   }
 `
 
@@ -444,7 +444,7 @@ const HeaderActions = styled.div`
     cursor: pointer;
     width: 1.5em !important;
     height: 1.5em !important;
-    margin-right: 5px;
+    margin-right: 5px; 
     transition: background .25s ease-in-out, transform .25s ease-in-out;
   }
 
@@ -478,7 +478,7 @@ const Dropdown = styled.div`
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 0px 0px 4px 4px;
   padding: 15px;
-  background: #fff;
+  background: var(--white);
   min-width: 175px;
   z-index: 1;
   opacity: 0;
@@ -512,7 +512,7 @@ const HeaderSubnav = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #FFFFFF;
+  background-color: var(--white);
   box-shadow: 0px 1px 4px #0000001A;
   padding: 5px 0;
 `
@@ -538,12 +538,12 @@ const SubnavLinks = styled.div`
 
   > a:hover {
     background-color: var(--gold);
-    color: #fff;
+    color: var(--white);
   }
 
   > a.active {
     background-color: var(--gold);
-    color: #fff;
+    color: var(--white);
   }
 
   &.hidden {
@@ -586,7 +586,7 @@ const QuickNav = styled.div`
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 0px 0px 4px 4px;
   padding: 15px;
-  background: #fff;
+  background: var(--white);
   z-index: 5;
   opacity: 0;
   transition: opacity .35s ease-in-out;
@@ -612,7 +612,7 @@ const Column = styled.div`
   min-width: 150px;
 
   > h5 {
-    color: #E0BC77;
+    color: var(--gold);
     margin-bottom: 20px;
     font-weight: 500;
   }

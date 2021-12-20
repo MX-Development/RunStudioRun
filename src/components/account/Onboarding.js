@@ -81,7 +81,7 @@ function Onboarding() {
                         id="email"
                         placeholder="Enter email"
                         variant="outlined"
-                        style={{ background: '#fff' }}
+                        style={{ background: 'var(--white)' }}
                       />
                     </FormControl>
                   </FormGroup>
@@ -94,7 +94,7 @@ function Onboarding() {
                         id="password"
                         placeholder="Password"
                         variant="outlined"
-                        style={{ background: '#fff' }}
+                        style={{ background: 'var(--white)' }}
                       />
                     </FormControl>
                     <FormHelperText id="outlined-weight-helper-text">Password strength: strong</FormHelperText>
@@ -109,7 +109,7 @@ function Onboarding() {
                         id="first_name"
                         placeholder="First name"
                         variant="outlined"
-                        style={{ background: '#fff' }}
+                        style={{ background: 'var(--white)' }}
                       />
                     </FormControl>
                   </FormGroup>
@@ -122,7 +122,7 @@ function Onboarding() {
                         id="last_name"
                         placeholder="Last name"
                         variant="outlined"
-                        style={{ background: '#fff' }}
+                        style={{ background: 'var(--white)' }}
                       />
                     </FormControl>
                   </FormGroup>
@@ -135,7 +135,7 @@ function Onboarding() {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <p style={{ fontSize: '16px', textAlign: 'center', fontWeight: 'bold' }}>
-                    <span style={{ color: '#fff' }}>30 DAY FREE TRIAL</span> NO CREDIT CARD REQUIRED</p>
+                    <span style={{ color: 'var(--white)' }}>30 DAY FREE TRIAL</span> NO CREDIT CARD REQUIRED</p>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <p style={{ fontSize: '12px', textAlign: 'center', margin: '8px 0', width: '80%', display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop: '10px' }}>This site is protected by reCAPTACHA and the Google Privacy Policy and Terms of Service apply.</p>
@@ -168,7 +168,7 @@ const LoginModal = styled.div`
 
 const ModalHeader = styled.div`
   padding: 30px 15px;
-  background: #fff; 
+  background: var(--white); 
   border-radius: 2px 2px 0 0;
   position: relative;
 
@@ -203,7 +203,7 @@ const ModalBody = styled.div`
   > h3 {
     font-size: 28px;
     font-weight: 300;
-    color: #fff;
+    color: var(--white);
     margin-bottom: 20px;
   }
 
@@ -228,7 +228,7 @@ const ModalFooter = styled.div`
 
 const GoogleButton = styled.div`
   width: 100%;
-  background: #fff;
+  background: var(--white);
   display: flex;
   justify-content: center;
   padding: 7.5px;
@@ -255,7 +255,7 @@ const Divider = styled.div`
     content: '';
     width: 20px;
     height: 1px;
-    background: #fff;
+    background: var(--white);
     position: relative;
     top: 6px;
     margin-right: 10px;
@@ -265,7 +265,7 @@ const Divider = styled.div`
     content: '';
     width: 20px;
     height: 1px;
-    background: #fff;
+    background: var(--white);
     position: relative;
     top: 6px;
     margin-left: 10px;

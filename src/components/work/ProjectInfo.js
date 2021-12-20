@@ -103,7 +103,7 @@ const Button = styled.div`
 `
 
 const Info = styled.div`
-  background: #fff;
+  background: var(--white);
   padding: 10px;
   border-radius: 2px;
 `

@@ -50,7 +50,7 @@ export default Profile
 const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--white);
   padding: 20px;
   width: 66.6%;
 `

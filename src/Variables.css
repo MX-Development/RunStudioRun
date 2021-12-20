@@ -1,0 +1,19 @@
+body {
+  /* Variables */
+  --gold: #E0BC77;
+  --light-gray: #DDDBD7;
+  --text-gray: var(--text-gray);
+  --dark-gray: #B1B0AF;
+  --white: #FFFFFF;
+  transition: all .5s ease-in-out;
+}
+
+body.dark-mode {
+  /* Variables */
+  --gold: #E0BC77;
+  --light-gray: #1C1C1C;
+  --text-gray: #FFFFFF;
+  --dark-gray: #B1B0AF;
+  --white: #424242;
+  transition: all .5s ease-in-out;
+}

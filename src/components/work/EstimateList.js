@@ -297,7 +297,7 @@ const DragButton = styled.div`
   width: 50px;
   height: 50px;
   padding: 10px;
-  background: #fff;
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,7 +314,7 @@ const Info = styled.div`
   justify-content: center;
   flex: 0.5;
   padding: 0 15px;
-  background: #fff;
+  background: var(--white);
 `
 
 const Top = styled.div`
@@ -392,7 +392,7 @@ const Description = styled.div`
   flex: ${props => props.small ? "0.5525" : "0.5"};
   padding: 15px;
   font-size: 14px;
-  background: #fff;
+  background: var(--white);
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
 `
@@ -401,7 +401,7 @@ const ActionButton = styled.div`
   width: 50px;
   height: 50px;
   padding: 10px;
-  background: #fff;
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;

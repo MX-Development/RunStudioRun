@@ -50,7 +50,7 @@ function Subscription() {
             {/* <StripeElement /> */}
 
             <p style={{ marginBottom: '16px' }}>
-              <strong>You currently have <span style={{ color: '#E0BC77' }}>5 subscriptions</span> and to add more please select an option below, proceed to payment and then assign to your user.</strong>
+              <strong>You currently have <span style={{ color: 'var(--gold)' }}>5 subscriptions</span> and to add more please select an option below, proceed to payment and then assign to your user.</strong>
             </p>
 
             <SubscriptionTypes>
@@ -155,7 +155,7 @@ function Subscription() {
                     </FormGroup>
                   </Grid>
                   <Grid item xs={12} sm={4} style={{ display: 'flex' }} alignItems={"center"}>
-                    <a href="#" style={{ color: '#3C3C3C' }}>What’s this</a>
+                    <a href="#" style={{ color: 'var(--text-gray)' }}>What’s this</a>
                   </Grid>
 
                 </Grid>
@@ -167,7 +167,7 @@ function Subscription() {
                     color="primary"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                   />
-                  I agree with the <a href="#" style={{ color: '#3C3C3C' }}>Terms & Conditions</a>
+                  I agree with the <a href="#" style={{ color: 'var(--text-gray)' }}>Terms & Conditions</a>
                 </SmallText>
                 <img src={ PaymentIcons } alt="payment icons" style={{ width: '50%' }} />
               </div>
@@ -183,7 +183,7 @@ function Subscription() {
 
           <Block>
             <BlockHeading>
-              <h3 style={{ fontWeight: '400', marginBottom: '8px', color: '#E0BC77', fontWeight: 'bold', fontSize: '18px' }}>Payment History</h3>
+              <h3 style={{ fontWeight: '400', marginBottom: '8px', color: 'var(--gold)', fontWeight: 'bold', fontSize: '18px' }}>Payment History</h3>
               <button className="btn btn-light-gray">Export</button>
             </BlockHeading>
             <div style={{ maxHeight: '350px', overflowY: 'scroll', paddingRight: '15px' }}>
@@ -251,11 +251,11 @@ const Option = styled.div`
   }
 
   &.active {
-    border-color: #E0BC77;
+    border-color: var(--gold);
 
     > div {
-      background: #E0BC77; 
-      border-color: #E0BC77;
+      background: var(--gold); 
+      border-color: var(--gold);
       color: #fff;
     }
   }
@@ -279,7 +279,7 @@ const Total = styled.div`
   justify-content: space-between;
   padding: 8px 0;
   font-weight: bold;
-  border-bottom: 1px solid #E0BC77;
+  border-bottom: 1px solid var(--gold);
   margin-bottom: 8px;
 `
 

@@ -18,6 +18,7 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
       left: '50%',
       right: 'auto',
       bottom: 'auto',
+      background: 'var(--white)',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       maxWidth: size ? '850px' : '550px',

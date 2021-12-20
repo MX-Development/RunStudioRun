@@ -145,7 +145,7 @@ const Block = styled.div`
       left: 0;
       height: 100%;
       width: 60%;
-      background: #E0BC77;
+      background: var(--gold);
     }
   }
 `
@@ -156,7 +156,7 @@ const JobContainer = styled.div`
   justify-content: space-between;
   
   ${Block}:nth-child(1) {
-    background: #3C3C3C;
+    background: var(--text-gray);
 
     .bottom {
       background: rgba(255,255,255,0.4);
@@ -168,7 +168,7 @@ const JobContainer = styled.div`
 
     .info {
       span {
-        color: #3C3C3C;
+        color: var(--text-gray);
       }
     }
 
@@ -179,7 +179,7 @@ const JobContainer = styled.div`
   
   ${Block}:nth-child(3) { 
     .info {
-      background: #FFFFFF;
+      background: var(--white);
 
       > .sub {
         display: flex;

@@ -12,9 +12,9 @@
   margin-bottom: 7.5px;
   font-size: 16px;
 }
-
+ 
 .form-control {
-  border: 1px solid #DDDBD7;
+  border: 1px solid var(--light-gray);
   padding: 12.5px;
 }
 
@@ -60,7 +60,7 @@
 /* Material UI */
 .MuiOutlinedInput-input {
   border-radius: 4px !important;
-  border: 1px solid #DDDBD7 !important;
+  border: 1px solid var(--light-gray) !important;
   padding: 7.5px !important;
   font-size: 14px !important;
 }
@@ -129,12 +129,12 @@
 }
 
 .MuiOutlinedInput-notchedOutline {
-  border-color: #DDDBD7 !important;
+  border-color: var(--light-gray) !important;
 }
 
 .MuiFormHelperText-contained {
   margin: 0 !important;
-  color: #3c3c3c !important;
+  color: var(--text-gray) !important;
   font-weight: 500;
   margin-top: 5px !important;
 }
@@ -156,7 +156,7 @@
 }
 
 .MuiFormLabel-root {
-  color: #3C3C3C !important;
+  color: var(--text-gray) !important;
   font-weight: 400 !important;
 }
 
@@ -190,8 +190,8 @@
 }
 
 .MuiDialogActions-spacing > :not(:first-child) {
-  background: #DDDBD7 !important;
-  color: #3C3C3C !important;
+  background: var(--light-gray) !important;
+  color: var(--text-gray) !important;
 }
 
 /* Typography */

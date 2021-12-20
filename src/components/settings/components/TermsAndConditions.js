@@ -129,7 +129,7 @@ function TermsAndConditions() {
         style={centerModal}
         contentLabel="Example Modal"
       >
-        <div style={{ background: '#fff', position: 'relative' }}>
+        <div style={{ background: 'var(--white)', position: 'relative' }}>
           <ModalHeader>
             { openTab !== null ? 
               <>
@@ -240,6 +240,6 @@ const Tab = styled.div`
   }
 
   &.active {
-    background: #fff;
+    background: var(--white);
   }
 `

@@ -146,7 +146,7 @@ const SelectContainer = styled.div`
   display: none;
   flex-direction: column;
   max-height: 70vh; 
-  background: #fff;
+  background: var(--white);
   padding: 7.5px;
   position: absolute;
   left: -50%;

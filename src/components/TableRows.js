@@ -43,7 +43,7 @@ export default TableRows
 const Row = styled.div`
   display: flex;
   border-radius: 2px;
-  background: #fff;
+  background: var(--white);
   margin-bottom: 10px;
   padding: 10px 15px;
 ` 

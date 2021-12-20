@@ -54,7 +54,7 @@ function GettingStarted() {
                         id="email"
                         placeholder="your-company-name"
                         variant="outlined"
-                        style={{ background: '#fff' }}
+                        style={{ background: 'var(--white)' }}
                       />
                     </FormControl>
                     <span>.runstudiorun.net</span>
@@ -94,7 +94,7 @@ const LoginModal = styled.div`
 
 const ModalHeader = styled.div`
   padding: 45px 45px 0;
-  background: #fff; 
+  background: var(--white); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,7 +109,7 @@ const ModalHeader = styled.div`
 
 const ModalBody = styled.div`
   text-align: center;
-  background: #fff;
+  background: var(--white);
   padding: 45px 15px 15px;
   border-radius: 0 0 2px 2px;
 

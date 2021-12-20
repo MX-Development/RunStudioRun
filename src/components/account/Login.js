@@ -77,7 +77,7 @@ function Login() {
                       id="email"
                       placeholder="Enter email"
                       variant="outlined"
-                      style={{ background: '#fff' }}
+                      style={{ background: 'var(--white)' }}
                     />
                   </FormControl>
                 </FormGroup>
@@ -90,7 +90,7 @@ function Login() {
                       id="password"
                       placeholder="Password"
                       variant="outlined"
-                      style={{ background: '#fff' }}
+                      style={{ background: 'var(--white)' }}
                     />
                   </FormControl>
                 </FormGroup>
@@ -150,7 +150,7 @@ const LoginModal = styled.div`
 
 const ModalHeader = styled.div`
   padding: 30px 15px;
-  background: #fff; 
+  background: var(--white); 
   border-radius: 2px 2px 0 0;
   position: relative;
 
@@ -185,7 +185,7 @@ const ModalBody = styled.div`
   > h3 {
     font-size: 28px;
     font-weight: 300;
-    color: #fff;
+    color: var(--white);
     margin-bottom: 20px;
   }
 
@@ -210,7 +210,7 @@ const ModalFooter = styled.div`
 
 const GoogleButton = styled.div`
   width: 100%;
-  background: #fff;
+  background: var(--white);
   display: flex;
   justify-content: center;
   padding: 7.5px;
@@ -237,7 +237,7 @@ const Divider = styled.div`
     content: '';
     width: 20px;
     height: 1px;
-    background: #fff;
+    background: var(--white);
     position: relative;
     top: 6px;
     margin-right: 10px;
@@ -247,7 +247,7 @@ const Divider = styled.div`
     content: '';
     width: 20px;
     height: 1px;
-    background: #fff;
+    background: var(--white);
     position: relative;
     top: 6px;
     margin-left: 10px;

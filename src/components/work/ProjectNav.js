@@ -31,7 +31,7 @@ const TabContainer = styled.div`
     text-align: center;
     padding: 8px;
     font-size: 14px;
-    background: #fff;
+    background: var(--white);
     border-radius: 2px;
     font-weight: bold;
     color: #B1B0AF;

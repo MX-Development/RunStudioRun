@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 
-import Picker from './components/ColorPicker'
-import NewColorPicker from './components/NewColorPicker'
+import ColorPicker from './components/ColorPicker'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
@@ -104,7 +103,7 @@ function BusinessInformation() {
 
           <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography variant="h4" style={{ fontWeight: '600' }}>Company Settings</Typography>
-            <NewColorPicker />
+            <ColorPicker />
           </Grid>
           <Grid item xs={6}>
             <FormGroup>

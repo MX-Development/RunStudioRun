@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import ReactHelmet from 'react-helmet';
 import styled from 'styled-components'
 import './App.css';
 import './Buttons.css';
 import './Forms.css';
 import './Table.css';
 import './Typography.css';
+import './Variables.css';
 
 import {
   createTheme,
@@ -71,7 +73,7 @@ let theme = createTheme({
   palette: {
     primary: { // works
       main: '#165788',
-      contrastText: '#fff',
+      contrastText: 'var(--white)',
     }
   },
   typography: {

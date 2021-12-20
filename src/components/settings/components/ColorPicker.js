@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { HexColorPicker } from "react-colorful";
+import { SketchPicker } from 'react-color';
 
-function Picker({ position }) {
-
-  if (position) {
-    console.log(position);
-  }
+function ColorPicker({ position }) {
 
   const [color, setColor] = useState("#aabbcc");
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -15,28 +11,40 @@ function Picker({ position }) {
     setPickerOpen(!pickerOpen);
   }
 
+  function handleChange(color) {
+    setColor(color.hex);
+  }
+
   return (
-    <ColorPicker>
+    <ColorContainer>
       <PickerContainer className={pickerOpen ? 'active' : ''} pickerPosition={position}>
-        <HexColorPicker color={color} onChange={setColor} />
+        <SketchPicker color={color} onChange={handleChange} disableAlpha={true} />
       </PickerContainer>
-      <span>Your Colour</span>
+      <span className="label">Your Colour</span>
       <PickedColor color={color} onClick={openPicker} />
-    </ColorPicker>
+    </ColorContainer>
   )
 }
 
-export default Picker
+export default ColorPicker
 
-const ColorPicker = styled.div`
+const ColorContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
 
-  span {
+  span.label {
     margin-right: 8px;
     font-size: 12px;
     font-weight: 100;
+  }
+
+  > .color-button {
+    border-radius: 50%;
+    width: 30px;
+    min-width: auto;
+    height: 30px;
+    padding: 0;
   }
 `
 

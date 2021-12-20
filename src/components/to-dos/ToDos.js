@@ -141,7 +141,7 @@ function Calendar() {
                 getContentAnchorEl: null
               }}
               value={'Taso Katsionis'}
-              style={{ width: '100%', background: '#fff' }}
+              style={{ width: '100%', background: 'var(--white)' }}
               onChange={changeMember}
             >
               <MenuItem value="">
@@ -231,7 +231,7 @@ export default Calendar
 
 // const eventStopDragging = (info) => {
 //   info.el.querySelector('.event-container').classList.remove('dragged')
-//   info.el.querySelector('.event-container').style.background = '#fff'
+//   info.el.querySelector('.event-container').style.background = 'var(--white)'
 // }
 
 function renderEventContent(eventInfo) {
@@ -301,7 +301,7 @@ const AdditionalTime = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--white);
   border-radius: 50px;
   width: 30px;
   height: 30px;

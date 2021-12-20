@@ -1,5 +1,5 @@
 .fc-event-main {
-  background: #fff;
+  background: var(--white);
   color: #333 !important;
   border-left: 10px solid var(--gold);
   padding: 10px;
@@ -125,7 +125,7 @@ a.fc-event.eventRed {
 }
 
 .event-outer {
-  background: #fff;
+  background: var(--white);
   color: #333 !important;
   border-left: 10px solid var(--gold);
   padding: 10px;
@@ -152,7 +152,7 @@ a.fc-event.eventRed {
 }
 
 .event-container .event-header {
-  background: #fff;
+  background: var(--white);
   z-index: 5;
   position: relative;
   top: -1px;
@@ -183,7 +183,7 @@ a.fc-event.eventRed {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #fff;
+  background: var(--white);
   padding: 8px 8px 16px;
   width: 100%;
 }
@@ -226,7 +226,7 @@ a.fc-event.eventRed {
   left: 0;
   top: 0;
   height: 8px;
-  background: #3C3C3C;
+  background: var(--text-gray);
 }
 
 .event-buttons {
@@ -257,7 +257,7 @@ a.fc-event.eventRed {
 .table-heading .day {
   padding: 7.5px;
   border-radius: 4px 4px 0 0;
-  background: #fff;
+  background: var(--white);
   font-size: 12px;
   font-weight: 600;
 }

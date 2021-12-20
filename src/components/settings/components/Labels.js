@@ -144,7 +144,7 @@ function Labels() {
           <Heading>Projects</Heading>
           {
             projects.map((label, index) => (
-              <Label key={index} style={{ background: label.color, color: '#3C3C3C' }}>{label.title}</Label>
+              <Label key={index} style={{ background: label.color, color: 'var(--text-gray)' }}>{label.title}</Label>
             ))
           }
         </Column>

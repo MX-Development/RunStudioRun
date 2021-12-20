@@ -70,7 +70,7 @@ function Timeliner() {
       end_time: moment('2021-10-21'),
       itemProps: {
         style: {
-          background: '#E0BC77',
+          background: 'var(--gold)',
           border: 'none'
         }
       }
@@ -83,7 +83,7 @@ function Timeliner() {
       end_time: moment('2021-10-25'),
       itemProps: {
         style: {
-          background: '#E0BC77',
+          background: 'var(--gold)',
           border: 'none'
         }
       }
@@ -96,7 +96,7 @@ function Timeliner() {
       end_time: moment('2021-10-30'),
       itemProps: {
         style: {
-          background: '#E0BC77',
+          background: 'var(--gold)',
           border: 'none'
         }
       }

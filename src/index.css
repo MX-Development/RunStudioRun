@@ -12,14 +12,9 @@ html {
 }
 
 body {
-  /* Variables */
-  --gold: #E0BC77;
-  --light-gray: #DDDBD7;
-  --dark-gray: #B1B0AF;
-
   overflow-x: hidden;
   margin: 0;
-  color: #3C3C3C;
+  color: var(--text-gray);
   background: #F4F2F0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

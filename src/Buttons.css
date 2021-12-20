@@ -39,7 +39,7 @@ a {
 }
 
 .btn.btn-gold.gray-text {
-  color: #3C3C3C;
+  color: var(--text-gray);
 }
 
 .btn.btn-light-gray {
@@ -49,7 +49,7 @@ a {
 
 .btn.btn-dark-gray {
   background: #DDDBD7;
-  color: #3C3C3C;
+  color: var(--text-gray);
 }
 
 .btn-group {

@@ -14,7 +14,7 @@
   <g id="Group_2720" data-name="Group 2720" transform="translate(-10928 -1184)">
     <g id="Group_2045" data-name="Group 2045">
       <g transform="matrix(1, 0, 0, 1, 10928, 1184)" filter="url(#Ellipse_428)">
-        <circle id="Ellipse_428-2" data-name="Ellipse 428" cx="160" cy="160" r="160" transform="translate(12 12)" fill="#3c3c3c"/>
+        <circle id="Ellipse_428-2" data-name="Ellipse 428" cx="160" cy="160" r="160" transform="translate(12 12)" fill="var(--text-gray)"/>
       </g>
       <g id="Mask_Group_11" data-name="Mask Group 11" transform="translate(32 12)" clip-path="url(#clip-path)">
         <g id="Group_2719" data-name="Group 2719" transform="translate(10973 1239.445)">

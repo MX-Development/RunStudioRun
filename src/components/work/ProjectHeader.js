@@ -66,7 +66,7 @@ function ProjectHeader({ projectID }) {
                 <FormControl variant="outlined">
                   <Select
                     value={'Select project'}
-                    style={{ width: '100%', background: '#fff' }}
+                    style={{ width: '100%', background: 'var(--white)' }}
                     onChange={changeProject}
                     MenuProps={{
                       anchorOrigin: {
@@ -143,7 +143,7 @@ function ProjectHeader({ projectID }) {
                       getContentAnchorEl: null
                     }}
                     value={'Who requested the work?'}
-                    style={{ width: '100%', background: '#fff' }}
+                    style={{ width: '100%', background: 'var(--white)' }}
                   >
                     <MenuItem value="Who requested the work?">
                       <em>Who requested the work?</em>
@@ -165,7 +165,7 @@ function ProjectHeader({ projectID }) {
                         {...field}
                         value={selectedData ? selectedData.order_nr : null}
                         onChange={handleChange}
-                        style={{ background: '#fff' }}
+                        style={{ background: 'var(--white)' }}
                       />
                     )}
                     control={control}
@@ -197,7 +197,7 @@ function ProjectHeader({ projectID }) {
                         onChange={handleChange}
                         multiline
                         rows={4}
-                        style={{ background: '#fff' }}
+                        style={{ background: 'var(--white)' }}
                       />
                     )}
                     control={control}
@@ -229,7 +229,7 @@ export default ProjectHeader
 const ProjectMenu = styled.div`
   display: none;
   padding: 5px;
-  background: #fff;
+  background: var(--white);
   box-shadow: 0 0 8px rgb(0 0 0 / 25%);
   position: absolute;
   right: 0;

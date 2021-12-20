@@ -63,7 +63,7 @@ const Container = styled.div`
   top: 145px;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fff;
+  background: var(--white);
   padding: 15px;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
   border-radius: 4px;
