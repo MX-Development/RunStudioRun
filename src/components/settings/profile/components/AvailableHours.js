@@ -8,6 +8,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
+import Typography from '@material-ui/core/Typography';
+
 function AvailableHours() {
 
   const { handleSubmit, control } = useForm();
@@ -68,7 +70,7 @@ function AvailableHours() {
   return (
     <>
       <Grid item xs={12} sm={12}>
-        <h5>Hours I’m available to work</h5>
+        <Typography variant="h4" style={{ fontWeight: '600' }}>Hours I’m available to work</Typography>
       </Grid>
 
       {

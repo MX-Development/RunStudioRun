@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 function Block({ background, title, children }) {
   return (
     <Container style={{ background: background ? background : '#fff' }}>
-      { title ? ( <Typography gutterBottom variant="h4" style={{ fontWeight: '600' }}>{ title }</Typography> ) : null}
+      { title ? ( <Typography gutterBottom variant="h4" style={{ fontWeight: '600', marginTop: '0' }}>{ title }</Typography> ) : null}
       { children }
     </Container>
   )

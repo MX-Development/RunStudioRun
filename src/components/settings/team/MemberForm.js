@@ -13,6 +13,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
+import Typography from '@material-ui/core/Typography';
+
 import {
   Link
 } from "react-router-dom"
@@ -89,7 +91,7 @@ function MemberForm({ memberAccess, addMember }) {
           <Grid container spacing={2}>  
 
             <Grid item xs={12} sm={12}> 
-              <h5>Your Profile</h5>
+              <Typography variant="h4" style={{ fontWeight: '600' }}>Your Profile</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
               <FormGroup>
@@ -173,7 +175,7 @@ function MemberForm({ memberAccess, addMember }) {
           <Grid container spacing={2}>  
 
             <Grid item xs={12} sm={12}>
-              <h5>Change Password</h5>
+              <Typography variant="h4" style={{ fontWeight: '600' }}>Change Password</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
               <FormGroup>
@@ -224,7 +226,7 @@ function MemberForm({ memberAccess, addMember }) {
 
               <>
                 <Grid item xs={12} sm={12}>
-                  <h5>Team Member Access</h5>
+                  <Typography variant="h4" style={{ fontWeight: '600' }}>Team Member Access</Typography>
                 </Grid>
                 {
                   accessOptions ?

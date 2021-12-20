@@ -8,27 +8,17 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LightHound from '../../assets/img/light-hound.svg'
 import DarkHound from '../../assets/img/dark-hound.svg'
 
+import { useSelector, useDispatch } from "react-redux";
+import { setMode } from "../../../features/items/modeSlice";
+
 function DisplayModes() {
 
-  const [darkMode, setDarkMode] = useState(false);
-  const [modeUpdated, setModeUpdated] = useState(false);
-
-  useEffect(() => {
-    let storedMode = localStorage.getItem('darkMode');
-    console.log(storedMode);
-
-    storedMode ?
-      setDarkMode(!storedMode)
-    :
-      setDarkMode(false)
-  }, [modeUpdated]);
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.items.darkMode);
 
   const handleChange = event => {
-    setDarkMode(!darkMode)
-    localStorage.setItem('darkMode', !darkMode);
-
-    setModeUpdated(true);
-    setModeUpdated(false);
+    console.log('Changing mode');
+    dispatch(setMode(!mode))
   }
 
   return (
@@ -37,7 +27,7 @@ function DisplayModes() {
         <FormControlLabel
           control={
             <Checkbox 
-              checked={darkMode ? false : true} 
+              checked={mode ? false : true} 
               onClick={handleChange} 
               name="light" 
             />
@@ -55,7 +45,7 @@ function DisplayModes() {
         <FormControlLabel
           control={
             <Checkbox 
-              checked={darkMode ? true : false} 
+              checked={mode ? true : false} 
               onClick={handleChange} 
               name="dark" 
             />

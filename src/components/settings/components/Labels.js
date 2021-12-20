@@ -125,8 +125,8 @@ function Labels() {
         <Column>
           <Heading>Jobs</Heading>
           {
-            jobs.map(label => (
-              <Label style={{ background: label.color}}>{label.title}</Label>
+            jobs.map((label, index) => (
+              <Label key={index} style={{ background: label.color}}>{label.title}</Label>
             ))
           }
         </Column>
@@ -134,8 +134,8 @@ function Labels() {
         <Column>
           <Heading>Invoices</Heading>
           {
-            invoices.map(label => (
-              <Label style={{ background: label.color}}>{label.title}</Label>
+            invoices.map((label, index) => (
+              <Label key={index} style={{ background: label.color}}>{label.title}</Label>
             ))
           }
         </Column>
@@ -143,8 +143,8 @@ function Labels() {
         <Column>
           <Heading>Projects</Heading>
           {
-            projects.map(label => (
-              <Label style={{ background: label.color, color: '#3C3C3C' }}>{label.title}</Label>
+            projects.map((label, index) => (
+              <Label key={index} style={{ background: label.color, color: '#3C3C3C' }}>{label.title}</Label>
             ))
           }
         </Column>
@@ -152,8 +152,8 @@ function Labels() {
         <Column>
           <Heading>Contacts</Heading>
           {
-            contacts.map(label => (
-              <Label style={{ background: label.color}}>{label.title}</Label>
+            contacts.map((label, index) => (
+              <Label key={index} style={{ background: label.color}}>{label.title}</Label>
             ))
           }
         </Column>

@@ -12,6 +12,8 @@ import {
   ThemeProvider,
 } from '@material-ui/core/styles';
 
+import { useSelector } from "react-redux";
+
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './config/firebase'
 
@@ -90,7 +92,8 @@ let theme = createTheme({
     },
     h4: {
       fontSize: '22px',
-      lineHeight: '1'
+      lineHeight: '1',
+      marginTop: '16px'
     },
     h5: {
       fontSize: '18px',
@@ -112,6 +115,14 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 function App() {
+  const mode = useSelector((state) => state.items.darkMode);
+
+  useEffect(() => {
+    mode ? 
+      document.body.classList.add('dark-mode')
+    :
+      document.body.classList.remove('dark-mode')
+  },[mode])
 
   const location = useLocation();
   const [bgImage, setBgImage] = useState('')
@@ -143,7 +154,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="app" id="test-modal" style={{ backgroundImage: `url(${ bgImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
+      <div className={`app`} id="test-modal" style={{ backgroundImage: `url(${ bgImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
         
           {
             !user ? (
