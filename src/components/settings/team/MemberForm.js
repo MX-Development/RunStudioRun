@@ -17,7 +17,55 @@ import {
   Link
 } from "react-router-dom"
 
-function MemberForm() {
+function MemberForm({ memberAccess, addMember }) {
+
+  const [accessOptions, setAccessOptions] = useState([
+    {
+      "id": 1,
+      "title": "Dashboard",
+      "checked": true
+    },
+    {
+      "id": 2,
+      "title": "View Jobs",
+      "checked": true
+    },
+    {
+      "id": 3,
+      "title": "View Estimates",
+      "checked": true
+    },
+    {
+      "id": 4,
+      "title": "View Purchases",
+      "checked": false
+    },
+    {
+      "id": 5,
+      "title": "View Invoices",
+      "checked": false
+    },
+    {
+      "id": 6,
+      "title": "View Contacts",
+      "checked": true
+    },
+    {
+      "id": 7,
+      "title": "View Reports",
+      "checked": true
+    },
+    {
+      "id": 8,
+      "title": "View Contacts",
+      "checked": false
+    },
+    {
+      "id": 9,
+      "title": "Edit Your Profile",
+      "checked": false
+    }
+  ])
 
   const { handleSubmit, control } = useForm();
 
@@ -25,22 +73,11 @@ function MemberForm() {
     console.log(data)
   }
 
-  const uploadAvatar = () => {
-    console.log('Upload an avatar...')
-  }
-
-  const [selectedData, setSelectedData] = useState(null)
-
   const handleChange = event => {
-    setSelectedData({
-      ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
-    });
+    var items = accessOptions;
+    items[event.target.id - 1].checked = !items[event.target.id - 1].checked;
+    setAccessOptions([...items]);
   }
-
-  const [state, setState] = useState({
-    all: true
-  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -176,141 +213,44 @@ function MemberForm() {
               </FormGroup>
             </Grid>
 
-            <Grid item xs={12} sm={12}>
-              <h5>Team Member Access</h5>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="Dashboard"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="View Jobs"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="View Estimates"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="View Purchases"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="View Invoices"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="View Contacts"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="View Reports"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="View Contacts"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid item xs={4} style={{ padding: '2px' }}>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.all}
-                      onChange={handleChange}
-                      name="all"
-                    />
-                  }
-                  label="Edit Your Profile"
-                />
-              </FormGroup>
-            </Grid>
-
             <Grid item xs={12}>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <button type="submit" className="btn btn-gray">Update</button>
               </div>
             </Grid>
+
+          {
+            memberAccess ?
+
+              <>
+                <Grid item xs={12} sm={12}>
+                  <h5>Team Member Access</h5>
+                </Grid>
+                {
+                  accessOptions ?
+                  accessOptions.map((item, index) => (
+                    <Grid item xs={4} style={{ padding: '2px' }} key={index}>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={item.checked}
+                              onChange={handleChange}
+                              id={item.id}
+                              name={`item[${index}]`}
+                            />
+                          }
+                          label={item.title}
+                        />
+                      </FormGroup>
+                    </Grid>
+                  ))
+                  : null
+                }
+              </>
+
+            : null
+          }
 
           </Grid>
         </Grid>
@@ -319,7 +259,9 @@ function MemberForm() {
       </FormControl>
 
       <ProfileFooter>
+        { addMember ?
         <Link to="/team/add" className="btn btn-light-gray" style={{ marginRight: '12px' }}>Add team member</Link>
+        : null }
         <button type="submit" className="btn btn-gold">Save profile</button>
       </ProfileFooter>
 

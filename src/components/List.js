@@ -72,7 +72,7 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
   function closeModal() {
     setIsOpen(false);
     const selectedRow = document.querySelector('.Mui-selected');
-    selectedRow.classList.remove('Mui-selected');
+    if (selectedRow) selectedRow.classList.remove('Mui-selected');
   }
 
   const ROW_HEIGHT = 52;

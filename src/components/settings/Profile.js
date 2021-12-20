@@ -35,7 +35,10 @@ function Profile() {
       <ProfileContainer>   
 
         <ProfileBadge />
-        <MemberForm />
+        <MemberForm 
+          addMember={true}
+          memberAccess={false} 
+        />
 
       </ProfileContainer>
     </>
@@ -43,55 +46,6 @@ function Profile() {
 }
 
 export default Profile
-
-const MemberAvatar = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-bottom: 30px;
-`
-
-const AvatarContainer = styled.div`
-  position: relative;
-`
-
-const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  border-radius: 50%;
-  transition: opacity .25s ease-in-out;
-  z-index: 5;
-  color: #fff;
-
-  > span {
-    font-size: 14px;
-  }
-
-  :hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-  
-`
-
-const MemberInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-
-  > h5 {
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-`
 
 const ProfileContainer = styled.div`
   display: flex;

@@ -9,6 +9,7 @@
   border-radius: 2px;
   font-weight: bold;
   transition: background .25s ease-in, color .25s ease-in;
+  min-width: 85px;
 }
 
 .btn.btn-lg {

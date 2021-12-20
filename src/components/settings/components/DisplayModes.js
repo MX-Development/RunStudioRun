@@ -1,19 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import LightHound from '../assets/img/light-hound.svg'
-import DarkHound from '../assets/img/dark-hound.svg'
+import LightHound from '../../assets/img/light-hound.svg'
+import DarkHound from '../../assets/img/dark-hound.svg'
 
 function DisplayModes() {
 
-  const [selectedState, setSelectedState] = useState('light');
-  const handleClick = (id) => {
-    setSelectedState(id);
-  };
+  const [darkMode, setDarkMode] = useState(false);
+  const [modeUpdated, setModeUpdated] = useState(false);
+
+  useEffect(() => {
+    let storedMode = localStorage.getItem('darkMode');
+    console.log(storedMode);
+
+    storedMode ?
+      setDarkMode(!storedMode)
+    :
+      setDarkMode(false)
+  }, [modeUpdated]);
+
+  const handleChange = event => {
+    setDarkMode(!darkMode)
+    localStorage.setItem('darkMode', !darkMode);
+
+    setModeUpdated(true);
+    setModeUpdated(false);
+  }
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
@@ -21,8 +37,8 @@ function DisplayModes() {
         <FormControlLabel
           control={
             <Checkbox 
-              checked={selectedState === 'light' ? true : false} 
-              onClick={() => handleClick('light')} 
+              checked={darkMode ? false : true} 
+              onClick={handleChange} 
               name="light" 
             />
           }
@@ -39,8 +55,8 @@ function DisplayModes() {
         <FormControlLabel
           control={
             <Checkbox 
-            checked={selectedState === 'dark' ? true : false} 
-              onClick={() => handleClick('dark')} 
+              checked={darkMode ? true : false} 
+              onClick={handleChange} 
               name="dark" 
             />
           }

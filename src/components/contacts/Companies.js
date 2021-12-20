@@ -9,6 +9,10 @@ import List from '../List'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
+import {
+  useHistory
+} from "react-router-dom"
+
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -25,6 +29,8 @@ const columns = [
 ]
 
 function Companies({ add, importing }) {
+
+  let history = useHistory()
 
   const [data, setData] = useState([])
 
@@ -332,7 +338,21 @@ function Companies({ add, importing }) {
   return (
     <>
       <List 
-        title={'Companies'} 
+        title={'Companies'}  
+        buttons={[
+          {
+            "label": "Add",
+            "action": function() { history.push(`/companies/add`) }
+          },
+          {
+            "label": "Export",
+            "action": function() { alert('Export...') }
+          },
+          {
+            "label": "Print",
+            "action": function() { alert('Print...') }
+          }
+        ]}
         columns={columns} 
         data={data} 
         modalTitle={importing ? 'Import Companies' : 'Add/Edit Company'} 

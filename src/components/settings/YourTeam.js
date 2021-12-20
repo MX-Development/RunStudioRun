@@ -89,13 +89,14 @@ function YourTeam({ add }) {
     console.log('Upload an avatar...')
   }
 
-  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']
-
   const modalContent = (         
     <>
       <ProfileBadge teamMember={selectedData} />
 
-      <MemberForm />
+      <MemberForm 
+        addMember={false}
+        memberAccess={true} 
+      />
     </>
   )
 

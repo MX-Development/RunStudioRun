@@ -179,12 +179,12 @@ const LabelContainer = styled.div`
 
 const Column = styled.div`
   width: 22.5%;
-  max-height: 250px;
-  overflow-y: scroll;
+  /* max-height: 250px;
+  overflow-y: scroll; */
   padding-right: 1%;
 
   /* Scrollbar */
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     width: 3px;
   }
 
@@ -196,7 +196,7 @@ const Column = styled.div`
   ::-webkit-scrollbar-thumb {
     background-color: #DDDBD7;
     border-radius: 100px;
-  }
+  } */
 `
 
 const Heading = styled.div`

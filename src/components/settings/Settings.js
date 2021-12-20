@@ -16,7 +16,7 @@ import TimeBlocks from './TimeBlocks'
 import PaymentTerms from './PaymentTerms'
 
 import BusinessInformation from './BusinessInformation'
-import DisplayModes from './DisplayModes';
+import DisplayModes from './components/DisplayModes';
 
 import Labels from './components/Labels';
 import TermsAndConditions from './components/TermsAndConditions';

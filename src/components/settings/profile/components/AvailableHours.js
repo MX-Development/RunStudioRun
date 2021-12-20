@@ -12,15 +12,58 @@ function AvailableHours() {
 
   const { handleSubmit, control } = useForm();
 
-  const [state, setState] = useState({
-    job_nr_req: true
-  });
+  const [days, setDays] = useState([
+    {
+      "id": 1,
+      "title": "Mon",
+      "amount": 10,
+      "checked": true
+    },
+    {
+      "id": 2,
+      "title": "Tue",
+      "amount": 0,
+      "checked": false
+    },
+    {
+      "id": 3,
+      "title": "Wed",
+      "amount": 5,
+      "checked": true
+    },
+    {
+      "id": 4,
+      "title": "Thu",
+      "amount": 4,
+      "checked": true
+    },
+    {
+      "id": 5,
+      "title": "Fri",
+      "amount": 0,
+      "checked": false
+    },
+    {
+      "id": 6,
+      "title": "Sat",
+      "amount": 0,
+      "checked": false
+    }
+  ])
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+  const handleChange = event => {
 
-  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+    if (!event.target.name.includes('item')) {
+      var items = days;
+      items[event.target.name - 1].amount = event.target.value;
+      setDays([...items]);
+    } else {
+      var items = days;
+      items[event.target.id - 1].checked = !items[event.target.id - 1].checked;
+      setDays([...items]);
+    }
+
+  }
 
   return (
     <>
@@ -28,36 +71,44 @@ function AvailableHours() {
         <h5>Hours I’m available to work</h5>
       </Grid>
 
-      { days.map((day, index) => (
-        <Grid item sm={2} key={index}>
-          <>
-          <FormGroup>
-            { state.type }
-            <FormControlLabel
-              control={<Checkbox checked={true} name={`day_${day}`} />}
-              label={day[0].toUpperCase() + day.substring(1)}
-              labelPlacement="top"
-              style={{ margin: '0' }}
-            />
-          </FormGroup>
-          <FormControl variant="outlined">
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  type="number"
-                  {...field}
-                  value={0}
-                  onChange={handleChange}
-                />
-              )}
-              control={control}
-              name={`day_hours_${day}`}
-            />
-          </FormControl>
-          </>
-        </Grid>
-      ))}
+      {
+        days ?
+        days.map((item, index) => (
+          <Grid item xs={2} key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={item.checked}
+                    onChange={handleChange}
+                    id={item.id}
+                    name={`item[${item.id}]`}
+                  />
+                }
+                label={item.title}
+                labelPlacement={'top'}
+              />
+            </FormGroup>
+            <FormControl variant="outlined">
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    type="number"
+                    {...field}
+                    value={item.amount}
+                    onChange={handleChange}
+                  />
+                )}
+                control={control}
+                name={`${item.id}`}
+              />
+            </FormControl>
+          </Grid>
+        ))
+        : null
+      }
+
     </>
   )
 }
