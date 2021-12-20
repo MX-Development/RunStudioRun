@@ -98,16 +98,17 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
         { headerButton ? <button className="btn">{ headerButton }</button> : null }
       </ListHeader>
       
-      <div style={{ height: '100%', width: '100%' }}>
+      <GridContainer style={{ maxHeight: containerHeight + 'px !important' }}>
         <DataGrid
           className={nocolor ? 'no-color' : defaultcolor ? 'default-color' : ''}
           columns={columns}
           rows={data}
           onCellClick={projectID ? showProject : showItem}
-          autoHeight
+          // autoHeight
           {...rest}
+          style={{ height: containerHeight }}
         />
-      </div>
+      </GridContainer>
 
       <Modal
         isOpen={modalIsOpen}
@@ -130,6 +131,10 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
 }
 
 export default List
+
+const GridContainer = styled.div`
+ width: 100%
+`
 
 const ModalHeading = styled.div`
   display: flex;

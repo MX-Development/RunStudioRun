@@ -8,9 +8,10 @@
 
 .MuiDataGrid-root > div:nth-child(3) {
   position: absolute;
-  bottom: calc(0px - 52px);
+  bottom: 0;
   transform: translate(0, 75%);
   width: 100%;
+  padding-bottom: 30px;
 }
 
 .MuiDataGrid-root .MuiDataGrid-row {
