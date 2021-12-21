@@ -12,14 +12,14 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
-import Button from '@material-ui/core/Button';
-
 import Typography from '@material-ui/core/Typography';
 
 import BusinessLogo from '../assets/img/business-logo.svg'
 import { MenuItem, Select } from '@material-ui/core';
 
 function BusinessInformation() {
+
+  const [postalSame, setPostalSame] = useState(false);
 
   const { handleSubmit, watch } = useForm();
   const onSubmit = data => console.log(data);
@@ -31,6 +31,10 @@ function BusinessInformation() {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const changePostal = () => {
+    setPostalSame(!postalSame)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -199,10 +203,11 @@ function BusinessInformation() {
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
                   <FormGroup>
                     <FormControlLabel
-                      control={<Checkbox checked={true} />}
+                      control={<Checkbox checked={postalSame} />}
                       label={'As above'}
                       labelPlacement="right"
                       style={{ margin: '0', marginLeft: '12.5px' }}
+                      onChange={changePostal}
                     />
                   </FormGroup>
                 </div>
@@ -254,8 +259,7 @@ function BusinessInformation() {
           </Grid>
           <Grid item xs={12}>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button color="primary">Test</Button>
-              <button type="submit" className="btn btn-gold">Save</button>
+              <button type="submit" class="btn btn-gold">Save</button>
             </div>
           </Grid>
 

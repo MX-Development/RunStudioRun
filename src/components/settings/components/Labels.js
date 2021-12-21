@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import './Labels.css'
 
@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 function Labels() {
 
-  const jobs = [
+  const [jobs, setJobs] = useState([
     {
       "title": "Ready",
       "color": "#B1B0AF"
@@ -31,7 +31,7 @@ function Labels() {
       "title": "Cancelled",
       "color": "#000000"
     }
-  ]
+  ])
 
   const invoices = [
     {
@@ -118,6 +118,15 @@ function Labels() {
     },
   ]
 
+  const changeLabel = (event) => {    
+    const target = event.target;
+    const key = target.dataset.id;
+
+    var items = jobs;
+    items[key].title = event.target.defaultValue;
+    setJobs([...items]);
+  }
+
   return (
     <>
       <LabelContainer>
@@ -126,7 +135,7 @@ function Labels() {
           <Heading>Jobs</Heading>
           {
             jobs.map((label, index) => (
-              <Label key={index} style={{ background: label.color}}>{label.title}</Label>
+              <Label key={index} style={{ background: label.color}} onChange={changeLabel} data-id={index} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -135,7 +144,7 @@ function Labels() {
           <Heading>Invoices</Heading>
           {
             invoices.map((label, index) => (
-              <Label key={index} style={{ background: label.color}}>{label.title}</Label>
+              <Label key={index} style={{ background: label.color}} onChange={changeLabel} data-id={index} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -144,7 +153,7 @@ function Labels() {
           <Heading>Projects</Heading>
           {
             projects.map((label, index) => (
-              <Label key={index} style={{ background: label.color, color: 'var(--text-gray)' }}>{label.title}</Label>
+              <Label key={index} style={{ background: label.color, color: 'var(--text-gray)' }} onChange={changeLabel} data-id={index} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -153,7 +162,7 @@ function Labels() {
           <Heading>Contacts</Heading>
           {
             contacts.map((label, index) => (
-              <Label key={index} style={{ background: label.color}}>{label.title}</Label>
+              <Label key={index} style={{ background: label.color}} onChange={changeLabel} data-id={index} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -204,7 +213,7 @@ const Heading = styled.div`
   margin-bottom: 8px;
 `
 
-const Label = styled.div`
+const Label = styled.input.attrs({ type: 'text' })`
   font-size: 12px;
   font-weight: 500;
   color: #fff;
@@ -213,4 +222,7 @@ const Label = styled.div`
   text-align: center;
   border-radius: 2px;
   margin-bottom: 8px;
+  border: none;
+  width: 100%;
+  outline: none !important;
 `

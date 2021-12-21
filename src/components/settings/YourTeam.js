@@ -11,6 +11,10 @@ import { auth } from '../../config/firebase'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
+import {
+  useHistory
+} from "react-router-dom"
+
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
@@ -33,6 +37,8 @@ const columns = [
 ]
 
 function YourTeam({ add }) {
+
+  let history = useHistory()
 
   const [user] = useAuthState(auth)
 
@@ -102,7 +108,26 @@ function YourTeam({ add }) {
 
   return (
     <>
-      <List title={'Your Team'} columns={columns} data={data} modalTitle={'Add/Edit Team Member'} modalContent={modalContent} size={'large'} add={add ? true : false} defaultcolor={true} />
+      <List 
+        title={'Your Team'} 
+        buttons={[
+          {
+            "label": "Add",
+            "action": function() { history.push(`/team/add`) }
+          },
+          {
+            "label": "Print",
+            "action": function() { alert('Print...') }
+          }
+        ]}
+        columns={columns} 
+        data={data} 
+        modalTitle={'Add/Edit Team Member'} 
+        modalContent={modalContent} 
+        size={'large'} 
+        add={add ? true : false} 
+        defaultcolor={true} 
+      />
     </>
   )
 }

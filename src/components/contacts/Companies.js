@@ -13,6 +13,8 @@ import {
   useHistory
 } from "react-router-dom"
 
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -31,6 +33,12 @@ const columns = [
 function Companies({ add, importing }) {
 
   let history = useHistory()
+
+  const [postalSame, setPostalSame] = useState(false);
+
+  const changePostal = () => {
+    setPostalSame(!postalSame)
+  }
 
   const [data, setData] = useState([])
 
@@ -217,21 +225,24 @@ function Companies({ add, importing }) {
           <Grid item xs={12}>
             <FormGroup>
               <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
-                <Controller
-                  render={({ field }) => (
-                    <TextField
-                      variant="outlined"
-                      placeholder="Where to post stuff"
-                      {...field}
-                      value={selectedData ? selectedData.postalAddress : null}
-                      onChange={handleChange}
-                      multiline
-                      rows={4}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox checked={postalSame} />}
+                      label={'As above'}
+                      labelPlacement="right"
+                      style={{ margin: '0', marginLeft: '12.5px' }}
+                      onChange={changePostal}
                     />
-                  )}
-                  control={control}
-                  name="postal_address"
+                  </FormGroup>
+                </div>
+                <TextField
+                  id="postal_address"
+                  placeholder="Where to post stuff"
+                  variant="outlined"
+                  multiline
+                  rows={4}
                 />
               </FormControl>
             </FormGroup>
