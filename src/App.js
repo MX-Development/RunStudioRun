@@ -156,7 +156,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={`app`} id="test-modal" style={{ backgroundImage: `url(${ bgImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
+      <div className="app" style={{ backgroundImage: `url(${ bgImage })`, backgroundPosition: 'bottom -75px right -75px', backgroundRepeat: 'no-repeat' }}>
         
           {
             !user ? (

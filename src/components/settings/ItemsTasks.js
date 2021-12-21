@@ -7,6 +7,10 @@ import List from '../List'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
+import {
+  useHistory
+} from "react-router-dom"
+
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -48,6 +52,9 @@ const columns = [
 ]
 
 function ItemsTasks({ add }) {
+
+  let history = useHistory()
+  
   const [data, setData] = useState([])
 
   const fetchData = async () => {
@@ -208,7 +215,29 @@ function ItemsTasks({ add }) {
 
   return (
     <>
-      <List title={'Items & Tasks'} columns={columns} data={data} modalTitle={'Add/Edit Item & Task'} modalContent={modalContent} add={add ? true : false} nocolor={true} />
+      <List 
+        title={'Items & Tasks'} 
+        buttons={[
+          {
+            "label": "Add",
+            "action": function() { history.push(`/items-and-tasks/add`) }
+          },
+          {
+            "label": "Export",
+            "action": function() { alert('Export...') }
+          },
+          {
+            "label": "Print",
+            "action": function() { alert('Print...') }
+          }
+        ]}
+        columns={columns}
+        data={data} 
+        modalTitle={'Add/Edit Item & Task'} 
+        modalContent={modalContent} 
+        add={add ? true : false} 
+        nocolor={true} 
+      />
     </>
   )
 }

@@ -2,7 +2,7 @@ body {
   /* Variables */
   --gold: #E0BC77;
   --light-gray: #DDDBD7;
-  --text-gray: var(--text-gray);
+  --text-gray: #3C3C3C;
   --dark-gray: #B1B0AF;
   --white: #FFFFFF;
   transition: all .5s ease-in-out;

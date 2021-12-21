@@ -7,6 +7,10 @@ import List from '../List'
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
+import {
+  useHistory
+} from "react-router-dom"
+
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -22,6 +26,8 @@ const columns = [
 ]
 
 function Expenses({ add }) {
+
+  let history = useHistory()
 
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
@@ -206,7 +212,29 @@ function Expenses({ add }) {
     'Loading...'
     :
     <>
-      <List title={'Expenses'} columns={columns} data={data} modalTitle={'Add/Edit Expenses'} modalContent={modalContent} add={add ? true : false} nocolor={true} />
+      <List 
+        title={'Expenses'} 
+        buttons={[
+          {
+            "label": "Add",
+            "action": function() { history.push(`/expenses/add`) }
+          },
+          {
+            "label": "Export",
+            "action": function() { alert('Export...') }
+          },
+          {
+            "label": "Print",
+            "action": function() { alert('Print...') }
+          }
+        ]}
+        columns={columns} 
+        data={data} 
+        modalTitle={'Add/Edit Expenses'} 
+        modalContent={modalContent} 
+        add={add ? true : false} 
+        nocolor={true} 
+      />
     </>
       
   )
