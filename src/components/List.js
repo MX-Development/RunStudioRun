@@ -7,10 +7,21 @@ import PageTitle from './layout/PageTitle'
 
 import './List.css';
 
+import { useSelector, useDispatch } from "react-redux";
+import { setShowOrdered } from "../features/items/projectSlice";
+
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 function List({ title, buttons, columns, data, modalTitle, modalContent, modalAction, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
+
+  const dispatch = useDispatch();
+  const order = useSelector((state) => state.order.showOrdered);
+
+  const setOrder = event => {
+    console.log('Changing order');
+    dispatch(setShowOrdered(!order))
+  }
 
   const centerModal = {
     content: {
@@ -90,21 +101,26 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
   //     },
   //   })
   // );
+  
 
   return (
     <>
       <ListHeader>
         <PageTitle title={title} buttons={buttons} />
-        { headerButton ? <button className="btn">{ headerButton }</button> : null }
+        {/* { headerButton ? <button className="btn">{ headerButton }</button> : null } */}
       </ListHeader>
       
       <GridContainer style={{ maxHeight: containerHeight + 'px !important' }}>
         <DataGrid
-          className={nocolor ? 'no-color' : defaultcolor ? 'default-color' : ''}
+          className={`${nocolor ? 'no-color' : defaultcolor ? 'default-color' : ''} ${order ? 'hideContent' : ''}`}
           columns={columns}
           rows={data}
           onCellClick={projectID ? showProject : showItem}
-          // autoHeight
+
+          onColumnHeaderClick={(event) => {
+            if (pagePath === 'projects') setOrder(event); return;
+          }}
+
           {...rest}
           style={{ height: containerHeight }}
         />

@@ -218,3 +218,17 @@
 .MuiTablePagination-selectRoot {
   margin-right: 95px !important;
 }
+
+.hideHeader .MuiDataGrid-columnsContainer {
+  visibility: hidden !important;
+  display: none !important;
+}
+
+.hideContent {
+  height: 30px !important;
+  margin-bottom: 7.5px;
+}
+
+.hideContent .MuiDataGrid-footerContainer {
+  display: none !important;
+}

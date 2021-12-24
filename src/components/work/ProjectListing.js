@@ -3,12 +3,25 @@ import styled from 'styled-components'
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { DataGrid } from '@material-ui/data-grid';
 
+import { useSelector, useDispatch } from "react-redux";
+import { setShowOrdered } from "../../features/items/projectSlice";
+
+import PageTitle from '../layout/PageTitle'
+
 import '../List.css';
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function ProjectListing({ company, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
+function ProjectListing({company, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
+
+  const dispatch = useDispatch();
+  const order = useSelector((state) => state.order.showOrdered);
+
+  const setOrder = event => {
+    console.log('Changing order');
+    dispatch(setShowOrdered(!order))
+  }
 
   const centerModal = {
     content: {
@@ -70,18 +83,25 @@ function ProjectListing({ company, columns, data, modalTitle, modalContent, size
   }
 
   return (
-    <>
-      
+    <>      
       <div style={{ height: 'auto', width: '100%' }} className="project-grid">
         <GridHeading>
           <span>{ company }</span>
         </GridHeading>
         <DataGrid
-          className={nocolor ? 'no-color' : defaultcolor ? 'default-color' : ''}
+          className={`hideHeader ${nocolor ? 'no-color' : defaultcolor ? 'default-color' : ''}`}
           columns={columns}
           rows={data}
           onCellClick={projectID ? showProject : showItem}
+
+          onColumnHeaderClick={(params, event) => {
+            if (pagePath === 'projects') setOrder(event); return;
+          }}
+
           autoHeight
+          style={{ 
+            marginTop: '-36px'
+           }}
           rowsPerPageOptions={[]}
           {...rest}
         />
@@ -128,5 +148,24 @@ const GridHeading = styled.div`
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 600;
+  }
+`
+
+const ListHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > button {
+    border: 1px solid #B1B0AF;
+    color: #B1B0AF;
+    border-radius: 2px;
+    background: transparent;
+    font-size: 12px;
+    padding: 4px 6px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `

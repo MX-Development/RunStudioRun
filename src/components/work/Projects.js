@@ -5,6 +5,7 @@ import moment from 'moment'
 
 import axios from 'axios';
 
+import List from '../List'
 import ProjectListing from './ProjectListing'
 
 import PageTitle from '../layout/PageTitle'
@@ -19,6 +20,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
+
+import { useSelector, useDispatch } from "react-redux";
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -46,7 +49,7 @@ function Projects({ add }) {
             onClick={(e) => {
               e.stopPropagation()
               if (companies) {
-                let c = companies.filter((company) => company.companyName === params.row.companyName);
+                let c = companies.filter((company) => company === params.row.companyName);
                 let companyID = c[0].id;
                 showCompany(companyID)
               }
@@ -68,6 +71,13 @@ function Projects({ add }) {
   const [companies, setCompanies] = useState(null);
   const [companyProjects, setCompanyProjects] = useState(null);
 
+  const order = useSelector((state) => state.order.showOrdered);
+  const [showOrdered, setShowOrdered] = useState(order);
+
+  useEffect(() => {
+    setShowOrdered(order)
+  }, [order]);
+
   const { handleSubmit, control } = useForm();
   const onSubmit = data => console.log(data);
 
@@ -76,7 +86,8 @@ function Projects({ add }) {
     try {
       await axios.get(`https://kendrix.kendrix.website/json/projects.json`)
         .then(res => {
-
+          setData(res.data)
+          console.log(res.data);
           setProjects(res.data);
 
           let companies = [];
@@ -298,24 +309,67 @@ function Projects({ add }) {
 
   return (
     <>
-      <ListHeader>
-        <PageTitle title={'Projects'} />
-        <button className="btn">Print</button>
-      </ListHeader>
+      <List 
+        title={'Projects'}  
+        buttons={[
+          {
+            "label": "Add",
+            "action": function() { history.push(`/companies/add`) }
+          },
+          {
+            "label": "Export",
+            "action": function() { alert('Export...') }
+          },
+          {
+            "label": "Print",
+            "action": function() { alert('Print...') }
+          }
+        ]}
+        columns={columns} 
+        data={data} 
+      />
 
-      { companies ?
-        companies.map(company => {
-          let companyProjects = [];
-          projects.forEach(project => {
-            if (project.companyName === company) {
-              companyProjects.push(project);
-            }
-          })
-          return (
-            <ProjectListing company={company} columns={columns} data={companyProjects} headerButton={'Print'} modalTitle={'New Project'} modalContent={modalContent} add={add ? true : false} />
-          ) 
-        })
-      : <h1>No companies</h1> }
+      {
+        showOrdered ?
+          companies ?
+            companies.map((company, index) => {
+              let companyProjects = [];
+              projects.forEach(project => {
+                if (project.companyName === company) {
+                  companyProjects.push(project);
+                }
+              })
+              return (
+                <ProjectListing 
+                  title={'Projects'}  
+                  buttons={[
+                    {
+                      "label": "Add",
+                      "action": function() { history.push(`/companies/add`) }
+                    },
+                    {
+                      "label": "Export",
+                      "action": function() { alert('Export...') }
+                    },
+                    {
+                      "label": "Print",
+                      "action": function() { alert('Print...') }
+                    }
+                  ]}
+                  company={company} 
+                  columns={columns} 
+                  data={companyProjects} 
+                  headerButton={'Print'} 
+                  modalTitle={'New Project'} 
+                  modalContent={modalContent} 
+                  add={add ? true : false} 
+                />
+              ) 
+            })
+          : <h1>No companies</h1> 
+      : null
+    }
+
     </>
   )
 }
