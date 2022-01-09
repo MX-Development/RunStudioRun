@@ -194,6 +194,12 @@
   align-items: center;
   justify-content: center;
   padding-top: 8px !important;
+  position: relative;
+  top: -1px;
+}
+
+.MuiTablePagination-caption {
+  left: -25px !important;
 }
 
 .MuiTablePagination-caption {
@@ -207,7 +213,11 @@
 .MuiTablePagination-actions {
   position: absolute !important;
   right: 0 !important;
-  width: 157.5px !important;
+  width: 125px !important;
+}
+
+.MuiIconButton-root {
+  padding: 5px !important;
 }
 
 .MuiTablePagination-actions > button:nth-child(2) {
@@ -216,7 +226,7 @@
 }
 
 .MuiTablePagination-selectRoot {
-  margin-right: 95px !important;
+  margin-right: 70px !important;
 }
 
 .hideHeader .MuiDataGrid-columnsContainer {

@@ -8,10 +8,10 @@ import TestOrder from './TestOrder';
 
 const columns = [
   { field: 'project', type: 'string', flex: 0.4 },
-  { field: 'jobNo', type: 'string', flex: 0.2 },
+  { field: 'jobNo', type: 'string', flex: 0.2, headerName: 'Job no.' },
   { field: 'estimate', type: 'string', flex: 0.2 },
   { field: 'description', type: 'string', flex: 0.5 },
-  { field: 'enteredDate', type: 'string', flex: 0.2 },
+  { field: 'enteredDate', type: 'string', flex: 0.2, headerName: 'Entered Date' },
   { field: 'approved', type: 'number', flex: 0.2 },
   { field: 'budget', type: 'number', flex: 0.2 },
   { field: 'action', type: 'number', flex: 0.2 },
@@ -42,7 +42,20 @@ function Estimates({ projectID }) {
       viewID ? 
       <TestOrder estimateID={viewID} key={1} />
       :
-      <List title={'Estimates'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />
+      <List 
+        title={'Estimates'}
+        buttons={[
+          {
+            "label": "Print",
+            "action": function() { alert('Print...') }
+          }
+        ]}
+        columns={columns} 
+        data={data} 
+        projectID={projectID} 
+        key={projectID} 
+        view={view} 
+      />
   )
 }
 

@@ -21,11 +21,11 @@ const columns = [
       </div>
     )
   },
-  { field: 'jobNo', type: 'string', flex: 0.2 },
+  { field: 'jobNo', type: 'string', flex: 0.2, headerName: 'Job no.' },
   { field: 'invoice', type: 'string', flex: 0.2 },
   { field: 'description', type: 'string', flex: 0.5 },
-  { field: 'enteredDate', type: 'string', flex: 0.2 },
-  { field: 'dueDate', type: 'string', flex: 0.2 },
+  { field: 'enteredDate', type: 'string', flex: 0.2, headerName: 'Entered Date' },
+  { field: 'dueDate', type: 'string', flex: 0.2, headerName: 'Due Date' },
   { field: 'budgeted', type: 'string', flex: 0.2 },
   { field: 'invoiced', type: 'string', flex: 0.2 },
   { field: 'status', type: 'number', flex: 0.2 },
@@ -55,7 +55,24 @@ function Invoices({ projectID }) {
     viewID ? 
     <h3>Invoice { viewID }</h3>
     :
-    <List title={'Invoices'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />
+    <List 
+      title={'Invoices'}
+      buttons={[
+        {
+          "label": "Export to Quickbooks",
+          "action": function() { alert('Export...') }
+        },
+        {
+          "label": "Print",
+          "action": function() { alert('Print...') }
+        }
+      ]}  
+      columns={columns} 
+      data={data} 
+      projectID={projectID} 
+      key={projectID} 
+      view={view} 
+    />
   )
 }
 
