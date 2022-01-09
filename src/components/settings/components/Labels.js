@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import './Labels.css'
 
 import Grid from '@material-ui/core/Grid';
+import Label from './Label';
 
 function Labels() {
 
@@ -135,7 +136,7 @@ function Labels() {
           <Heading>Jobs</Heading>
           {
             jobs.map((label, index) => (
-              <Label key={index} style={{ background: label.color}} onChange={changeLabel} data-id={index} defaultValue={label.title} />
+              <Label key={index} background={ label.color } onChange={changeLabel} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -144,7 +145,7 @@ function Labels() {
           <Heading>Invoices</Heading>
           {
             invoices.map((label, index) => (
-              <Label key={index} style={{ background: label.color}} onChange={changeLabel} data-id={index} defaultValue={label.title} />
+              <Label key={index} background={ label.color } onChange={changeLabel} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -153,7 +154,7 @@ function Labels() {
           <Heading>Projects</Heading>
           {
             projects.map((label, index) => (
-              <Label key={index} style={{ background: label.color, color: 'var(--text-gray)' }} onChange={changeLabel} data-id={index} defaultValue={label.title} />
+              <Label key={index} background={ label.color } color={'var(--text-gray)'} onChange={changeLabel} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -162,7 +163,7 @@ function Labels() {
           <Heading>Contacts</Heading>
           {
             contacts.map((label, index) => (
-              <Label key={index} style={{ background: label.color}} onChange={changeLabel} data-id={index} defaultValue={label.title} />
+              <Label key={index} background={ label.color } onChange={changeLabel} defaultValue={label.title} />
             ))
           }
         </Column>
@@ -211,18 +212,4 @@ const Column = styled.div`
 const Heading = styled.div`
   text-transform: uppercase;
   margin-bottom: 8px;
-`
-
-const Label = styled.input.attrs({ type: 'text' })`
-  font-size: 12px;
-  font-weight: 500;
-  color: #fff;
-  text-transform: uppercase;
-  padding: 6px 0;
-  text-align: center;
-  border-radius: 2px;
-  margin-bottom: 8px;
-  border: none;
-  width: 100%;
-  outline: none !important;
 `

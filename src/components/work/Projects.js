@@ -29,6 +29,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { compareAsc } from 'date-fns';
+import Label from '../settings/components/Label';
 
 function Projects({ add }) {
 
@@ -62,8 +63,30 @@ function Projects({ add }) {
     { field: 'team', type: 'string', flex: 0.15 },
     { field: 'enteredDate', type: 'string', flex: 0.15, headerName: 'Entered' },
     { field: 'dueDate', type: 'string', flex: 0.15, headerName: 'Due Date' },
-    { field: 'action', type: 'string', flex: 0.15 },
-    { field: 'status', type: 'string', flex: 0.15 },
+    { field: 'action', type: 'string', flex: 0.15,
+    renderCell: (params) => (
+      <Label 
+        type={params.row.status} 
+        background={'#A0C485'} 
+        defaultValue={'Label'}
+        onClick={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+        }}
+      />
+    ) },
+    { field: 'status', type: 'string', flex: 0.15,
+    renderCell: (params) => (
+      <Label 
+        type={params.row.status} 
+        background={'#B1B0AF'} 
+        defaultValue={'Label'}
+        onClick={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+        }}
+      />
+    )},
   ]
 
   const [data, setData] = useState([])
