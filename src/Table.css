@@ -237,6 +237,7 @@
 .hideContent {
   height: 30px !important;
   margin-bottom: 7.5px;
+  overflow: hidden !important;
 }
 
 .hideContent .MuiDataGrid-footerContainer {
