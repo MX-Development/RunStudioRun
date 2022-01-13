@@ -1,123 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import './Labels.css'
+
+import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid';
 import Label from './Label';
 
 function Labels() {
 
-  const [jobs, setJobs] = useState([
-    {
-      "title": "Ready",
-      "color": "#B1B0AF"
-    },
-    {
-      "title": "Live",
-      "color": "#76C939"
-    },
-    {
-      "title": "Ongoing",
-      "color": "#1AA81A"
-    },
-    {
-      "title": "Completed",
-      "color": "#2376FA"
-    },
-    {
-      "title": "On hold",
-      "color": "#A55EA2"
-    },
-    {
-      "title": "Cancelled",
-      "color": "#000000"
-    }
-  ])
+  const [isLoading, setIsLoading] = useState(false);
 
-  const invoices = [
-    {
-      "title": "Open",
-      "color": "#B1B0AF"
-    },
-    {
-      "title": "Ready",
-      "color": "#B1B0AF"
-    },
-    {
-      "title": "Approved",
-      "color": "#B1B0AF"
-    },
-    {
-      "title": "Exported",
-      "color": "#B1B0AF"
-    }
-  ]
+  const [jobs, setJobs] = useState([])
+  const [invoices, setInvoices] = useState([])
+  const [projects, setProjects] = useState([])
+  const [contacts, setContacts] = useState([])
 
-  const projects = [
-    {
-      "title": "No status",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "No rush",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "Urgent",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "Planning",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "Briefing",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "Review",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "Planning",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "Briefing",
-      "color": "#F4F2F0"
-    },
-    {
-      "title": "Review",
-      "color": "#F4F2F0"
-    }
-  ]
+  const fetchData = async () => {
+    setIsLoading(true);
 
-  const contacts = [
-    {
-      "title": "Supplier",
-      "color": "#7F5E8B"
-    },
-    {
-      "title": "Client",
-      "color": "#A0C485"
-    },
-    {
-      "title": "Prospect",
-      "color": "#75A0E6"
-    },
-    {
-      "title": "Ex-supplier",
-      "color": "#B1B0AF"
-    },
-    {
-      "title": "Ex-client",
-      "color": "#B1B0AF"
-    },
-    {
-      "title": "Prospect lost",
-      "color": "#B1B0AF"
-    },
-  ]
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/labels.json`)
+        .then(res => {
+          setJobs(res.data[0].jobs);
+          setInvoices(res.data[0].invoices);
+          setProjects(res.data[0].projects);
+          setContacts(res.data[0].contacts);
+        })
+
+        console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, []);
 
   const changeLabel = (event) => {    
     const target = event.target;
@@ -132,41 +54,50 @@ function Labels() {
     <>
       <LabelContainer>
 
-        <Column>
-          <Heading>Jobs</Heading>
-          {
-            jobs.map((label, index) => (
-              <Label key={index} background={ label.color } onChange={changeLabel} defaultValue={label.title} />
-            ))
-          }
-        </Column>
+        { isLoading ?
 
-        <Column>
-          <Heading>Invoices</Heading>
-          {
-            invoices.map((label, index) => (
-              <Label key={index} background={ label.color } onChange={changeLabel} defaultValue={label.title} />
-            ))
-          }
-        </Column>
+          'Loading...'
+        :
 
-        <Column>
-          <Heading>Projects</Heading>
-          {
-            projects.map((label, index) => (
-              <Label key={index} background={ label.color } color={'var(--text-gray)'} onChange={changeLabel} defaultValue={label.title} />
-            ))
-          }
-        </Column>
+          <>
+            <Column>
+              <Heading>Jobs</Heading>
+              {
+                jobs.map((label, index) => (
+                  <Label key={index} background={ label.background } color={label.color} onChange={changeLabel} defaultValue={label.title} />
+                ))
+              }
+            </Column>
 
-        <Column>
-          <Heading>Contacts</Heading>
-          {
-            contacts.map((label, index) => (
-              <Label key={index} background={ label.color } onChange={changeLabel} defaultValue={label.title} />
-            ))
-          }
-        </Column>
+            <Column>
+              <Heading>Invoices</Heading>
+              {
+                invoices.map((label, index) => (
+                  <Label key={index} background={ label.background } color={label.color} onChange={changeLabel} defaultValue={label.title} />
+                ))
+              }
+            </Column>
+
+            <Column>
+              <Heading>Projects</Heading>
+              {
+                projects.map((label, index) => (
+                  <Label key={index} background={ label.background } color={label.color} onChange={changeLabel} defaultValue={label.title} />
+                ))
+              }
+            </Column>
+
+            <Column>
+              <Heading>Contacts</Heading>
+              {
+                contacts.map((label, index) => (
+                  <Label key={index} background={ label.background } color={label.color} onChange={changeLabel} defaultValue={label.title} />
+                ))
+              }
+            </Column>
+          </>
+
+        }
 
       </LabelContainer>
 

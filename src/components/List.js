@@ -66,10 +66,14 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
     }
   }, [add, openModal]);
 
-  function showItem(GridCellParams) {
-    const itemId = GridCellParams.id
-    history.push(`/${pagePath}/${itemId}`);
-    setIsOpen(true)
+  function showItem(GridCellParams, MuiEvent) {
+    console.log(MuiEvent)
+    const clickedItem = MuiEvent.target.value;
+    if (clickedItem === 'Label') return;
+
+    // const itemId = GridCellParams.id
+    // history.push(`/${pagePath}/${itemId}`);
+    // setIsOpen(true)
   }
 
   function showProject(GridCellParams) {

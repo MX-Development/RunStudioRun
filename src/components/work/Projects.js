@@ -33,6 +33,38 @@ import Label from '../settings/components/Label';
 
 function Projects({ add }) {
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [jobs, setJobs] = useState([])
+  const [invoices, setInvoices] = useState([])
+  const [projectLabels, setProjectLabels] = useState([])
+  const [contacts, setContacts] = useState([])
+
+  const fetchLabels = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get(`https://kendrix.kendrix.website/json/labels.json`)
+        .then(res => {
+          setJobs(res.data[0].jobs);
+          setInvoices(res.data[0].invoices);
+          setProjectLabels(res.data[0].projects);
+          setContacts(res.data[0].contacts);
+        })
+
+        console.log('Data fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+    setIsLoading(false);
+
+  }
+
+  useEffect(() => {
+    fetchLabels()
+  }, []);
+
   const columns = [
     { field: 'projectInfo', type: 'string', flex: 0.4, headerName: 'Project',
       renderCell: (params) => (
@@ -64,30 +96,88 @@ function Projects({ add }) {
     { field: 'enteredDate', type: 'string', flex: 0.15, headerName: 'Entered' },
     { field: 'dueDate', type: 'string', flex: 0.15, headerName: 'Due Date' },
     { field: 'action', type: 'string', flex: 0.15,
-    renderCell: (params) => (
-      <Label 
-        type={params.row.status} 
-        background={'#A0C485'} 
-        defaultValue={'Label'}
-        onClick={(e) => {
-          e.stopPropagation()
-          e.preventDefault()
-        }}
-      />
+    renderCell: (params) => (  
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={params.row.action}
+        name={`${params.row.id}`}
+        label="Job status"
+        onChange={changeAction}
+      >
+        {
+          projectLabels.map(label => (
+            <MenuItem value={label.id}>
+              <Label 
+                type={params.row.action} 
+                background={label.background}
+                color={label.color} 
+                defaultValue={label.title}
+                name={`label[${label.id}]`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                }}
+              />
+            </MenuItem>
+          ))
+        }
+      </Select>
     ) },
     { field: 'status', type: 'string', flex: 0.15,
     renderCell: (params) => (
-      <Label 
-        type={params.row.status} 
-        background={'#B1B0AF'} 
-        defaultValue={'Label'}
-        onClick={(e) => {
-          e.stopPropagation()
-          e.preventDefault()
-        }}
-      />
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={params.row.status}
+        name={`${params.row.id}`}
+        label="Job status"
+        onChange={changeStatus}
+      >
+        {
+          jobs.map(label => (
+            <MenuItem value={label.id}>
+              <Label 
+                type={params.row.status} 
+                background={label.background} 
+                color={label.color} 
+                defaultValue={label.title}
+                name={`label[${label.id}]`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                }}
+              />
+            </MenuItem>
+          ))
+        }
+      </Select>
     )},
   ]
+
+  const changeAction = (event) => {
+    const projectId = event.target.name;
+    const labelId = event.target.value;
+
+    let newArr = [...data];
+    data.map((project, index) => {
+      newArr[projectId - 1].action = labelId;
+    });
+
+    setData(newArr);
+  };
+
+  const changeStatus = (event) => {
+    const projectId = event.target.name;
+    const labelId = event.target.value;
+
+    let newArr = [...data];
+    data.map((project, index) => {
+      newArr[projectId - 1].status = labelId;
+    });
+
+    setData(newArr);
+  };
 
   const [data, setData] = useState([])
   const [projects, setProjects] = useState(null);
