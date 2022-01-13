@@ -122,7 +122,7 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
           onCellClick={projectID ? showProject : showItem}
 
           onColumnHeaderClick={(event) => {
-            if (pagePath === 'projects') setOrder(event); return;
+            if (pagePath === 'projects' && event.field === 'projectInfo') setOrder(event); return;
           }}
 
           {...rest}

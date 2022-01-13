@@ -91,8 +91,8 @@ function Projects({ add }) {
         </div>
       )
     },
-    { field: 'description', type: 'string', flex: 0.85 },
-    { field: 'team', type: 'string', flex: 0.15 },
+    { field: 'description', type: 'string', flex: 0.85, sortable: false },
+    { field: 'team', type: 'string', flex: 0.15, sortable: false },
     { field: 'enteredDate', type: 'string', flex: 0.15, headerName: 'Entered' },
     { field: 'dueDate', type: 'string', flex: 0.15, headerName: 'Due Date' },
     { field: 'action', type: 'string', flex: 0.15,
