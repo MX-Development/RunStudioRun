@@ -15,7 +15,7 @@ const Item = styled.input.attrs({ type: 'text' })`
   font-weight: 500;
   color: #fff;
   text-transform: uppercase;
-  padding: 6px 0;
+  padding: 5px 0;
   text-align: center;
   border-radius: 2px;
   margin-bottom: 8px;

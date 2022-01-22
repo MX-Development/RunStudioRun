@@ -95,7 +95,7 @@ function Invoices({ projectID }) {
         onChange={changeStatus}
       >
         {
-          jobs.map(label => (
+          invoices.map(label => (
             <MenuItem value={label.id}>
               <Label 
                 type={params.row.status} 
