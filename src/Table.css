@@ -243,3 +243,37 @@
 .hideContent .MuiDataGrid-footerContainer {
   display: none !important;
 }
+
+/* Label select */
+.label-select svg {
+  display: none !important;
+}
+
+.label-select .MuiSelect-selectMenu {
+  padding: 0 !important;
+}
+
+.label-select .MuiSelect-selectMenu:hover {
+  cursor: pointer;
+}
+
+.label-select .MuiSelect-selectMenu input {
+  margin: 0;
+}
+
+.label-select .MuiSelect-selectMenu input:hover {
+  cursor: pointer;
+}
+
+.label-select .MuiSelect-select:focus {
+  background-color: transparent !important;
+}
+
+.MuiListItem-button input:hover {
+  cursor: pointer;
+}
+
+.label-select:after,
+.label-select:before {
+  display: none;
+}

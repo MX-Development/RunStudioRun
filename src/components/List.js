@@ -71,9 +71,11 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
     const clickedItem = MuiEvent.target.value;
     if (clickedItem === 'Label') return;
 
-    // const itemId = GridCellParams.id
-    // history.push(`/${pagePath}/${itemId}`);
-    // setIsOpen(true)
+    if (!MuiEvent.target.value) {
+      const itemId = GridCellParams.id
+      history.push(`/${pagePath}/${itemId}`);
+      setIsOpen(true)
+    }
   }
 
   function showProject(GridCellParams) {

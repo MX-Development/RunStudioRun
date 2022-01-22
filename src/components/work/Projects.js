@@ -94,13 +94,14 @@ function Projects({ add }) {
     { field: 'description', type: 'string', flex: 0.85, sortable: false },
     { field: 'team', type: 'string', flex: 0.15, sortable: false },
     { field: 'enteredDate', type: 'string', flex: 0.15, headerName: 'Entered' },
-    { field: 'dueDate', type: 'string', flex: 0.15, headerName: 'Due Date' },
+    { field: 'dueDate', type: 'string', flex: 0.15, headerName: 'Due' },
     { field: 'action', type: 'string', flex: 0.15,
     renderCell: (params) => (  
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={params.row.action}
+        className="label-select"
         name={`${params.row.id}`}
         label="Job status"
         onChange={changeAction}
@@ -131,6 +132,7 @@ function Projects({ add }) {
         id="demo-simple-select"
         value={params.row.status}
         name={`${params.row.id}`}
+        className="label-select"
         label="Job status"
         onChange={changeStatus}
       >
