@@ -67,12 +67,17 @@ function List({ title, buttons, columns, data, modalTitle, modalContent, modalAc
   }, [add, openModal]);
 
   function showItem(GridCellParams, MuiEvent) {
-    console.log(MuiEvent)
     const clickedItem = MuiEvent.target.value;
     if (clickedItem === 'Label') return;
 
     if (!MuiEvent.target.value) {
-      const itemId = GridCellParams.id
+      const itemId = GridCellParams.id;
+
+      if (pagePath === 'projects') {
+        history.push(`/${pagePath}/${itemId}/jobs`);
+        return;
+      }
+
       history.push(`/${pagePath}/${itemId}`);
       setIsOpen(true)
     }

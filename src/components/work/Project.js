@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom"
 import Estimates from './Estimates'
 import Purchases from './Purchases'
 import Invoices from './Invoices'
-import CreateEstimate from './CreateEstimate'
 import ProjectHeader from './ProjectHeader'
 import Jobs from './Jobs'
 import ProjectView from './projects/ProjectView'
@@ -30,8 +29,7 @@ function Project() {
             null
               : 
               <>
-              <Jobs projectID={id} />
-              <CreateEstimate id={id} />
+                <Jobs projectID={id} />
               </>
             : view === 'estimates' ?
               <Estimates projectID={id} />

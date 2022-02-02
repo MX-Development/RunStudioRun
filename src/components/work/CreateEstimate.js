@@ -8,6 +8,7 @@ import ModalBox from '../ModalBox';
 import EyeIcon from '../assets/icons/EyeIcon.svg'
 import PlusIcon from '../assets/icons/PlusIcon.svg'
 import AddNav from './projects/AddNav'
+import TestOrder from './TestOrder';
 
 function CreateEstimate({ id }) {
 
@@ -30,18 +31,19 @@ function CreateEstimate({ id }) {
       { 
         adding ?
         <>
-          <DividerWithIcon onClick={() => setAddNav(!addNav)}>
-            <img src={PlusIcon} alt="" />
+          <DividerWithIcon>
+            <img src={PlusIcon} alt="" onClick={() => setAddNav(!addNav)} />
             <AddNav show={addNav ? true : false} />
           </DividerWithIcon>
 
-          <ProjectEstimates />
+          <TestOrder estimateID={1} key={1} />
+          {/* <ProjectEstimates /> */}
 
           <DividerWithIcon onClick={showPDF}>
             <img src={EyeIcon} alt="" />
-            <ModalBox modalOpened={openModal}>
+            {/* <ModalBox modalOpened={openModal}>
               PDF
-            </ModalBox>
+            </ModalBox> */}
           </DividerWithIcon>
         </>
         :

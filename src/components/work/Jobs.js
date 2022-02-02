@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import List from '../List'
 import TestOrder from './TestOrder';
+import CreateEstimate from './CreateEstimate'
 
 const columns = [
   { field: 'project', type: 'string', flex: 0.4 },
@@ -42,7 +43,10 @@ function Jobs({ projectID }) {
     viewID ? 
     <TestOrder estimateID={viewID} key={1} />
     :
-    <List title={'Jobs'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />
+      data.length > 0 ?
+        <List title={'Jobs'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />
+      : 
+        <CreateEstimate id={projectID} />
   )
 }
 

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/swiper-bundle.min.css'
-import 'swiper/swiper.min.css'
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import 'swiper/swiper-bundle.min.css'
+// import 'swiper/swiper.min.css'
+import Slider from "react-slick";
 
 import './JobScroll.css'
 
@@ -29,20 +30,29 @@ function JobScroll({ projectID }) {
       )
   }, [projectID]);
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
   return (
-      <Swiper
-        spaceBetween={30} 
-        slidesPerView={1}
-        navigation
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
-        style={{ width: '100%' }}
-      >
-        {
+      // <Swiper
+      //   spaceBetween={30} 
+      //   slidesPerView={1}
+      //   navigation
+      //   onSlideChange={() => console.log('slide change')}
+      //   onSwiper={(swiper) => console.log(swiper)}
+      //   style={{ width: '100%' }}
+      // >
+      // <Slider {...settings} style={{ width: '100%' }}>
+        
           data ?
-            data.map(job => {
+            data.map((job, index) => {
+              if (index === 1) return;
               return (
-              <SwiperSlide>
                 <JobContainer>
                   <Block>
                     <div className="top">
@@ -98,12 +108,11 @@ function JobScroll({ projectID }) {
                     </div>
                   </Block>
                 </JobContainer>
-              </SwiperSlide>
               )
             })
           : null
-        }
-      </Swiper>
+        
+      // </Slider>
   )
 }
 

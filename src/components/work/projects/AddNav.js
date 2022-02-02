@@ -52,6 +52,9 @@ function AddNav({ show }) {
           labelPlacement="start"
         />
       </Item>
+      <AddButton>
+        <button class="btn btn-grey" type="button">Add</button>
+      </AddButton>
     </Container>
   )
 }
@@ -69,6 +72,7 @@ const Container = styled.div`
   border-radius: 4px;
   display: ${props => props.shown ? "flex" : "none"};
   flex-direction: column;
+  z-index: 5;
 `
 
 const Item = styled.div`
@@ -84,4 +88,10 @@ const Item = styled.div`
   > .MuiCheckbox-root {
     padding: 6px;
   }
+`
+
+const AddButton = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
 `

@@ -18,6 +18,7 @@ import { MenuItem, Select } from '@material-ui/core'
 import ProjectInfo from './ProjectInfo'
 
 import EllipsisIcon from '../assets/icons/EllipsisIcon.svg'
+import ProjectNotes from './projects/ProjectNotes'
 
 function ProjectHeader({ projectID }) {
 
@@ -97,7 +98,7 @@ function ProjectHeader({ projectID }) {
             <Grid item xs={12} style={{ position: 'relative' }}>  
               <div className="text-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3>PREFIX <strong>Project Master</strong></h3>
-                <div style={{ width: '30px', borderLeft: '1px solid rgba(0,0,0,0.35)', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '24px' }} 
+                <PrefixBtn
                   onClick={() => showProjectNav(!projectNav)}>
                     {
                       projectNav ?
@@ -105,7 +106,7 @@ function ProjectHeader({ projectID }) {
                       :
                       <img src={EllipsisIcon} alt="Ellipsis icon" onClick={() => console.log('clicked')} style={{ height: '16px', opacity: '0.25' }} />
                     }
-                </div>
+                </PrefixBtn>
               </div>
               <ProjectMenu className={projectNav ? 'active' : ''}>
                 <NavItem>
@@ -184,27 +185,7 @@ function ProjectHeader({ projectID }) {
 
               <ProjectNav />
 
-              <FormGroup>
-                <FormControl variant="outlined">
-                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Project notes</FormLabel>
-                  <Controller
-                    render={({ field }) => (
-                      <TextField
-                        variant="outlined"
-                        placeholder="Project notes"
-                        {...field}
-                        value={selectedData ? selectedData.project_notes : null}
-                        onChange={handleChange}
-                        multiline
-                        rows={4}
-                        style={{ background: 'var(--white)' }}
-                      />
-                    )}
-                    control={control}
-                    name="project_notes"
-                  />
-                </FormControl>
-              </FormGroup>  
+              <ProjectNotes data={selectedData} />
 
               <ProjectInfo projectID={projectID} />
 
@@ -252,5 +233,18 @@ const NavItem = styled.div`
     cursor: pointer;
     background: #F4F2F0;
     transition: background .25s ease-in, color .25s ease-in;
+  }
+`
+
+const PrefixBtn = styled.div`
+  width: 30px;
+  border-left: 1px solid rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+
+  &:hover {
+    cursor: pointer;
   }
 `
