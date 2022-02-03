@@ -49,12 +49,12 @@ function JobScroll({ projectID }) {
       // >
       // <Slider {...settings} style={{ width: '100%' }}>
         
-          data ?
+          data.length > 0 ?
             data.map((job, index) => {
               if (index === 1) return;
               return (
                 <JobContainer>
-                  <Block>
+                  <Block percentage={40}>
                     <div className="top">
                       <div className="info">
                         <h6>Planned hours</h6>
@@ -69,7 +69,7 @@ function JobScroll({ projectID }) {
                       <span className="bar"></span>
                     </div>
                   </Block>
-                  <Block>
+                  <Block percentage={35}>
                     <div className="top">
                       <div className="info">
                         <h6>Planned budget</h6>
@@ -84,7 +84,7 @@ function JobScroll({ projectID }) {
                       <span className="bar"></span>
                     </div>
                   </Block>
-                  <Block>
+                  <Block percentage={60}>
                     <div className="top">
                       <div className="info">
                         <h6>Entered</h6>
@@ -110,7 +110,62 @@ function JobScroll({ projectID }) {
                 </JobContainer>
               )
             })
-          : null
+          : 
+          <JobContainer>
+            <Block percentage={0}>
+              <div className="top">
+                <div className="info">
+                  <h6>Planned hours</h6>
+                  <span>0hr</span>
+                </div>
+                <div className="info">
+                  <h6>Used</h6>
+                  <span>0hr/0hr</span>
+                </div>
+              </div>
+              <div className="bottom">
+                <span className="bar"></span>
+              </div>
+            </Block>
+            <Block percentage={0}>
+              <div className="top">
+                <div className="info">
+                  <h6>Planned budget</h6>
+                  <span>0hr</span>
+                </div>
+                <div className="info">
+                  <h6>Used</h6>
+                  <span>$0/$0</span>
+                </div>
+              </div>
+              <div className="bottom">
+                <span className="bar"></span>
+              </div>
+            </Block>
+            <Block percentage={0}>
+              <div className="top">
+                <div className="info">
+                  <h6>Entered</h6>
+                  <span>-</span>
+                </div>
+                <div className="info">
+                  <div className="sub">
+                    <div className="left">
+                      <h6>Start</h6>
+                      <span>-</span>
+                    </div>
+                    <div className="right">
+                      <h6>Due date</h6>
+                      <span>-</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bottom">
+                <span className="bar"></span>
+              </div>
+            </Block>
+          </JobContainer>
         
       // </Slider>
   )
@@ -153,7 +208,7 @@ const Block = styled.div`
       top: 0;
       left: 0;
       height: 100%;
-      width: 60%;
+      width: ${props => props.percentage || 0}%;
       background: var(--gold);
     }
   }

@@ -317,7 +317,7 @@ const AppBody = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 1320px;
+  max-width: 1600px;
   margin: 0 auto;
   margin-top: 30px;
   padding: 0 15px;

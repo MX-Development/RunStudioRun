@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import './Labels.css'
 
-function Label({ defaultValue, background, color }) {
+function Label({ defaultValue, background, color, border }) {
   return (
-    <Item defaultValue={defaultValue} style={{ background: background, color: color }} />
+    <Item defaultValue={defaultValue} style={{ background: background, color: color, border: border }} />
   )
 }
 

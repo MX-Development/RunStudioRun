@@ -12,6 +12,33 @@ import Label from '../settings/components/Label';
 
 function ProjectInfo({ projectID }) {
 
+  const [rates, setRates] = useState([
+    {
+      "id": 1,
+      "name": "standard",
+      "title": "Standard",
+      "rate": 100
+    },
+    {
+      "id": 2,
+      "name": "tier_1",
+      "title": "Tier 1",
+      "rate": 120
+    },
+    {
+      "id": 3,
+      "name": "tier_2",
+      "title": "Tier 2",
+      "rate": 130
+    },
+    {
+      "id": 4,
+      "name": "tier_3",
+      "title": "Tier 3",
+      "rate": 150
+    }
+  ])
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [jobs, setJobs] = useState([])
@@ -91,6 +118,10 @@ function ProjectInfo({ projectID }) {
     // setData(newArr);
   };
 
+  const changeRate = (event) => {
+    
+  }
+
   return (
     <Info>
       <Grid container spacing={2}>
@@ -126,15 +157,40 @@ function ProjectInfo({ projectID }) {
           <Grid container spacing={2}>
             <Grid item xs={4}>
               <h6>Rate</h6>
-              <Button>
-                Standard
-              </Button>
+              <Select
+                labelId="rate-select-label"
+                id="rate-select"
+                value={1}
+                name={`1`}
+                className="label-select"
+                label="Job rate"
+                onChange={changeRate}
+              >
+                {
+                  rates.map(rate => (
+                    <MenuItem value={rate.id}>
+                      <Label 
+                        type={1} 
+                        background={'#fff'} 
+                        color={'#B1B0AF'} 
+                        border={'1px solid #B1B0AF'}
+                        defaultValue={rate.title}
+                        name={`label[${rate.id}]`}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                        }}
+                      />
+                    </MenuItem>
+                  ))
+                }
+              </Select>
             </Grid>
             <Grid item xs={4}>
-              <h6>Rate</h6>
+              <h6>Status</h6>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="status-select-label"
+                id="status-select"
                 value={1}
                 name={`1`}
                 className="label-select"
@@ -161,14 +217,14 @@ function ProjectInfo({ projectID }) {
               </Select>
             </Grid>
             <Grid item xs={4}>
-              <h6>Rate</h6>
+              <h6>Action</h6>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="action-select-label"
+                id="action-select"
                 value={1}
                 name={`1`}
                 className="label-select"
-                label="Job status"
+                label="Job action"
                 onChange={changeStatus}
               >
                 {
