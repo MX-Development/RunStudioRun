@@ -12,7 +12,7 @@ const columns = [
   { field: 'jobNo', type: 'string', flex: 0.2 },
   { field: 'estimate', type: 'string', flex: 0.2 },
   { field: 'description', type: 'string', flex: 0.5 },
-  { field: 'enteredDate', type: 'string', flex: 0.2 },
+  { field: 'enteredDate', type: 'string', flex: 0.2, headerName: 'Entered' },
   { field: 'approved', type: 'number', flex: 0.2 },
   { field: 'budget', type: 'number', flex: 0.2 },
   { field: 'action', type: 'number', flex: 0.2 },

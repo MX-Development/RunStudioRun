@@ -17,8 +17,12 @@ import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 import ProjectInfo from './ProjectInfo'
 
-import EllipsisIcon from '../assets/icons/EllipsisIcon.svg'
+import ActionIcon from '../assets/icons/ActionIcon.svg'
+import CloseIcon from '../assets/icons/CloseIcon.svg'
 import ProjectNotes from './projects/ProjectNotes'
+
+import Avatar from '@material-ui/core/Avatar'
+import MemberAvatars from './projects/MemberAvatars'
 
 function ProjectHeader({ projectID }) {
 
@@ -102,9 +106,9 @@ function ProjectHeader({ projectID }) {
                   onClick={() => showProjectNav(!projectNav)}>
                     {
                       projectNav ?
-                      <span>X</span>
+                      <img src={CloseIcon} alt="Close icon" onClick={() => console.log('clicked')} style={{ height: '13px' }} />
                       :
-                      <img src={EllipsisIcon} alt="Ellipsis icon" onClick={() => console.log('clicked')} style={{ height: '16px', opacity: '0.25' }} />
+                      <img src={ActionIcon} alt="Action icon" onClick={() => console.log('clicked')} style={{ height: '16px' }} />
                     }
                 </PrefixBtn>
               </div>
@@ -155,8 +159,8 @@ function ProjectHeader({ projectID }) {
                 </FormControl>
               </FormGroup>
             </Grid>
-            <Grid item xs={12}>
-              <FormGroup>
+            <Grid item xs={10}>
+              <FormGroup style={{ display: 'flex' }}>
                 <FormControl variant="outlined">
                   <Controller
                     render={({ field }) => (
@@ -174,6 +178,9 @@ function ProjectHeader({ projectID }) {
                   />
                 </FormControl>
               </FormGroup>  
+            </Grid>
+            <Grid item xs={2}>
+              <MemberAvatars projectID={projectID} solo={true} />
             </Grid>
           </Grid>
 

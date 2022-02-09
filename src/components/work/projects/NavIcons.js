@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import SavingDraft from './SavingDraft.svg'
@@ -10,10 +10,10 @@ import {
   Link
 } from "react-router-dom"
 
-import TimelineIcon from '../../assets/icons/TimelineIcon.svg'
-import BookIcon from '../../assets/icons/BookIcon.svg'
-import DiscIcon from '../../assets/icons/DiscIcon.svg'
-import EyeIcon from '../../assets/icons/EyeIcon.svg'
+import { ReactComponent as TimelineIcon } from '../../assets/icons/TimelineIcon.svg'
+import { ReactComponent as BookIcon } from '../../assets/icons/BookIcon.svg'
+import { ReactComponent as DiscIcon } from '../../assets/icons/DiscIcon.svg'
+import { ReactComponent as EyeIcon } from '../../assets/icons/EyeIcon.svg'
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -91,24 +91,24 @@ function NavIcons({ id }) {
         PDF
       </ModalBox> */}
       <Icons>
-        <Link to={`/projects/${id}/timeline`} onClick={(e) => setActiveNav('timeline')} className={activeNav === 'timeline' ? 'active' : ''}>
-          <img src={TimelineIcon} alt="timeline icon" />
+        <Link to={`/projects/${id}/timeline`} onClick={(e) => setActiveNav('timeline')} className={`btn btn-icon ${activeNav === 'timeline' ? 'active' : ''}`}>
+          <TimelineIcon />
         </Link>
-        <Link to={`/projects/${id}/book`} onClick={(e) => setActiveNav('book')} className={activeNav === 'book' ? 'active' : ''}>
-          <img src={BookIcon} alt="book icon" />
+        <Link href={`/projects/${id}/book`} onClick={(e) => setActiveNav('book')} className={`btn btn-icon ${activeNav === 'book' ? 'active' : ''}`}>
+          <BookIcon />
         </Link>
-        <Link to={`/projects/${id}`} onClick={(e) => {
+        <Link href={`/projects/${id}`} onClick={(e) => {
           // Set the button to active and run the saving draft function
           setActiveNav('disc')
           saveDraft()
-        }} className={activeNav === 'disc' ? 'active' : ''}>
-          <img src={DiscIcon} alt="disc icon" />
+        }}  className={`btn btn-icon ${activeNav === 'disc' ? 'active' : ''}`}>
+          <DiscIcon />
         </Link>
-        <Link to={`/projects/${id}`} onClick={(e) => {
+        <Link href={`/projects/${id}`} onClick={(e) => {
           setActiveNav('eye')
           showPDF()
-        }} className={activeNav === 'eye' ? 'active' : ''}>
-          <img src={EyeIcon} alt="eye icon" />
+        }}  className={`btn btn-icon ${activeNav === 'eye' ? 'active' : ''}`}>
+          <EyeIcon />
         </Link>
       </Icons>
     </>

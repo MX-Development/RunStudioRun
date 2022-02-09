@@ -10,7 +10,42 @@ import TextField from '@material-ui/core/TextField';
 
 import AddIconSquare from '../../assets/icons/AddIconSquare.svg'
 
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 function ProjectNotes({ data }) {
+
+  const centerModal = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      background: 'var(--white)',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      maxWidth: '550px',
+      maxHeight: '90vh',
+      overflowY: 'scroll'
+    },
+  };
+  
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function afterOpenModal() {
+
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+    const selectedRow = document.querySelector('.Mui-selected');
+    if (selectedRow) selectedRow.classList.remove('Mui-selected');
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
   // const [editorState, setEditorState] = useState(
   //   EditorState.createEmpty()
   // )
@@ -30,28 +65,41 @@ function ProjectNotes({ data }) {
   // }
 
   return (
-    <FormGroup>
-      <FormControl variant="outlined">
-        <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Project notes</FormLabel>
-        <TextField
-          variant="outlined"
-          placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate."
-          value={data ? data.project_notes : null}
-          multiline
-          rows={4}
-          readOnly
-          style={{ background: 'var(--white)' }}
-        />
-        <IconContainer>
-          <img src={AddIconSquare} />
-        </IconContainer>
-        {/* <Editor
-          ref={editor}
-          editorState={editorState}
-          onChange={editorState => setEditorState(editorState)}
-        /> */}
-      </FormControl>
-    </FormGroup>  
+    <>
+      <FormGroup>
+        <FormControl variant="outlined">
+          <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Project notes</FormLabel>
+          <TextField
+            variant="outlined"
+            placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate."
+            defaultValue={data ? data.project_notes : null}
+            multiline
+            rows={4}
+            inputProps={
+              { readOnly: true, }
+            }
+            style={{ background: 'var(--white)', paddingRight: '30px !important' }}
+          />
+          <IconContainer onClick={openModal}>
+            <img src={AddIconSquare} />
+          </IconContainer>
+          {/* <Editor
+            ref={editor}
+            editorState={editorState}
+            onChange={editorState => setEditorState(editorState)}
+          /> */}
+        </FormControl>
+      </FormGroup>  
+
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={centerModal}
+      >
+        <h2>Add project notes</h2>
+      </Modal>
+    </>
   )
 }
 

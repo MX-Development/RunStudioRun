@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import 'swiper/swiper-bundle.min.css'
-// import 'swiper/swiper.min.css'
-import Slider from "react-slick";
+import Carousel from "react-simply-carousel";
 
 import './JobScroll.css'
 
 import axios from 'axios';
+import InfoGraphics from './projects/jobSlider/InfoGraphics';
 
 function JobScroll({ projectID }) {
+  const [activeSlide, setActiveSlide] = useState(0);
 
   const [data, setData] = useState([])
   useEffect(() => {
@@ -30,144 +29,120 @@ function JobScroll({ projectID }) {
       )
   }, [projectID]);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
-
   return (
-      // <Swiper
-      //   spaceBetween={30} 
-      //   slidesPerView={1}
-      //   navigation
-      //   onSlideChange={() => console.log('slide change')}
-      //   onSwiper={(swiper) => console.log(swiper)}
-      //   style={{ width: '100%' }}
-      // >
-      // <Slider {...settings} style={{ width: '100%' }}>
-        
-          data.length > 0 ?
-            data.map((job, index) => {
-              if (index === 1) return;
-              return (
-                <JobContainer>
-                  <Block percentage={40}>
-                    <div className="top">
-                      <div className="info">
-                        <h6>Planned hours</h6>
-                        <span>10hr</span>
-                      </div>
-                      <div className="info">
-                        <h6>Used</h6>
-                        <span>1hr/9hr</span>
-                      </div>
-                    </div>
-                    <div className="bottom">
-                      <span className="bar"></span>
-                    </div>
-                  </Block>
-                  <Block percentage={35}>
-                    <div className="top">
-                      <div className="info">
-                        <h6>Planned budget</h6>
-                        <span>10hr</span>
-                      </div>
-                      <div className="info">
-                        <h6>Used</h6>
-                        <span>$150/$1350</span>
-                      </div>
-                    </div>
-                    <div className="bottom">
-                      <span className="bar"></span>
-                    </div>
-                  </Block>
-                  <Block percentage={60}>
-                    <div className="top">
-                      <div className="info">
-                        <h6>Entered</h6>
-                        <span>8 SEP 2017</span>
-                      </div>
-                      <div className="info">
-                        <div className="sub">
-                          <div className="left">
-                            <h6>Start</h6>
-                            <span>1 SEP 2017</span>
-                          </div>
-                          <div className="right">
-                            <h6>Due date</h6>
-                            <span>30 SEP 2017</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bottom">
-                      <span className="bar"></span>
-                    </div>
-                  </Block>
-                </JobContainer>
-              )
-            })
-          : 
-          <JobContainer>
-            <Block percentage={0}>
-              <div className="top">
-                <div className="info">
-                  <h6>Planned hours</h6>
-                  <span>0hr</span>
-                </div>
-                <div className="info">
-                  <h6>Used</h6>
-                  <span>0hr/0hr</span>
-                </div>
-              </div>
-              <div className="bottom">
-                <span className="bar"></span>
-              </div>
-            </Block>
-            <Block percentage={0}>
-              <div className="top">
-                <div className="info">
-                  <h6>Planned budget</h6>
-                  <span>0hr</span>
-                </div>
-                <div className="info">
-                  <h6>Used</h6>
-                  <span>$0/$0</span>
-                </div>
-              </div>
-              <div className="bottom">
-                <span className="bar"></span>
-              </div>
-            </Block>
-            <Block percentage={0}>
-              <div className="top">
-                <div className="info">
-                  <h6>Entered</h6>
+
+    data && data.length > 0 ?
+      <Carousel
+        className="job-carousel"
+        infinite={false}
+        containerProps={{
+          className: 'hallo',
+          style: {
+            position: 'relative',
+            maxWidth: 'none',
+            width: '100%'
+          }
+        }}
+        innerProps={{
+          style: {
+            maxWidth: 'none',
+            minWidth: 'none !important'
+          }
+        }}
+        activeSlideIndex={activeSlide}
+        onRequestChange={setActiveSlide}
+        forwardBtnProps={{
+          children: ">",
+          style: {
+            width: 60,
+            height: 60,
+            minWidth: 60,
+            alignSelf: "center",
+            position: "absolute",
+            top: "0",
+            right: "0"
+          }
+        }}
+        backwardBtnProps={{
+          children: "<",
+          style: {
+            width: 60,
+            height: 60,
+            minWidth: 60,
+            alignSelf: "center",
+            position: "absolute",
+            top: "0",
+            left: "0"
+          }
+        }}
+        itemsToShow={1}
+        speed={400}
+      >
+        <InfoGraphics />
+        <InfoGraphics />
+        {/* { data.map((job, index) => {
+          return (
+            <InfoGraphics />
+          )
+        }) } */}
+      </Carousel>
+      :
+      <JobContainer>
+        <Block percentage={0}>
+          <div className="top">
+            <div className="info">
+              <h6>Planned hours</h6>
+              <span>0hr</span>
+            </div>
+            <div className="info">
+              <h6>Used</h6>
+              <span>0hr/0hr</span>
+            </div>
+          </div>
+          <div className="bottom">
+            <span className="bar"></span>
+          </div>
+        </Block>
+        <Block percentage={0}>
+          <div className="top">
+            <div className="info">
+              <h6>Planned budget</h6>
+              <span>0hr</span>
+            </div>
+            <div className="info">
+              <h6>Used</h6>
+              <span>$0/$0</span>
+            </div>
+          </div>
+          <div className="bottom">
+            <span className="bar"></span>
+          </div>
+        </Block>
+        <Block percentage={0}>
+          <div className="top">
+            <div className="info">
+              <h6>Entered</h6>
+              <span>-</span>
+            </div>
+            <div className="info">
+              <div className="sub">
+                <div className="left">
+                  <h6>Start</h6>
                   <span>-</span>
                 </div>
-                <div className="info">
-                  <div className="sub">
-                    <div className="left">
-                      <h6>Start</h6>
-                      <span>-</span>
-                    </div>
-                    <div className="right">
-                      <h6>Due date</h6>
-                      <span>-</span>
-                    </div>
-                  </div>
+                <div className="right">
+                  <h6>Due date</h6>
+                  <span>-</span>
                 </div>
               </div>
-              <div className="bottom">
-                <span className="bar"></span>
-              </div>
-            </Block>
-          </JobContainer>
-        
-      // </Slider>
+            </div>
+          </div>
+          <div className="bottom">
+            <span className="bar"></span>
+          </div>
+        </Block>
+      </JobContainer>
+    
   )
 }
 

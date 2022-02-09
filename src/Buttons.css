@@ -16,6 +16,27 @@
   padding: 7.5px 32px;
 }
 
+.btn.btn-icon {
+  background: #fff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn.btn-icon:hover,
+.btn.btn-icon.active {
+  background: #3C3C3C;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.btn.btn-icon:hover svg path,
+.btn.btn-icon.active svg path {
+  fill: #fff;
+}
+
 a {
   transition: background .25s ease-in, color .25s ease-in; 
 }
