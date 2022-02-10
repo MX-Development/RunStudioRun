@@ -200,3 +200,7 @@ form h5 {
   font-weight: bold;
   margin-bottom: 0;
 }
+
+.padded-right textarea {
+  padding-right: 30px !important;
+}

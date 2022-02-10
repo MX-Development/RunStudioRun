@@ -45,6 +45,7 @@
     "react-modal": "^3.14.3",
     "react-popper-tooltip": "^4.3.0",
     "react-redux": "^7.2.3",
+    "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-simply-carousel": "^5.1.4",

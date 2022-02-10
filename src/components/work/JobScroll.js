@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-import Carousel from "react-simply-carousel";
+import { Carousel } from 'react-responsive-carousel';
+import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import './JobScroll.css'
 
@@ -33,58 +34,16 @@ function JobScroll({ projectID }) {
 
     data && data.length > 0 ?
       <Carousel
-        className="job-carousel"
-        infinite={false}
-        containerProps={{
-          className: 'hallo',
-          style: {
-            position: 'relative',
-            maxWidth: 'none',
-            width: '100%'
-          }
-        }}
-        innerProps={{
-          style: {
-            maxWidth: 'none',
-            minWidth: 'none !important'
-          }
-        }}
-        activeSlideIndex={activeSlide}
-        onRequestChange={setActiveSlide}
-        forwardBtnProps={{
-          children: ">",
-          style: {
-            width: 60,
-            height: 60,
-            minWidth: 60,
-            alignSelf: "center",
-            position: "absolute",
-            top: "0",
-            right: "0"
-          }
-        }}
-        backwardBtnProps={{
-          children: "<",
-          style: {
-            width: 60,
-            height: 60,
-            minWidth: 60,
-            alignSelf: "center",
-            position: "absolute",
-            top: "0",
-            left: "0"
-          }
-        }}
-        itemsToShow={1}
-        speed={400}
+      showStatus={false}
+      showIndicators={false}
       >
-        <InfoGraphics />
-        <InfoGraphics />
-        {/* { data.map((job, index) => {
+        {/* <InfoGraphics />
+        <InfoGraphics /> */}
+        { data.map((job, index) => {
           return (
             <InfoGraphics />
           )
-        }) } */}
+        }) }
       </Carousel>
       :
       <JobContainer>

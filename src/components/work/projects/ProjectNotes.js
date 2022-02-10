@@ -26,7 +26,8 @@ function ProjectNotes({ data }) {
       transform: 'translate(-50%, -50%)',
       maxWidth: '550px',
       maxHeight: '90vh',
-      overflowY: 'scroll'
+      width: '100%',
+      padding: '0 !important'
     },
   };
   
@@ -74,6 +75,7 @@ function ProjectNotes({ data }) {
             placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate."
             defaultValue={data ? data.project_notes : null}
             multiline
+            className="padded-right"
             rows={4}
             inputProps={
               { readOnly: true, }
@@ -97,7 +99,14 @@ function ProjectNotes({ data }) {
         onRequestClose={closeModal}
         style={centerModal}
       >
-        <h2>Add project notes</h2>
+        <TextField
+          variant="outlined"
+          placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate."
+          defaultValue={data ? data.project_notes : null}
+          multiline
+          rows={25}
+          style={{ background: 'var(--white)', width: '100%' }}
+        />
       </Modal>
     </>
   )
