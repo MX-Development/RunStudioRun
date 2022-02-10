@@ -9,6 +9,9 @@ import './JobScroll.css'
 import axios from 'axios';
 import InfoGraphics from './projects/jobSlider/InfoGraphics';
 
+import { ReactComponent as SliderPrevArrow } from '../assets/icons/SliderPrevArrow.svg'
+import { ReactComponent as SliderNextArrow } from '../assets/icons/SliderNextArrow.svg'
+
 function JobScroll({ projectID }) {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -36,12 +39,31 @@ function JobScroll({ projectID }) {
       <Carousel
       showStatus={false}
       showIndicators={false}
+      emulateTouch={true}
+      swipable={true}
+      renderArrowPrev={(clickHandler, hasPrev, label) => {
+        return (
+          <button type="button" aria-label="prev slide / item" class={`control-arrow control-prev ${hasPrev ? '' : 'disabled'}`} onClick={clickHandler}>
+            <SliderPrevArrow />
+          </button>
+        )
+      }}
+      renderArrowNext={(clickHandler, hasNext, label) => {
+        return (
+          <button type="button" aria-label="next slide / item" class={`control-arrow control-next ${hasNext ? '' : 'disabled'}`} onClick={clickHandler}>
+            <SliderNextArrow />
+          </button>
+        )
+      }}
       >
         {/* <InfoGraphics />
         <InfoGraphics /> */}
         { data.map((job, index) => {
           return (
-            <InfoGraphics />
+            <GraphicItem>
+              <GraphicHeading>{ job.jobNo }</GraphicHeading>
+              <InfoGraphics item={job} key={index} />
+            </GraphicItem>
           )
         }) }
       </Carousel>
@@ -120,6 +142,7 @@ const Block = styled.div`
       flex-direction: column;
       padding: 7.5px;
       color: #fff;
+      text-align: left;
 
       > span {
         font-size: 1.2em;
@@ -214,4 +237,16 @@ const JobContainer = styled.div`
       background: #519151;
     }
   }
+`
+
+const GraphicItem = styled.div`
+  position: relative;
+`
+
+const GraphicHeading = styled.h5`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -40px);
+  font-weight: bold;
 `

@@ -37,6 +37,8 @@ function Jobs({ projectID }) {
           setData(res.data)
         }
       )
+
+      document.querySelector('.app').style.backgroundImage = "none";
   }, [projectID]);
 
   return (

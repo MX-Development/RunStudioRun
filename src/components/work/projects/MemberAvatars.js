@@ -35,7 +35,7 @@ function MemberAvatars({ projectID, solo }) {
         if (index > 0 && solo) return false;
         if (index > 3) return false;
         return (
-          <Avatar alt={ member.name } src={ member.avatar } onClick={solo ? () => setShowExtended(!showExtended) : null}>
+          <Avatar key={index} alt={ member.name } src={ member.avatar } onClick={solo ? () => setShowExtended(!showExtended) : null}>
             M
           </Avatar>
         )
@@ -51,7 +51,7 @@ function MemberAvatars({ projectID, solo }) {
         if (index < 2) return false;
         return (
           <Member>
-            <Avatar alt={ member.name } src={ member.avatar }>
+            <Avatar key={index} alt={ member.name } src={ member.avatar }>
               M
             </Avatar>
             <span>

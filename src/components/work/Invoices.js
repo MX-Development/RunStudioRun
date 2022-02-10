@@ -49,7 +49,8 @@ function Invoices({ projectID }) {
     axios.get(`https://kendrix.kendrix.website/json/invoices.json`)
       .then(res => {
         projectID ? 
-          res.data.forEach(item => {
+          res.data.forEach((item, index) => {
+            if (index === 0) document.querySelector('.app').style.backgroundImage = "none";
             if (item.projectID === parseInt(projectID)) {
               setData(data => [...data, item])
             }

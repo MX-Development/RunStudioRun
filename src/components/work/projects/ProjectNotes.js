@@ -99,14 +99,16 @@ function ProjectNotes({ data }) {
         onRequestClose={closeModal}
         style={centerModal}
       >
-        <TextField
-          variant="outlined"
-          placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate."
-          defaultValue={data ? data.project_notes : null}
-          multiline
-          rows={25}
-          style={{ background: 'var(--white)', width: '100%' }}
-        />
+        <FormGroup>
+          <TextField
+            variant="outlined"
+            placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate."
+            defaultValue={data ? data.project_notes : null}
+            multiline
+            rows={25}
+            style={{ background: 'var(--white)', width: '100%' }}
+          />
+        </FormGroup>
       </Modal>
     </>
   )

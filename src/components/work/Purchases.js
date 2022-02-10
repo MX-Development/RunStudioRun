@@ -49,11 +49,16 @@ function Purchases({ projectID }) {
     axios.get(`https://kendrix.kendrix.website/json/purchases.json`)
       .then(res => {
         projectID ? 
-          res.data.forEach(item => {
-            if (item.projectID === parseInt(projectID)) {
-              setData(data => [...data, item])
-            }
-          })
+          <>
+          {
+            res.data.forEach((item, index) => {
+              if (index === 0) document.querySelector('.app').style.backgroundImage = "none";
+              if (item.projectID === parseInt(projectID)) {
+                setData(data => [...data, item])
+              }
+            })
+          }
+          </>
         :
           setData(res.data)
         }

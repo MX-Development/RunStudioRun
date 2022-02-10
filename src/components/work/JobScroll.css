@@ -11,14 +11,21 @@
 .carousel.carousel-slider .control-arrow {
   display: flex;
   align-items: flex-start;
+  padding: 0;
+}
+
+.carousel.carousel-slider .control-arrow.disabled {
+  opacity: 0.1;
 }
 
 .carousel .control-arrow:before, .carousel.carousel-slider .control-arrow:before {
-  content: '>';
-  background: #333;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
+}
+
+.carousel.carousel-slider .control-arrow:hover {
+  background: transparent;
+}
+
+.carousel .slide {
+  text-align: inherit;
 }
