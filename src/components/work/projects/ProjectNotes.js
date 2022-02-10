@@ -10,10 +10,25 @@ import TextField from '@material-ui/core/TextField';
 
 import AddIconSquare from '../../assets/icons/AddIconSquare.svg'
 
+// Import the Slate editor factory.
+import { createEditor } from 'slate'
+
+// Import the Slate components and React plugin.
+import { Slate, Editable, withReact } from 'slate-react'
+
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 function ProjectNotes({ data }) {
+
+  const [editor] = useState(() => withReact(createEditor()))
+  // Keep track of state for the value of the editor.
+  const [value, setValue] = useState([
+    {
+      type: 'paragraph',
+      children: [{ text: 'A line of text in a paragraph.' }],
+    },
+  ])
 
   const centerModal = {
     content: {
@@ -108,6 +123,14 @@ function ProjectNotes({ data }) {
             rows={25}
             style={{ background: 'var(--white)', width: '100%' }}
           />
+
+    <Slate
+      editor={editor}
+      value={value}
+      onChange={newValue => setValue(newValue)}
+    >
+      <Editable />
+    </Slate>
         </FormGroup>
       </Modal>
     </>
