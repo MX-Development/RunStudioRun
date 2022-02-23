@@ -1,34 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
-import { Editor, EditorState } from 'draft-js';
-import 'draft-js/dist/Draft.css';
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField'; 
+ 
+import AddIconSquare from '../../../../assets/icons/AddIconSquare.svg'
 
-import AddIconSquare from '../../assets/icons/AddIconSquare.svg'
-
-// Import the Slate editor factory.
-import { createEditor } from 'slate'
-
-// Import the Slate components and React plugin.
-import { Slate, Editable, withReact } from 'slate-react'
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import '../../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import './Wysiwyg.css';
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 function ProjectNotes({ data }) {
 
-  const [editor] = useState(() => withReact(createEditor()))
-  // Keep track of state for the value of the editor.
-  const [value, setValue] = useState([
-    {
-      type: 'paragraph',
-      children: [{ text: 'A line of text in a paragraph.' }],
-    },
-  ])
+  const content = localStorage.getItem('content');
+
+  const [editorState, setEditorState] = useState(EditorState.createEmpty())
+
+  useEffect(() => {
+    content ?
+      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content)))) 
+    : 
+      setEditorState(EditorState.createEmpty())
+  }, []);
+
+  const onEditorStateChange = (editorState) => {
+    setEditorState(editorState)
+
+    const contentState = editorState.getCurrentContent();
+    localStorage.setItem('content', JSON.stringify(convertToRaw(contentState)));
+  }
 
   const centerModal = {
     content: {
@@ -42,7 +48,8 @@ function ProjectNotes({ data }) {
       maxWidth: '550px',
       maxHeight: '90vh',
       width: '100%',
-      padding: '0 !important'
+      padding: '0 !important',
+      border: 'none'
     },
   };
   
@@ -62,26 +69,23 @@ function ProjectNotes({ data }) {
     setIsOpen(true)
   }
 
-  // const [editorState, setEditorState] = useState(
-  //   EditorState.createEmpty()
-  // )
- 
-  // const editor = React.useRef(null);
- 
-  // function focusEditor() {
-  //   editor.current.focus();
-  // }
- 
-  // React.useEffect(() => {
-  //   focusEditor()
-  // }, []);
-
-  // const EditNotes = () => {
-  //   console.log('Edit notes...');
-  // }
-
   return (
     <>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={centerModal}
+      >
+        <Editor 
+          toolbar={{
+            options: ['inline']
+          }} 
+          editorState={editorState}
+          onEditorStateChange={onEditorStateChange}
+        />
+      </Modal> 
+
       <FormGroup>
         <FormControl variant="outlined">
           <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Project notes</FormLabel>
@@ -107,32 +111,6 @@ function ProjectNotes({ data }) {
           /> */}
         </FormControl>
       </FormGroup>  
-
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={centerModal}
-      >
-        <FormGroup>
-          <TextField
-            variant="outlined"
-            placeholder="Enter the job description and if you’d like the client to understand what you will be working on tick to publish this description in your estimate."
-            defaultValue={data ? data.project_notes : null}
-            multiline
-            rows={25}
-            style={{ background: 'var(--white)', width: '100%' }}
-          />
-
-    <Slate
-      editor={editor}
-      value={value}
-      onChange={newValue => setValue(newValue)}
-    >
-      <Editable />
-    </Slate>
-        </FormGroup>
-      </Modal>
     </>
   )
 }

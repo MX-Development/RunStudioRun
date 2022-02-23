@@ -1,0 +1,13 @@
+.rdw-editor-toolbar {
+  background: var(--text-gray);
+  border: none;
+}
+
+.rdw-option-wrapper {
+  background: var(--dark-gray);
+  border: none;
+}
+
+.DraftEditor-editorContainer {
+  padding: 0 15px;
+}

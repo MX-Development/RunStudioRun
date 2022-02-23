@@ -5,6 +5,8 @@ import axios from 'axios'
 
 import Grid from '@material-ui/core/Grid';
 
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
 import { MenuItem, Select } from '@material-ui/core'
 import Label from '../settings/components/Label';
 import MemberAvatars from './projects/MemberAvatars';
@@ -134,94 +136,106 @@ function ProjectInfo({ projectID }) {
           <Grid container spacing={2}>
             <Grid item xs={4}>
               <h6>Rate</h6>
-              <Select
-                labelId="rate-select-label"
-                id="rate-select"
-                value={1}
-                name={`1`}
-                className="label-select"
-                label="Job rate"
-                onChange={changeRate}
-              >
-                {
-                  rates.map(rate => (
-                    <MenuItem value={rate.id}>
-                      <Label 
-                        type={1} 
-                        background={'#fff'} 
-                        color={'#B1B0AF'} 
-                        border={'1px solid #B1B0AF'}
-                        defaultValue={rate.title}
-                        name={`label[${rate.id}]`}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          e.preventDefault()
-                        }}
-                      />
-                    </MenuItem>
-                  ))
-                }
-              </Select>
+              <FormGroup>
+                <FormControl variant="outlined">
+                  <Select
+                    labelId="rate-select-label"
+                    id="rate-select"
+                    value={1}
+                    name={`1`}
+                    className="label-select"
+                    label="Job rate"
+                    onChange={changeRate}
+                  >
+                    {
+                      rates.map(rate => (
+                          <MenuItem value={rate.id} key={rate.id}>
+                            <Label 
+                              type={1} 
+                              background={'#fff'} 
+                              color={'#B1B0AF'} 
+                              border={'1px solid #B1B0AF'}
+                              defaultValue={rate.title}
+                              name={`label[${rate.id}]`}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                              }}
+                            />
+                          </MenuItem>
+                      ))
+                    }
+                  </Select>
+                </FormControl>
+              </FormGroup>
             </Grid>
             <Grid item xs={4}>
               <h6>Status</h6>
-              <Select
-                labelId="status-select-label"
-                id="status-select"
-                value={1}
-                name={`1`}
-                className="label-select"
-                label="Job status"
-                onChange={changeStatus}
-              >
-                {
-                  jobs.map(label => (
-                    <MenuItem value={label.id}>
-                      <Label 
-                        type={1} 
-                        background={label.background} 
-                        color={label.color} 
-                        defaultValue={label.title}
-                        name={`label[${label.id}]`}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          e.preventDefault()
-                        }}
-                      />
-                    </MenuItem>
-                  ))
-                }
-              </Select>
+              <FormGroup>
+                <FormControl variant="outlined">
+                  <Select
+                    labelId="status-select-label"
+                    id="status-select"
+                    value={1}
+                    name={`1`}
+                    className="label-select"
+                    label="Job status"
+                    onChange={changeStatus}
+                  >
+                    {
+                      jobs.map(label => (
+                          <MenuItem value={label.id} key={label.id}>
+                            <Label 
+                              type={1} 
+                              background={label.background} 
+                              color={label.color} 
+                              defaultValue={label.title}
+                              name={`label[${label.id}]`}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                              }}
+                            />
+                          </MenuItem>
+                      ))
+                    }
+                  </Select>
+                </FormControl>
+              </FormGroup>
             </Grid>
             <Grid item xs={4}>
               <h6>Action</h6>
-              <Select
-                labelId="action-select-label"
-                id="action-select"
-                value={1}
-                name={`1`}
-                className="label-select"
-                label="Job action"
-                onChange={changeStatus}
-              >
-                {
-                  projectLabels.map(label => (
-                    <MenuItem value={label.id}>
-                      <Label 
-                        type={1} 
-                        background={label.background} 
-                        color={label.color} 
-                        defaultValue={label.title}
-                        name={`label[${label.id}]`}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          e.preventDefault()
-                        }}
-                      />
-                    </MenuItem>
-                  ))
-                }
-              </Select>
+              <FormGroup>
+                <FormControl variant="outlined">
+                  <Select
+                    labelId="action-select-label"
+                    id="action-select"
+                    value={1}
+                    name={`1`}
+                    className="label-select"
+                    label="Job action"
+                    onChange={changeStatus}
+                  >
+                    {
+                      projectLabels.map(label => (
+                          <MenuItem value={label.id} key={label.id}>
+                            <Label 
+                              type={1} 
+                              background={label.background} 
+                              color={label.color} 
+                              defaultValue={label.title}
+                              name={`label[${label.id}]`}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                              }}
+                            />
+                          </MenuItem>
+                      ))
+                    }
+                  </Select>
+                </FormControl>
+              </FormGroup>
             </Grid>
           </Grid>
         </Grid>

@@ -51,7 +51,7 @@ import Expenses from './components/settings/Expenses';
 import Profile from './components/settings/Profile';
 
 import ToDos from './components/to-dos/ToDos';
-import Reports from './components/work/Reports';
+import Reports from './components/work/Reports'; 
 
 // Background images
 import BackgroundImage from './components/assets/img/greyhounds/corner-left-hound.svg'
@@ -60,13 +60,15 @@ import LoveHounds from './components/assets/img/greyhounds/LoveHounds.svg'
 import BabyHounds from './components/assets/img/greyhounds/BabyHounds.svg'
 import SideHounds from './components/assets/img/greyhounds/SideHounds.svg'
 
-import Components from './components/Components';
+import Components from './components/Components'; 
 import PDF from './components/PDF';
 import Onboarding from './components/account/Onboarding';
 import KanbanBoard from './components/to-dos/KanbanBoard';
 import Verify from './components/account/Verify';
 import GettingStarted from './components/account/GettingStarted';
 import Trello from './components/to-dos/Trello';
+
+// import DragList2 from './components/DragList2';
 
 // Create theme
 let theme = createTheme({
@@ -187,6 +189,7 @@ function App() {
                     <Route path="/table" exact>
                       <MaterialTable /> 
                     </Route> */}
+                    {/* <Route exact path="/draglist2" component={DragList2} /> */}
 
                     <Route exact path="/">
                         <Redirect to="/to-do" />

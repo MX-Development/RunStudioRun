@@ -6,11 +6,11 @@ import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import './JobScroll.css'
 
-import axios from 'axios';
-import InfoGraphics from './projects/jobSlider/InfoGraphics';
+import axios from 'axios'; 
+import InfoGraphics from './InfoGraphics';
 
-import { ReactComponent as SliderPrevArrow } from '../assets/icons/SliderPrevArrow.svg'
-import { ReactComponent as SliderNextArrow } from '../assets/icons/SliderNextArrow.svg'
+import { ReactComponent as SliderPrevArrow } from '../../../../assets/icons/SliderPrevArrow.svg'
+import { ReactComponent as SliderNextArrow } from '../../../../assets/icons/SliderNextArrow.svg'
 
 function JobScroll({ projectID }) {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -233,7 +233,7 @@ const JobContainer = styled.div`
       background: #B1B0AF;
     }
 
-    .bar {
+    .bar { 
       background: #519151;
     }
   }

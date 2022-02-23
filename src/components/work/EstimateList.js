@@ -25,6 +25,8 @@ import {
 
 function EstimateList({ type, data, id, team }) {
 
+  console.log(data);
+
   const { control } = useForm();
 
   const [selectedData, setSelectedData] = useState(null)
@@ -297,7 +299,7 @@ const DragButton = styled.div`
   width: 50px;
   height: 50px;
   padding: 10px;
-  background: var(--white);
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,7 +316,7 @@ const Info = styled.div`
   justify-content: center;
   flex: 0.5;
   padding: 0 15px;
-  background: var(--white);
+  background: #fff;
 `
 
 const Top = styled.div`
@@ -392,7 +394,7 @@ const Description = styled.div`
   flex: ${props => props.small ? "0.5525" : "0.5"};
   padding: 15px;
   font-size: 14px;
-  background: var(--white);
+  background: #fff;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
 `
@@ -401,7 +403,7 @@ const ActionButton = styled.div`
   width: 50px;
   height: 50px;
   padding: 10px;
-  background: var(--white);
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -5,7 +5,6 @@ import { useHistory, useParams, useLocation } from "react-router-dom"
 
 import axios from 'axios'
 
-import JobScroll from './JobScroll'
 import ProjectNav from './ProjectNav'
 import NavIcons from './projects/NavIcons'
 
@@ -19,10 +18,11 @@ import ProjectInfo from './ProjectInfo'
 
 import ActionIcon from '../assets/icons/ActionIcon.svg'
 import CloseIcon from '../assets/icons/CloseIcon.svg'
-import ProjectNotes from './projects/ProjectNotes'
+import ProjectNotes from './projects/projectHeader/projectNotes/ProjectNotes'
 
 import Avatar from '@material-ui/core/Avatar'
 import MemberAvatars from './projects/MemberAvatars'
+import JobScroll from './projects/projectHeader/jobSlider/JobScroll'
 
 function ProjectHeader({ projectID }) {
 
@@ -150,7 +150,7 @@ function ProjectHeader({ projectID }) {
                     value={'Who requested the work?'}
                     style={{ width: '100%', background: 'var(--white)' }}
                   >
-                    <MenuItem value="Who requested the work?">
+                    <MenuItem value="Who requested the work?"> 
                       <em>Who requested the work?</em>
                     </MenuItem>
                     <MenuItem value={20}>2</MenuItem>
@@ -168,7 +168,7 @@ function ProjectHeader({ projectID }) {
                         variant="outlined"
                         placeholder="Client Purchase Order Number [Optional]"
                         {...field}
-                        value={selectedData ? selectedData.order_nr : null}
+                        value={selectedData ? selectedData.order_nr : ''}
                         onChange={handleChange}
                         style={{ background: 'var(--white)' }}
                       />

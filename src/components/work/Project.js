@@ -31,7 +31,7 @@ function Project() {
               <>
                 <Jobs projectID={id} />
               </>
-            : view === 'estimates' ?
+            : view === 'estimates' ? 
               <Estimates projectID={id} />
             : view === 'purchases' ?
               <Purchases projectID={id} />

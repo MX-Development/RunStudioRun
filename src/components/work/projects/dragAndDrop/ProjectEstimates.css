@@ -1,10 +1,10 @@
-.dragging-over {
+/* .dragging-over {
   background: rgba(0,0,0,0.25);
 }
 
 .dragging {
   background: rgba(0,0,0,0.5);
-}
+} */
 
 .dragger-content {
   display: flex;

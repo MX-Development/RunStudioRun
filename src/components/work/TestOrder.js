@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import produce from 'immer'
 
-import './ProjectEstimates.css'
+import './projects/dragAndDrop/ProjectEstimates.css'
 import EstimateList from './EstimateList';
 
 const dragReducer = produce((draft, action) => {

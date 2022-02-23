@@ -4,11 +4,19 @@ import styled from 'styled-components'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-function AddNav({ show }) {
+function AddNav({ show, addOptions }) {
+  
+  // Send items to add back to parent
+  function addItems() {  
+    addOptions(state);
+  }
 
   const [state, setState] = useState({
     overview: false,
-    stage: false
+    phase: false,
+    task: false,
+    subtask: false,
+    expense: false
   });
 
   const handleChange = (event) => {
@@ -24,23 +32,23 @@ function AddNav({ show }) {
           labelPlacement="start"
         />
       </Item>
-      <Item active={state.stage ? true : false}>
+      <Item active={state.phase ? true : false}>
         <FormControlLabel
-          control={<Checkbox checked={state.stage} onChange={handleChange} name="stage" />}
+          control={<Checkbox checked={state.phase} onChange={handleChange} name="phase" />}
           label="Add a Stage/Phase"
           labelPlacement="start"
         />
       </Item>
-      <Item active={state.item ? true : false}>
+      <Item active={state.task ? true : false}>
         <FormControlLabel
-          control={<Checkbox checked={state.item} onChange={handleChange} name="item" />}
+          control={<Checkbox checked={state.task} onChange={handleChange} name="task" />}
           label="Add an Item/Task"
           labelPlacement="start"
         />
       </Item>
-      <Item active={state.subitem ? true : false}>
+      <Item active={state.subtask ? true : false}>
         <FormControlLabel
-          control={<Checkbox checked={state.subitem} onChange={handleChange} name="subitem" />}
+          control={<Checkbox checked={state.subtask} onChange={handleChange} name="subtask" />}
           label="Add a Sub Item/Task"
           labelPlacement="start"
         />
@@ -53,7 +61,7 @@ function AddNav({ show }) {
         />
       </Item>
       <AddButton>
-        <button class="btn btn-grey" type="button">Add</button>
+        <button className="btn btn-grey" type="button" onClick={addItems}>Add</button>
       </AddButton>
     </Container>
   )

@@ -7,7 +7,7 @@ function InfoGraphics({ item }) {
 
   return (
     <JobContainer>
-      <Block percentage={40}>
+      <Block percentage={40}> 
         <div className="top">
           <div className="info">
             <h6>Planned hours</h6>

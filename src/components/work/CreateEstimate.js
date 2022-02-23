@@ -2,18 +2,14 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import AddIcon from '../assets/icons/AddIcon.svg'
-import ProjectEstimates from './ProjectEstimates';
+import ProjectEstimates from './projects/dragAndDrop/ProjectEstimates';
 import ModalBox from '../ModalBox';
 
 import EyeIcon from '../assets/icons/EyeIcon.svg'
-import PlusIcon from '../assets/icons/PlusIcon.svg'
-import AddNav from './projects/AddNav'
-import TestOrder from './TestOrder';
 
 function CreateEstimate({ id }) {
 
   const [adding, setAdding] = useState(false)
-  const [addNav, setAddNav] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
   const AddEstimate = () => {
@@ -31,13 +27,9 @@ function CreateEstimate({ id }) {
       { 
         adding ?
         <>
-          <DividerWithIcon>
-            <img src={PlusIcon} alt="" onClick={() => setAddNav(!addNav)} />
-            <AddNav show={addNav ? true : false} />
-          </DividerWithIcon>
 
-          <TestOrder estimateID={1} key={1} />
-          {/* <ProjectEstimates /> */}
+          <ProjectEstimates estimateID={null} key={1} />
+          {/* <TestOrder estimateID={1} key={1} /> */}
 
           <DividerWithIcon onClick={showPDF}>
             <img src={EyeIcon} alt="" />
