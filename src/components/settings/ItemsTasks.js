@@ -19,8 +19,8 @@ import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
 const columns = [
-  { field: 'rateName', type: 'string', flex: 0.3 },
-  { field: 'rateDescription', type: 'string', flex: 0.5 },
+  { field: 'rateName', type: 'string', flex: 0.3, headerName: 'Item/task' },
+  { field: 'rateDescription', type: 'string', flex: 0.5, headerName: 'Description' },
   { 
     field: 'standard', type: 'number', flex: 0.1, headerName: 'The Rate',
     valueFormatter: (params) => {

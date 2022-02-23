@@ -18,7 +18,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 const columns = [
-  { field: 'expenseName', type: 'string', flex: 0.3 },
+  { field: 'expenseName', type: 'string', flex: 0.3, headerName: 'Expense' },
   { field: 'description', type: 'string', flex: 0.6 },
   { field: 'cost', type: 'string', flex: 0.2 },
   { field: 'markup', type: 'string', flex: 0.2 },
