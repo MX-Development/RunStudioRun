@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "taskId": 1,
+    "projectID": 1,
+    "title": "Subtask title 1",
+    "description": "Subtask description 1",
+    "time": 75,
+    "rate": 150,
+    "total": 200,
+    "startDate": "2021-08-21T14:15",
+    "endDate": "2021-08-21T17:00",
+    "team": [1, 4]
+  },
+  {
+    "id": 2,
+    "taskId": 1,
+    "projectID": 1,
+    "title": "Subtask title 2",
+    "description": "Subtask description 2",
+    "time": 120,
+    "rate": 150,
+    "total": 300,
+    "startDate": "2021-08-18T18:15",
+    "endDate": "2021-08-21T17:00",
+    "team": [2]
+  },
+  {
+    "id": 3,
+    "taskId": 2,
+    "projectID": 1,
+    "title": "Subtask title 3",
+    "description": "Subtask description 3",
+    "time": 75,
+    "rate": 150,
+    "total": 200,
+    "startDate": "2021-08-22T15:15",
+    "endDate": "2021-08-21T17:00",
+    "team": [2, 3]
+  },
+  {
+    "id": 4,
+    "taskId": 3,
+    "projectID": 1,
+    "title": "Subtask title 4",
+    "description": "Subtask description 4",
+    "time": 75,
+    "rate": 150,
+    "total": 200,
+    "startDate": "2021-08-22T15:15",
+    "endDate": "2021-08-21T17:00",
+    "team": [1, 2]
+  }
+]

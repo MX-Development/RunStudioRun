@@ -1,0 +1,182 @@
+[
+  {
+    "jobs": [
+      {
+        "id": 1,
+        "title": "Ready",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 2,
+        "title": "Live",
+        "background": "rgb(118, 201, 57)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 3,
+        "title": "Ongoing",
+        "background": "rgb(26, 168, 26)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 4,
+        "title": "Completed",
+        "background": "rgb(35, 118, 250)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 5,
+        "title": "On hold",
+        "background": "rgb(165, 94, 162)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 6,
+        "title": "Cancelled",
+        "background": "rgb(0, 0, 0)",
+        "color": "#FFFFFF"
+      }
+    ],
+    "invoices": [
+      {
+        "id": 1,
+        "title": "Open",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 2,
+        "title": "Ready",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 3,
+        "title": "Approved",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 4,
+        "title": "Exported",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "title": "No status",
+        "background": "rgb(244, 242, 240)",
+        "color": "#3C3C3C"
+      },
+      {
+        "id": 2,
+        "title": "No rush",
+        "background": "rgb(244, 242, 240)",
+        "color": "#3C3C3C"
+      },
+      {
+        "id": 3,
+        "title": "Urgent",
+        "background": "rgb(244, 242, 240)",
+        "color": "#3C3C3C"
+      },
+      {
+        "id": 4,
+        "title": "Planning",
+        "background": "rgb(244, 242, 240)",
+        "color": "#3C3C3C"
+      },
+      {
+        "id": 5,
+        "title": "Briefing",
+        "background": "rgb(244, 242, 240)",
+        "color": "#3C3C3C"
+      },
+      {
+        "id": 6,
+        "title": "Review",
+        "background": "rgb(244, 242, 240)",
+        "color": "#3C3C3C"
+      }
+    ],
+    "contacts": [
+      {
+        "id": 1,
+        "title": "Supplier",
+        "background": "rgb(127, 94, 139)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 2,
+        "title": "Client",
+        "background": "rgb(160, 196, 133)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 3,
+        "title": "Prospect",
+        "background": "rgb(117, 160, 230)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 4,
+        "title": "Ex-supplier",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 5,
+        "title": "Ex-client",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 6,
+        "title": "Prospect lost",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      }
+    ],
+    "purchases": [
+      {
+        "id": 1,
+        "title": "Pending",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 2,
+        "title": "Requested",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 3,
+        "title": "Quoted",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 4,
+        "title": "Ordered",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 5,
+        "title": "Received",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      },
+      {
+        "id": 6,
+        "title": "Cancelled",
+        "background": "rgb(177, 176, 175)",
+        "color": "#FFFFFF"
+      }
+    ]
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "jobId": 1,
+    "projectID": 1,
+    "item": [
+      {
+        "id": 2,
+        "jobId": 1,
+        "type": "phase",
+        "title": "Phase 1 title",
+        "description": "Phase 1 description",
+        "tasks": [1, 2]
+      },
+      {
+        "id": 3,
+        "type": "task",
+        "title": "Task title 1",
+        "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
+        "time": 4500,
+        "time_worked": 1500,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-18T09:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4]
+      },
+      {
+        "id": 4,
+        "type": "subtask",
+        "title": "Subtask title 1",
+        "description": "Subtask description 1",
+        "time": 75,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-21T14:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4]
+      },
+      {
+        "id": 5,
+        "jobId": 1,
+        "type": "phase",
+        "title": "Phase 2 title",
+        "description": "Phase 2 description",
+        "tasks": [3]
+      },
+      {
+        "id": 6,
+        "type": "task",
+        "title": "Task title 2",
+        "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
+        "time": 6500,
+        "time_worked": 1500,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-18T09:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4],
+        "subitems": []
+      },
+      {
+        "id": 7,
+        "type": "subtask",
+        "title": "Subtask title 3",
+        "description": "Subtask description 3",
+        "time": 75,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-21T14:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4]
+      },
+      {
+        "id": 8,
+        "type": "subtask", 
+        "title": "Subtask title 4",
+        "description": "Subtask description 4",
+        "time": 75,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-21T14:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4]
+      },
+      {
+        "id": 9,
+        "type": "expense",
+        "title": "Expense title 1",
+        "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
+        "time": 6500,
+        "time_worked": 1500,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-18T09:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4],
+        "subitems": []
+      },
+      {
+        "id": 10,
+        "type": "additional_time",
+        "title": "Additional time 1",
+        "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur.",
+        "time": 4500,
+        "time_worked": 1500,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-18T09:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4]
+      },
+      {
+        "id": 11,
+        "type": "additional_time",
+        "title": "Additional time 2",
+        "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur.",
+        "time": 4500,
+        "time_worked": 1500,
+        "rate": 150,
+        "total": 200,
+        "startDate": "2021-08-18T09:15",
+        "endDate": "2021-08-21T17:00",
+        "team": [1, 4]
+      }
+    ]
+  }
+]

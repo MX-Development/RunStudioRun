@@ -30,7 +30,7 @@ function ProjectHeader({ projectID }) {
 
   const [projects, setProjects] = useState([])
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/projects.json`)
+    axios.get(`/json/projects.json`)
       .then(res => {
         setProjects(res.data)
       })

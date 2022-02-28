@@ -47,7 +47,7 @@ function YourTeam({ add }) {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/team.json`)
+      await axios.get(`/json/team.json`)
         .then(res => {
           setData(res.data)
         })

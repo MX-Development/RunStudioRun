@@ -14,12 +14,13 @@ html {
 .modal-open {
   padding-right: 0 !important;
 }
-html {
+/* html {
   overflow-y: scroll !important;
-}
+} */
 
 body {
   overflow-x: hidden;
+  overflow-y: scroll !important;
   margin: 0;
   color: var(--text-gray);
   padding-right: 0 !important;

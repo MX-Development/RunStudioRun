@@ -51,7 +51,7 @@ function ProjectInfo({ projectID }) {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/labels.json`)
+      await axios.get(`/json/labels.json`)
         .then(res => {
           setJobs(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
@@ -76,13 +76,13 @@ function ProjectInfo({ projectID }) {
   const [showExtended, setShowExtended] = useState(false)
 
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+    axios.get(`/json/estimates/items.json`)
     .then(res => {
       setTeamMembers([])
       res.data.forEach(task => {
        if (task.projectID === parseInt(projectID)) {
 
-        axios.get(`https://kendrix.kendrix.website/json/team.json`)
+        axios.get(`/json/team.json`)
         .then(res => {
           res.data.forEach(member => {
             if (task.team.includes(member.id)) {

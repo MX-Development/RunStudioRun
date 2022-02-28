@@ -10,13 +10,13 @@ function MemberAvatars({ projectID, solo }) {
   const [showExtended, setShowExtended] = useState(false)
 
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+    axios.get(`/json/estimates/items.json`)
     .then(res => {
       setTeamMembers([])
       res.data.forEach(task => {
        if (task.projectID === parseInt(projectID)) {
 
-        axios.get(`https://kendrix.kendrix.website/json/team.json`)
+        axios.get(`/json/team.json`)
         .then(res => {
           res.data.forEach(member => {
             if (task.team.includes(member.id)) {
@@ -50,7 +50,7 @@ function MemberAvatars({ projectID, solo }) {
       { teamMembers ? teamMembers.map((member, index) => {
         if (index < 2) return false;
         return (
-          <Member>
+          <Member key={index}>
             <Avatar key={index} alt={ member.name } src={ member.avatar }>
               M
             </Avatar>

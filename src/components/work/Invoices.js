@@ -21,7 +21,7 @@ function Invoices({ projectID }) {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/labels.json`)
+      await axios.get(`/json/labels.json`)
         .then(res => {
           setJobs(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
@@ -46,7 +46,7 @@ function Invoices({ projectID }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/invoices.json`)
+    axios.get(`/json/invoices.json`)
       .then(res => {
         projectID ? 
           res.data.forEach((item, index) => {

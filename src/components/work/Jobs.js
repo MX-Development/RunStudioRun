@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom"
 import axios from 'axios';
 
 import List from '../List'
-import TestOrder from './TestOrder';
 import CreateEstimate from './CreateEstimate'
+import ProjectEstimates from './projects/dragAndDrop/ProjectEstimates';
 
 const columns = [
   { field: 'project', type: 'string', flex: 0.4 },
@@ -25,7 +25,7 @@ function Jobs({ projectID }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/jobs.json`)
+    axios.get(`/json/jobs.json`)
       .then(res => {
         projectID ? 
           res.data.forEach(item => {
@@ -43,7 +43,10 @@ function Jobs({ projectID }) {
 
   return (
     viewID ? 
-    <TestOrder estimateID={viewID} key={1} />
+    <>
+      <ProjectEstimates estimateID={viewID} itemType={'estimate'} key={1} />
+      <ProjectEstimates estimateID={viewID} itemType={'additional_time'} />
+    </>
     :
       data.length > 0 ?
         <List title={'Jobs'} columns={columns} data={data} projectID={projectID} key={projectID} view={view} />

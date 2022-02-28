@@ -44,7 +44,7 @@ function Projects({ add }) {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/labels.json`)
+      await axios.get(`/json/labels.json`)
         .then(res => {
           setJobs(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
@@ -108,7 +108,7 @@ function Projects({ add }) {
       >
         {
           projectLabels.map(label => (
-            <MenuItem value={label.id}>
+            <MenuItem value={label.id} key={label.id}>
               <Label 
                 type={params.row.action} 
                 background={label.background}
@@ -138,7 +138,7 @@ function Projects({ add }) {
       >
         {
           jobs.map(label => (
-            <MenuItem value={label.id}>
+            <MenuItem value={label.id} key={label.id}>
               <Label 
                 type={params.row.status} 
                 background={label.background} 
@@ -184,6 +184,7 @@ function Projects({ add }) {
   const [data, setData] = useState([])
   const [projects, setProjects] = useState(null);
   const [companies, setCompanies] = useState(null);
+  const [allCompanies, setAllCompanies] = useState(null);
   const [companyProjects, setCompanyProjects] = useState(null);
 
   const order = useSelector((state) => state.order.showOrdered);
@@ -199,7 +200,7 @@ function Projects({ add }) {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/projects.json`)
+      await axios.get(`/json/projects.json`)
         .then(res => {
           setData(res.data)
           console.log(res.data);
@@ -214,10 +215,11 @@ function Projects({ add }) {
 
           setCompanies(companies);
 
-          // axios.get(`https://kendrix.kendrix.website/json/companies.json`)
-          //   .then(res => {
-          //     // companies.push(res.data);
-          //   })
+          axios.get(`/json/companies.json`)
+            .then(res => {
+              console.log('Companies: ', res.data)
+              setAllCompanies(res.data);
+            })
 
           // setData(res.data)
         })
@@ -315,12 +317,12 @@ function Projects({ add }) {
                     value={'Select...'}
                     style={{ width: '100%' }}
                   >
-                    <MenuItem value="">
+                    <MenuItem value="Select...">
                       <em>Select...</em>
                     </MenuItem>
                     { 
-                      companies ? 
-                        companies.map(company => (
+                      allCompanies && allCompanies.length > 0 ? 
+                        allCompanies.map(company => (
                           <MenuItem value={company.companyName} key={company.id}>{company.companyName}</MenuItem>
                         ))
                       : null
@@ -429,11 +431,7 @@ function Projects({ add }) {
         buttons={[
           {
             "label": "Add",
-            "action": function() { history.push(`/companies/add`) }
-          },
-          {
-            "label": "Export",
-            "action": function() { alert('Export...') }
+            "action": function() { history.push(`/projects/add`) }
           },
           {
             "label": "Print",
@@ -442,6 +440,9 @@ function Projects({ add }) {
         ]}
         columns={columns} 
         data={data} 
+        modalTitle={'New Project'} 
+        modalContent={modalContent} 
+        add={add ? true : false} 
       />
 
       {

@@ -45,7 +45,7 @@ function Companies({ add, importing }) {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+      await axios.get(`/json/companies.json`)
         .then(res => {
           setData(res.data)
         })

@@ -28,14 +28,13 @@ function CreateEstimate({ id }) {
         adding ?
         <>
 
-          <ProjectEstimates estimateID={null} key={1} />
-          {/* <TestOrder estimateID={1} key={1} /> */}
+          <ProjectEstimates estimateID={null} itemType={'estimate'} />
 
           <DividerWithIcon onClick={showPDF}>
             <img src={EyeIcon} alt="" />
-            {/* <ModalBox modalOpened={openModal}>
+            <ModalBox modalOpened={openModal}>
               PDF
-            </ModalBox> */}
+            </ModalBox>
           </DividerWithIcon>
         </>
         :

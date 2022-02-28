@@ -18,7 +18,7 @@ function JobScroll({ projectID }) {
   const [data, setData] = useState([])
   useEffect(() => {
     setData([])
-    axios.get(`https://kendrix.kendrix.website/json/jobs.json`)
+    axios.get(`/json/jobs.json`)
       .then(res => {
         projectID ? 
           res.data.forEach(item => {
@@ -43,14 +43,14 @@ function JobScroll({ projectID }) {
       swipable={true}
       renderArrowPrev={(clickHandler, hasPrev, label) => {
         return (
-          <button type="button" aria-label="prev slide / item" class={`control-arrow control-prev ${hasPrev ? '' : 'disabled'}`} onClick={clickHandler}>
+          <button type="button" aria-label="prev slide / item" className={`control-arrow control-prev ${hasPrev ? '' : 'disabled'}`} onClick={clickHandler}>
             <SliderPrevArrow />
           </button>
         )
       }}
       renderArrowNext={(clickHandler, hasNext, label) => {
         return (
-          <button type="button" aria-label="next slide / item" class={`control-arrow control-next ${hasNext ? '' : 'disabled'}`} onClick={clickHandler}>
+          <button type="button" aria-label="next slide / item" className={`control-arrow control-next ${hasNext ? '' : 'disabled'}`} onClick={clickHandler}>
             <SliderNextArrow />
           </button>
         )
@@ -60,7 +60,7 @@ function JobScroll({ projectID }) {
         <InfoGraphics /> */}
         { data.map((job, index) => {
           return (
-            <GraphicItem>
+            <GraphicItem key={index}>
               <GraphicHeading>{ job.jobNo }</GraphicHeading>
               <InfoGraphics item={job} key={index} />
             </GraphicItem>

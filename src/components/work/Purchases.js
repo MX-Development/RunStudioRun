@@ -16,17 +16,19 @@ function Purchases({ projectID }) {
   const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
   const [contacts, setContacts] = useState([])
+  const [purchases, setPurchases] = useState([])
 
   const fetchLabels = async () => {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/labels.json`)
+      await axios.get(`/json/labels.json`)
         .then(res => {
           setJobs(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
           setProjectLabels(res.data[0].projects);
           setContacts(res.data[0].contacts);
+          setPurchases(res.data[0].purchases);
         })
 
         console.log('Data fetched successfully.')
@@ -46,7 +48,7 @@ function Purchases({ projectID }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/purchases.json`)
+    axios.get(`/json/purchases.json`)
       .then(res => {
         projectID ? 
           <>
@@ -86,7 +88,7 @@ function Purchases({ projectID }) {
         onChange={changeStatus}
       >
         {
-          jobs.map(label => (
+          purchases.map(label => (
             <MenuItem value={label.id}>
               <Label 
                 type={params.row.status} 

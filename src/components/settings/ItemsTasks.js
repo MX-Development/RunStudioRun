@@ -60,7 +60,7 @@ function ItemsTasks({ add }) {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/items_tasks.json`)
+      await axios.get(`/json/items_tasks.json`)
         .then(res => {
           setData(res.data)
         })

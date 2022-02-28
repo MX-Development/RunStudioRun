@@ -48,7 +48,7 @@ function Calendar() {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+      await axios.get(`/json/estimates/items.json`)
         .then(res => {
           setEvents([])
 
@@ -100,8 +100,8 @@ function Calendar() {
     })
   }, [])
 
-  const handleDateClick = () => {
-    console.log('test')
+  const handleEventClick = () => {
+    console.log('handleEventClick')
   }
 
   const changeMember = event => {
@@ -174,7 +174,7 @@ function Calendar() {
           right: ''
         }}
         weekends={false}
-        eventClick={handleDateClick}
+        eventClick={handleEventClick}
         eventContent={renderEventContent}
         scrollTime={'08:45:00'}
         slotDuration={'00:15:00'}
@@ -203,15 +203,26 @@ function Calendar() {
 
           // parent.classList.remove('not-dragged');
         }}
+        eventResize={function(event, info) {
+          console.log(event);
+          console.log(info);
+          // event.setExtendedProp('time_worked', 'hallo')
+        }}
         eventDragStop={function( info ) {
           console.log(info);
           let parent = info.el.parentNode;
 
           parent.classList.add('not-dragged');
         }}
+        eventChange={function (changeInfo) {
+          console.log(changeInfo);
+          const timeWorked = changeInfo.event.extendedProps['time_worked']
+
+          // changeInfo.event.setExtendedProp('time_worked', 1000);
+        }}
+        eventStartEditable={true}
         eventDidMount={
           function(info) {
-            console.log('Event did mount')
             let parent = info.el.parentNode;
 
             parent.classList.remove('not-dragged');
@@ -295,6 +306,11 @@ const MemberSelect = styled.div`
   position: absolute;
   right: 0;
   top: 3px;
+  width: 250px;
+
+  > .MuiFormGroup-root {
+    width: 100%;
+  }
 `
 
 const AdditionalTime = styled.div`
@@ -304,6 +320,7 @@ const AdditionalTime = styled.div`
   background: var(--white);
   border-radius: 50px;
   width: 30px;
+  min-width: 30px;
   height: 30px;
   margin-left: 10px;
 

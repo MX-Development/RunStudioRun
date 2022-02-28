@@ -36,7 +36,7 @@ function TestOrder({ estimateID }) {
     setPhases([])
     setTasks([])
     setSubtasks([])
-    axios.get(`https://kendrix.kendrix.website/json/estimates.json`)
+    axios.get(`/json/estimates.json`)
       .then(res => {
         res.data.map(item => {
           if (item.id === parseInt(estimateID)) {
@@ -44,19 +44,19 @@ function TestOrder({ estimateID }) {
           }
         })
       }).then(
-        axios.get(`https://kendrix.kendrix.website/json/estimates/phases.json`)
+        axios.get(`/json/estimates/phases.json`)
           .then(res => {
             res.data.map(item => {
               if (item.jobId === parseInt(estimateID)) {
                 setPhases(phases => [...phases, item])
 
-                axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+                axios.get(`/json/estimates/items.json`)
                   .then(res => {
                     res.data.map(task => {
                       if (item.tasks.includes(task.id)) {
                         setTasks(tasks => [...tasks, task])
 
-                        axios.get(`https://kendrix.kendrix.website/json/estimates/subitems.json`)
+                        axios.get(`/json/estimates/subitems.json`)
                           .then(res => {
                             res.data.map(subtask => {
                               if (subtask.taskId === task.id) {

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Taso Katsionis",
+    "phone": "0424 059 513",
+    "email": "taso@ak-d.com.au",
+    "company": "Action Design",
+    "notes": "notes to remember birthday and more...",
+    "subscription": "Active",
+    "avatar": "https://storage.pubble.nl/d9c7ad83/content/2019/1/73c7f540-60e9-4cbc-90f1-23d55c040483_thumb840.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Lorem Ipsum",
+    "phone": "0424 059 513",
+    "email": "lorem@ipsum.com",
+    "company": "Lorem Ipsum Development",
+    "notes": "notes to remember birthday and more...",
+    "subscription": "Active",
+    "avatar": "https://img.freepik.com/vrije-photo/knappe-zelfverzekerde-lachende-man-met-handen-gekruist-op-de-borst_176420-18743.jpg?size=626&ext=jpg"
+  },
+  {
+    "id": 3,
+    "name": "Mike Hendriks",
+    "phone": "06 99 99 99 99",
+    "email": "mikehendriks94@gmail.com",
+    "company": "MX Development",
+    "notes": "notes to remember birthday and more...",
+    "subscription": "Active",
+    "avatar": "https://www.gratisdatingtips.nl/wp-content/uploads/2019/10/man-model.png"
+  },
+  {
+    "id": 4,
+    "name": "Jean Paul",
+    "phone": "9482 059 513",
+    "email": "jeanpaul@jean.paul",
+    "company": "Jean Paul Signs",
+    "notes": "notes to remember birthday and more...",
+    "subscription": "Active",
+    "avatar": "https://rutgerdijkstra.com/wp-content/uploads/RUTGER_DIJKSTRA.png"
+  }
+]

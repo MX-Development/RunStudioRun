@@ -1,0 +1,23 @@
+[
+  {
+    "user": 1,
+    "userName": "Taso Katsionis",
+    "status": "Active",
+    "type": "Monthly",
+    "renewDate": "Oct 2020"
+  },
+  {
+    "user": 2,
+    "userName": "Mike Hendriks",
+    "status": "Active",
+    "type": "Monthly",
+    "renewDate": "Oct 2020"
+  },
+  {
+    "user": 3,
+    "userName": "Taso K.",
+    "status": "Active",
+    "type": "Monthly",
+    "renewDate": "Nov 2020"
+  }
+]

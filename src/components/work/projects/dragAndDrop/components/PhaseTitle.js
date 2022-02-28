@@ -1,15 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import DragIcon from '../../../../assets/icons/DragIcon.svg'
-import ActionIcon from '../../../../assets/icons/ActionIcon.svg'
-
 function PhaseTitle({ data }) {
   return (
     <Container small={false}>
-      <DragButton>
-        <img src={DragIcon} alt="drag icon" />
-      </DragButton>
 
       <Info>
         <Top>
@@ -24,9 +18,6 @@ function PhaseTitle({ data }) {
           { data.description }
         </p>
       </Description>
-      <ActionButton>
-        <img src={ActionIcon} alt="action icon" />
-      </ActionButton>
     </Container>
   )
 }
@@ -38,21 +29,6 @@ const Container = styled.div`
   margin-bottom: 10px;
   margin-left: ${props => props.small ? "50px" : "0"};
   width: 100%;
-`
-
-const DragButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #eee;
-
-  > img {
-    max-width: 50px;
-  }
 `
 
 const Info = styled.div`
@@ -136,18 +112,4 @@ const Description = styled.div`
   background: #fff;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
-`
-
-const ActionButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  > img {
-    max-height: 50px;
-  }
 `

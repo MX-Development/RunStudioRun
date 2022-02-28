@@ -48,7 +48,7 @@ function Users() {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/subscriptions.json`)
+      await axios.get(`/json/subscriptions.json`)
         .then(res => {
           setData(res.data)
         })

@@ -83,7 +83,7 @@ function EstimateList({ type, data, id, team }) {
   const fetchData = async () => {
 
     try {
-      axios.get(`https://kendrix.kendrix.website/json/team.json`)
+      axios.get(`/json/team.json`)
       .then(res => {
         setTeamMembers([])
         res.data.forEach(member => {

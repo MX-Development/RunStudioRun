@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "jobId": 1,
+    "phaseId": 2,
+    "expenseName": "Digital 1 Printing",
+    "description": "For the printing of 100 x A4 double sided flyers, printed on 150gsm gloss stock…",
+    "cost": 500,
+    "markup": 30,
+    "sell": 650
+  },
+  {
+    "id": 2,
+    "jobId": 1,
+    "phaseId": 2,
+    "expenseName": "Digital 2 Printing",
+    "description": "For the printing of 100 x A4 double sided flyers, printed on 150gsm gloss stock…",
+    "cost": 600,
+    "markup": 15,
+    "sell": 650
+  }
+]

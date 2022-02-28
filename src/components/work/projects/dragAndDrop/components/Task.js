@@ -22,6 +22,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { ReactComponent as DatePickerIcon } from '../../../../assets/icons/DatePickerIcon.svg'
 
 function Task({ data, size }) {
 
@@ -81,7 +82,7 @@ function Task({ data, size }) {
   const fetchData = async () => {
 
     try {
-      axios.get(`https://kendrix.kendrix.website/json/team.json`)
+      axios.get(`/json/team.json`)
       .then(res => {
         setTeamMembers([])
         res.data.forEach(member => {
@@ -101,10 +102,6 @@ function Task({ data, size }) {
 
   return (
     <Container small={size === 'small' ? true : false}>
-      <DragButton>
-        <img src={DragIcon} alt="drag icon" />
-      </DragButton>
-
       <Info>
         <Top>
           <div className="title">
@@ -198,6 +195,8 @@ function Task({ data, size }) {
                         'aria-label': 'change date',
                       }}
                       name="startDate"
+                      keyboardIcon={<DatePickerIcon />}
+                      InputAdornmentProps={{ position: 'start' }}
                     />
                 </FormControl>
               </FormGroup>
@@ -217,6 +216,8 @@ function Task({ data, size }) {
                         'aria-label': 'change date',
                       }}
                       name="endDate"
+                      keyboardIcon={<DatePickerIcon />}
+                      InputAdornmentProps={{ position: 'start' }}
                     />
                 </FormControl>
               </FormGroup>
@@ -230,9 +231,6 @@ function Task({ data, size }) {
           { data.description }
         </p>
       </Description>
-      <ActionButton>
-        <img src={ActionIcon} alt="action icon" />
-      </ActionButton>
     </Container>
   )
 }
@@ -242,7 +240,6 @@ export default Task
 const Container = styled.div`
   display: flex;
   margin-bottom: 10px;
-  margin-left: ${props => props.small ? "50px" : "0"};
   width: 100%;
 `
 

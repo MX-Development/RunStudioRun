@@ -25,11 +25,11 @@ function JobSelect() {
     try {
       setTasks([])
 
-      await axios.get(`https://kendrix.kendrix.website/json/jobs.json`)
+      await axios.get(`/json/jobs.json`)
         .then(res => {
           let jobs = res.data
 
-          axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+          axios.get(`/json/estimates/items.json`)
           .then(res => {
             res.data.forEach(task => {
 
@@ -41,7 +41,7 @@ function JobSelect() {
               task.projectName = job[0].projectName
               setTasks(tasks => [...tasks, task])
 
-              axios.get(`https://kendrix.kendrix.website/json/team.json`)
+              axios.get(`/json/team.json`)
               .then(res => {
                 setTeamMembers([])
                 res.data.forEach(member => {

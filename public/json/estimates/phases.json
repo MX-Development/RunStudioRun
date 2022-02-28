@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "jobId": 1,
+    "title": "Phase 1 title",
+    "description": "Phase 1 description",
+    "tasks": [1, 2]
+  },
+  {
+    "id": 2,
+    "jobId": 1,
+    "title": "Phase 2 title",
+    "description": "Phase 2 description",
+    "tasks": [3]
+  }
+]

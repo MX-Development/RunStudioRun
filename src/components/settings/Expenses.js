@@ -36,7 +36,7 @@ function Expenses({ add }) {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/expenses.json`)
+      await axios.get(`/json/expenses.json`)
         .then(res => {
           setData(res.data)
         })

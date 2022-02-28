@@ -75,7 +75,7 @@ let theme = createTheme({
   palette: {
     primary: { // works
       main: '#165788',
-      contrastText: 'var(--white)',
+      contrastText: '#fff',
     }
   },
   typography: {
@@ -324,4 +324,5 @@ const AppBody = styled.div`
   margin: 0 auto;
   margin-top: 30px;
   padding: 0 15px;
+  max-height: 50px;
 `

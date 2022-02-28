@@ -50,7 +50,7 @@ function KanbanBoard() {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+      await axios.get(`/json/estimates/items.json`)
         .then(res => {
           setEvents([])
 

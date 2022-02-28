@@ -16,7 +16,8 @@ function AddNav({ show, addOptions }) {
     phase: false,
     task: false,
     subtask: false,
-    expense: false
+    expense: false,
+    additional_time: false
   });
 
   const handleChange = (event) => {
@@ -57,6 +58,13 @@ function AddNav({ show, addOptions }) {
         <FormControlLabel
           control={<Checkbox checked={state.expense} onChange={handleChange} name="expense" />}
           label="Add an Expense"
+          labelPlacement="start"
+        />
+      </Item>
+      <Item active={state.additional_time ? true : false}>
+        <FormControlLabel
+          control={<Checkbox checked={state.additional_time} onChange={handleChange} name="additional_time" />}
+          label="Add additional time"
           labelPlacement="start"
         />
       </Item>

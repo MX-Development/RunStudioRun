@@ -52,19 +52,19 @@ function Trello() {
       let companies = [];
       let jobs = [];
 
-      await axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+      await axios.get(`/json/companies.json`)
         .then(res => {
           companies = res.data
           console.log(companies);
         })
 
-        await axios.get(`https://kendrix.kendrix.website/json/jobs.json`)
+        await axios.get(`/json/jobs.json`)
           .then(res => {  
             jobs = res.data
             console.log(jobs);
           })
 
-      await axios.get(`https://kendrix.kendrix.website/json/estimates/items.json`)
+      await axios.get(`/json/estimates/items.json`)
         .then(res => {
           console.log(res.data);
           setEvents([])

@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom"
 import axios from 'axios';
 
 import List from '../List'
-import TestOrder from './TestOrder';
 
 import { MenuItem, Select } from '@material-ui/core'
 import Label from '../settings/components/Label';
+import ProjectEstimates from './projects/dragAndDrop/ProjectEstimates';
 
 function Estimates({ projectID }) {
 
@@ -22,7 +22,7 @@ function Estimates({ projectID }) {
     setIsLoading(true);
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/labels.json`)
+      await axios.get(`/json/labels.json`)
         .then(res => {
           setJobs(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
@@ -47,7 +47,7 @@ function Estimates({ projectID }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`https://kendrix.kendrix.website/json/estimates.json`)
+    axios.get(`/json/estimates.json`)
       .then(res => {
         projectID ? 
           res.data.forEach((item, index) => {
@@ -158,7 +158,7 @@ function Estimates({ projectID }) {
 
   return (
       viewID ? 
-      <TestOrder estimateID={viewID} key={1} />
+      <ProjectEstimates estimateID={viewID} />
       :
       <List 
         title={'Estimates'}

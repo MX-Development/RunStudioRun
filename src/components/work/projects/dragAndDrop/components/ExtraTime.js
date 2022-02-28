@@ -4,9 +4,6 @@ import styled from 'styled-components'
 import moment from 'moment'
 import axios from 'axios'
 
-import DragIcon from '../../../../assets/icons/DragIcon.svg'
-import ActionIcon from '../../../../assets/icons/ActionIcon.svg'
-
 import { useForm, Controller } from "react-hook-form"
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -22,8 +19,9 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { ReactComponent as DatePickerIcon } from '../../../../assets/icons/DatePickerIcon.svg'
 
-function Task({ data, size }) {
+function ExtraTime({ data, size }) {
 
   const { control } = useForm();
 
@@ -101,15 +99,119 @@ function Task({ data, size }) {
 
   return (
     <Container small={size === 'small' ? true : false}>
+      <Description small={size === 'small' ? true : false}>
+        <p>
+          { data.description }
+        </p>
+      </Description>
       <Info>
-        <Top>
-          <div className="title">
-            <h3>{ data.title }</h3>
-            <span>Pending</span>
-          </div>
+        <Bottom>
+          <Item width={0.2}>
+            <FormGroup>
+              <FormControl variant="outlined">
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Hours</FormLabel>
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      variant="outlined"
+                      {...field}
+                      value={selectedData ? selectedData.time : ''}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="time"
+                />
+              </FormControl>
+            </FormGroup>
+          </Item>
+          <Item width={0.2}>
+            <FormGroup>
+              <FormControl variant="outlined">
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      variant="outlined"
+                      {...field}
+                      value={selectedData ? selectedData.rate : ''}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="rate"
+                />
+              </FormControl>
+            </FormGroup>
+          </Item>
+          <Item width={0.2}>
+            <FormGroup> 
+              <FormControl variant="outlined">
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Total</FormLabel>
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      variant="outlined"
+                      {...field}
+                      value={selectedData ? selectedData.total : ''}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                      }}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="total"
+                />
+              </FormControl>
+            </FormGroup>
+          </Item>
+          <Item width={0.3}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <FormGroup>
+                <FormControl variant="outlined">
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Start</FormLabel>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      format="MM/dd/yyyy"
+                      value={selectedDate.startDate}
+                      onChange={handleDateChange('startDate')}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                      name="startDate"
+                      keyboardIcon={<DatePickerIcon />}
+                      InputAdornmentProps={{ position: 'start' }}
+                    />
+                </FormControl>
+              </FormGroup>
+            </MuiPickersUtilsProvider>
+          </Item>
+          <Item width={0.3}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <FormGroup>
+                <FormControl variant="outlined">
+                  <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>End</FormLabel>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      format="MM/dd/yyyy"
+                      value={selectedDate.endDate}
+                      onChange={handleDateChange('endDate')}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                      name="endDate"
+                      keyboardIcon={<DatePickerIcon />}
+                      InputAdornmentProps={{ position: 'start' }}
+                    />
+                </FormControl>
+              </FormGroup>
+            </MuiPickersUtilsProvider>
+          </Item>
+        </Bottom>
           <Members>
             { teamMembers.forEach(member => {
-              if (data.team.length > 0 &&data.team.includes(member.id)) {
+              if (data.team.length > 0 && data.team.includes(member.id)) {
                 return (
                   <Avatar alt={ member.name } src={ member.avatar }>
                     M
@@ -118,54 +220,17 @@ function Task({ data, size }) {
               }
             })}
           </Members>
-        </Top>
-        <Bottom>
-          <Item width={0.1}>
-            <h6>Option</h6>
-            <span>A</span>
-          </Item>
-          <Item width={0.2}>
-            <h6>Quantity</h6>
-            <span>000</span>
-          </Item>
-          <Item width={0.2}>
-            <h6>Unit cost</h6>
-            <span>$0</span>
-          </Item>
-          <Item width={0.2}>
-            <h6>Cost</h6>
-            <span>$0</span>
-          </Item>
-          <Item width={0.1}>
-            <h6>Markup</h6>
-            <span>000%</span>
-          </Item>
-          <Item width={0.2}>
-            <h6>Unit price</h6>
-            <span>$0</span>
-          </Item>
-          <Item width={0.2}>
-            <h6>Total</h6>
-            <span>$0</span>
-          </Item>
-        </Bottom>
       </Info>
-
-      <Description small={size === 'small' ? true : false}>
-        <p>
-          { data.description }
-        </p>
-      </Description>
     </Container>
   )
 }
 
-export default Task
+export default ExtraTime
 
 const Container = styled.div`
   display: flex;
   margin-bottom: 10px;
-  margin-left: ${props => props.small ? "50px" : "0"};
+  width: 100%;
 `
 
 const DragButton = styled.div`
@@ -190,6 +255,7 @@ const Info = styled.div`
   flex: 0.5;
   padding: 0 15px;
   background: #fff;
+  max-height: 50px;
 `
 
 const Top = styled.div`
@@ -214,11 +280,12 @@ const Top = styled.div`
 const Bottom = styled.div`
   display: flex;
   height: 50px;
-  margin-bottom: 5px;
 `
 
 const Item = styled.div`
   flex: ${props => props.width};
+  display: flex;
+  align-items: center;
 
   > h6 {
     text-transform: uppercase;
@@ -249,7 +316,6 @@ const Item = styled.div`
 
   .MuiFormControl-marginNormal {
     margin: 0;
-    top: -5px;
   }
 
   .MuiInput-underline:before,
@@ -260,11 +326,15 @@ const Item = styled.div`
   .MuiOutlinedInput-adornedStart {
     padding-left: 0;
   }
+
+  .MuiInputBase-input {
+    padding: 0;
+  }
 `
 
 const Description = styled.div`
   display: flex;
-  flex: ${props => props.small ? "0.5525" : "0.5"};
+  flex: ${props => props.small ? "0.539" : "0.5"};
   padding: 15px;
   font-size: 14px;
   background: #fff;

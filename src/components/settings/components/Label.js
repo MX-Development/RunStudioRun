@@ -22,4 +22,11 @@ const Item = styled.input.attrs({ type: 'text' })`
   border: none;
   width: 100%;
   outline: none !important;
+  -webkit-filter: brightness(100%);
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    -webkit-filter: brightness(92.5%);
+    transition: all 0.5s ease-in-out;
+  }
 `

@@ -39,11 +39,11 @@ function People({ add, importing, syncing }) {
   const fetchData = async () => {
 
     try {
-      await axios.get(`https://kendrix.kendrix.website/json/people.json`)
+      await axios.get(`/json/people.json`)
         .then(res => {
           setData(res.data)
 
-          axios.get(`https://kendrix.kendrix.website/json/companies.json`)
+          axios.get(`/json/companies.json`)
             .then(res => {
               setCompanies(res.data)
             })
