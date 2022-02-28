@@ -16,7 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { MenuItem, Select } from '@material-ui/core'
 
 import Clock from '../assets/icons/Clock.svg'
-
+ 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
@@ -45,9 +45,16 @@ function Calendar() {
   
   const history = useHistory();
   const [events, setEvents] = useState([])
+
+  const [userSettings, setUserSettings] = useState([])
   const fetchData = async () => {
 
     try {
+      await axios.get(`/json/settings.json`)
+        .then(res => {
+          setUserSettings(res.data);
+        })
+
       await axios.get(`/json/estimates/items.json`)
         .then(res => {
           setEvents([])
@@ -74,6 +81,11 @@ function Calendar() {
       console.trace(err);
     }
   }
+
+  useEffect(() => {
+    console.log(userSettings);
+    console.log(userSettings.slot_intervals)
+  }, [userSettings]);
 
   useEffect(() => {
     fetchData()
@@ -177,7 +189,7 @@ function Calendar() {
         eventClick={handleEventClick}
         eventContent={renderEventContent}
         scrollTime={'08:45:00'}
-        slotDuration={'00:15:00'}
+        slotDuration={userSettings.slot_intervals ? userSettings.slot_intervals : `00:30:00`}
         slotLabelInterval={'01:00'}
         slotLabelFormat={{
           hour: '2-digit',
@@ -216,7 +228,9 @@ function Calendar() {
         }}
         eventChange={function (changeInfo) {
           console.log(changeInfo);
-          const timeWorked = changeInfo.event.extendedProps['time_worked']
+          const timeWorked = changeInfo.event.extendedProps['time_worked'];
+          // if (timeWorked !== )
+          renderHeaderContent(changeInfo);
 
           // changeInfo.event.setExtendedProp('time_worked', 1000);
         }}
@@ -281,6 +295,7 @@ function renderEventContent(eventInfo) {
 }
 
 function renderHeaderContent(eventInfo) {
+  console.log('Event info: ', eventInfo)
   return (
     <div className="table-heading">
       <div className="day">

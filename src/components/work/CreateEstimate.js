@@ -32,9 +32,9 @@ function CreateEstimate({ id }) {
 
           <DividerWithIcon onClick={showPDF}>
             <img src={EyeIcon} alt="" />
-            <ModalBox modalOpened={openModal}>
+            {/* <ModalBox modalOpened={openModal}>
               PDF
-            </ModalBox>
+            </ModalBox> */}
           </DividerWithIcon>
         </>
         :
