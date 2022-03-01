@@ -72,7 +72,7 @@ function JobSelect() {
   return (
     <Container>
       <SelectButton className={openNav ? 'btn btn-gold' : 'btn'} onClick={(e) => setOpenNav(!openNav)}>Select task</SelectButton>
-      <SelectContainer className={openNav ? 'active' : null} id="task-list">
+      <SelectContainer className={openNav ? 'active' : null} id="task-list" onMouseLeave={() => setOpenNav(!openNav)}>
             <FormGroup>
               <FormControl variant="outlined">
                 <Controller

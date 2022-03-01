@@ -8,6 +8,8 @@ import './Table.css';
 import './Typography.css';
 import './Variables.css';
 
+import axios from 'axios';
+
 import {
   createTheme,
   responsiveFontSizes,
@@ -148,6 +150,27 @@ function App() {
     }
   }, [location]);
 
+  // Fetch user settings
+  const [userSettings, setUserSettings] = useState(null);
+  const fetchSettings = async () => {
+
+    try {
+      await axios.get(`/json/settings.json`)
+        .then(res => {
+          setUserSettings(res.data);
+        })
+
+        console.info('Settings fetched successfully.')
+    } catch (err) {
+      console.trace(err);
+    }
+
+  }
+
+  useEffect(() => {
+    fetchSettings()
+  }, []);
+
   const [user, loading] = useAuthState(auth)
  
   if (loading) {
@@ -173,34 +196,18 @@ function App() {
                 <Header />
                 <AppBody>
                   <Switch>
-                    {/* <Route path="/draglist" exact>
-                      <DragList />
-                    </Route>
-                    <Route path="/draglist2" exact>
-                      <DragList2 />
-                    </Route>
-
-                    <Route path="/projects" exact>
-                      <Projects />
-                    </Route>
-                    <Route path="/form" exact>
-                      <Form />
-                    </Route>
-                    <Route path="/table" exact>
-                      <MaterialTable /> 
-                    </Route> */}
-                    {/* <Route exact path="/draglist2" component={DragList2} /> */}
 
                     <Route exact path="/">
-                        <Redirect to="/to-do" />
+                      <Redirect to="/to-do" />
                     </Route>
 
                     <Route exact path="/pdf" component={PDF} />
                     <Route exact path="/components" component={Components} />
 
-                    <Route exact path="/to-do" component={ToDos} /> 
-                    <Route exact path="/kanban" component={KanbanBoard} />
-                    <Route exact path="/trello" component={Trello} />
+                    
+                    <Route exact path="/to-do" component={userSettings?.time_blocks.time_grid ? ToDos : Trello} /> 
+                    {/* <Route exact path="/kanban" component={Trello} /> */}
+                    {/* <Route exact path="/trello" component={KanbanBoard} /> */}
 
                     {/* Work */}
                     <Route exact path="/projects" component={Projects} />

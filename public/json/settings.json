@@ -1,3 +1,6 @@
 {
-  "slot_intervals": "00:15:00"
+  "time_blocks": {
+    "time_grid": true,
+    "slot_intervals": "00:15:00"
+  }
 }

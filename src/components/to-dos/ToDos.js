@@ -16,6 +16,8 @@ import FormControl from '@material-ui/core/FormControl';
 import { MenuItem, Select } from '@material-ui/core'
 
 import Clock from '../assets/icons/Clock.svg'
+
+import AdditionalTime from './components/AdditionalTime';
  
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -132,8 +134,11 @@ function Calendar() {
         contentLabel="Example Modal"
       >
         <ModalBody>
-          <h2>Additional Time</h2>
-          
+          <ModalHeading>
+            <h2>Additional Time</h2>
+            {/* { modalAction ? modalAction : null} */}
+          </ModalHeading>
+          <AdditionalTime />
         </ModalBody>
       </Modal>
     
@@ -163,9 +168,9 @@ function Calendar() {
             </Select>
           </FormControl>
         </FormGroup>
-        <AdditionalTime onClick={() => setIsOpen(true)}>
+        <AddTime onClick={() => setIsOpen(true)}>
           <img src={Clock} alt="clock icon" />
-        </AdditionalTime>
+        </AddTime>
       </MemberSelect>
 
       <FullCalendar
@@ -328,7 +333,7 @@ const MemberSelect = styled.div`
   }
 `
 
-const AdditionalTime = styled.div`
+const AddTime = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -353,3 +358,9 @@ const ModalBody = styled.div`
     margin-bottom: 15px;
   }
 ` 
+
+const ModalHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+`

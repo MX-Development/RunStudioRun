@@ -29,6 +29,8 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { compareAsc } from 'date-fns';
+import { ReactComponent as DatePickerIcon } from '../assets/icons/DatePickerIcon.svg'
+
 import Label from '../settings/components/Label';
 
 function Projects({ add }) {
@@ -261,11 +263,7 @@ function Projects({ add }) {
   }
 
   const modalContent = (        
-    <>     
-      <p style={{ marginBottom: '20px' }}>
-        Add ‘expenses’ that constitute part of the project whereby you can add also your admin or commission fees. Note these are not time related costs.
-      </p>
-      
+    <>           
       <form onSubmit={handleSubmit(onSubmit)}>
 
         <FormControl component="fieldset">
@@ -301,6 +299,8 @@ function Projects({ add }) {
                         placeholder="Enter a brief description or what you intend in working on to allow a client to clearly understand the work you will do."
                         {...field}
                         value={''}
+                        multiline
+                        rows={4}
                       />
                     )}
                     control={control}
@@ -380,6 +380,8 @@ function Projects({ add }) {
                           'aria-label': 'change date',
                         }}
                         name="startDate"
+                        keyboardIcon={<DatePickerIcon />}
+                        InputAdornmentProps={{ position: 'start' }}
                       />
                   </FormControl>
                 </FormGroup>
@@ -399,6 +401,8 @@ function Projects({ add }) {
                           'aria-label': 'change date',
                         }}
                         name="endDate"
+                        keyboardIcon={<DatePickerIcon />}
+                        InputAdornmentProps={{ position: 'start' }}
                       />
                   </FormControl>
                 </FormGroup>
