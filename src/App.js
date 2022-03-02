@@ -231,6 +231,13 @@ function App() {
                     />
                     <Route path="/purchases/:id" component={Purchases} />
                     <Route exact path="/invoices" component={Invoices} />
+                    <Route
+                      exact
+                      path='/invoices/add'
+                      render={(props) => (
+                        <Invoices {...props} add={true} />
+                      )}
+                    />
                     <Route path="/invoices/:id" component={Invoices} />
                     <Route exact path="/reports" component={Reports} />
 

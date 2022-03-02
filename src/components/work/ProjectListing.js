@@ -13,7 +13,23 @@ import '../List.css';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function ProjectListing({company, columns, data, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
+function ProjectListing({company, columns, data, jobs, modalTitle, modalContent, size, projectID, view, add, openModal, headerButton, nocolor, defaultcolor, ...rest }) {
+
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    setProjects([])
+    data.map(project => {
+      jobs.map(job => {
+        if (job.projectID == project.projectID) {
+          setProjects(projects => [...projects, project])
+          setProjects(projects => [...projects, job])
+          return;
+        }
+        setProjects(projects => [...projects, project])
+      })
+    })
+  }, []);
 
   const dispatch = useDispatch();
   const order = useSelector((state) => state.order.showOrdered);
@@ -64,12 +80,21 @@ function ProjectListing({company, columns, data, modalTitle, modalContent, size,
   }, [add, openModal]);
 
   function showItem(GridCellParams) {
+
+    if (GridCellParams.row.jobNo) {
+      const itemId = GridCellParams.id
+      const projectID = GridCellParams.row.projectID
+      history.push(`/${pagePath}/${projectID}/jobs/${itemId}`);
+      return;
+    }
+
     const itemId = GridCellParams.id
     history.push(`/${pagePath}/${itemId}`);
     setIsOpen(true)
   }
 
   function showProject(GridCellParams) {
+
     const estimateID = GridCellParams.row.id
     history.push(`/projects/${projectID}/${view}/${estimateID}`);
   }
@@ -91,13 +116,17 @@ function ProjectListing({company, columns, data, modalTitle, modalContent, size,
         <DataGrid
           className={`hideHeader ${nocolor ? 'no-color' : defaultcolor ? 'default-color' : ''}`}
           columns={columns}
-          rows={data}
+          rows={projects}
+          getRowClassName={(params) => {
+            // If the row is a job
+            if (params.row.jobNo) {
+              return 'job-row';
+            }
+          }}
           onCellClick={projectID ? showProject : showItem}
-
           onColumnHeaderClick={(params, event) => {
             if (pagePath === 'projects') setOrder(event); return;
           }}
-
           autoHeight
           style={{ 
             marginTop: '-36px'

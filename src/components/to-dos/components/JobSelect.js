@@ -33,9 +33,9 @@ function JobSelect() {
           .then(res => {
             res.data.forEach(task => {
 
-              let jobId = task.jobId
+              let jobNo = task.jobNo
               const job = jobs.filter(obj => {
-                return obj.id === jobId
+                return obj.jobNo === jobNo
               })
 
               task.projectName = job[0].projectName

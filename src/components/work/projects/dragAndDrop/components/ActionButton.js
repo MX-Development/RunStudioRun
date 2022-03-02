@@ -119,7 +119,6 @@ const ActionNav = styled.div`
     left: 0;
     transition: opacity .35s ease-in-out;
   }
-
 `
 
 const ActionItem = styled.button`

@@ -8,7 +8,15 @@ import List from '../List'
 import { MenuItem, Select } from '@material-ui/core'
 import Label from '../settings/components/Label';
 
-function Invoices({ projectID }) {
+import ModalContent from '../misc/ModalContent';
+
+import {
+  useHistory
+} from "react-router-dom"
+
+function Invoices({ projectID, add }) {
+
+  let history = useHistory()
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -128,6 +136,43 @@ function Invoices({ projectID }) {
     setData(newArr);
   };
 
+  const modalForm = [
+    {
+      "columns": 4,
+      "type": "textfield",
+      "label": "Label",
+      "name": "label",
+      "placeholder": "Placeholder",
+      "value": "The value"
+    },
+    {
+      "columns": 8,
+      "type": "textfield",
+      "label": "Label",
+      "name": "label_2",
+      "placeholder": "Placeholder",
+      "value": "The value"
+    },
+    {
+      "columns": 12,
+      "type": "select",
+      "label": "Select the Project",
+      "name": "project",
+      "placeholder": "Select...",
+      "value": "Select...",
+      "options": [
+        {
+          "value": "test_2",
+          "label": "Test 2"
+        },
+        {
+          "value": "test_1",
+          "label": "Test 1"
+        }
+      ]
+    }
+  ] 
+
   return (
     viewID ? 
     <h3>Invoice { viewID }</h3>
@@ -135,6 +180,10 @@ function Invoices({ projectID }) {
     <List 
       title={'Invoices'}
       buttons={[
+        {
+          "label": "Add",
+          "action": function() { history.push(`/invoices/add`) }
+        },
         {
           "label": "Export to Quickbooks",
           "action": function() { alert('Export...') }
@@ -148,7 +197,9 @@ function Invoices({ projectID }) {
       data={data} 
       projectID={projectID} 
       key={projectID} 
-      view={view} 
+      modalTitle={'New Invoice'} 
+      modalContent={<ModalContent formElements={modalForm} />} 
+      add={add ? true : false} 
     />
   )
 }

@@ -16,6 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { MenuItem, Select } from '@material-ui/core'
 
 import Clock from '../assets/icons/Clock.svg'
+import Ellipsis from '../assets/icons/CardEllipsis.svg'
 
 import AdditionalTime from './components/AdditionalTime';
  
@@ -23,6 +24,8 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 function Calendar() {
+
+  const [actionNav, setActionNav] = useState(false);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const centerModal = {
@@ -277,6 +280,20 @@ function renderEventContent(eventInfo) {
         <h5>{eventInfo.event.title}</h5>
         <h6 style={{ fontWeight: '500', margin: '2.5px 0' }}>{eventInfo.event.extendedProps.jobTitle}</h6>
         <span className="type" style={{ fontWeight: '400' }}>Client</span>
+        <div className="event-action" onMouseEnter={() => console.log('Mouse entered')}>
+          <img src={Ellipsis} alt="action icon" />
+          <ActionNav className={'active'}>
+            <ActionItem>
+              Commit Time
+            </ActionItem>
+            <ActionItem>
+              View & Edit
+            </ActionItem>
+            <ActionItem>
+              Delete Time
+            </ActionItem>
+          </ActionNav>
+        </div>
       </div>
       <div className="event-description">
         <p>
@@ -300,7 +317,7 @@ function renderEventContent(eventInfo) {
 }
 
 function renderHeaderContent(eventInfo) {
-  console.log('Event info: ', eventInfo)
+  console.log('Header info: ', eventInfo)
   return (
     <div className="table-heading">
       <div className="day">
@@ -363,4 +380,45 @@ const ModalHeading = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
+`
+
+const ActionNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  transform: translate(-105%,-50%);
+  box-shadow: 0px 0px 8px #00000033;
+  border-radius: 4px 4px 4px 4px;
+  padding: 10px;
+  background: var(--white);
+  z-index: 5;
+  left: -9999px;
+  opacity: 0;
+  transition: opacity .35s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    left: 0;
+    transition: opacity .35s ease-in-out;
+  }
+`
+
+const ActionItem = styled.button`
+  padding: 7.5px 10px;
+  text-decoration: none;
+  color: #292724;
+  font-size: 14px;
+  display: flex;
+  word-wrap: none;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+  transition: background .35s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background: #F4F2F0;
+    transition: background .35s ease-in-out;
+  }
 `

@@ -37,7 +37,7 @@ function Projects({ add }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [jobs, setJobs] = useState([])
+  const [jobLabels, setJobLabels] = useState([])
   const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
   const [contacts, setContacts] = useState([])
@@ -48,7 +48,7 @@ function Projects({ add }) {
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
-          setJobs(res.data[0].jobs);
+          setJobLabels(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
           setProjectLabels(res.data[0].projects);
           setContacts(res.data[0].contacts);
@@ -139,7 +139,7 @@ function Projects({ add }) {
         onChange={changeStatus}
       >
         {
-          jobs.map(label => (
+          jobLabels.map(label => (
             <MenuItem value={label.id} key={label.id}>
               <Label 
                 type={params.row.status} 
@@ -185,6 +185,7 @@ function Projects({ add }) {
 
   const [data, setData] = useState([])
   const [projects, setProjects] = useState(null);
+  const [jobs, setJobs] = useState([]);
   const [companies, setCompanies] = useState(null);
   const [allCompanies, setAllCompanies] = useState(null);
   const [companyProjects, setCompanyProjects] = useState(null);
@@ -221,6 +222,12 @@ function Projects({ add }) {
             .then(res => {
               console.log('Companies: ', res.data)
               setAllCompanies(res.data);
+            })
+
+          axios.get(`/json/jobs.json`)
+            .then(res => {
+              console.log('Jobs: ', res.data)
+              setJobs(res.data);
             })
 
           // setData(res.data)
@@ -465,7 +472,7 @@ function Projects({ add }) {
                   buttons={[
                     {
                       "label": "Add",
-                      "action": function() { history.push(`/companies/add`) }
+                      "action": function() { history.push(`/projects/add`) }
                     },
                     {
                       "label": "Export",
@@ -479,6 +486,7 @@ function Projects({ add }) {
                   company={company} 
                   columns={columns} 
                   data={companyProjects} 
+                  jobs={jobs}
                   headerButton={'Print'} 
                   modalTitle={'New Project'} 
                   modalContent={modalContent} 
@@ -486,7 +494,7 @@ function Projects({ add }) {
                 />
               ) 
             })
-          : <h1>No companies</h1> 
+          : <h1>Loading companies...</h1> 
       : null
     }
 

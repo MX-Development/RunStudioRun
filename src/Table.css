@@ -49,6 +49,16 @@
   border-color: #FCDB6E !important;
 }
 
+.MuiDataGrid-root .MuiDataGrid-row.job-row {
+  margin-left: 35px;
+  width: calc(100% - 35px) !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-row.job-row [data-field="projectInfo"] {
+  min-width: 277px !important;
+  max-width: 277px !important;
+}
+
 .MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .MuiDataGrid-root .MuiDataGrid-cell:focus {
   outline: none !important;
 }

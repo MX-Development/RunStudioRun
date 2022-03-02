@@ -42,3 +42,43 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Add a form to the content of a modal:
+```
+const modalForm = [
+  {
+    "columns": 4,
+    "type": "textfield",
+    "label": "Label",
+    "name": "label",
+    "placeholder": "Placeholder",
+    "value": "The value"
+  },
+  {
+    "columns": 8,
+    "type": "textfield",
+    "label": "Label",
+    "name": "label_2",
+    "placeholder": "Placeholder",
+    "value": "The value"
+  },
+  {
+    "columns": 12,
+    "type": "select",
+    "label": "Select the Project",
+    "name": "project",
+    "placeholder": "Select...",
+    "value": "Select...",
+    "options": [
+      {
+        "value": "test_2",
+        "label": "Test 2"
+      },
+      {
+        "value": "test_1",
+        "label": "Test 1"
+      }
+    ]
+  }
+]
+```

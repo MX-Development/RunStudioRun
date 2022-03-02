@@ -163,6 +163,7 @@ a.fc-event.eventRed {
 
 .fc-timegrid-event .fc-event-main {
   padding: 0 !important;
+  overflow: visible;
 }
 
 .event-container .event-header {
@@ -170,6 +171,17 @@ a.fc-event.eventRed {
   z-index: 5;
   position: relative;
   top: -1px;
+}
+
+.event-container .event-header .event-action {
+  position: absolute;
+  right: -8px;
+  top: 5px;
+  height: 20px;
+}
+
+.event-container .event-header .event-action img {
+  transform: rotate(90deg);
 }
 
 .event-container .event-header h5 {
