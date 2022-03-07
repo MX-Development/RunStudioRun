@@ -179,9 +179,12 @@ function Calendar({ action, taskID }) {
 
     let totalDayTime = 0;
 
+    let allDaysFilled = [];
+
     eventsOnMap.map(ev => {
 
       const eventDay = moment(ev.start).format('YYYY-MM-DD');
+      allDaysFilled.push(eventDay);
 
       // Return when event date is not the same as changed event
       if (eventDay !== headerDay) return;
@@ -203,10 +206,25 @@ function Calendar({ action, taskID }) {
         eventTime = hours + (minutes / 60);
         totalDayTime = totalDayTime + eventTime;
       } else {
-        eventTime = 1;
+        eventTime = 1; 
         totalDayTime = totalDayTime + 1;
       }
     })
+
+    console.log('All days filled: ', allDaysFilled);
+
+    const allHeaders = document.querySelectorAll(`[data-date]`);
+    allHeaders.forEach(head => {
+      const date = head.getAttribute('data-date');
+      if (allDaysFilled.includes(date)) return;
+ 
+      if (head) {
+        const header = document.querySelector(`[data-date="${date}"]`);
+        header.querySelector('.time-worked').innerHTML = `0h`;  
+        header.querySelector('.bar').style.width = `0%`; 
+      } 
+    })
+
 
     const header = document.querySelector(`[data-date="${headerDay}"]`);
     let timeWorked = header.querySelector('.time-worked').innerHTML;
