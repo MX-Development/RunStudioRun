@@ -5,6 +5,12 @@ import ActionIcon from '../../../../assets/icons/ActionIcon.svg'
 import CloseIcon from '../../../../assets/icons/CloseIcon.svg'
 
 function ActionButton({ setAction, snapshot, item }) {
+
+  const [actionItem, setActionItem] = useState(null);
+
+  useEffect(() => {
+    setActionItem(item);
+  }, [item]);
   
   const [openActions, setOpenActions] = useState(false)
 
@@ -42,6 +48,8 @@ function ActionButton({ setAction, snapshot, item }) {
             setAction('subtask', snapshot, item)
             setOpenActions(false)
           }}
+          // If item type is not 'task' or 'expense' - hide the subtask action
+          style={ actionItem?.type === 'task' || actionItem?.type === 'expense' ? {} : { display: 'none' } }
         >
           Make Sub Item/Task
         </ActionItem>

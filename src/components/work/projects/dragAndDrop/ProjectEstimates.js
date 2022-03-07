@@ -53,6 +53,20 @@ function ProjectEstimates({ estimateID, itemType }) {
       case "ADD":
         draft['items'].splice(action.position, 0, action.items[action.items.length - 1]);
         break;
+      case "DUPLICATE":
+        const duplicate = action.items[action.fromIndex];
+
+        // Get highest index value in array
+        let lastIndex = 0;
+        action.items.map(item => {
+          if (item.id > lastIndex) {
+            lastIndex = item.id
+          }
+        })
+
+        const newDuplicate = { ...duplicate, id: lastIndex + 1 }
+        draft['items'].splice(action.fromIndex, 0, newDuplicate);
+        break;
       case 'UPDATE':
         draft['items'] = action.items;
         break
@@ -323,8 +337,34 @@ function ProjectEstimates({ estimateID, itemType }) {
       case 'duplicate':
         console.log('Duplicating item');
 
-        // Duplicate the item - depending on type of item
-        optionsToAdd({ [item.type]: true }, 'duplicate', item.id)
+        // Find index of item in array
+        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+
+        dispatch({
+          type: "DUPLICATE",
+          fromIndex: index,
+          items: [...data]
+        });
+
+        oldData = [...data];
+        
+        const duplicate = oldData[index];
+
+        // Get highest index value in array
+        let lastIndex = 0;
+        data.map(item => {
+          if (item.id > lastIndex) {
+            lastIndex = item.id
+          }
+        })
+
+        // const lastIndex = oldData[oldData.length - 1].id
+        const newDuplicate = { ...duplicate, id: lastIndex + 1 }
+        oldData.splice(index, 0, newDuplicate);
+
+        setData(oldData);
+
+        console.log('Data after duplicate: ', oldData)
         break;
       case 'subtask':
         console.log('Adding subtask');
