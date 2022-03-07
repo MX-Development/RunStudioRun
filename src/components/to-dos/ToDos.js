@@ -166,8 +166,8 @@ function Calendar({ action, taskID }) {
           { eventInfo.text } 
         </div>
         <div className="time-bar">
-          <span className="bar" style={{ width: '60%' }}></span>
-          <span className="time-worked">5h</span>
+          <span className="bar" style={{ width: '0%' }}></span>
+          <span className="time-worked">0h</span>
           <span className="time-total">8h</span>
         </div>
       </div>
