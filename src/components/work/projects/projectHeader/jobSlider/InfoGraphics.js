@@ -3,8 +3,6 @@ import styled from 'styled-components'
 
 function InfoGraphics({ item }) {
 
-  console.log(item);
-
   return (
     <JobContainer>
       <Block percentage={40}> 

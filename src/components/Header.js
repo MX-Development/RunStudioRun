@@ -198,7 +198,7 @@ function Header() {
           <HeaderNav>
             {
               navItems.map(item => (
-                <Link key={item.item} onClick={(e) => {
+                <Link to={`#`} key={item.item} onClick={(e) => {
                   
                   setActiveNav(item.item)
 

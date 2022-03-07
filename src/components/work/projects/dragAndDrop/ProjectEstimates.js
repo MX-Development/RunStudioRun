@@ -19,57 +19,46 @@ import DragIcon from '../../../assets/icons/DragIcon.svg'
 import ActionButton from './components/ActionButton'
 import ExtraTime from './components/ExtraTime'
 
-const dragReducer = produce((draft, action) => {
-  console.log(action);
-  console.log(draft);
-
-  let [swapped] = [];
-
-  switch (action.type) {
-    case "MOVE": 
-      draft[action.from] = draft[action.from] || [];
-      draft[action.to] = draft[action.to] || [];
-      let [removed] = draft[action.from].splice(action.fromIndex, 1);
-      draft[action.to].splice(action.toIndex, 0, removed);
-      break;
-    case "MOVE_UP": 
-      // Find index of item in array
-      var index = action.items.map(function (item) { return item.id; }).indexOf(action.item.id);
-
-      draft['items'] = draft['items'] || [];
-      draft['items'] = draft['items'] || [];
-      [swapped] = draft['items'].splice(index, 1);
-      draft['items'].splice(index - 1, 0, swapped);
-      break;
-    case "MOVE_DOWN": 
-      // Find index of item in array
-      var index = action.items.map(function (item) { return item.id; }).indexOf(action.item.id);
-
-      draft['items'] = draft['items'] || [];
-      draft['items'] = draft['items'] || [];
-      [swapped] = draft['items'].splice(index, 1);
-      draft['items'].splice(index + 1, 0, swapped);
-      break;
-    case "DELETE":
-      // let [test] = draft['items'].splice(action.item.id, 2);
-      let array = action.items;
-      let [newArray] = array.splice(2, 0, "Lemon", "Kiwi");
-      console.log(action.items);
-      console.log(newArray);
-      console.log('deletingggg')
-      return array;
-      break;
-    case "ADD":
-      draft['items'].splice(action.position, 0, action.items[action.items.length - 1]);
-      break;
-    case 'UPDATE':
-      draft['items'] = action.items;
-      break
-    default: return
-    }
-});
-
 function ProjectEstimates({ estimateID, itemType }) { 
+
+  const [data, setData] = useState([]);
+
+  const dragReducer = produce((draft, action) => {
+    console.log(action);
+    console.log(draft);
+  
+    let [removed] = [];
+  
+    switch (action.type) {
+      case "MOVE": 
+        draft[action.from] = draft[action.from] || [];
+        draft[action.to] = draft[action.to] || [];
+        [removed] = draft[action.from].splice(action.fromIndex, 1);
+        draft[action.to].splice(action.toIndex, 0, removed);
+        break;
+      case "MOVE_UP": 
+        draft['items'] = draft['items'] || [];
+        [removed] = draft['items'].splice(action.fromIndex, 1);
+        draft['items'].splice(action.toIndex, 0, removed);
+        break;
+      case "MOVE_DOWN": 
+        draft['items'] = draft['items'] || [];
+        [removed] = draft['items'].splice(action.fromIndex, 1);
+        draft['items'].splice(action.toIndex, 0, removed);
+        break;
+      case "DELETE":
+        draft['items'] = draft['items'] || [];
+        draft['items'].splice(action.fromIndex, 1);
+        break;
+      case "ADD":
+        draft['items'].splice(action.position, 0, action.items[action.items.length - 1]);
+        break;
+      case 'UPDATE':
+        draft['items'] = action.items;
+        break
+      default: return
+      }
+  });
 
   const [idToAdd, setIdToAdd] = useState(0);
   
@@ -195,8 +184,6 @@ function ProjectEstimates({ estimateID, itemType }) {
 
   const [addNav, setAddNav] = useState(false)
 
-  const [data, setData] = useState([]);
-
   const fetchData = async () => {
 
     try {
@@ -265,36 +252,73 @@ function ProjectEstimates({ estimateID, itemType }) {
   }, []);
   
   const fireAction = (action_data, snapshot, item) => {
+
+    let oldData;
+    let [removed] = [];
   
     switch(action_data) {
       case 'move_up':
-        console.log('Move item up');
+
+        // Find index of item in array
+        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+
         dispatch({
           type: "MOVE_UP",
-          items: [...data],
-          item: item,
-          position: item.id
+          from: 'items',
+          to: 'items',
+          fromIndex: index,
+          toIndex: index - 1, 
+          items: [...data]
         });
+
+
+        oldData = [...data];
+        
+        [removed] = oldData.splice(index, 1);
+        oldData.splice(index - 1, 0, removed);
+
+        setData(oldData);
+
         break;
       case 'move_down':
-        console.log('Move item down');
+
+        // Find index of item in array
+        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+
         dispatch({
           type: "MOVE_DOWN",
-          items: [...data],
-          item: item,
-          position: item.id
+          from: 'items',
+          to: 'items',
+          fromIndex: index,
+          toIndex: index + 1, 
+          items: [...data]
         });
-        break;
-      case 'move_down':
-        console.log('Move item down');
+
+
+        oldData = [...data];
+        
+        [removed] = oldData.splice(index, 1);
+        oldData.splice(index + 1, 0, removed);
+
+        setData(oldData);
+
         break;
       case 'delete':
-        console.log('Delete item');
+
+        // Find index of item in array
+        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+
         dispatch({
           type: "DELETE",
-          items: [...data],
-          item: item
+          fromIndex: index,
+          items: [...data]
         });
+
+        oldData = [...data];
+        
+        oldData.splice(index, 1);
+
+        setData(oldData);
         break;
       case 'duplicate':
         console.log('Duplicating item');

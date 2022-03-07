@@ -23,7 +23,6 @@ function JobScroll({ projectID }) {
         projectID ? 
           res.data.forEach(item => {
             if (item.projectID === parseInt(projectID)) {
-              console.log(item);
               setData(data => [...data, item])
             }
           })

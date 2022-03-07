@@ -8,7 +8,6 @@ function ProjectNav() {
   let { id } = useParams();
   const location = useLocation();
   const pagePath = location.pathname.split('/')[1]
-  console.log(location.pathname)
 
   return (
     <TabContainer>

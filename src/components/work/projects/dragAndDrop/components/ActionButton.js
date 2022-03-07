@@ -69,11 +69,6 @@ function ActionButton({ setAction, snapshot, item }) {
           Commit Time
         </ActionItem>
         <ActionItem
-          onClick={() => setOpenActions(false)}
-        >
-          Hide
-        </ActionItem>
-        <ActionItem
           onClick={() => {
             setAction('delete', snapshot, item)
             setOpenActions(false)

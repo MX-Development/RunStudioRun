@@ -94,16 +94,16 @@ function NavIcons({ id }) {
         <Link to={`/projects/${id}/timeline`} onClick={(e) => setActiveNav('timeline')} className={`btn btn-icon ${activeNav === 'timeline' ? 'active' : ''}`}>
           <TimelineIcon />
         </Link>
-        <Link href={`/projects/${id}/book`} className={`btn btn-icon ${activeNav === 'book' ? 'active' : ''}`}>
+        <Link to={`/projects/${id}/book`} className={`btn btn-icon ${activeNav === 'book' ? 'active' : ''}`}>
           <BookIcon />
         </Link>
-        <Link href={`/projects/${id}`} onClick={(e) => {
+        <Link to={`/projects/${id}`} onClick={(e) => {
           // Run the saving draft function
           saveDraft()
         }}  className={`btn btn-icon ${activeNav === 'disc' ? 'active' : ''}`}>
           <DiscIcon />
         </Link>
-        <Link href={`/projects/${id}`} onClick={(e) => {
+        <Link to={`/projects/${id}`} onClick={(e) => {
           setActiveNav('eye')
           showPDF()
         }}  className={`btn btn-icon ${activeNav === 'eye' ? 'active' : ''}`}>

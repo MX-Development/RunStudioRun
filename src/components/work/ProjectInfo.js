@@ -58,8 +58,6 @@ function ProjectInfo({ projectID }) {
           setProjectLabels(res.data[0].projects);
           setContacts(res.data[0].contacts);
         })
-
-        console.log('Data fetched successfully.')
     } catch (err) {
       console.trace(err);
     }
