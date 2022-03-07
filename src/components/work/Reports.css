@@ -1,0 +1,66 @@
+.rdrDay {
+  color: var(--gold) !important;
+  height: 50px !important;
+}
+
+.rdrDay span.rdrInRange {
+  color: var(--gold) !important;
+}
+
+.rdrStartEdge {
+  color: var(--gold) !important;
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.rdrEndEdge {
+  color: var(--gold) !important;
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+.rdrDayHovered {
+  color: var(--gold) !important;
+  border-color: var(--gold) !important;
+  border-radius: 4px !important;
+}
+
+.rdrDayToday .rdrDayNumber span:after {
+  background: var(--gold);
+}
+
+.rdrDayEndOfMonth .rdrInRange, .rdrDayEndOfMonth .rdrStartEdge, .rdrDayEndOfWeek .rdrInRange, .rdrDayEndOfWeek .rdrStartEdge {
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+.rdrDayStartOfMonth .rdrInRange, .rdrDayStartOfMonth .rdrEndEdge, .rdrDayStartOfWeek .rdrInRange, .rdrDayStartOfWeek .rdrEndEdge {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.rdrMonth .rdrWeekDays {
+  background: #F4F2F0;
+  padding: 5px 0;
+}
+
+.rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview {
+  border-radius: 4px !important;
+  color: var(--gold) !important;
+}
+
+.rdrInputRanges {
+  display: none !important;
+}
+
+.rdrDateDisplay {
+  color: var(--gold) !important;
+}
+
+.rdrDateDisplayItem {
+  /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .21) !important; */
+}
+
+.rdrDateDisplayWrapper {
+  background-color: #eee !important;
+}

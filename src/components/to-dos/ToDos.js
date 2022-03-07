@@ -136,10 +136,6 @@ function Calendar({ action, taskID }) {
   const [events, setEvents] = useState([])
   const [eventsMounted, setEventsMounted] = useState([]);
 
-  useEffect(() => {
-    console.log('Events: ', events);
-  }, [events]);
-
   // When event is moved/added - not resized
   const mountEvent = (info) => {
 
@@ -178,7 +174,6 @@ function Calendar({ action, taskID }) {
 
     let calendarApi = calendarRef.current.getApi()
     const eventsOnMap = calendarApi.getEvents();
-    console.log('Events on calendar: ', eventsOnMap);
 
     const headerDay = moment(info.event.start).format('YYYY-MM-DD');
 
