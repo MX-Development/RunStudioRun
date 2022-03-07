@@ -7,12 +7,12 @@
     "phaseId": 1,
     "title": "Task title 1",
     "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
-    "time": 4500,
-    "time_worked": 1500,
+    "time": 12000,
+    "time_worked": 3500,
     "rate": 150,
     "total": 200,
-    "startDate": "2021-08-18T09:15",
-    "endDate": "2021-08-21T17:00",
+    "startDate": "2022-03-11T09:00",
+    "endDate": "2022-03-11T17:00",
     "team": [1, 4]
   },
   {
@@ -23,12 +23,12 @@
     "phaseId": 1,
     "title": "Task title 2",
     "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
-    "time": 7200,
+    "time": 6450,
     "time_worked": 1600, 
     "rate": 150,
     "total": 300,
-    "startDate": "2021-08-18T12:15",
-    "endDate": "2021-08-21T17:00",
+    "startDate": "2022-03-09T12:30",
+    "endDate": "2022-03-09T17:30",
     "team": [1, 4]
   },
   {
@@ -43,8 +43,8 @@
     "time_worked": 0,
     "rate": 150,
     "total": 200,
-    "startDate": "2021-08-19T14:30",
-    "endDate": "2021-08-21T17:00",
+    "startDate": "2022-03-08T14:30",
+    "endDate": "2022-03-08T17:00",
     "team": [2, 3]
   }
 ]

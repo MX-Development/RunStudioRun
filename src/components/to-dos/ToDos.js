@@ -23,7 +23,16 @@ import AdditionalTime from './components/AdditionalTime';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-function Calendar() {
+function Calendar({ action, taskID }) {
+
+  const calendarRef = React.createRef()
+
+  useEffect(() => {
+    if (action === 'edit') {
+      // Edit task
+      
+    }
+  }, [action]);
 
   const [actionNav, setActionNav] = useState(false);
 
@@ -49,7 +58,6 @@ function Calendar() {
   }
   
   const history = useHistory();
-  const [events, setEvents] = useState([])
 
   const [userSettings, setUserSettings] = useState([])
   const fetchData = async () => {
@@ -69,27 +77,26 @@ function Calendar() {
             let taskObject = {
               title: task.title, 
               start: moment(task.startDate).format(),
-              end: moment(task.startDate).add(task.time, 'minutes').format(),
+              end: moment(task.startDate).add(task.time, 'seconds').format(),
               description: task.description,
               time: task.time,
+              time_worked: task.time_worked,
               jobTitle: 'Job Title',
               editable: true,
+              taskID: task.id,
               eventDurationEditable: true
             }
 
             setEvents(events => [...events, taskObject])
           })
         })
-
-        console.log('Data fetched successfully.')
     } catch (err) {
       console.trace(err);
     }
   }
 
   useEffect(() => {
-    console.log(userSettings);
-    console.log(userSettings.slot_intervals)
+
   }, [userSettings]);
 
   useEffect(() => {
@@ -126,6 +133,183 @@ function Calendar() {
     history.push(`/to-do/${memberID}`)
   }
 
+  const [events, setEvents] = useState([])
+  const [eventsMounted, setEventsMounted] = useState([]);
+
+  useEffect(() => {
+    console.log('Events: ', events);
+  }, [events]);
+
+  // When event is moved/added - not resized
+  const mountEvent = (info) => {
+
+    const eventID = info.event._def.publicId;
+
+    // Check if event with ID is already in array
+    const exists = eventsMounted.filter(ev => parseInt(ev._def.publicId) === parseInt(eventID))
+    
+    if (exists.length > 0) {
+      // Event does exist in array - update it
+      const updatedEvents = eventsMounted.filter((ev) => ev._def.publicId !== info.event._def.publicId);
+      setEventsMounted([...updatedEvents, info.event])
+    } else {
+      // Event doesn't exist in array - push it
+      setEventsMounted(eventsMounted => [...eventsMounted, info.event])
+    }
+  }
+
+  // Render day header content on load
+  function renderHeaderContent(eventInfo) {  
+    return (
+      <div className="table-heading">
+        <div className="day">
+          { eventInfo.text } 
+        </div>
+        <div className="time-bar">
+          <span className="bar" style={{ width: '60%' }}></span>
+          <span className="time-worked">5h</span>
+          <span className="time-total">8h</span>
+        </div>
+      </div>
+    )
+  }
+
+  const setDayHeader = (info) => {
+
+    let calendarApi = calendarRef.current.getApi()
+    const eventsOnMap = calendarApi.getEvents();
+    console.log('Events on calendar: ', eventsOnMap);
+
+    const headerDay = moment(info.event.start).format('YYYY-MM-DD');
+
+    let totalDayTime = 0;
+
+    eventsOnMap.map(ev => {
+
+      const eventDay = moment(ev.start).format('YYYY-MM-DD');
+
+      // Return when event date is not the same as changed event
+      if (eventDay !== headerDay) return;
+
+      // Set start time
+      const startTime = moment(ev.start);
+      let endTime;
+      // Check if end time exists - if not it means that the card has not been resized yet, so end time = start time + 1 hour
+      if (ev.end) {
+        endTime = moment(ev.end);
+      }
+
+      let eventTime;
+      if (endTime) {
+        eventTime = moment.duration(endTime.diff(startTime));
+        const hours = parseInt(eventTime.asHours());
+        const minutes = parseInt(eventTime.asMinutes()) % 60;
+
+        eventTime = hours + (minutes / 60);
+        totalDayTime = totalDayTime + eventTime;
+      } else {
+        eventTime = 1;
+        totalDayTime = totalDayTime + 1;
+      }
+    })
+
+    const header = document.querySelector(`[data-date="${headerDay}"]`);
+    let timeWorked = header.querySelector('.time-worked').innerHTML;
+    timeWorked = timeWorked.replace('h', '');
+    timeWorked = parseInt(timeWorked);
+
+    const percentage = parseInt(totalDayTime) / 8 * 100;
+
+    header.querySelector('.time-worked').innerHTML = `${totalDayTime.toFixed(1)}h`;  
+
+    if (percentage < 100) {
+      header.querySelector('.bar').style.width = `${percentage}%`; 
+      header.querySelector('.bar').style.background = `var(--gold)`; 
+      header.querySelector('.time-total').style.color = `var(--text-gray)`; 
+    } else {
+      // You have overworked for the day
+      header.querySelector('.bar').style.width = `100%`; 
+      header.querySelector('.bar').style.background = `#DE5454`; 
+      header.querySelector('.time-worked').innerHTML = `Over Worked!`;  
+      header.querySelector('.time-total').innerHTML = `${totalDayTime.toFixed(1)}h`;  
+      header.querySelector('.time-total').style.color = `#FFFFFF`; 
+    }
+  }
+
+  function deleteTime(eventInfo) {
+    console.log('Delete time', eventInfo);
+    console.log('All events', events);
+
+    let calendarApi = calendarRef.current.getApi()
+    const selectedEvent = calendarApi.getEventById(eventInfo.event.id);
+    selectedEvent.remove();
+  }
+
+  function editTask(eventInfo) {
+    const taskID = eventInfo.event._def.extendedProps.taskID;
+    console.log(taskID);
+    
+    history.push(`/items-and-tasks/${taskID}`)
+  }
+
+  function renderEventContent(eventInfo) {
+  
+    let totalTime = eventInfo.event.extendedProps.time
+    let timeWorked = eventInfo.event.extendedProps.time_worked
+    // let remaining = totalTime - timeWorked
+    let percentage = timeWorked / totalTime * 100
+  
+    function openNav() {
+      setActionNav(!actionNav)
+    }
+
+    // Change event day header
+    setDayHeader(eventInfo);
+  
+    return (
+      <>
+        <ActionNav className={actionNav ? 'active' : ''}>
+          <ActionItem onClick={() => setIsOpen(!modalIsOpen)}>
+            Commit Time
+          </ActionItem>
+          <ActionItem onClick={() => editTask(eventInfo)}>
+            View & Edit
+          </ActionItem>
+          <ActionItem onClick={() => deleteTime(eventInfo)}>
+            Delete Time
+          </ActionItem>
+        </ActionNav>
+        <div className="event-container">
+          <div className="event-header">
+            <h5>{eventInfo.event.title}</h5>
+            <h6 style={{ fontWeight: '500', margin: '2.5px 0' }}>{eventInfo.event.extendedProps.jobTitle}</h6>
+            <span className="type" style={{ fontWeight: '400' }}>Client</span>
+            <div className="event-action" onClick={openNav}>
+              <img src={Ellipsis} alt="action icon" />
+            </div>
+          </div>
+          <div className="event-description">
+            <p>
+              {eventInfo.event.extendedProps.description}
+            </p>
+          </div>
+          <div className="event-footer">
+            <div className="event-time">
+              <div className="time-meta">
+                <span>{(new Date(timeWorked * 1000)).toUTCString().match(/(\d:\d\d:)/)[0].replace(':', 'h').replace(':', 'm')}</span>
+                <span>{(new Date(totalTime * 1000)).toUTCString().match(/(\d:\d\d:)/)[0].replace(':', 'h').replace(':', 'm')}</span>
+              </div>
+              <div className="card-time">
+                <span className="total-bar"></span>
+                <span className="worked-bar" style={{ width: percentage + '%' }}></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+
   return (
     <div style={{ position: 'relative' }}>
 
@@ -138,8 +322,7 @@ function Calendar() {
       >
         <ModalBody>
           <ModalHeading>
-            <h2>Additional Time</h2>
-            {/* { modalAction ? modalAction : null} */}
+            <h2>Commit Time</h2>
           </ModalHeading>
           <AdditionalTime />
         </ModalBody>
@@ -177,6 +360,7 @@ function Calendar() {
       </MemberSelect>
 
       <FullCalendar
+        ref={calendarRef}
         plugins={[ timeGridPlugin, interactionPlugin ]}
         initialView="timeGridWeek"
         droppable={true}
@@ -219,23 +403,19 @@ function Calendar() {
         eventDragStart={function( info ) {
           let parent = info.el.parentNode;
 
-          console.log(info.jsEvent.target)
-
           // parent.classList.remove('not-dragged');
         }}
         eventResize={function(event, info) {
-          console.log(event);
-          console.log(info);
           // event.setExtendedProp('time_worked', 'hallo')
         }}
         eventDragStop={function( info ) {
-          console.log(info);
           let parent = info.el.parentNode;
+          
 
           parent.classList.add('not-dragged');
         }}
         eventChange={function (changeInfo) {
-          console.log(changeInfo);
+          // console.log(changeInfo);
           const timeWorked = changeInfo.event.extendedProps['time_worked'];
           // if (timeWorked !== )
           renderHeaderContent(changeInfo);
@@ -243,13 +423,7 @@ function Calendar() {
           // changeInfo.event.setExtendedProp('time_worked', 1000);
         }}
         eventStartEditable={true}
-        eventDidMount={
-          function(info) {
-            let parent = info.el.parentNode;
-
-            parent.classList.remove('not-dragged');
-          }
-        }
+        eventDidMount={info => mountEvent(info)}
       />
     </div>
   )
@@ -267,73 +441,8 @@ export default Calendar
 //   info.el.querySelector('.event-container').style.background = 'var(--white)'
 // }
 
-function renderEventContent(eventInfo) {
-
-  let totalTime = eventInfo.event.extendedProps.time
-  let timeWorked = eventInfo.event.extendedProps.time_worked
-  // let remaining = totalTime - timeWorked
-  let percentage = timeWorked / totalTime * 100
-
-  return (
-    <div className="event-container">
-      <div className="event-header">
-        <h5>{eventInfo.event.title}</h5>
-        <h6 style={{ fontWeight: '500', margin: '2.5px 0' }}>{eventInfo.event.extendedProps.jobTitle}</h6>
-        <span className="type" style={{ fontWeight: '400' }}>Client</span>
-        <div className="event-action" onMouseEnter={() => console.log('Mouse entered')}>
-          <img src={Ellipsis} alt="action icon" />
-          <ActionNav className={'active'}>
-            <ActionItem>
-              Commit Time
-            </ActionItem>
-            <ActionItem>
-              View & Edit
-            </ActionItem>
-            <ActionItem>
-              Delete Time
-            </ActionItem>
-          </ActionNav>
-        </div>
-      </div>
-      <div className="event-description">
-        <p>
-          {eventInfo.event.extendedProps.description}
-        </p>
-      </div>
-      <div className="event-footer">
-        <div className="event-time">
-          <div className="time-meta">
-            <span>{(new Date(timeWorked * 1000)).toUTCString().match(/(\d:\d\d:)/)[0].replace(':', 'h').replace(':', 'm')}</span>
-            <span>{(new Date(totalTime * 1000)).toUTCString().match(/(\d:\d\d:)/)[0].replace(':', 'h').replace(':', 'm')}</span>
-          </div>
-          <div className="card-time">
-            <span className="total-bar"></span>
-            <span className="worked-bar" style={{ width: percentage + '%' }}></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function renderHeaderContent(eventInfo) {
-  console.log('Header info: ', eventInfo)
-  return (
-    <div className="table-heading">
-      <div className="day">
-        { eventInfo.text } 
-      </div>
-      <div className="time-bar">
-        <span className="bar"></span>
-        <span className="time-worked">5h15m</span>
-        <span className="time-total">7h330m</span>
-      </div>
-    </div>
-  )
-}
-
 function renderDayContent(eventInfo) {
-  // console.log(eventInfo)
+  
 }
 
 const MemberSelect = styled.div`
@@ -386,20 +495,21 @@ const ActionNav = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%;
-  transform: translate(-105%,-50%);
+  top: 20px;
+  transform: translate(-25%,-50%);
   box-shadow: 0px 0px 8px #00000033;
   border-radius: 4px 4px 4px 4px;
   padding: 10px;
   background: var(--white);
-  z-index: 5;
+  z-index: 999;
   left: -9999px;
   opacity: 0;
   transition: opacity .35s ease-in-out;
 
   &.active {
     opacity: 1;
-    left: 0;
+    left: auto;
+    right: 0;
     transition: opacity .35s ease-in-out;
   }
 `

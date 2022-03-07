@@ -107,6 +107,7 @@
   background: var(--gold);
   z-index: 0;
   border-radius: 0 0 0 4px;
+  transition: width 0.5s ease-in-out;
 }
 
 .time-worked,
@@ -155,6 +156,7 @@ a.fc-event.eventRed {
   padding: 0 8px 8px;
   position: relative;
   height: 100%;
+  overflow: hidden;
 }
 
 /* .event-container.dragged {

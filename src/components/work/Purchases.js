@@ -8,11 +8,19 @@ import List from '../List'
 import { MenuItem, Select } from '@material-ui/core'
 import Label from '../settings/components/Label';
 
-function Purchases({ projectID }) {
+import ModalContent from '../misc/ModalContent';
+
+import {
+  useHistory
+} from "react-router-dom"
+
+function Purchases({ projectID, add }) {
+
+  let history = useHistory()
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [jobs, setJobs] = useState([])
+  const [jobLabels, setJobLabels] = useState([])
   const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
   const [contacts, setContacts] = useState([])
@@ -24,7 +32,7 @@ function Purchases({ projectID }) {
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
-          setJobs(res.data[0].jobs);
+          setJobLabels(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
           setProjectLabels(res.data[0].projects);
           setContacts(res.data[0].contacts);
@@ -120,6 +128,73 @@ function Purchases({ projectID }) {
     setData(newArr);
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  const [projects, setProjects] = useState([])
+  const [jobs, setJobs] = useState([
+    {
+      "value": "job_1",
+      "label": "Job 1"
+    },
+    {
+      "value": "job_2",
+      "label": "Job 2"
+    }
+  ])
+  useEffect(async () => {
+    // Get all projects
+    let result = axios.get(`/json/projects.json`)
+      .then(res => {
+
+        // Add each project to the projects array
+        res.data.map(project => {
+          setProjects(projects => [...projects, {
+            "value": project.id,
+            "label": project.projectName
+          }]);
+        })
+      })
+  }, []);
+
+  const modalForm = [
+    {
+      "columns": 12,
+      "type": "select",
+      "label": "Select the Project",
+      "name": "project",
+      "placeholder": "Select...",
+      "value": "Select...",
+      "options": projects
+    },
+    {
+      "columns": 12,
+      "type": "select",
+      "label": "Select the Job",
+      "name": "job",
+      "placeholder": "Select...",
+      "value": "Select...",
+      "options": jobs
+    }
+  ] 
+
+
   return (
     viewID ? 
     <h3>Purchase { viewID }</h3>
@@ -127,6 +202,10 @@ function Purchases({ projectID }) {
     <List 
       title={'Purchases'} 
       buttons={[
+        {
+          "label": "Add",
+          "action": function() { history.push(`/purchases/add`) }
+        },
         {
           "label": "Print",
           "action": function() { alert('Print...') }
@@ -137,6 +216,9 @@ function Purchases({ projectID }) {
       projectID={projectID} 
       key={projectID} 
       view={view} 
+      modalTitle={'New Purchase'} 
+      modalContent={<ModalContent formElements={modalForm} />} 
+      add={add ? true : false} 
     />
   )
 }

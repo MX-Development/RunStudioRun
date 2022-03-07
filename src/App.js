@@ -206,6 +206,13 @@ function App() {
 
                     
                     <Route exact path="/to-do" component={userSettings?.time_blocks.time_grid ? ToDos : Trello} /> 
+                    <Route
+                      path='/to-do/task/2/edit'
+                      render={(props) => (
+                        <ToDos {...props} action={'edit'} taskID={1} />
+                      )}
+                    />
+
                     {/* <Route exact path="/kanban" component={Trello} /> */}
                     {/* <Route exact path="/trello" component={KanbanBoard} /> */}
 
@@ -220,6 +227,13 @@ function App() {
                     />
                     <Route path="/projects/:id/:view?/:viewID?" component={Project} />
                     <Route exact path="/estimates" component={Estimates} />
+                    <Route
+                      exact
+                      path='/estimates/add'
+                      render={(props) => (
+                        <Estimates {...props} add={true} />
+                      )}
+                    />
                     <Route path="/estimates/:id" component={Estimates} />
                     <Route exact path="/purchases" component={Purchases} />
                     <Route

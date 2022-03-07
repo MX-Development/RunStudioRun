@@ -20,7 +20,7 @@ function Invoices({ projectID, add }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [jobs, setJobs] = useState([])
+  const [jobLabels, setJobLabels] = useState([])
   const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
   const [contacts, setContacts] = useState([])
@@ -31,7 +31,7 @@ function Invoices({ projectID, add }) {
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
-          setJobs(res.data[0].jobs);
+          setJobLabels(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
           setProjectLabels(res.data[0].projects);
           setContacts(res.data[0].contacts);
@@ -136,23 +136,34 @@ function Invoices({ projectID, add }) {
     setData(newArr);
   };
 
+
+  const [projects, setProjects] = useState([])
+  const [jobs, setJobs] = useState([
+    {
+      "value": "job_1",
+      "label": "Job 1"
+    },
+    {
+      "value": "job_2",
+      "label": "Job 2"
+    }
+  ])
+  useEffect(async () => {
+    // Get all projects
+    let result = axios.get(`/json/projects.json`)
+      .then(res => {
+
+        // Add each project to the projects array
+        res.data.map(project => {
+          setProjects(projects => [...projects, {
+            "value": project.id,
+            "label": project.projectName
+          }]);
+        })
+      })
+  }, []);
+
   const modalForm = [
-    {
-      "columns": 4,
-      "type": "textfield",
-      "label": "Label",
-      "name": "label",
-      "placeholder": "Placeholder",
-      "value": "The value"
-    },
-    {
-      "columns": 8,
-      "type": "textfield",
-      "label": "Label",
-      "name": "label_2",
-      "placeholder": "Placeholder",
-      "value": "The value"
-    },
     {
       "columns": 12,
       "type": "select",
@@ -160,16 +171,16 @@ function Invoices({ projectID, add }) {
       "name": "project",
       "placeholder": "Select...",
       "value": "Select...",
-      "options": [
-        {
-          "value": "test_2",
-          "label": "Test 2"
-        },
-        {
-          "value": "test_1",
-          "label": "Test 1"
-        }
-      ]
+      "options": projects
+    },
+    {
+      "columns": 12,
+      "type": "select",
+      "label": "Select the Job",
+      "name": "job",
+      "placeholder": "Select...",
+      "value": "Select...",
+      "options": jobs
     }
   ] 
 

@@ -152,13 +152,15 @@ function AdditionalTime() {
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
                   <Select
-                    value={'Select...'}
+                    value={'Rate'}
                     style={{ width: '100%' }}
                   >
                     <MenuItem value="">
-                      <em>Select...</em>
+                      <em>Select</em>
                     </MenuItem>
-                    <MenuItem value={'standard'}>Standard</MenuItem>
+                    <MenuItem value={100}>100</MenuItem>
+                    <MenuItem value={120}>120</MenuItem>
+                    <MenuItem value={130}>130</MenuItem>
                   </Select>
                 </FormControl>
               </FormGroup>

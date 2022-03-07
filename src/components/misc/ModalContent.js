@@ -65,8 +65,8 @@ function ModalContent({ formElements }) {
                                   style={{ width: '100%' }}
                                   {...field}
                                 >
-                                  <MenuItem value={el.placeholder}>
-                                    <em>{ el.placeholder }</em>
+                                  <MenuItem disabled selected value={el.placeholder}>
+                                    { el.placeholder }
                                   </MenuItem>
                                   { 
                                     el.options && el.options.length > 0 ? 

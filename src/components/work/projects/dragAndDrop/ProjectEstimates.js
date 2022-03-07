@@ -22,6 +22,9 @@ import ExtraTime from './components/ExtraTime'
 const dragReducer = produce((draft, action) => {
   console.log(action);
   console.log(draft);
+
+  let [swapped] = [];
+
   switch (action.type) {
     case "MOVE": 
       draft[action.from] = draft[action.from] || [];
@@ -30,9 +33,34 @@ const dragReducer = produce((draft, action) => {
       draft[action.to].splice(action.toIndex, 0, removed);
       break;
     case "MOVE_UP": 
+      // Find index of item in array
+      var index = action.items.map(function (item) { return item.id; }).indexOf(action.item.id);
+
+      draft['items'] = draft['items'] || [];
+      draft['items'] = draft['items'] || [];
+      [swapped] = draft['items'].splice(index, 1);
+      draft['items'].splice(index - 1, 0, swapped);
+      break;
+    case "MOVE_DOWN": 
+      // Find index of item in array
+      var index = action.items.map(function (item) { return item.id; }).indexOf(action.item.id);
+
+      draft['items'] = draft['items'] || [];
+      draft['items'] = draft['items'] || [];
+      [swapped] = draft['items'].splice(index, 1);
+      draft['items'].splice(index + 1, 0, swapped);
+      break;
+    case "DELETE":
+      // let [test] = draft['items'].splice(action.item.id, 2);
+      let array = action.items;
+      let [newArray] = array.splice(2, 0, "Lemon", "Kiwi");
+      console.log(action.items);
+      console.log(newArray);
+      console.log('deletingggg')
+      return array;
       break;
     case "ADD":
-      draft['items'].splice(action.items.length, 0, action.items[action.items.length - 1]);
+      draft['items'].splice(action.position, 0, action.items[action.items.length - 1]);
       break;
     case 'UPDATE':
       draft['items'] = action.items;
@@ -43,166 +71,124 @@ const dragReducer = produce((draft, action) => {
 
 function ProjectEstimates({ estimateID, itemType }) { 
 
-  const [idToAdd, setIdToAdd] = useState(2);
+  const [idToAdd, setIdToAdd] = useState(0);
   
-  const optionsToAdd = (options) => {
+  const optionsToAdd = (options, action, position) => {
 
     for (const [key, value] of Object.entries(options)) {
 
       if (value !== true) return
 
-      if (key === 'overview') {
+      let item;
 
-        const newID = idToAdd * idToAdd + 1;
-        
-        const item = {
-          "id": newID,
-          "type": "overview",
-          "title": "Overview",
-          "description": "Overview 1 description",
-          "tasks": [1, 2]
-        }
-    
-        setData(data => [...data, item]);
-    
+      if (action === 'subtask') {
+        key = 'subtask';
+      }
+
+      const newID = data[data.length - 1].id + 1;
+
+      switch(key) {
+        case 'overview':
+          item = {
+            "id": newID,
+            "type": "overview",
+            "title": "Overview",
+            "description": "Overview 1 description",
+            "tasks": [1, 2]
+          }
+          break;
+        case 'phase':
+          item = {
+            "id": newID,
+            "type": "phase",
+            "title": "Phase 1 title",
+            "description": "Phase 1 description",
+            "tasks": [1, 2]
+          }
+          break;
+        case 'task':
+          item = {
+            "id": newID,
+            "type": "task",
+            "title": "Task title",
+            "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
+            "time": 0,
+            "time_worked": 0,
+            "rate": 0,
+            "total": 0,
+            "startDate": "2021-08-18T09:15",
+            "endDate": "2021-08-21T17:00",
+            "team": []
+          }
+          break;
+        case 'subtask':
+          item = {
+            "id": newID,
+            "type": "subtask",
+            "title": "Subtask title 1",
+            "description": "Subtask description 1",
+            "time": 75,
+            "rate": 150,
+            "total": 200,
+            "startDate": "2021-08-21T14:15",
+            "endDate": "2021-08-21T17:00",
+            "team": [1, 4]
+          }
+          break;
+        case 'expense':
+          item = {
+            "id": newID,
+            "type": "expense",
+            "title": "Expense title 1",
+            "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
+            "time": 6500,
+            "time_worked": 1500,
+            "rate": 150,
+            "total": 200,
+            "startDate": "2021-08-18T09:15",
+            "endDate": "2021-08-21T17:00",
+            "team": [1, 4],
+            "subitems": []
+          }
+          break;
+        case 'additional_time':
+          item = {
+            "id": newID,
+            "type": "additional_time",
+            "title": "Additional time",
+            "description": "This is for the time that the client asked for another revision even though",
+            "time": 0,
+            "time_worked": 0,
+            "rate": 0,
+            "total": 0,
+            "startDate": "2022-08-18T09:15",
+            "endDate": "2022-08-21T17:00",
+            "team": []
+          }
+          break;
+        default: return
+      }
+
+      setData(data => [...data, item]);
+
+      if (action === 'duplicate') {
+        dispatch({
+          type: "ADD",
+          items: [...data, item],
+          position: position - 2
+        });
+      } else if (action === 'add_subtask') {
+        dispatch({
+          type: "ADD",
+          items: [...data, item],
+          position: position - 1
+        });
+      } else {
         dispatch({
           type: "ADD",
           items: [...data, item]
         });
-
       }
-
-      if (key === 'phase') {
-
-        const newID = idToAdd * idToAdd + 2;
-        
-        const item = {
-          "id": newID,
-          "type": "phase",
-          "title": "Phase 1 title",
-          "description": "Phase 1 description",
-          "tasks": [1, 2]
-        }
-    
-        setData(data => [...data, item]);
-    
-        dispatch({
-          type: "ADD",
-          items: [...data, item]
-        });
-
-      }
-
-      if (key === 'task') {
-
-        const newID = idToAdd * idToAdd + 3;
-        
-        const item = {
-          "id": newID,
-          "type": "task",
-          "title": "Task title",
-          "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
-          "time": 0,
-          "time_worked": 0,
-          "rate": 0,
-          "total": 0,
-          "startDate": "2021-08-18T09:15",
-          "endDate": "2021-08-21T17:00",
-          "team": []
-        }
-    
-        setData(data => [...data, item]);
-    
-        dispatch({
-          type: "ADD",
-          items: [...data, item]
-        });
-
-      }
-
-      if (key === 'subtask') {
-
-        const newID = idToAdd * idToAdd + 4;
-        
-        const item = {
-          "id": newID,
-          "type": "subtask",
-          "title": "Subtask title 1",
-          "description": "Subtask description 1",
-          "time": 75,
-          "rate": 150,
-          "total": 200,
-          "startDate": "2021-08-21T14:15",
-          "endDate": "2021-08-21T17:00",
-          "team": [1, 4]
-        }
-
-        setData(data => [...data, item]);
-  
-        dispatch({
-          type: "ADD",
-          items: [...data, item]
-        });
-
-      }
-
-      if (key === 'expense') {
-
-        const newID = idToAdd * idToAdd + 5;
-        
-        const item = {
-          "id": newID,
-          "type": "expense",
-          "title": "Expense title 1",
-          "description": "Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.",
-          "time": 6500,
-          "time_worked": 1500,
-          "rate": 150,
-          "total": 200,
-          "startDate": "2021-08-18T09:15",
-          "endDate": "2021-08-21T17:00",
-          "team": [1, 4],
-          "subitems": []
-        }
-        
-
-        setData(data => [...data, item]);
-  
-        dispatch({
-          type: "ADD",
-          items: [...data, item]
-        });
-
-      }
-
-      if (key === 'additional_time') {
-
-        const newID = idToAdd * idToAdd + 6;
-        
-        const item = {
-          "id": newID,
-          "type": "additional_time",
-          "title": "Additional time",
-          "description": "This is for the time that the client asked for another revision even though",
-          "time": 0,
-          "time_worked": 0,
-          "rate": 0,
-          "total": 0,
-          "startDate": "2022-08-18T09:15",
-          "endDate": "2022-08-21T17:00",
-          "team": []
-        }
-    
-        setData(data => [...data, item]);
-    
-        dispatch({
-          type: "ADD",
-          items: [...data, item]
-        });
-
-      }
-
-      setIdToAdd(idToAdd + 1);
     }
 
   }
@@ -212,7 +198,6 @@ function ProjectEstimates({ estimateID, itemType }) {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    console.log('hallo');
 
     try {
       await axios.get(`/json/estimates/full_estimates.json`)
@@ -279,18 +264,49 @@ function ProjectEstimates({ estimateID, itemType }) {
     }
   }, []);
   
-  const fireAction = (data, snapshot) => {
-    console.log(data);
-    console.log(snapshot);
-    switch(data) {
+  const fireAction = (action_data, snapshot, item) => {
+  
+    switch(action_data) {
       case 'move_up':
         console.log('Move item up');
         dispatch({
-          type: "MOVE_UP"
+          type: "MOVE_UP",
+          items: [...data],
+          item: item,
+          position: item.id
         });
         break;
       case 'move_down':
         console.log('Move item down');
+        dispatch({
+          type: "MOVE_DOWN",
+          items: [...data],
+          item: item,
+          position: item.id
+        });
+        break;
+      case 'move_down':
+        console.log('Move item down');
+        break;
+      case 'delete':
+        console.log('Delete item');
+        dispatch({
+          type: "DELETE",
+          items: [...data],
+          item: item
+        });
+        break;
+      case 'duplicate':
+        console.log('Duplicating item');
+
+        // Duplicate the item - depending on type of item
+        optionsToAdd({ [item.type]: true }, 'duplicate', item.id)
+        break;
+      case 'subtask':
+        console.log('Adding subtask');
+
+        // Duplicate the item - depending on type of item
+        optionsToAdd({ subtask: true }, 'add_subtask', item.id)
         break;
       default: return
     }
@@ -333,6 +349,7 @@ function ProjectEstimates({ estimateID, itemType }) {
                       return (
                         <Draggable key={item.id} draggableId={(item.id).toString()} index={index}>
                           {(provided, snapshot) => {
+                            const type = item.type;
                             return (
                               <div
                                 className={snapshot.isDragging ? 'dragging' : null}
@@ -362,7 +379,7 @@ function ProjectEstimates({ estimateID, itemType }) {
                                       default: return
                                     }
                                   })()}
-                                  <ActionButton setAction={(data, snapshot) => fireAction(data, snapshot)} snapshot={provided} />
+                                  <ActionButton setAction={(action_data, snapshot, item) => fireAction(action_data, snapshot, item)} snapshot={provided} item={item} />
                                 </div>
                               </div>
                             ); 

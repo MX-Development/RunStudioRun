@@ -29,7 +29,7 @@ function ProjectListing({company, columns, data, jobs, modalTitle, modalContent,
         setProjects(projects => [...projects, project])
       })
     })
-  }, []);
+  }, [data]);
 
   const dispatch = useDispatch();
   const order = useSelector((state) => state.order.showOrdered);
@@ -38,6 +38,26 @@ function ProjectListing({company, columns, data, jobs, modalTitle, modalContent,
     console.log('Changing order');
     dispatch(setShowOrdered(!order))
   }
+
+  useEffect(() => {
+    if (order) {
+      console.log('order');
+
+      setTimeout(function() {
+        const container = document.querySelectorAll('.project-grid .MuiDataGrid-windowContainer');
+        container.forEach(el => { 
+          const elHeight = el.style.height;
+          const height = parseInt(elHeight.replace('px'));
+          const newHeight = height / 2;
+  
+          if (height > 350) {
+            el.style.height = `${height / 2}px`;
+          }
+          // console.log(`${parseInt(height.replace('px')) / 2}px`);
+        })
+      }, 500);
+    } 
+  }, [order]);
 
   const centerModal = {
     content: {

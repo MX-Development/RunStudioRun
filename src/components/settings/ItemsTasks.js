@@ -76,6 +76,8 @@ function ItemsTasks({ add }) {
   }, []);
 
 
+  const [openModal, setOpenModal] = useState(false);
+
   let { id } = useParams();
   const selectedID = id;
 
@@ -93,6 +95,7 @@ function ItemsTasks({ add }) {
       })
 
       setSelectedData(dataSelect[0])
+      setOpenModal(true);
     }
   }, [id, data, selectedID]);
 
@@ -237,6 +240,7 @@ function ItemsTasks({ add }) {
         modalContent={modalContent} 
         add={add ? true : false} 
         nocolor={true} 
+        openModal={openModal}
       />
     </>
   )

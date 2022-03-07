@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ActionIcon from '../../../../assets/icons/ActionIcon.svg'
 import CloseIcon from '../../../../assets/icons/CloseIcon.svg'
 
-function ActionButton({ setAction, snapshot }) {
+function ActionButton({ setAction, snapshot, item }) {
   
   const [openActions, setOpenActions] = useState(false)
 
@@ -23,7 +23,7 @@ function ActionButton({ setAction, snapshot }) {
       <ActionNav className={openActions ? 'active' : ''}>
         <ActionItem
           onClick={() => {
-            setAction('move_up', snapshot)
+            setAction('move_up', snapshot, item)
             setOpenActions(false)
           }}
         >
@@ -31,19 +31,25 @@ function ActionButton({ setAction, snapshot }) {
         </ActionItem>
         <ActionItem
           onClick={() => {
-            setAction('move_down')
+            setAction('move_down', snapshot, item)
             setOpenActions(false)
           }}
         >
           Move Down
         </ActionItem>
         <ActionItem
-          onClick={() => setOpenActions(false)}
+          onClick={() => {
+            setAction('subtask', snapshot, item)
+            setOpenActions(false)
+          }}
         >
           Make Sub Item/Task
         </ActionItem>
         <ActionItem
-          onClick={() => setOpenActions(false)}
+          onClick={() => {
+            setAction('duplicate', snapshot, item)
+            setOpenActions(false)
+          }}
         >
           Duplicate
         </ActionItem>
@@ -68,7 +74,10 @@ function ActionButton({ setAction, snapshot }) {
           Hide
         </ActionItem>
         <ActionItem
-          onClick={() => setOpenActions(false)}
+          onClick={() => {
+            setAction('delete', snapshot, item)
+            setOpenActions(false)
+          }}
         >
           Delete
         </ActionItem>

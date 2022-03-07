@@ -9,14 +9,24 @@ import { MenuItem, Select } from '@material-ui/core'
 import Label from '../settings/components/Label';
 import ProjectEstimates from './projects/dragAndDrop/ProjectEstimates';
 
-function Estimates({ projectID }) {
+import ModalContent from '../misc/ModalContent';
+
+import {
+  useHistory
+} from "react-router-dom"
+
+function Estimates({ projectID, add }) {
+
+  let history = useHistory()
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [jobs, setJobs] = useState([])
+  const [jobLabels, setJobLabels] = useState([])
   const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
   const [contacts, setContacts] = useState([])
+
+  const [data, setData] = useState([])
 
   const fetchLabels = async () => {
     setIsLoading(true);
@@ -24,13 +34,25 @@ function Estimates({ projectID }) {
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
-          setJobs(res.data[0].jobs);
+          setJobLabels(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
           setProjectLabels(res.data[0].projects);
           setContacts(res.data[0].contacts);
         })
 
-        console.log('Data fetched successfully.')
+        axios.get(`/json/estimates.json`)
+          .then(res => {
+            projectID ? 
+              res.data.forEach((item, index) => {
+                if (index === 0) document.querySelector('.app').style.backgroundImage = "none";
+                if (item.projectID === parseInt(projectID)) {
+                  setData(data => [...data, item])
+                }
+              })
+            :
+              setData(res.data)
+            }
+          )
     } catch (err) {
       console.trace(err);
     }
@@ -44,23 +66,6 @@ function Estimates({ projectID }) {
   }, []);
 
   let { view, viewID } = useParams();
-
-  const [data, setData] = useState([])
-  useEffect(() => {
-    axios.get(`/json/estimates.json`)
-      .then(res => {
-        projectID ? 
-          res.data.forEach((item, index) => {
-            if (index === 0) document.querySelector('.app').style.backgroundImage = "none";
-            if (item.projectID === parseInt(projectID)) {
-              setData(data => [...data, item])
-            }
-          })
-        :
-          setData(res.data)
-        }
-      )
-  }, [projectID]);
 
   const columns = [
     { field: 'projectName', type: 'string', flex: 0.4, headerName: 'Project' },
@@ -156,6 +161,72 @@ function Estimates({ projectID }) {
     setData(newArr);
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  const [projects, setProjects] = useState([])
+  const [jobs, setJobs] = useState([
+    {
+      "value": "job_1",
+      "label": "Job 1"
+    },
+    {
+      "value": "job_2",
+      "label": "Job 2"
+    }
+  ])
+  useEffect(async () => {
+    // Get all projects
+    let result = axios.get(`/json/projects.json`)
+      .then(res => {
+
+        // Add each project to the projects array
+        res.data.map(project => {
+          setProjects(projects => [...projects, {
+            "value": project.id,
+            "label": project.projectName
+          }]);
+        })
+      })
+  }, []);
+
+  const modalForm = [
+    {
+      "columns": 12,
+      "type": "select",
+      "label": "Select the Project",
+      "name": "project",
+      "placeholder": "Select...",
+      "value": "Select...",
+      "options": projects
+    },
+    {
+      "columns": 12,
+      "type": "select",
+      "label": "Select the Job",
+      "name": "job",
+      "placeholder": "Select...",
+      "value": "Select...",
+      "options": jobs
+    }
+  ] 
+
   return (
       viewID ? 
       <ProjectEstimates estimateID={viewID} />
@@ -163,6 +234,10 @@ function Estimates({ projectID }) {
       <List 
         title={'Estimates'}
         buttons={[
+          {
+            "label": "Add",
+            "action": function() { history.push(`/estimates/add`) }
+          },
           {
             "label": "Print",
             "action": function() { alert('Print...') }
@@ -173,6 +248,9 @@ function Estimates({ projectID }) {
         projectID={projectID} 
         key={projectID} 
         view={view} 
+        modalTitle={'New Estimates'} 
+        modalContent={<ModalContent formElements={modalForm} />} 
+        add={add ? true : false} 
       />
   )
 }
