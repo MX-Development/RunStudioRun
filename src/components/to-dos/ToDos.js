@@ -211,8 +211,6 @@ function Calendar({ action, taskID }) {
       }
     })
 
-    console.log('All days filled: ', allDaysFilled);
-
     const allHeaders = document.querySelectorAll(`[data-date]`);
     allHeaders.forEach(head => {
       const date = head.getAttribute('data-date');
@@ -233,13 +231,21 @@ function Calendar({ action, taskID }) {
 
     const percentage = parseInt(totalDayTime) / 8 * 100;
 
+    // header.querySelector('.time-worked').innerHTML = `${totalDayTime.toFixed(1)}h`;  
     header.querySelector('.time-worked').innerHTML = `${totalDayTime.toFixed(1)}h`;  
 
-    if (percentage < 100) {
+    if (percentage < 35) {
+      header.querySelector('.bar').style.width = `${percentage}%`; 
+      header.querySelector('.bar').style.background = `#77E0CC`; 
+      header.querySelector('.time-total').style.color = `#fff`; 
+      header.querySelector('.time-total').innerHTML = `8h`;  
+    } else if (percentage > 35 && percentage < 100) {
       header.querySelector('.bar').style.width = `${percentage}%`; 
       header.querySelector('.bar').style.background = `var(--gold)`; 
       header.querySelector('.time-total').style.color = `var(--text-gray)`; 
+      header.querySelector('.time-total').innerHTML = `8h`;  
     } else {
+      console.log(percentage);
       // You have overworked for the day
       header.querySelector('.bar').style.width = `100%`; 
       header.querySelector('.bar').style.background = `#DE5454`; 

@@ -116,6 +116,10 @@
   z-index: 1;
 }
 
+.time-total {
+  color: var(--text-gray);
+}
+
 .time-worked {
   color: #fff;
 }

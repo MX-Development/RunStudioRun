@@ -17,7 +17,7 @@ function ProjectInfo({ projectID }) {
     {
       "id": 1,
       "name": "standard",
-      "title": "Standard",
+      "title": "Standard rate long",
       "rate": 100
     },
     {
@@ -135,7 +135,7 @@ function ProjectInfo({ projectID }) {
             <Grid item xs={4}>
               <h6>Rate</h6>
               <FormGroup>
-                <FormControl variant="outlined">
+                <FormControl>
                   <Select
                     labelId="rate-select-label"
                     id="rate-select"
@@ -170,7 +170,7 @@ function ProjectInfo({ projectID }) {
             <Grid item xs={4}>
               <h6>Status</h6>
               <FormGroup>
-                <FormControl variant="outlined">
+                <FormControl>
                   <Select
                     labelId="status-select-label"
                     id="status-select"
@@ -204,7 +204,7 @@ function ProjectInfo({ projectID }) {
             <Grid item xs={4}>
               <h6>Action</h6>
               <FormGroup>
-                <FormControl variant="outlined">
+                <FormControl>
                   <Select
                     labelId="action-select-label"
                     id="action-select"

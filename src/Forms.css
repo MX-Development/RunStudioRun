@@ -194,6 +194,10 @@
   color: var(--text-gray) !important;
 }
 
+/* .MuiOutlinedInput-notchedOutline {
+  border: none !important;
+} */
+
 /* Typography */
 form h5 {
   margin-top: 16px;
