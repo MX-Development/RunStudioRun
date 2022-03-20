@@ -2,29 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import FormHelperText from '@material-ui/core/FormHelperText';
-
-import {
-  Link
-} from "react-router-dom";
 
 import RunStudioRunLogo from '../assets/img/logo-hound-blurred.svg'
 
 function GettingStarted() {
 
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
-
-  function resendEmail() {
-    console.log('Resending email...');
-  }
 
   return (
     <LoginContainer>
@@ -54,7 +42,7 @@ function GettingStarted() {
                         id="email"
                         placeholder="your-company-name"
                         variant="outlined"
-                        style={{ background: 'var(--white)' }}
+                        style={{ background: '#fff' }}
                       />
                     </FormControl>
                     <span>.runstudiorun.net</span>

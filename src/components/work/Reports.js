@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { DateRangePicker } from 'react-date-range';
 import { addDays } from 'date-fns';

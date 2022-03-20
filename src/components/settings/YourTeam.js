@@ -1,29 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 
 import axios from 'axios';
 
 import List from '../List'
-
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../../config/firebase'
-
-import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 
 import {
   useHistory
 } from "react-router-dom"
 
-import Checkbox from '@material-ui/core/Checkbox'
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-
-import Avatar from '@material-ui/core/Avatar';
 import ProfileBadge from './components/ProfileBadge';
 import MemberForm from './team/MemberForm';
 
@@ -39,8 +24,6 @@ const columns = [
 function YourTeam({ add }) {
 
   let history = useHistory()
-
-  const [user] = useAuthState(auth)
 
   const [data, setData] = useState([])
 
@@ -65,9 +48,6 @@ function YourTeam({ add }) {
   let { id } = useParams();
   const selectedID = id;
 
-  const { handleSubmit, control } = useForm();
-  const onSubmit = data => console.log(data);
-
   const [selectedData, setSelectedData] = useState(null)
 
   useEffect(() => {
@@ -79,21 +59,6 @@ function YourTeam({ add }) {
       setSelectedData(dataSelect[0])
     }
   }, [id, data, selectedID]);
-
-  const handleChange = event => {
-    setSelectedData({
-      ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
-    });
-  }
-
-  const [state, setState] = useState({
-    all: true
-  });
-
-  const uploadAvatar = () => {
-    console.log('Upload an avatar...')
-  }
 
   const modalContent = (         
     <>

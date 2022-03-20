@@ -5,7 +5,7 @@ import { DataGrid } from '@material-ui/data-grid';
 
 import PageTitle from './layout/PageTitle'
 
-import './List.css';
+import '../styles/List.css';
 
 import { useSelector, useDispatch } from "react-redux";
 import { setShowOrdered } from "../features/items/projectSlice";

@@ -83,6 +83,7 @@ function JobSelect() {
                       {...field}
                       value={searchQuery}
                       onChange={handleChange}
+                      autocomplete={false}
                     />
                   )}
                   control={control}
@@ -93,7 +94,7 @@ function JobSelect() {
             </FormGroup>
       {
         tasks ?
-          tasks.map(task => {
+          tasks.forEach(task => {
 
             if (task.title.toLowerCase().includes(searchQuery.toLowerCase()) || task.projectName.toLowerCase().includes(searchQuery.toLowerCase())) {
               return (
@@ -103,6 +104,8 @@ function JobSelect() {
                   data-time={task.time}
                   data-time-worked={task.time_worked}
                   data-description={task.description}
+                  data-job-id={task.jobId}
+                  data-project-id={task.projectId}
                   data={task.id}
                   key={task.id}
                 >

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Steps, Hints } from 'intro.js-react';
+import { Steps } from 'intro.js-react';
 import 'intro.js/introjs.css';
 import './Tooltips.css';
 
@@ -10,8 +10,7 @@ function Tooltips() {
   useEffect(() => {
     setStepsEnabled(true);
   }, [])
-
-  const [initialStep, setInitialStep] = useState(0);
+  
   const contacts = [
     {
       element: "[parent='Contacts'][href='/companies']",
@@ -63,7 +62,7 @@ function Tooltips() {
           <Steps
             enabled={stepsEnabled}
             steps={contacts}
-            initialStep={initialStep}
+            initialStep={0}
             onExit={onExit}
             options={{
               nextLabel: 'next',
@@ -76,7 +75,7 @@ function Tooltips() {
           <Steps
             enabled={stepsEnabled}
             steps={settings}
-            initialStep={initialStep}
+            initialStep={0}
             onExit={onExit}
             options={{
               hidePrev: true,

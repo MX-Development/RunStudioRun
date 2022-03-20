@@ -3,11 +3,8 @@ import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 import { auth, provider } from '../../config/firebase'
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -16,7 +13,7 @@ import { useSpring, animated } from 'react-spring'
 
 import Hound from '../assets/img/logo-hound-blurred.svg';
 
-import GoogleLogo from './google-logo.svg'
+import GoogleLogo from '../assets/logos/google-logo.svg'
 
 import './Onboarding.css'
 
@@ -32,7 +29,7 @@ const trans4 = (x, y) => `translate3d(${x / 3.5 + 800}px,${y / 3.5 + 200}px,0)`
 
 function Onboarding() {
 
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
 
   const signIn = (e) => {
@@ -138,7 +135,7 @@ function Onboarding() {
                     <span style={{ color: 'var(--white)' }}>30 DAY FREE TRIAL</span> NO CREDIT CARD REQUIRED</p>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <p style={{ fontSize: '12px', textAlign: 'center', margin: '8px 0', width: '80%', display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop: '10px' }}>This site is protected by reCAPTACHA and the Google Privacy Policy and Terms of Service apply.</p>
+                  <p style={{ fontSize: '12px', textAlign: 'center', width: '80%', display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop: '10px' }}>This site is protected by reCAPTACHA and the Google Privacy Policy and Terms of Service apply.</p>
                 </Grid>
 
               </Grid>
@@ -212,17 +209,6 @@ const ModalBody = styled.div`
     text-decoration: underline;
     color: inherit;
     display: block;
-  }
-`
-
-const ModalFooter = styled.div`
-  font-size: 12px;
-  text-align: center;
-  margin-top: 15px;
-
-  > p a {
-    text-decoration: none;
-    color: inherit;
   }
 `
 

@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 
 function AvailableHours() {
 
-  const { handleSubmit, control } = useForm();
+  const { control } = useForm();
 
   const [days, setDays] = useState([
     {
@@ -55,12 +55,14 @@ function AvailableHours() {
 
   const handleChange = event => {
 
+    var items;
+
     if (!event.target.name.includes('item')) {
-      var items = days;
+      items = days;
       items[event.target.name - 1].amount = event.target.value;
       setDays([...items]);
     } else {
-      var items = days;
+      items = days;
       items[event.target.id - 1].checked = !items[event.target.id - 1].checked;
       setDays([...items]);
     }

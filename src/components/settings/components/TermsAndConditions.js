@@ -7,7 +7,6 @@ import EyeIconBorder from '../../assets/icons/EyeIconBorder.svg'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import { MenuItem, Select } from '@material-ui/core'
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -42,7 +41,7 @@ function TermsAndConditions() {
   const changeTabs = (tabID) => {
     setOpenTab(tabID)
 
-    tabID == 1 ? 
+    tabID === 1 ? 
       setModalContent(estimateBody)
     :
       setModalContent(invoiceBody)
@@ -134,12 +133,12 @@ function TermsAndConditions() {
             { openTab !== null ? 
               <>
                 <Tab onClick={(tabID) => changeTabs(1)}
-                    className={openTab == 1 ? 'active' : ''}
+                    className={openTab === 1 ? 'active' : ''}
                   >
                   <h2>Estimates</h2>
                 </Tab>
                 <Tab onClick={(tabID) => changeTabs(2)}
-                    className={openTab == 2 ? 'active' : ''}
+                    className={openTab === 2 ? 'active' : ''}
                   >
                   <h2>Invoices</h2>
                 </Tab>

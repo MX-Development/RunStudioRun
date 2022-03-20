@@ -27,7 +27,7 @@ function ProjectNotes({ data }) {
       setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content)))) 
     : 
       setEditorState(EditorState.createEmpty())
-  }, []);
+  }, [content]);
 
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState)
@@ -102,7 +102,7 @@ function ProjectNotes({ data }) {
             style={{ background: 'var(--white)', paddingRight: '30px !important' }}
           />
           <IconContainer onClick={openModal}>
-            <img src={AddIconSquare} />
+            <img src={AddIconSquare} alt="add icon" />
           </IconContainer>
           {/* <Editor
             ref={editor}

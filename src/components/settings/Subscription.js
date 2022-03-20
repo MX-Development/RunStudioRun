@@ -14,11 +14,9 @@ import PaymentHistory from './PaymentHistory'
 import OutlineHound from '../assets/img/outline-hound.svg'
 import PaymentIcons from '../assets/img/payment-icons.svg'
 import Users from './subscription/components/Users'
-import StripeElement from './StripeElement'
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
@@ -28,7 +26,7 @@ function Subscription() {
 
   const [activeType, setActiveType] = useState(null);
 
-  const { register, handleSubmit, watch } = useForm();
+  const { handleSubmit, watch } = useForm();
   const onSubmit = data => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of 
@@ -155,7 +153,7 @@ function Subscription() {
                     </FormGroup>
                   </Grid>
                   <Grid item xs={12} sm={4} style={{ display: 'flex' }} alignItems={"center"}>
-                    <a href="#" style={{ color: 'var(--text-gray)' }}>What’s this</a>
+                    <a href="/help" style={{ color: 'var(--text-gray)' }}>What’s this</a>
                   </Grid>
 
                 </Grid>
@@ -167,7 +165,7 @@ function Subscription() {
                     color="primary"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                   />
-                  I agree with the <a href="#" style={{ color: 'var(--text-gray)' }}>Terms & Conditions</a>
+                  I agree with the <a href="/terms-and-conditions" style={{ color: 'var(--text-gray)' }}>Terms & Conditions</a>
                 </SmallText>
                 <img src={ PaymentIcons } alt="payment icons" style={{ width: '50%' }} />
               </div>
@@ -183,7 +181,7 @@ function Subscription() {
 
           <Block>
             <BlockHeading>
-              <h3 style={{ fontWeight: '400', marginBottom: '8px', color: 'var(--gold)', fontWeight: 'bold', fontSize: '18px' }}>Payment History</h3>
+              <h3 style={{ marginBottom: '8px', color: 'var(--gold)', fontWeight: 'bold', fontSize: '18px' }}>Payment History</h3>
               <button className="btn btn-light-gray">Export</button>
             </BlockHeading>
             <div style={{ maxHeight: '350px', overflowY: 'scroll', paddingRight: '15px' }}>

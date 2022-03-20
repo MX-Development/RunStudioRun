@@ -1,15 +1,24 @@
 [
   {
-  "id": "1",
-  "calc_ui_hexBlock": "628AC8",
-  "fullName": "Anna Klein",
-  "email": "anna@anythingispawsible.com",
-  "phone": "0000 000 000",
-  "birthday": "21/05/1995",
-  "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
-  "companyName": "Anything is Paw-sible",
-  "jobTitle": "General Manager",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+    "id": "1",
+    "calc_ui_hexBlock": "628AC8",
+    "fullName": "Anna Klein",
+    "email": "anna@anythingispawsible.com",
+    "phone": "0000 000 000",
+    "birthday": "21/05/1995",
+    "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
+    "companyName": "Anything is Paw-sible",
+    "jobTitle": "General Manager",
+    "communicationPrefs": {
+      "all": false,
+      "marketing_emails": true,
+      "email": false,
+      "phone_call": false,
+      "google_chat": false,
+      "post": false,
+      "text_sms": true,
+      "skype_messenger": false
+    }
   },
   {
   "id": "2",
@@ -21,7 +30,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Anything is Paw-sible",
   "jobTitle": "Social Media Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "3",
@@ -33,7 +51,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Anything is Paw-sible",
   "jobTitle": "Product Designer",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "4",
@@ -45,7 +72,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Bella Bisciuts",
   "jobTitle": "CEO",
-  "communicationPrefs": "Phone"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "5",
@@ -57,7 +93,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Bella Bisciuts",
   "jobTitle": "Marketing Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "6",
@@ -69,7 +114,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Bella Bisciuts",
   "jobTitle": "R&D Manager",
-  "communicationPrefs": "Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "7",
@@ -81,7 +135,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Bloodhound Rescue",
   "jobTitle": "CEO",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "8",
@@ -93,7 +156,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Bloodhound Rescue",
   "jobTitle": "Communications Manager",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "9",
@@ -105,7 +177,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Bloodhound Rescue",
   "jobTitle": "Corporate Affairs",
-  "communicationPrefs": "Skype"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "10",
@@ -117,7 +198,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Hound Empire",
   "jobTitle": "General Manager",
-  "communicationPrefs": "Skype"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "11",
@@ -129,7 +219,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Hound Empire",
   "jobTitle": "Product Designer",
-  "communicationPrefs": "Skype"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "12",
@@ -141,7 +240,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Hound Empire",
   "jobTitle": "Communications Manager",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "13",
@@ -153,7 +261,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Re-Tail Store",
   "jobTitle": "CEO",
-  "communicationPrefs": "Google Meet"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "14",
@@ -165,7 +282,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Re-Tail Store",
   "jobTitle": "Social Media Manager",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "15",
@@ -177,7 +303,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Re-Tail Store",
   "jobTitle": "Marketing Manager",
-  "communicationPrefs": "Skype"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "16",
@@ -189,7 +324,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Runner Press",
   "jobTitle": "General Manager",
-  "communicationPrefs": "Google Meet"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "17",
@@ -201,7 +345,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Runner Press",
   "jobTitle": "Marketing Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "18",
@@ -213,7 +366,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Runner Press",
   "jobTitle": "Social Media Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "19",
@@ -225,7 +387,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Sit & Roll Screenprinting",
   "jobTitle": "General Manager",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "20",
@@ -237,7 +408,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Sit & Roll Screenprinting",
   "jobTitle": "Marketing Manager",
-  "communicationPrefs": "Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "21",
@@ -249,7 +429,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Sit & Roll Screenprinting",
   "jobTitle": "Print Representative",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "22",
@@ -261,7 +450,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Spotted Design",
   "jobTitle": "Design Manager",
-  "communicationPrefs": "Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "23",
@@ -273,7 +471,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Spotted Design",
   "jobTitle": "Senior Designer",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "24",
@@ -285,7 +492,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Spotted Design",
   "jobTitle": "Designer",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "25",
@@ -297,7 +513,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Unleashed Merch",
   "jobTitle": "CEO",
-  "communicationPrefs": "Messenger"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "26",
@@ -309,7 +534,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Unleashed Merch",
   "jobTitle": "Marketing Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "27",
@@ -321,7 +555,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "Unleashed Merch",
   "jobTitle": "Social Media Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "28",
@@ -333,7 +576,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "WAG-C+ Coding",
   "jobTitle": "Marketing Manager",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "29",
@@ -345,7 +597,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "WAG-C+ Coding",
   "jobTitle": "Studio Manager",
-  "communicationPrefs": "Email Marketing, Phone, Email"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "30",
@@ -357,7 +618,16 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "We Know SEO",
   "jobTitle": "General Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
   "id": "31",
@@ -369,10 +639,19 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "We Know SEO",
   "jobTitle": "Communications Manager",
-  "communicationPrefs": "Google Meet"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   },
   {
-  "id": "32",
+  "id": "32", 
   "calc_ui_hexBlock": "C8629F",
   "fullName": "Ryan Michael",
   "email": "ryan@weknowseo.com",
@@ -381,6 +660,15 @@
   "notes": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
   "companyName": "We Know SEO",
   "jobTitle": "Social Media Manager",
-  "communicationPrefs": "All"
+  "communicationPrefs": {
+    "all": false,
+    "marketing_emails": true,
+    "email": false,
+    "phone_call": false,
+    "google_chat": false,
+    "post": false,
+    "text_sms": true,
+    "skype_messenger": false
+  }
   }
   ]

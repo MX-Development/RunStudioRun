@@ -59,51 +59,6 @@ const Top = styled.div`
   }
 `
 
-const Item = styled.div`
-  flex: ${props => props.width};
-
-  > h6 {
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-
-  > span {
-    font-size: 16px;
-  }
-
-  .MuiOutlinedInput-input {
-    border: none !important;
-    outline: none;
-    padding: 0 !important;
-    font-size: 18px !important;
-  }
-
-  .MuiOutlinedInput-notchedOutline {
-    border: none !important;
-  }
-
-  .MuiFormLabel-root {
-    font-size: 0.67em;
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    font-weight: 600 !important;
-  }
-
-  .MuiFormControl-marginNormal {
-    margin: 0;
-    top: -5px;
-  }
-
-  .MuiInput-underline:before,
-  .MuiInput-underline:after {
-    opacity: 0;
-  }
-
-  .MuiOutlinedInput-adornedStart {
-    padding-left: 0;
-  }
-`
-
 const Description = styled.div`
   display: flex;
   flex: ${props => props.small ? "0.5525" : "0.5"};

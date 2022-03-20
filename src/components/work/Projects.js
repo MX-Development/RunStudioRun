@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 
 import moment from 'moment'
 
@@ -7,8 +6,6 @@ import axios from 'axios';
 
 import List from '../List'
 import ProjectListing from './ProjectListing'
-
-import PageTitle from '../layout/PageTitle'
 
 import { useHistory } from "react-router-dom";
  
@@ -21,45 +18,35 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { compareAsc } from 'date-fns';
 import { ReactComponent as DatePickerIcon } from '../assets/icons/DatePickerIcon.svg'
 
 import Label from '../settings/components/Label';
 
 function Projects({ add }) {
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const [jobLabels, setJobLabels] = useState([])
-  const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
-  const [contacts, setContacts] = useState([])
 
   const fetchLabels = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
           setJobLabels(res.data[0].jobs);
-          setInvoices(res.data[0].invoices);
           setProjectLabels(res.data[0].projects);
-          setContacts(res.data[0].contacts);
         })
 
         console.log('Data fetched successfully.')
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
 
   }
 
@@ -164,7 +151,7 @@ function Projects({ add }) {
     const labelId = event.target.value;
 
     let newArr = [...data];
-    data.map((project, index) => {
+    data.forEach(() => {
       newArr[projectId - 1].action = labelId;
     });
 
@@ -176,7 +163,7 @@ function Projects({ add }) {
     const labelId = event.target.value;
 
     let newArr = [...data];
-    data.map((project, index) => {
+    data.forEach(() => {
       newArr[projectId - 1].status = labelId;
     });
 
@@ -188,7 +175,6 @@ function Projects({ add }) {
   const [jobs, setJobs] = useState([]);
   const [companies, setCompanies] = useState(null);
   const [allCompanies, setAllCompanies] = useState(null);
-  const [companyProjects, setCompanyProjects] = useState(null);
 
   const order = useSelector((state) => state.order.showOrdered);
   const [showOrdered, setShowOrdered] = useState(order);
@@ -211,7 +197,7 @@ function Projects({ add }) {
 
           let companies = [];
           res.data.forEach(project => {
-            var companyExists = companies.findIndex(x => x == project.companyName); 
+            var companyExists = companies.findIndex(x => x === project.companyName); 
 
             if (companyExists === -1) companies.push(project.companyName)
           })
@@ -503,22 +489,3 @@ function Projects({ add }) {
 }
 
 export default Projects
-
-const ListHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  > button {
-    border: 1px solid #B1B0AF;
-    color: #B1B0AF;
-    border-radius: 2px;
-    background: transparent;
-    font-size: 12px;
-    padding: 4px 6px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`

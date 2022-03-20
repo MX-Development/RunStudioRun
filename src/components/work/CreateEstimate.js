@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import AddIcon from '../assets/icons/AddIcon.svg'
 import ProjectEstimates from './projects/dragAndDrop/ProjectEstimates';
-import ModalBox from '../ModalBox';
 
 import EyeIcon from '../assets/icons/EyeIcon.svg'
 

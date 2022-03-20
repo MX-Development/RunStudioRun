@@ -13,7 +13,7 @@ import MemberAvatars from './projects/MemberAvatars';
 
 function ProjectInfo({ projectID }) {
 
-  const [rates, setRates] = useState([
+  const rates = [
     {
       "id": 1,
       "name": "standard",
@@ -38,83 +38,31 @@ function ProjectInfo({ projectID }) {
       "title": "Tier 3",
       "rate": 150
     }
-  ])
-
-  const [isLoading, setIsLoading] = useState(false);
+  ];
 
   const [jobs, setJobs] = useState([])
-  const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
-  const [contacts, setContacts] = useState([])
 
   const fetchLabels = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
           setJobs(res.data[0].jobs);
-          setInvoices(res.data[0].invoices);
           setProjectLabels(res.data[0].projects);
-          setContacts(res.data[0].contacts);
         })
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
 
   }
 
   useEffect(() => {
     fetchLabels()
   }, []);
-
-  const [teamMembers, setTeamMembers] = useState([])
-  const [showExtended, setShowExtended] = useState(false)
-
-  useEffect(() => {
-    axios.get(`/json/estimates/items.json`)
-    .then(res => {
-      setTeamMembers([])
-      res.data.forEach(task => {
-       if (task.projectID === parseInt(projectID)) {
-
-        axios.get(`/json/team.json`)
-        .then(res => {
-          res.data.forEach(member => {
-            if (task.team.includes(member.id)) {
-              setTeamMembers(teamMembers => [...teamMembers, member])
-            }
-          })
-        })
-       }
-      })
-    })
-  }, [projectID])
-  
-  const changeAction = (event) => {
-    const projectId = event.target.name;
-    const labelId = event.target.value;
-  
-    // let newArr = [...data];
-    // data.map((project, index) => {
-    //   newArr[projectId - 1].action = labelId;
-    // });
-  
-    // setData(newArr);
-  };
   
   const changeStatus = (event) => {
-    const projectId = event.target.name;
-    const labelId = event.target.value;
-  
-    // let newArr = [...data];
-    // data.map((project, index) => {
-    //   newArr[projectId - 1].status = labelId;
-    // });
-  
-    // setData(newArr);
+
   };
 
   const changeRate = (event) => {
@@ -244,15 +192,6 @@ function ProjectInfo({ projectID }) {
 }
 
 export default ProjectInfo
-
-const Button = styled.div`
-  border: 1px solid;
-  border-radius: 2px;
-  padding: 5px 0;
-  font-weight: bold;
-  font-size: 12px;
-  text-align: center;
-`
 
 const Info = styled.div`
   background: var(--white);

@@ -4,9 +4,6 @@ import styled from 'styled-components'
 import moment from 'moment'
 import axios from 'axios'
 
-import DragIcon from '../../../../assets/icons/DragIcon.svg'
-import ActionIcon from '../../../../assets/icons/ActionIcon.svg'
-
 import { useForm, Controller } from "react-hook-form"
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -243,21 +240,6 @@ const Container = styled.div`
   width: 100%;
 `
 
-const DragButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #eee;
-
-  > img {
-    max-width: 50px;
-  }
-`
-
 const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -345,20 +327,6 @@ const Description = styled.div`
   background: #fff;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
-`
-
-const ActionButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  > img {
-    max-height: 50px;
-  }
 `
 
 const Members = styled.div`

@@ -1,80 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-import moment from 'moment'
 import axios from 'axios'
-
-import DragIcon from '../../../../assets/icons/DragIcon.svg'
-import ActionIcon from '../../../../assets/icons/ActionIcon.svg'
-
-import { useForm, Controller } from "react-hook-form"
-
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 import Avatar from '@material-ui/core/Avatar';
 
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-
 function Task({ data, size }) {
-
-  const { control } = useForm();
-
-  const [selectedData, setSelectedData] = useState(null)
-
-  useEffect(() => {
-    // if (id) {
-    //   const dataSelect = data.filter(obj => {
-    //     return obj.id === parseInt(id)
-    //   })
-
-    //   console.log(dataSelect)
-
-    //   setSelectedData(dataSelect[0])
-    // }
-    setSelectedData(data)
-  }, [data]);
-
-  const handleChange = event => {
-    setSelectedData({
-      ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
-    });
-  }
-
-  const [selectedDate, setSelectedDate] = useState({
-    startDate: new Date(moment(data.startDate).format()),
-    endDate: new Date(moment(data.startDate).format())
-  });
-
-  const handleDateChange = (id) => (date) => {
-    if (id === 'startDate') {
-      setSelectedDate({
-        ...selectedDate,
-        startDate: moment(date).format()
-      });
-      setSelectedData({
-        ...selectedData,
-        startDate: moment(date).format()
-      });
-    } else if (id === 'endDate') {
-      setSelectedDate({
-        ...selectedDate,
-        endDate: moment(date).format()
-      });
-      setSelectedData({
-        ...selectedData,
-        endDate: moment(date).format()
-      });
-    }
-  };
 
   const [teamMembers, setTeamMembers] = useState([])
 
@@ -168,21 +99,6 @@ const Container = styled.div`
   margin-left: ${props => props.small ? "50px" : "0"};
 `
 
-const DragButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #eee;
-
-  > img {
-    max-width: 50px;
-  }
-`
-
 const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -270,20 +186,6 @@ const Description = styled.div`
   background: #fff;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
-`
-
-const ActionButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  > img {
-    max-height: 50px;
-  }
 `
 
 const Members = styled.div`

@@ -18,24 +18,13 @@ function Purchases({ projectID, add }) {
 
   let history = useHistory()
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [jobLabels, setJobLabels] = useState([])
-  const [invoices, setInvoices] = useState([])
-  const [projectLabels, setProjectLabels] = useState([])
-  const [contacts, setContacts] = useState([])
   const [purchases, setPurchases] = useState([])
 
   const fetchLabels = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
-          setJobLabels(res.data[0].jobs);
-          setInvoices(res.data[0].invoices);
-          setProjectLabels(res.data[0].projects);
-          setContacts(res.data[0].contacts);
           setPurchases(res.data[0].purchases);
         })
 
@@ -43,8 +32,6 @@ function Purchases({ projectID, add }) {
     } catch (err) {
       console.trace(err);
     }
-
-    setIsLoading(false);
 
   }
 
@@ -121,7 +108,7 @@ function Purchases({ projectID, add }) {
     const labelId = event.target.value;
   
     let newArr = [...data];
-    data.map((project, index) => {
+    data.forEach((project, index) => {
       newArr[projectId - 1].status = labelId;
     });
   
@@ -148,7 +135,7 @@ function Purchases({ projectID, add }) {
 
 
   const [projects, setProjects] = useState([])
-  const [jobs, setJobs] = useState([
+  const jobs = [
     {
       "value": "job_1",
       "label": "Job 1"
@@ -157,14 +144,14 @@ function Purchases({ projectID, add }) {
       "value": "job_2",
       "label": "Job 2"
     }
-  ])
-  useEffect(async () => {
+  ]
+  useEffect(() => {
     // Get all projects
-    let result = axios.get(`/json/projects.json`)
+    axios.get(`/json/projects.json`)
       .then(res => {
 
         // Add each project to the projects array
-        res.data.map(project => {
+        res.data.forEach(project => {
           setProjects(projects => [...projects, {
             "value": project.id,
             "label": project.projectName

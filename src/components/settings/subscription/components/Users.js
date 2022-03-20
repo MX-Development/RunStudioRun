@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from "react-hook-form";
 
 import axios from 'axios';
 
@@ -7,17 +6,11 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import Checkbox from '@material-ui/core/Checkbox';
 
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
 function Users() {
-
-  const { register, setValue, handleSubmit } = useForm();
 
   const [selected, setSelected] = React.useState([]);
 

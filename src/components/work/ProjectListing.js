@@ -6,9 +6,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import { useSelector, useDispatch } from "react-redux";
 import { setShowOrdered } from "../../features/items/projectSlice";
 
-import PageTitle from '../layout/PageTitle'
-
-import '../List.css';
+import '../../styles/List.css';
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -19,9 +17,9 @@ function ProjectListing({company, columns, data, jobs, modalTitle, modalContent,
 
   useEffect(() => {
     setProjects([])
-    data.map(project => {
-      jobs.map(job => {
-        if (job.projectID == project.projectID) {
+    data.forEach(project => {
+      jobs.forEach(job => {
+        if (job.projectID === project.projectID) {
           setProjects(projects => [...projects, project])
           setProjects(projects => [...projects, job])
           return;
@@ -29,31 +27,27 @@ function ProjectListing({company, columns, data, jobs, modalTitle, modalContent,
         setProjects(projects => [...projects, project])
       })
     })
-  }, [data]);
+  }, [data, jobs]);
 
   const dispatch = useDispatch();
   const order = useSelector((state) => state.order.showOrdered);
 
-  const setOrder = event => {
-    console.log('Changing order');
+  const setOrder = () => {
     dispatch(setShowOrdered(!order))
   }
 
   useEffect(() => {
     if (order) {
-      console.log('order');
 
       setTimeout(function() {
         const container = document.querySelectorAll('.project-grid .MuiDataGrid-windowContainer');
         container.forEach(el => { 
           const elHeight = el.style.height;
           const height = parseInt(elHeight.replace('px'));
-          const newHeight = height / 2;
   
           if (height > 350) {
             el.style.height = `${height / 2}px`;
           }
-          // console.log(`${parseInt(height.replace('px')) / 2}px`);
         })
       }, 500);
     } 
@@ -77,17 +71,6 @@ function ProjectListing({company, columns, data, jobs, modalTitle, modalContent,
   let { id } = useParams();
 
   const [modalIsOpen, setIsOpen] = useState(false);
-
-  // const columnData = columns.push({ 
-  //   field: '', width: 55, sortable: false, 
-  //   renderCell: () => (
-  //     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-  //       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  //         <path id="Path_10" data-name="Path 10" d="M8,0,6.545,1.455l5.506,5.506H0V9.039H12.052L6.545,14.545,8,16l8-8Z" fill="#b1b0af"/>
-  //       </svg>
-  //     </div>
-  //   )
-  // })
 
   useEffect(() => {
     if (add) {
@@ -197,24 +180,5 @@ const GridHeading = styled.div`
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 600;
-  }
-`
-
-const ListHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  > button {
-    border: 1px solid #B1B0AF;
-    color: #B1B0AF;
-    border-radius: 2px;
-    background: transparent;
-    font-size: 12px;
-    padding: 4px 6px;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 `

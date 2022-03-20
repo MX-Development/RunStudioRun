@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 
 import moment from 'moment'
 
@@ -19,8 +18,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { compareAsc } from 'date-fns';
-import { ReactComponent as DatePickerIcon } from '../../assets/icons/DatePickerIcon.svg'
+import { ReactComponent as DatePickerIcon } from '../../../assets/icons/DatePickerIcon.svg'
 
 function AdditionalTime() {
 

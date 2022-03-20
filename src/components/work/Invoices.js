@@ -18,23 +18,14 @@ function Invoices({ projectID, add }) {
 
   let history = useHistory()
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [jobLabels, setJobLabels] = useState([])
   const [invoices, setInvoices] = useState([])
-  const [projectLabels, setProjectLabels] = useState([])
-  const [contacts, setContacts] = useState([])
 
   const fetchLabels = async () => {
-    setIsLoading(true);
 
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
-          setJobLabels(res.data[0].jobs);
           setInvoices(res.data[0].invoices);
-          setProjectLabels(res.data[0].projects);
-          setContacts(res.data[0].contacts);
         })
 
         console.log('Data fetched successfully.')
@@ -42,15 +33,13 @@ function Invoices({ projectID, add }) {
       console.trace(err);
     }
 
-    setIsLoading(false);
-
   }
 
   useEffect(() => {
     fetchLabels()
   }, []);
 
-  let { view, viewID } = useParams();
+  let { viewID } = useParams();
 
   const [data, setData] = useState([])
   useEffect(() => {
@@ -129,7 +118,7 @@ function Invoices({ projectID, add }) {
     const labelId = event.target.value;
   
     let newArr = [...data];
-    data.map((project, index) => {
+    data.forEach(() => {
       newArr[projectId - 1].status = labelId;
     });
   
@@ -138,7 +127,7 @@ function Invoices({ projectID, add }) {
 
 
   const [projects, setProjects] = useState([])
-  const [jobs, setJobs] = useState([
+  const jobs = [
     {
       "value": "job_1",
       "label": "Job 1"
@@ -147,14 +136,14 @@ function Invoices({ projectID, add }) {
       "value": "job_2",
       "label": "Job 2"
     }
-  ])
-  useEffect(async () => {
+  ]
+  useEffect(() => {
     // Get all projects
-    let result = axios.get(`/json/projects.json`)
+    axios.get(`/json/projects.json`)
       .then(res => {
 
         // Add each project to the projects array
-        res.data.map(project => {
+        res.data.forEach(project => {
           setProjects(projects => [...projects, {
             "value": project.id,
             "label": project.projectName

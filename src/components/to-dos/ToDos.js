@@ -18,7 +18,8 @@ import { MenuItem, Select } from '@material-ui/core'
 import Clock from '../assets/icons/Clock.svg'
 import Ellipsis from '../assets/icons/CardEllipsis.svg'
 
-import AdditionalTime from './components/AdditionalTime';
+import AdditionalTime from './components/modals/AdditionalTime';
+import EditTask from './components/modals/EditTask';
  
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -34,9 +35,8 @@ function Calendar({ action, taskID }) {
     }
   }, [action]);
 
-  const [actionNav, setActionNav] = useState(false);
-
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
   const centerModal = {
     content: {
       top: '50%',
@@ -73,8 +73,9 @@ function Calendar({ action, taskID }) {
           setEvents([])
 
           const tasks = res.data
-          tasks.forEach(task => {
+          tasks.forEach((task, index) => {
             let taskObject = {
+              id: task.id,
               title: task.title, 
               start: moment(task.startDate).format(),
               end: moment(task.startDate).add(task.time, 'seconds').format(),
@@ -82,6 +83,8 @@ function Calendar({ action, taskID }) {
               time: task.time,
               time_worked: task.time_worked,
               jobTitle: 'Job Title',
+              jobId: task.jobId,
+              projectId: task.projectId,
               editable: true,
               taskID: task.id,
               eventDurationEditable: true
@@ -106,17 +109,22 @@ function Calendar({ action, taskID }) {
     new Draggable(draggableEl, {
       itemSelector: ".dragabble-task",
       eventData: function(eventEl) {
+        console.log('Event data: ', eventEl);
         let title = eventEl.getAttribute("title");
         let id = eventEl.getAttribute("data");
         let time = eventEl.getAttribute("data-time");
         let time_worked = eventEl.getAttribute("data-time-worked");
         let description = eventEl.getAttribute("data-description");
+        let jobId = eventEl.getAttribute("data-job-id");
+        let projectId = eventEl.getAttribute("data-project-id");
         return {
           title: title,
           id: id,
           time: time,
           time_worked: time_worked,
           description: description,
+          jobId: jobId,
+          projectId: projectId,
           editable: true,
           eventDurationEditable: true
         };
@@ -181,7 +189,7 @@ function Calendar({ action, taskID }) {
 
     let allDaysFilled = [];
 
-    eventsOnMap.map(ev => {
+    eventsOnMap.forEach(ev => {
 
       const eventDay = moment(ev.start).format('YYYY-MM-DD');
       allDaysFilled.push(eventDay);
@@ -225,13 +233,10 @@ function Calendar({ action, taskID }) {
 
 
     const header = document.querySelector(`[data-date="${headerDay}"]`);
-    let timeWorked = header.querySelector('.time-worked').innerHTML;
-    timeWorked = timeWorked.replace('h', '');
-    timeWorked = parseInt(timeWorked);
+    if (!header) return;
 
     const percentage = parseInt(totalDayTime) / 8 * 100;
 
-    // header.querySelector('.time-worked').innerHTML = `${totalDayTime.toFixed(1)}h`;  
     header.querySelector('.time-worked').innerHTML = `${totalDayTime.toFixed(1)}h`;  
 
     if (percentage < 35) {
@@ -255,20 +260,92 @@ function Calendar({ action, taskID }) {
     }
   }
 
-  function deleteTime(eventInfo) {
-    console.log('Delete time', eventInfo);
-    console.log('All events', events);
+  const deleteBtn = React.createRef()
 
-    let calendarApi = calendarRef.current.getApi()
-    const selectedEvent = calendarApi.getEventById(eventInfo.event.id);
-    selectedEvent.remove();
+  function deleteTime(eventInfo) {
+
+    var calendar = calendarRef.current.getApi();
+
+    setIsOpen(true)
+
+    setModalContent(
+      <>
+        <ModalHeading>
+          <h2>Delete? Are you sure?</h2>
+        </ModalHeading>
+
+        <div className="modal-footer">
+          <div className="btn-group">
+            <div className="btn-left">
+              <button className="btn btn-light-gray btn-left" onClick={() => closeModal()}>Cancel</button>
+            </div>
+            <div className="btn-right">
+              <button type="submit" className="btn btn-gold btn-right" onClick={() => confirmDelete(eventInfo)} ref={deleteBtn}>Delete</button>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+
+    // Close delete modal
+    function closeModal() {
+      setIsOpen(false)
+    }
+
+    // Delete event from calendar
+    function confirmDelete(eInfo) {
+
+      const selectedEvent = calendar.getEventById(eInfo.event.id);
+      selectedEvent.remove();
+
+      deleteBtn.current.click();
+
+      setIsOpen(false)
+    }
+  }
+
+  function commitTime(eventInfo) {
+
+    setModalContent(
+      <>
+        <ModalHeading>
+          <h2>Commit Time</h2>
+        </ModalHeading>
+        <AdditionalTime />
+      </>
+    )
+
+    setIsOpen(!modalIsOpen)
+
   }
 
   function editTask(eventInfo) {
-    const taskID = eventInfo.event._def.extendedProps.taskID;
-    console.log(taskID);
-    
-    history.push(`/items-and-tasks/${taskID}`)
+
+    console.log('Edit task: ', eventInfo);
+
+    setModalContent(
+      <>
+        <ModalHeading>
+          <h2>Task</h2>
+        </ModalHeading>
+        <EditTask eventInfo={eventInfo} />
+      </>
+    )
+
+    setIsOpen(!modalIsOpen)
+
+  }
+
+  const [actionNav, setActionNav] = useState({
+    open: false,
+    id: null
+  });
+  
+  const openNav = (id) => {
+    setActionNav({
+      open: !actionNav.open,
+      id: id
+    })
   }
 
   function renderEventContent(eventInfo) {
@@ -277,18 +354,14 @@ function Calendar({ action, taskID }) {
     let timeWorked = eventInfo.event.extendedProps.time_worked
     // let remaining = totalTime - timeWorked
     let percentage = timeWorked / totalTime * 100
-  
-    function openNav() {
-      setActionNav(!actionNav)
-    }
 
     // Change event day header
     setDayHeader(eventInfo);
   
     return (
       <>
-        <ActionNav className={actionNav ? 'active' : ''}>
-          <ActionItem onClick={() => setIsOpen(!modalIsOpen)}>
+        <ActionNav className={actionNav.id === eventInfo.event._instance.defId && actionNav.open === true ? 'active' : ''}>
+          <ActionItem onClick={() => commitTime(eventInfo)}>
             Commit Time
           </ActionItem>
           <ActionItem onClick={() => editTask(eventInfo)}>
@@ -303,7 +376,7 @@ function Calendar({ action, taskID }) {
             <h5>{eventInfo.event.title}</h5>
             <h6 style={{ fontWeight: '500', margin: '2.5px 0' }}>{eventInfo.event.extendedProps.jobTitle}</h6>
             <span className="type" style={{ fontWeight: '400' }}>Client</span>
-            <div className="event-action" onClick={openNav}>
+            <div className="event-action" onClick={() => openNav(eventInfo.event._instance.defId)}>
               <img src={Ellipsis} alt="action icon" />
             </div>
           </div>
@@ -340,10 +413,7 @@ function Calendar({ action, taskID }) {
         contentLabel="Example Modal"
       >
         <ModalBody>
-          <ModalHeading>
-            <h2>Commit Time</h2>
-          </ModalHeading>
-          <AdditionalTime />
+          { modalContent }
         </ModalBody>
       </Modal>
     
@@ -384,14 +454,6 @@ function Calendar({ action, taskID }) {
         initialView="timeGridWeek"
         droppable={true}
         allDaySlot={false}
-        // customButtons={{
-        //   myCustomButton: {
-        //     text: 'custom!',
-        //     click: function() {
-        //       alert('clicked the custom button!');
-        //     }
-        //   }
-        // }}
         headerToolbar={{
           left: 'prev,next today title',
           right: ''
@@ -417,16 +479,7 @@ function Calendar({ action, taskID }) {
           weekday: 'long'
         }}
         dayHeaderContent={renderHeaderContent}
-        dayCellContent={renderDayContent}
         events={events}
-        eventDragStart={function( info ) {
-          let parent = info.el.parentNode;
-
-          // parent.classList.remove('not-dragged');
-        }}
-        eventResize={function(event, info) {
-          // event.setExtendedProp('time_worked', 'hallo')
-        }}
         eventDragStop={function( info ) {
           let parent = info.el.parentNode;
           
@@ -434,12 +487,7 @@ function Calendar({ action, taskID }) {
           parent.classList.add('not-dragged');
         }}
         eventChange={function (changeInfo) {
-          // console.log(changeInfo);
-          const timeWorked = changeInfo.event.extendedProps['time_worked'];
-          // if (timeWorked !== )
           renderHeaderContent(changeInfo);
-
-          // changeInfo.event.setExtendedProp('time_worked', 1000);
         }}
         eventStartEditable={true}
         eventDidMount={info => mountEvent(info)}
@@ -449,20 +497,6 @@ function Calendar({ action, taskID }) {
 }
 
 export default Calendar
-
-// const eventDragging = (info) => {
-//   info.el.querySelector('.event-container').classList.add('dragged')
-//   info.el.querySelector('.event-container').style.transform = 'rotate(45deg)'
-// }
-
-// const eventStopDragging = (info) => {
-//   info.el.querySelector('.event-container').classList.remove('dragged')
-//   info.el.querySelector('.event-container').style.background = 'var(--white)'
-// }
-
-function renderDayContent(eventInfo) {
-  
-}
 
 const MemberSelect = styled.div`
   display: flex;

@@ -34,16 +34,10 @@ function Companies({ add, importing }) {
 
   let history = useHistory()
 
-  const [postalSame, setPostalSame] = useState(false);
-
-  const changePostal = () => {
-    setPostalSame(!postalSame)
-  }
-
   const [data, setData] = useState([])
 
+  // Fetch data from JSON files
   const fetchData = async () => {
-
     try {
       await axios.get(`/json/companies.json`)
         .then(res => {
@@ -56,28 +50,23 @@ function Companies({ add, importing }) {
     }
   }
 
+  // Fetch data on page load - when history changes
   useEffect(() => {
     fetchData()
-  }, []);
+  }, [history]);
 
+  // Get company ID from URL query when a company is selected
   let { id } = useParams();
   const selectedID = id;
 
-  useEffect(() => {
-    console.log('ID is: ' + id);
-  }, [id]);
-
   const { handleSubmit, control } = useForm();
 
-  const onSubmit = data => { 
-    console.log(selectedData)
-  }
-
+  // Initialize empty data state
   const [selectedData, setSelectedData] = useState(null)
 
+  // Set selected data depending on selected company on the front-end
   useEffect(() => {
     if (id) {
-      console.log('Company ID is in URL')
       const dataSelect = data.filter(obj => {
         return obj.id === parseInt(selectedID)
       })
@@ -86,11 +75,25 @@ function Companies({ add, importing }) {
     }
   }, [id, data, selectedID]);
 
+  // On change input fields
   const handleChange = event => {
     setSelectedData({
       ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
+      [event.target.name]: event.target.value 
     });
+  }
+
+  // On change checkbox for postal address same as physical address
+  const changePostal = (event) => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.checked 
+    });
+  }
+
+  // On submit form
+  const onSubmit = data => { 
+    console.log('Form data: ', selectedData)
   }
 
   const modalImport = (
@@ -134,7 +137,7 @@ function Companies({ add, importing }) {
                     />
                   )}
                   control={control}
-                  name="company"
+                  name="companyName"
                   defaultValue=""
                 />
               </FormControl>
@@ -214,6 +217,7 @@ function Companies({ add, importing }) {
                       onChange={handleChange}
                       multiline
                       rows={4}
+                      name="physicalAddress"
                     />
                   )}
                   control={control}
@@ -229,11 +233,12 @@ function Companies({ add, importing }) {
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
                   <FormGroup>
                     <FormControlLabel
-                      control={<Checkbox checked={postalSame} />}
+                      control={<Checkbox checked={selectedData ? selectedData.postalSame : null} />}
                       label={'As above'}
                       labelPlacement="right"
                       style={{ margin: '0', marginLeft: '12.5px' }}
                       onChange={changePostal}
+                      name="postalSame"
                     />
                   </FormGroup>
                 </div>
@@ -241,8 +246,11 @@ function Companies({ add, importing }) {
                   id="postal_address"
                   placeholder="Where to post stuff"
                   variant="outlined"
+                  disabled={selectedData ? selectedData.postalSame : null}
+                  value={selectedData ? selectedData.postalSame ? selectedData.physicalAddress : selectedData.postalAddress : null}
                   multiline
                   rows={4}
+                  name="postalAddress"
                 />
               </FormControl>
             </FormGroup>
@@ -262,7 +270,7 @@ function Companies({ add, importing }) {
                     />
                   )}
                   control={control}
-                  name="company_tax_number"
+                  name="companyTaxNumber"
                 />
               </FormControl>
             </FormGroup>
@@ -304,7 +312,7 @@ function Companies({ add, importing }) {
                     />
                   )}
                   control={control}
-                  name="prefix"
+                  name="companyPrefix"
                 />
               </FormControl>
             </FormGroup>
@@ -314,15 +322,16 @@ function Companies({ add, importing }) {
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
                 <Select
-                  value={'Rate'}
+                  value={selectedData ? selectedData.rate : null}
                   style={{ width: '100%' }}
+                  name="rate"
                 >
-                  <MenuItem value="">
+                  <MenuItem value={''}>
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value={100}>100</MenuItem>
-                  <MenuItem value={120}>120</MenuItem>
-                  <MenuItem value={130}>130</MenuItem>
+                  <MenuItem value={"100"}>100</MenuItem>
+                  <MenuItem value={"120"}>120</MenuItem>
+                  <MenuItem value={"130"}>130</MenuItem>
                 </Select>
               </FormControl>
             </FormGroup>
@@ -360,7 +369,7 @@ function Companies({ add, importing }) {
             "action": function() { alert('Export...') }
           },
           {
-            "label": "Print",
+            "label": "Print", 
             "action": function() { alert('Print...') }
           }
         ]}

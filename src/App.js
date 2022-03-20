@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ReactHelmet from 'react-helmet';
 import styled from 'styled-components'
-import './App.css';
-import './Buttons.css';
-import './Forms.css';
-import './Table.css';
-import './Typography.css';
-import './Variables.css';
+import './styles/App.css';
+import './styles/Buttons.css';
+import './styles/Forms.css';
+import './styles/Table.css';
+import './styles/Typography.css';
+import './styles/Variables.css';
 
 import axios from 'axios';
 
@@ -30,7 +29,7 @@ import {
 
 import LoadingScreen from './components/LoadingScreen';
 
-import Header from './components/Header'
+import Header from './components/layout/Header'
 import Settings from './components/settings/Settings'
 import Login from './components/account/Login'
 import Subscription from './components/settings/Subscription';
@@ -50,7 +49,7 @@ import People from './components/contacts/People';
 import YourTeam from './components/settings/YourTeam';
 import ItemsTasks from './components/settings/ItemsTasks';
 import Expenses from './components/settings/Expenses';
-import Profile from './components/settings/Profile';
+import Profile from './components/settings/profile/Profile';
 
 import ToDos from './components/to-dos/ToDos';
 import Reports from './components/work/Reports'; 
@@ -65,12 +64,9 @@ import SideHounds from './components/assets/img/greyhounds/SideHounds.svg'
 import Components from './components/Components'; 
 import PDF from './components/PDF';
 import Onboarding from './components/account/Onboarding';
-import KanbanBoard from './components/to-dos/KanbanBoard';
 import Verify from './components/account/Verify';
 import GettingStarted from './components/account/GettingStarted';
 import Trello from './components/to-dos/Trello';
-
-// import DragList2 from './components/DragList2';
 
 // Create theme
 let theme = createTheme({
@@ -135,7 +131,7 @@ function App() {
 
   useEffect(() => {
     console.log('Location changed');
-    if (window.location.href.includes('projects') && window.location.href.includes('purchases') || window.location.href.includes('projects') && window.location.href.includes('team')) {
+    if ((window.location.href.includes('projects') && window.location.href.includes('purchases')) || (window.location.href.includes('projects') && window.location.href.includes('team'))) {
       setBgImage(PurchasesBg);
     } else if (window.location.href.includes('subscription')) {
       setBgImage(LoveHounds);

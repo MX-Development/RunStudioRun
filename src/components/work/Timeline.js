@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Timeline, {
   TimelineHeaders,
-  SidebarHeader,
   DateHeader,
   TimelineMarkers,
-  CustomMarker,
-  TodayMarker,
-  CursorMarker
+  TodayMarker
 } from 'react-calendar-timeline'
 // make sure you include the timeline stylesheet or the timeline will not be styled
 import 'react-calendar-timeline/lib/Timeline.css'
 import moment from 'moment'
 
 import './Timeline.css'
-
-import axios from 'axios';
 
 function Timeliner() {
 

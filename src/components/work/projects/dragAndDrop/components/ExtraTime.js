@@ -233,21 +233,6 @@ const Container = styled.div`
   width: 100%;
 `
 
-const DragButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #eee;
-
-  > img {
-    max-width: 50px;
-  }
-`
-
 const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -256,25 +241,6 @@ const Info = styled.div`
   padding: 0 15px;
   background: #fff;
   max-height: 50px;
-`
-
-const Top = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-
-  > .title {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  > .title span {
-    opacity: 0.5;
-    font-style: italic;
-    margin-left: 10px;
-  }
 `
 
 const Bottom = styled.div`
@@ -340,20 +306,6 @@ const Description = styled.div`
   background: #fff;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
-`
-
-const ActionButton = styled.div`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  > img {
-    max-height: 50px;
-  }
 `
 
 const Members = styled.div`

@@ -36,8 +36,8 @@ function People({ add, importing, syncing }) {
   const [data, setData] = useState([])
   const [companies, setCompanies] = useState([])
 
+  // Fetch data from JSON files
   const fetchData = async () => {
-
     try {
       await axios.get(`/json/people.json`)
         .then(res => {
@@ -55,52 +55,42 @@ function People({ add, importing, syncing }) {
     }
   }
 
+  // Fetch data on page load - when history changes
   useEffect(() => {
     fetchData()
   }, []);
 
+  // Get company ID from URL query when a company is selected
   let { id } = useParams();
   const selectedID = id;
 
   const { handleSubmit, control } = useForm();
-  const onSubmit = data => console.log(data);
 
+  // Initialize empty data state
   const [selectedData, setSelectedData] = useState(null)
 
-  const [commPreferences, setCommPreferences] = useState({
-    all: false,
-    marketing_emails: false,
-    email: false,
-    phone_call: false,
-    google_chat: false,
-    post: false,
-    text_sms: true,
-    skype_messenger: false
-  });
-
+  // Set selected data depending on selected company on the front-end
   useEffect(() => {
     if (id) {
-      console.log(selectedID)
-      console.log(id)
       const dataSelect = data.filter(obj => {
         return obj.id === selectedID
       })
 
       setSelectedData(dataSelect[0])
-      console.log(dataSelect[0])
-
-      setCommPreferences({
-        all: true,
-        phone_call: true
-      })
     }
   }, [id, selectedID, data]);
 
+  // On change input fields
   const handleChange = event => {
     setSelectedData({
       ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
+      [event.target.name]: event.target.value
     });
+  }
+
+  // On submit form
+  const onSubmit = data => { 
+    console.log(selectedData)
   }
 
   const modalSync = (
@@ -155,6 +145,7 @@ function People({ add, importing, syncing }) {
                 <Select
                   value={selectedData ? selectedData.companyName : ''}
                   style={{ width: '100%' }}
+                  name="companyName"
                 >
                   <MenuItem value="">
                     <em>Select a company</em>
@@ -185,7 +176,7 @@ function People({ add, importing, syncing }) {
                     />
                   )}
                   control={control}
-                  name="job_title"
+                  name="jobTitle"
                   defaultValue=""
                 />
               </FormControl>
@@ -203,10 +194,11 @@ function People({ add, importing, syncing }) {
                       placeholder="First and last name"
                       {...field}
                       value={selectedData ? selectedData.fullName : ''}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
-                  name="full_name"
+                  name="fullName"
                 />
               </FormControl>
             </FormGroup>
@@ -222,6 +214,7 @@ function People({ add, importing, syncing }) {
                       placeholder="you@somehere.com"
                       {...field}
                       value={selectedData ? selectedData.email : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -241,6 +234,7 @@ function People({ add, importing, syncing }) {
                       placeholder="000-000-0000"
                       {...field}
                       value={selectedData ? selectedData.phone : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -260,6 +254,7 @@ function People({ add, importing, syncing }) {
                       placeholder="MM/DD/YYYY"
                       {...field}
                       value={selectedData ? selectedData.birthday : null}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}
@@ -280,9 +275,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.all}
+                    checked={selectedData ? selectedData.communicationPrefs.all : null}
                     onChange={handleChange}
-                    name="all"
+                    name="communicationPrefs.all"
                   />
                 }
                 label="Select all"
@@ -292,7 +287,7 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.email}
+                    checked={selectedData ? selectedData.communicationPrefs.email : null}
                     onChange={handleChange}
                     name="email"
                   />
@@ -306,7 +301,7 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.phone_call}
+                    checked={selectedData ? selectedData.communicationPrefs.phone_call : null}
                     onChange={handleChange}
                     name="phone_call"
                   />
@@ -318,7 +313,7 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.text_sms}
+                    checked={selectedData ? selectedData.communicationPrefs.text_sms : null}
                     onChange={handleChange}
                     name="text_sms"
                   />
@@ -332,7 +327,7 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.google_chat}
+                    checked={selectedData ? selectedData.communicationPrefs.google_chat : null}
                     onChange={handleChange}
                     name="google_chat"
                   />
@@ -344,7 +339,7 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.skype_messenger}
+                    checked={selectedData ? selectedData.communicationPrefs.skype_messenger : null}
                     onChange={handleChange}
                     name="skype_messenger"
                   />
@@ -358,7 +353,7 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.post}
+                    checked={selectedData ? selectedData.communicationPrefs.post : null}
                     onChange={handleChange}
                     name="post"
                   />
@@ -372,7 +367,7 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={commPreferences.marketing_emails}
+                    checked={selectedData ? selectedData.communicationPrefs.marketing_emails : null}
                     onChange={handleChange}
                     name="marketing_emails"
                   />
@@ -397,6 +392,7 @@ function People({ add, importing, syncing }) {
                       value={selectedData ? selectedData.notes : null}
                       multiline
                       rows={4}
+                      onChange={handleChange}
                     />
                   )}
                   control={control}

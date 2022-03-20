@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { Carousel } from 'react-responsive-carousel';
-import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import './JobScroll.css'
 
@@ -13,7 +12,6 @@ import { ReactComponent as SliderPrevArrow } from '../../../../assets/icons/Slid
 import { ReactComponent as SliderNextArrow } from '../../../../assets/icons/SliderNextArrow.svg'
 
 function JobScroll({ projectID }) {
-  const [activeSlide, setActiveSlide] = useState(0);
 
   const [data, setData] = useState([])
   useEffect(() => {

@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {
-  Link
-} from "react-router-dom";
-
 import RunStudioRunLogo from '../assets/img/logo-hound-blurred.svg'
 
 function Verify() {
@@ -50,7 +46,7 @@ function Verify() {
               <small>
                 <strong>Need to change your email address?</strong>
                 <br/>
-                <span>You’ll need a <a href="#">sign up again</a></span>
+                <span>You’ll need a <a href="/sign-up">sign up again</a></span>
               </small>
             </p>
 

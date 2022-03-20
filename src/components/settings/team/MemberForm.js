@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import AvailableHours from '../profile/components/AvailableHours';
 
-import { useForm, Controller } from "react-hook-form"
+import { useForm } from "react-hook-form"
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
@@ -69,7 +69,7 @@ function MemberForm({ memberAccess, addMember }) {
     }
   ])
 
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit } = useForm();
 
   const onSubmit = data => { 
     console.log(data)

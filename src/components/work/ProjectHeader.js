@@ -10,7 +10,6 @@ import NavIcons from './projects/NavIcons'
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
@@ -20,7 +19,6 @@ import ActionIcon from '../assets/icons/ActionIcon.svg'
 import CloseIcon from '../assets/icons/CloseIcon.svg'
 import ProjectNotes from './projects/projectHeader/projectNotes/ProjectNotes'
 
-import Avatar from '@material-ui/core/Avatar'
 import MemberAvatars from './projects/MemberAvatars'
 import JobScroll from './projects/projectHeader/jobSlider/JobScroll'
 
@@ -159,28 +157,28 @@ function ProjectHeader({ projectID }) {
                 </FormControl>
               </FormGroup>
             </Grid>
-            <Grid item xs={10}>
-              <FormGroup style={{ display: 'flex' }}>
-                <FormControl variant="outlined">
-                  <Controller
-                    render={({ field }) => (
-                      <TextField
-                        variant="outlined"
-                        placeholder="Client Purchase Order Number [Optional]"
-                        {...field}
-                        value={selectedData ? selectedData.order_nr : ''}
-                        onChange={handleChange}
-                        style={{ background: 'var(--white)' }}
-                      />
-                    )}
-                    control={control}
-                    name="order_nr"
-                  />
-                </FormControl>
-              </FormGroup>  
-            </Grid>
-            <Grid item xs={2}>
-              <MemberAvatars projectID={projectID} solo={true} />
+            <Grid item xs={12}>
+              <ClientPurchase>
+                <FormGroup style={{ display: 'flex' }}>
+                  <FormControl variant="outlined">
+                    <Controller
+                      render={({ field }) => (
+                        <TextField
+                          variant="outlined"
+                          placeholder="Client Purchase Order Number [Optional]"
+                          {...field}
+                          value={selectedData ? selectedData.order_nr : ''}
+                          onChange={handleChange}
+                          style={{ background: 'var(--white)' }}
+                        />
+                      )}
+                      control={control}
+                      name="order_nr"
+                    />
+                  </FormControl>
+                </FormGroup>  
+                <MemberAvatars projectID={projectID} solo={true} />
+              </ClientPurchase>
             </Grid>
           </Grid>
 
@@ -253,5 +251,17 @@ const PrefixBtn = styled.div`
 
   &:hover {
     cursor: pointer;
+  }
+`
+
+const ClientPurchase = styled.div`
+  display: flex;
+
+  .MuiFormGroup-root {
+    width: 100%;
+  }
+
+  .MuiAvatar-root {
+    margin-left: 8px;
   }
 `

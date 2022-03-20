@@ -19,51 +19,39 @@ function Estimates({ projectID, add }) {
 
   let history = useHistory()
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [jobLabels, setJobLabels] = useState([])
-  const [invoices, setInvoices] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
-  const [contacts, setContacts] = useState([])
 
   const [data, setData] = useState([])
 
-  const fetchLabels = async () => {
-    setIsLoading(true);
-
-    try {
-      await axios.get(`/json/labels.json`)
-        .then(res => {
-          setJobLabels(res.data[0].jobs);
-          setInvoices(res.data[0].invoices);
-          setProjectLabels(res.data[0].projects);
-          setContacts(res.data[0].contacts);
-        })
-
-        axios.get(`/json/estimates.json`)
-          .then(res => {
-            projectID ? 
-              res.data.forEach((item, index) => {
-                if (index === 0) document.querySelector('.app').style.backgroundImage = "none";
-                if (item.projectID === parseInt(projectID)) {
-                  setData(data => [...data, item])
-                }
-              })
-            :
-              setData(res.data)
-            }
-          )
-    } catch (err) {
-      console.trace(err);
-    }
-
-    setIsLoading(false);
-
-  }
-
   useEffect(() => {
+    const fetchLabels = () => {
+  
+      try {
+        axios.get(`/json/labels.json`)
+          .then(res => {
+            setProjectLabels(res.data[0].projects);
+          })
+  
+          axios.get(`/json/estimates.json`)
+            .then(res => {
+              projectID ? 
+                res.data.forEach((item, index) => {
+                  if (index === 0) document.querySelector('.app').style.backgroundImage = "none";
+                  if (item.projectID === parseInt(projectID)) {
+                    setData(data => [...data, item])
+                  }
+                })
+              :
+                setData(res.data)
+              }
+            )
+      } catch (err) {
+        console.trace(err);
+      }
+  
+    }
     fetchLabels()
-  }, []);
+  }, [projectID]);
 
   let { view, viewID } = useParams();
 
@@ -142,7 +130,7 @@ function Estimates({ projectID, add }) {
     const labelId = event.target.value;
   
     let newArr = [...data];
-    data.map((project, index) => {
+    data.forEach(() => {
       newArr[projectId - 1].action = labelId;
     });
   
@@ -154,7 +142,7 @@ function Estimates({ projectID, add }) {
     const labelId = event.target.value;
   
     let newArr = [...data];
-    data.map((project, index) => {
+    data.forEach(() => {
       newArr[projectId - 1].status = labelId;
     });
   
@@ -181,7 +169,7 @@ function Estimates({ projectID, add }) {
 
 
   const [projects, setProjects] = useState([])
-  const [jobs, setJobs] = useState([
+  const jobs = [
     {
       "value": "job_1",
       "label": "Job 1"
@@ -190,14 +178,14 @@ function Estimates({ projectID, add }) {
       "value": "job_2",
       "label": "Job 2"
     }
-  ])
-  useEffect(async () => {
+  ]
+  useEffect(() => {
     // Get all projects
-    let result = axios.get(`/json/projects.json`)
+    axios.get(`/json/projects.json`)
       .then(res => {
 
         // Add each project to the projects array
-        res.data.map(project => {
+        res.data.forEach(project => {
           setProjects(projects => [...projects, {
             "value": project.id,
             "label": project.projectName

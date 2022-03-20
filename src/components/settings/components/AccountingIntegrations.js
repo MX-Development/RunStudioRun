@@ -46,8 +46,6 @@ function AccountingIntegrations() {
   ]
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
-  const [openTab, setOpenTab] = useState(null);
   const centerModal = {
     content: {
       top: '50%',
@@ -124,7 +122,7 @@ function AccountingIntegrations() {
               </div>
             </>
             :
-            integrations.map(item => {
+            integrations.forEach(item => {
               if (item.id === selected) {
                 return (
                   <>

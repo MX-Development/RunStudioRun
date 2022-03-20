@@ -58,7 +58,7 @@ function ProjectEstimates({ estimateID, itemType }) {
 
         // Get highest index value in array
         let lastIndex = 0;
-        action.items.map(item => {
+        action.items.forEach(item => {
           if (item.id > lastIndex) {
             lastIndex = item.id
           }
@@ -73,12 +73,10 @@ function ProjectEstimates({ estimateID, itemType }) {
       default: return
       }
   });
-
-  const [idToAdd, setIdToAdd] = useState(0);
   
   const optionsToAdd = (options, action, position) => {
 
-    for (const [key, value] of Object.entries(options)) {
+    for (let [key, value] of Object.entries(options)) {
 
       if (value !== true) return
 
@@ -269,12 +267,13 @@ function ProjectEstimates({ estimateID, itemType }) {
 
     let oldData;
     let [removed] = [];
+    var index;
   
     switch(action_data) {
       case 'move_up':
 
         // Find index of item in array
-        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+        index = data.map(function (el) { return el.id; }).indexOf(item.id);
 
         dispatch({
           type: "MOVE_UP",
@@ -297,7 +296,7 @@ function ProjectEstimates({ estimateID, itemType }) {
       case 'move_down':
 
         // Find index of item in array
-        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+        index = data.map(function (el) { return el.id; }).indexOf(item.id);
 
         dispatch({
           type: "MOVE_DOWN",
@@ -320,7 +319,7 @@ function ProjectEstimates({ estimateID, itemType }) {
       case 'delete':
 
         // Find index of item in array
-        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+        index = data.map(function (el) { return el.id; }).indexOf(item.id);
 
         dispatch({
           type: "DELETE",
@@ -338,7 +337,7 @@ function ProjectEstimates({ estimateID, itemType }) {
         console.log('Duplicating item');
 
         // Find index of item in array
-        var index = data.map(function (el) { return el.id; }).indexOf(item.id);
+        index = data.map(function (el) { return el.id; }).indexOf(item.id);
 
         dispatch({
           type: "DUPLICATE",
@@ -352,7 +351,7 @@ function ProjectEstimates({ estimateID, itemType }) {
 
         // Get highest index value in array
         let lastIndex = 0;
-        data.map(item => {
+        data.forEach(item => {
           if (item.id > lastIndex) {
             lastIndex = item.id
           }
@@ -408,12 +407,11 @@ function ProjectEstimates({ estimateID, itemType }) {
                     {...provided.droppableProps}
                     className={snapshot.isDraggingOver ? 'dragging-over' : null}
                   >
-                    {state.items?.map((item, index) => {
+                    {state.items?.forEach((item, index) => {
                       if (item.type === 'additional_time') return;
                       return (
                         <Draggable key={item.id} draggableId={(item.id).toString()} index={index}>
                           {(provided, snapshot) => {
-                            const type = item.type;
                             return (
                               <div
                                 className={snapshot.isDragging ? 'dragging' : null}
@@ -465,7 +463,7 @@ function ProjectEstimates({ estimateID, itemType }) {
                     {...provided.droppableProps}
                     className={snapshot.isDraggingOver ? 'dragging-over' : null}
                   >
-                    {state.items?.map((item, index) => {
+                    {state.items?.forEach((item, index) => {
                       if (item.type !== 'additional_time') return;
                       return (
                         <Draggable key={item.id} draggableId={(item.id).toString()} index={index}>

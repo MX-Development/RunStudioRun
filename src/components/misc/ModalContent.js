@@ -1,6 +1,4 @@
 import React from 'react'
-
-import axios from 'axios';
  
 import { useForm, Controller } from "react-hook-form"
 
@@ -10,14 +8,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
-
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import { compareAsc } from 'date-fns';
-import { ReactComponent as DatePickerIcon } from '../assets/icons/DatePickerIcon.svg'
 
 function ModalContent({ formElements }) {
 

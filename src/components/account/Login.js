@@ -3,20 +3,16 @@ import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 import { auth, provider } from '../../config/firebase'
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 import Hound from '../assets/img/logo-hound-blurred.svg';
 
 import { useSpring, animated } from 'react-spring'
 
-import GoogleLogo from './google-logo.svg'
+import GoogleLogo from '../assets/logos/google-logo.svg'
 
 import './Login.css'
 
@@ -32,7 +28,7 @@ const trans4 = (x, y) => `translate3d(${x / 3.5 + 800}px,${y / 3.5 + 200}px,0)`
 
 function Login() {
 
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
 
   const signIn = (e) => {

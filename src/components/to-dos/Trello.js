@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom"
 import Board from 'react-trello'
-
-import moment from 'moment'
-
-import axios from 'axios';
 
 import './ToDos.css'
 
@@ -44,68 +40,6 @@ function Trello() {
   }
   
   const history = useHistory();
-
-  const [events, setEvents] = useState([])
-  const fetchData = async () => {
-
-    try {
-      let companies = [];
-      let jobs = [];
-
-      await axios.get(`/json/companies.json`)
-        .then(res => {
-          companies = res.data
-          console.log(companies);
-        })
-
-        await axios.get(`/json/jobs.json`)
-          .then(res => {  
-            jobs = res.data
-            console.log(jobs);
-          })
-
-      await axios.get(`/json/estimates/items.json`)
-        .then(res => {
-          console.log(res.data);
-          setEvents([])
-
-          const tasks = res.data
-          tasks.forEach(task => {
-
-            jobs.map(job => {
-              if (job.id === task.id) {
-                console.log(job);
-                companies.map(company => {
-                  if (company.companyName == job.companyName) {
-                    let taskObject = {
-                      title: task.title, 
-                      start: moment(task.startDate).format(),
-                      end: moment(task.startDate).add(task.time, 'minutes').format(),
-                      description: task.description,
-                      hexBlock: company.calc_ui_hexBlock,
-                      time: task.time,
-                      jobTitle: 'Job Title',
-                      editable: true,
-                      eventDurationEditable: true
-                    }
-                    setEvents(events => [...events, taskObject])
-                  }
-                });
-              }
-            })
-
-          })
-        })
-
-        console.log('Data fetched successfully.')
-    } catch (err) {
-      console.trace(err);
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   const handleDateClick = () => {
     //To add a card
@@ -354,10 +288,6 @@ function Trello() {
 }
 
 export default Trello
-
-function renderDayContent(eventInfo) {
-  // console.log(eventInfo)
-}
 
 const MemberSelect = styled.div`
   display: flex;

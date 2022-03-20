@@ -12,17 +12,14 @@ import {
 } from "react-router-dom"
 
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../config/firebase'
+import { auth } from '../../config/firebase'
 
-import RunStudioRunLogo from './assets/img/logo-hound.svg'
-import JobSelect from './to-dos/components/JobSelect';
-import Tooltips from './Tooltips';
+import RunStudioRunLogo from '../assets/img/logo-hound.svg'
+import JobSelect from '../to-dos/components/JobSelect';
+import Tooltips from '../Tooltips';
 
-import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
@@ -37,6 +34,7 @@ function Header() {
   const [helpOpen, setHelpOpen] = useState(false)
   const [activeNav, setActiveNav] = useState(null)
   const [activeSubitem, setActiveSubitem] = useState(null)
+  const [hideSubnav, setHideSubnav] = useState(false)
   
   const [openQuickNav, setQuicknav] = useState(false)
 
@@ -44,6 +42,8 @@ function Header() {
 
   // Set active nav from page URL
   useEffect(() => {
+    setHideSubnav(false);
+
     // Contacts
     if (location.pathname.includes('/companies')) {
       setActiveNav('Contacts')
@@ -61,6 +61,11 @@ function Header() {
 
     // Work
     else if (location.pathname.includes('/projects')) {
+      if (location.pathname.includes('/projects/add')) {
+        setHideSubnav(false);
+      } else if (location.pathname.includes('/projects/')) {
+        setHideSubnav(true);
+      }
       setActiveNav('Work')
       setActiveSubitem('Projects')
     }
@@ -106,7 +111,7 @@ function Header() {
       setActiveNav('Settings')
       setActiveSubitem('Subscription')
     }
-  }, [])
+  }, [location.pathname])
 
   const navItems = [
     {
@@ -322,7 +327,7 @@ function Header() {
         </HeaderTop>
         <HeaderSubnav> 
           <LeftSpace />
-          <SubnavLinks className={location.pathname.includes("/projects/") ? 'hidden' : 'shown'}>
+          <SubnavLinks className={hideSubnav ? 'hidden' : 'shown'}>
             {
               location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
                 <JobSelect />
@@ -340,14 +345,14 @@ function Header() {
               ))
             }
             {
-              // location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
-              //   <>
-              //     <Link to="/to-do">Timeline</Link>
-              //     <Link to="/kanban">Kanban</Link>
-              //     <Link to="/trello">Trello</Link>
-              //   </>
-              // :
-              // null
+              location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
+                <>
+                  <Link to="/to-do">Timeline</Link>
+                  <Link to="/kanban">Kanban</Link>
+                  <Link to="/trello">Trello</Link>
+                </>
+              :
+              null
             }
           </SubnavLinks>
           <SubnavSearch>
