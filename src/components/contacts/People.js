@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import axios from 'axios';
 
-import List from '../List'
+import List from '../layout/tables/List'
 
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
@@ -21,6 +21,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
+// Define table columns
 const columns = [
   { field: 'fullName', type: 'string', flex: 0.2, headerName: 'Name' },
   { field: 'phone', type: 'string', flex: 0.15 },
@@ -51,6 +52,7 @@ function People({ add, importing, syncing }) {
 
         console.log('Data fetched successfully.')
     } catch (err) {
+      // An error has occurred
       console.trace(err);
     }
   }
@@ -58,9 +60,9 @@ function People({ add, importing, syncing }) {
   // Fetch data on page load - when history changes
   useEffect(() => {
     fetchData()
-  }, []);
+  }, [history]);
 
-  // Get company ID from URL query when a company is selected
+  // Get person's ID from URL query when a person is selected
   let { id } = useParams();
   const selectedID = id;
 
@@ -93,6 +95,12 @@ function People({ add, importing, syncing }) {
     console.log(selectedData)
   }
 
+  // Delete item from database
+  const deleteItem = () => {
+    console.log('Delete item with ID: ', selectedData.id);
+  }
+
+  // Modal content for syncing
   const modalSync = (
     <>
       <h3 style={{ marginBottom: '10px' }}>Allow Run Studio Run to access your contacts</h3>
@@ -112,6 +120,7 @@ function People({ add, importing, syncing }) {
     </>
   )
 
+  // Modal content for importing through CSV
   const modalImport = (
     <>
       <h3 style={{ marginBottom: '10px' }}>Download and edit our sample CSV file</h3>
@@ -131,6 +140,7 @@ function People({ add, importing, syncing }) {
     </>
   )
 
+  // Modal content for person info
   const modalContent = (      
       
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -411,7 +421,7 @@ function People({ add, importing, syncing }) {
             <button className="btn btn-light-gray btn-left">Cancel</button>
           </div>
           <div className="btn-right">
-            <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
+            <button type="submit" className="btn btn-dark-gray btn-right" onClick={() => deleteItem()}>Delete</button>
             <button className="btn btn-gold btn-right">Save</button>
           </div>
         </div>

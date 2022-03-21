@@ -143,10 +143,6 @@
   padding: 0 !important;
 }
 
-.MuiTypography-body1 {
-  font-size: 12px !important;
-}
-
 .MuiCheckbox-root {
   color: #B1B0AF !important;
 }
@@ -193,10 +189,6 @@
   background: var(--light-gray) !important;
   color: var(--text-gray) !important;
 }
-
-/* .MuiOutlinedInput-notchedOutline {
-  border: none !important;
-} */
 
 /* Typography */
 form h5 {

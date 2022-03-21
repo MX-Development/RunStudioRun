@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 
+// Connect to firebase with Google Auth enabled
 var firebaseConfig = {
   apiKey: "AIzaSyDxm72D8cPn6kUMtGkRSeUn6Pj0KXVUrok",
   authDomain: "runstudiorun-9d16e.firebaseapp.com",

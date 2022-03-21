@@ -4,6 +4,7 @@ const initialState = {
   showOrdered: false
 }
 
+// Switch between ordered and unordered view in the Work > Projects list
 const projectSlice = createSlice({
   name: "order",
   initialState,

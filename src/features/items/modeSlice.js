@@ -4,6 +4,7 @@ const initialState = {
   darkMode: false
 }
 
+// Switch between light and dark-mode
 const modeSlice = createSlice({
   name: "items",
   initialState,

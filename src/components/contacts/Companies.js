@@ -4,7 +4,7 @@ import Picker from '../settings/components/ColorPicker'
 
 import axios from 'axios';
 
-import List from '../List'
+import List from '../layout/tables/List'
 
 import { useForm, Controller } from "react-hook-form"
 import { useParams } from 'react-router-dom'
@@ -22,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
+// Define table columns
 const columns = [
   { field: 'companyName', type: 'string', headerName: 'Company', flex: 0.2 },
   { field: 'phone', type: 'string', flex: 0.15 },
@@ -46,6 +47,7 @@ function Companies({ add, importing }) {
 
         console.log('Data fetched successfully.')
     } catch (err) {
+      // An error has occurred
       console.trace(err);
     }
   }
@@ -55,7 +57,7 @@ function Companies({ add, importing }) {
     fetchData()
   }, [history]);
 
-  // Get company ID from URL query when a company is selected
+  // Get company's ID from URL query when a company is selected
   let { id } = useParams();
   const selectedID = id;
 
@@ -92,10 +94,16 @@ function Companies({ add, importing }) {
   }
 
   // On submit form
-  const onSubmit = data => { 
+  const onSubmit = () => { 
     console.log('Form data: ', selectedData)
   }
 
+  // Delete item from database
+  const deleteItem = () => {
+    console.log('Delete item with ID: ', selectedData.id);
+  }
+
+  // Modal content for importing CSV file
   const modalImport = (
     <>
       <h3 style={{ marginBottom: '10px' }}>Download and edit our sample CSV file</h3>
@@ -115,6 +123,7 @@ function Companies({ add, importing }) {
     </>
   )
 
+  // Modal content for company info
   const modalContent = (        
       
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -242,15 +251,22 @@ function Companies({ add, importing }) {
                     />
                   </FormGroup>
                 </div>
-                <TextField
-                  id="postal_address"
-                  placeholder="Where to post stuff"
-                  variant="outlined"
-                  disabled={selectedData ? selectedData.postalSame : null}
-                  value={selectedData ? selectedData.postalSame ? selectedData.physicalAddress : selectedData.postalAddress : null}
-                  multiline
-                  rows={4}
-                  name="postalAddress"
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      variant="outlined"
+                      placeholder="Where to post stuff"
+                      {...field}
+                      onChange={handleChange}
+                      disabled={selectedData ? selectedData.postalSame : null}
+                      value={selectedData ? selectedData.postalSame ? selectedData.physicalAddress : selectedData.postalAddress : null}
+                      multiline
+                      rows={4}
+                      name="postalAddress"
+                    />
+                  )}
+                  control={control}
+                  name="postal_address"
                 />
               </FormControl>
             </FormGroup>
@@ -346,7 +362,7 @@ function Companies({ add, importing }) {
             <button className="btn btn-light-gray btn-left">Cancel</button>
           </div>
           <div className="btn-right">
-            <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
+            <button type="submit" className="btn btn-dark-gray btn-right" onClick={() => deleteItem()}>Delete</button>
             <button className="btn btn-gold btn-right">Save</button>
           </div>
         </div>
