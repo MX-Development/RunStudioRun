@@ -12,8 +12,31 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 function Users() {
 
-  const [selected, setSelected] = React.useState([]);
+  const [data, setData] = useState([])
 
+  // Fetch data from JSON files
+  const fetchData = async () => {
+
+    try {
+      await axios.get(`/json/settings/subscription/users.json`)
+        .then(res => {
+          setData(res.data)
+        })
+
+    } catch (err) {
+      // An error has occurred
+      console.trace(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  // State array for checked checkboxes
+  const [selected, setSelected] = useState([]);
+
+  // On check/uncheck checkboxes
   const handleClick = (id) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
@@ -35,26 +58,6 @@ function Users() {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
-  const [data, setData] = useState([])
-
-  const fetchData = async () => {
-
-    try {
-      await axios.get(`/json/subscriptions.json`)
-        .then(res => {
-          setData(res.data)
-        })
-
-        console.log('Data fetched successfully.')
-    } catch (err) {
-      console.trace(err);
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, []);
 
   return (
     <TableContainer>
@@ -86,7 +89,7 @@ function Users() {
                 <TableCell component="th" scope="row" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>
                   {row.userName}
                 </TableCell>
-                <TableCell align="left" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>{row.status}</TableCell>
+                <TableCell align="left" style={{ padding: '8px', paddingLeft: '0', paddingRight: '0' }}>{row.status === 1 ? 'Active' : 'Inactive'}</TableCell>
                 <TableCell align="right" style={{ padding: '8px', paddingLeft: '0' }}>{row.type} / Renews {row.renewDate}</TableCell>
               </TableRow>
             )

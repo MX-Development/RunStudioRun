@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 import './JobScroll.css'
@@ -14,6 +15,7 @@ import { ReactComponent as SliderNextArrow } from '../../../../../../assets/icon
 function JobScroll({ projectID }) {
 
   const [data, setData] = useState([])
+
   useEffect(() => {
     setData([])
     axios.get(`/json/jobs.json`)
@@ -34,27 +36,25 @@ function JobScroll({ projectID }) {
 
     data && data.length > 0 ?
       <Carousel
-      showStatus={false}
-      showIndicators={false}
-      emulateTouch={true}
-      swipable={true}
-      renderArrowPrev={(clickHandler, hasPrev, label) => {
-        return (
-          <button type="button" aria-label="prev slide / item" className={`control-arrow control-prev ${hasPrev ? '' : 'disabled'}`} onClick={clickHandler}>
-            <SliderPrevArrow />
-          </button>
-        )
-      }}
-      renderArrowNext={(clickHandler, hasNext, label) => {
-        return (
-          <button type="button" aria-label="next slide / item" className={`control-arrow control-next ${hasNext ? '' : 'disabled'}`} onClick={clickHandler}>
-            <SliderNextArrow />
-          </button>
-        )
-      }}
+        showStatus={false}
+        showIndicators={false}
+        emulateTouch={true}
+        swipable={true}
+        renderArrowPrev={(clickHandler, hasPrev, label) => {
+          return (
+            <button type="button" aria-label="prev slide / item" className={`control-arrow control-prev ${hasPrev ? '' : 'disabled'}`} onClick={clickHandler}>
+              <SliderPrevArrow />
+            </button>
+          )
+        }}
+        renderArrowNext={(clickHandler, hasNext, label) => {
+          return (
+            <button type="button" aria-label="next slide / item" className={`control-arrow control-next ${hasNext ? '' : 'disabled'}`} onClick={clickHandler}>
+              <SliderNextArrow />
+            </button>
+          )
+        }}
       >
-        {/* <InfoGraphics />
-        <InfoGraphics /> */}
         { data.map((job, index) => {
           return (
             <GraphicItem key={index}>

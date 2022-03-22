@@ -2,21 +2,21 @@
   {
     "user": 1,
     "userName": "Taso Katsionis",
-    "status": "Active",
+    "status": 1,
     "type": "Monthly",
     "renewDate": "Oct 2020"
   },
   {
     "user": 2,
     "userName": "Mike Hendriks",
-    "status": "Active",
+    "status": 1,
     "type": "Monthly",
     "renewDate": "Oct 2020"
   },
   {
     "user": 3,
     "userName": "Taso K.",
-    "status": "Active",
+    "status": 0,
     "type": "Monthly",
     "renewDate": "Nov 2020"
   }
