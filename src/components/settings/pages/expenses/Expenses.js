@@ -17,6 +17,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
+// Define table columns
 const columns = [
   { field: 'expenseName', type: 'string', flex: 0.3, headerName: 'Expense' },
   { field: 'description', type: 'string', flex: 0.6 },
@@ -30,37 +31,35 @@ function Expenses({ add }) {
   let history = useHistory()
 
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
 
+  // Fetch data from JSON files
   const fetchData = async () => {
-    setIsLoading(true);
-
     try {
       await axios.get(`/json/expenses.json`)
         .then(res => {
           setData(res.data)
         })
 
-        console.log('Data fetched successfully.')
     } catch (err) {
+      // An error has occurred
       console.trace(err);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
     fetchData()
-  }, []);
+  }, [history]);
 
+  // Get expense's ID from URL query when an expense is selected
   let { id } = useParams();
   const selectedID = id;
-
+  
   const { handleSubmit, control } = useForm();
-  const onSubmit = data => console.log(data);
 
+  // Initialize empty data state
   const [selectedData, setSelectedData] = useState(null)
 
+  // Set selected data depending on selected company on the front-end
   useEffect(() => {
     if (id) {
       const dataSelect = data.filter(obj => {
@@ -71,13 +70,25 @@ function Expenses({ add }) {
     }
   }, [id, data, selectedID]);
 
-  // const handleChange = event => {
-  //   setSelectedData({
-  //     ...selectedData,
-  //     [event.target.name]: event.target.value // This code replace the font object
-  //   });
-  // }
+  // On change input fields
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
 
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
+  }
+
+  // Delete item from database
+  const deleteItem = () => {
+    console.log('Delete item with ID: ', selectedData.id);
+  }
+
+  // Modal content for expense info
   const modalContent = (     
     <>     
       <p style={{ marginBottom: '20px' }}>
@@ -100,10 +111,12 @@ function Expenses({ add }) {
                         variant="outlined"
                         {...field}
                         value={selectedData ? selectedData.expenseName : null}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
                     name="expenseName"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -119,12 +132,14 @@ function Expenses({ add }) {
                         placeholder="Enter the expense description"
                         {...field}
                         value={selectedData ? selectedData.description : null}
+                        onChange={handleChange}
                         multiline
                         rows={4}
                       />
                     )}
                     control={control}
                     name="description"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -140,10 +155,12 @@ function Expenses({ add }) {
                         placeholder="How much"
                         {...field}
                         value={selectedData ? selectedData.cost : null}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
                     name="cost"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -159,10 +176,12 @@ function Expenses({ add }) {
                         placeholder="How much do you want to make?"
                         {...field}
                         value={selectedData ? selectedData.markup : null}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
                     name="markup"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -178,10 +197,12 @@ function Expenses({ add }) {
                         placeholder="Total"
                         {...field}
                         value={selectedData ? selectedData.sell : null}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
                     name="sell"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -196,8 +217,8 @@ function Expenses({ add }) {
               <button className="btn btn-light-gray btn-left">Cancel</button>
             </div>
             <div className="btn-right">
-              <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
-              <button className="btn btn-gold btn-right">Save</button>
+              <button type="button" className="btn btn-dark-gray btn-right" onClick={() => deleteItem()}>Delete</button>
+              <button type="submit" className="btn btn-gold btn-right">Save</button>
             </div>
           </div>
         </div>
@@ -207,10 +228,6 @@ function Expenses({ add }) {
   )
 
   return (
-      
-    isLoading ? 
-    'Loading...'
-    :
     <>
       <List 
         title={'Expenses'} 
@@ -236,7 +253,6 @@ function Expenses({ add }) {
         nocolor={true} 
       />
     </>
-      
   )
 }
 

@@ -18,6 +18,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select } from '@material-ui/core'
 
+// Define table columns
 const columns = [
   { field: 'rateName', type: 'string', flex: 0.3, headerName: 'Item/task' },
   { field: 'rateDescription', type: 'string', flex: 0.5, headerName: 'Description' },
@@ -57,37 +58,37 @@ function ItemsTasks({ add }) {
   
   const [data, setData] = useState([])
 
+  // Fetch data from JSON files
   const fetchData = async () => {
-
     try {
       await axios.get(`/json/items_tasks.json`)
         .then(res => {
           setData(res.data)
         })
-
-        console.log('Data fetched successfully.')
+        
     } catch (err) {
+      // An error has occurred
       console.trace(err);
     }
   }
 
+  // Fetch data on page load - when history changes
   useEffect(() => {
     fetchData()
-  }, []);
-
+  }, [history]);
 
   const [openModal, setOpenModal] = useState(false);
 
+  // Get item's ID from URL query when an item is selected
   let { id } = useParams();
   const selectedID = id;
 
   const { handleSubmit, control } = useForm();
-  const onSubmit = data => { 
-    console.log(selectedData)
-  }
 
+  // Initialize empty data state
   const [selectedData, setSelectedData] = useState(null)
 
+  // Set selected data depending on selected item on the front-end
   useEffect(() => {
     if (id) {
       const dataSelect = data.filter(obj => {
@@ -99,13 +100,25 @@ function ItemsTasks({ add }) {
     }
   }, [id, data, selectedID]);
 
+  // On change input fields
   const handleChange = event => {
     setSelectedData({
       ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
+      [event.target.name]: event.target.value 
     });
   }
 
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
+  }
+
+  // Delete item from database
+  const deleteItem = () => {
+    console.log('Delete item with ID: ', selectedData.id);
+  }
+
+  // Modal content for items and tasks info
   const modalContent = (     
     <>
       <p style={{ marginBottom: '20px' }}>
@@ -128,10 +141,12 @@ function ItemsTasks({ add }) {
                         placeholder="Design Development"
                         {...field}
                         value={selectedData ? selectedData.rateName : null}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
-                    name="item_name"
+                    name="rateName"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -153,7 +168,8 @@ function ItemsTasks({ add }) {
                       />
                     )}
                     control={control}
-                    name="description"
+                    name="rateDescription"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -169,10 +185,12 @@ function ItemsTasks({ add }) {
                         placeholder="120.00"
                         {...field}
                         value={selectedData ? selectedData.standard : null}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
-                    name="hourly_rate"
+                    name="standard"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -184,6 +202,8 @@ function ItemsTasks({ add }) {
                   <Select
                     value={'Standard'}
                     style={{ width: '100%' }}
+                    onChange={handleChange}
+                    name="standard"
                   >
                     <MenuItem value="">
                       <em>Select</em>
@@ -206,8 +226,8 @@ function ItemsTasks({ add }) {
               <button className="btn btn-light-gray btn-left">Cancel</button>
             </div>
             <div className="btn-right">
-              <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
-              <button className="btn btn-gold btn-right">Save</button>
+              <button type="button" className="btn btn-dark-gray btn-right" onClick={() => deleteItem()}>Delete</button>
+              <button type="submit" className="btn btn-gold btn-right">Save</button>
             </div>
           </div>
         </div>

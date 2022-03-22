@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import AvailableHours from '../../yourProfile/components/AvailableHours';
 
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
@@ -17,23 +17,31 @@ import {
   Link
 } from "react-router-dom"
 
-function MemberForm({ memberAccess, addMember }) {
+function MemberForm({ memberAccess, addMember, data }) {
 
-  const [accessOptions, setAccessOptions] = useState([
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState(null)
+
+  // Set selected data depending on selected company on the front-end
+  useEffect(() => {
+    setSelectedData(data)
+  }, [data]);
+
+  const accessOptions = [
     {
       "id": 1,
       "title": "Dashboard",
-      "checked": true
+      "checked": false
     },
     {
       "id": 2,
       "title": "View Jobs",
-      "checked": true
+      "checked": false
     },
     {
       "id": 3,
       "title": "View Estimates",
-      "checked": true
+      "checked": false
     },
     {
       "id": 4,
@@ -48,12 +56,12 @@ function MemberForm({ memberAccess, addMember }) {
     {
       "id": 6,
       "title": "View Contacts",
-      "checked": true
+      "checked": false
     },
     {
       "id": 7,
       "title": "View Reports",
-      "checked": true
+      "checked": false
     },
     {
       "id": 8,
@@ -65,18 +73,49 @@ function MemberForm({ memberAccess, addMember }) {
       "title": "Edit Your Profile",
       "checked": false
     }
-  ])
+  ]
 
-  const { handleSubmit } = useForm();
+  const { handleSubmit, control } = useForm();
 
-  const onSubmit = data => { 
-    console.log(data)
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
   }
 
+  // const handleChange = event => {
+  //   var items = accessOptions;
+  //   items[event.target.id - 1].checked = !items[event.target.id - 1].checked;
+  //   setAccessOptions([...items]);
+  // }
+
+  // On change input fields
   const handleChange = event => {
-    var items = accessOptions;
-    items[event.target.id - 1].checked = !items[event.target.id - 1].checked;
-    setAccessOptions([...items]);
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
+
+  // On change team member access checkbox
+  const handleAccess = event => {
+    const checks = document.querySelectorAll('[name^="item"]');
+    let checkedItems = [];
+    checks.forEach(item => {
+      if (item.checked) {
+        if (checkedItems.indexOf(item.id) === -1) {
+          checkedItems.push(parseInt(item.id))
+        }
+      }
+    })
+
+    setSelectedData({
+      ...selectedData,
+      'access': checkedItems
+    });
+  }
+
+  const updatePassword = event => {
+    console.log('Updating password...');
   }
 
   return (
@@ -95,10 +134,19 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Full Name</FormLabel>
-                  <TextField
-                    id="full_name"
-                    placeholder="First and last name"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="First and last name"
+                        variant="outlined"
+                        {...field}
+                        value={selectedData ? selectedData.name : ''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="name"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -107,10 +155,19 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Job Title</FormLabel>
-                  <TextField
-                    id="job_title"
-                    placeholder="Are you the leader of the pack?"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="Are you the leader of the pack?"
+                        variant="outlined"
+                        {...field}
+                        value={selectedData ? selectedData.jobTitle : ''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="jobTitle"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -119,10 +176,20 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Email</FormLabel>
-                  <TextField
-                    id="email"
-                    placeholder="you@somehere.com"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="you@somehere.com"
+                        variant="outlined"
+                        type="email"
+                        {...field}
+                        value={selectedData ? selectedData.email : ''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="email"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -131,10 +198,20 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Phone</FormLabel>
-                  <TextField
-                    id="phone"
-                    placeholder="000-000-0000"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="000-000-0000"
+                        variant="outlined"
+                        type="tel"
+                        {...field}
+                        value={selectedData ? selectedData.phone : ''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="phone"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -143,10 +220,19 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Billable rate</FormLabel>
-                  <TextField
-                    id="billable_rate"
-                    placeholder="What are they worth"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="What are they worth"
+                        variant="outlined"
+                        {...field}
+                        value={selectedData ? selectedData.billableRate : ''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="billableRate"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -155,10 +241,19 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Cost rate</FormLabel>
-                  <TextField
-                    id="cost_rate"
-                    placeholder="What it costs us"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="What it costs us"
+                        variant="outlined"
+                        {...field}
+                        value={selectedData ? selectedData.costRate : ''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="costRate"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -179,10 +274,20 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Current Password</FormLabel>
-                  <TextField
-                    id="password"
-                    placeholder="Don’t choose 1234"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="Don’t choose 1234"
+                        variant="outlined"
+                        type="password"
+                        {...field}
+                        value={''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="password"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -191,10 +296,20 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>New Password</FormLabel>
-                  <TextField
-                    id="new_password"
-                    placeholder="We know you chose 1234"
-                    variant="outlined"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="We know you chose 1234"
+                        variant="outlined"
+                        type="password"
+                        {...field}
+                        value={''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="new_password"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -203,11 +318,20 @@ function MemberForm({ memberAccess, addMember }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Confirm Password</FormLabel>
-                  <TextField
-                    id="confirm_password"
-                    placeholder="Remember what you chose?"
-                    variant="outlined"
-                    helperText="Password strength: strong"
+                  <Controller
+                    render={({ field }) => (
+                      <TextField
+                        placeholder="Remember what you chose?"
+                        variant="outlined"
+                        type="password"
+                        {...field}
+                        value={''}
+                        onChange={handleChange}
+                      />
+                    )}
+                    control={control}
+                    name="confirm_password"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -215,7 +339,7 @@ function MemberForm({ memberAccess, addMember }) {
 
             <Grid item xs={12}>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <button type="submit" className="btn btn-gray">Update</button>
+                <button type="submit" className="btn btn-gray" onClick={() => updatePassword()}>Update</button>
               </div>
             </Grid>
 
@@ -228,23 +352,29 @@ function MemberForm({ memberAccess, addMember }) {
                 </Grid>
                 {
                   accessOptions ?
-                  accessOptions.map((item, index) => (
-                    <Grid item xs={4} style={{ padding: '2px' }} key={index}>
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={item.checked}
-                              onChange={handleChange}
-                              id={item.id}
-                              name={`item[${index}]`}
-                            />
-                          }
-                          label={item.title}
-                        />
-                      </FormGroup>
-                    </Grid>
-                  ))
+                  accessOptions.map((item, index) => {
+                    let checked = false;
+                    if (selectedData?.access.includes(item.id)) {
+                      checked = true;
+                    }
+                    return (
+                      <Grid item xs={4} style={{ padding: '2px' }} key={index}>
+                        <FormGroup>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checked}
+                                onChange={handleAccess}
+                                id={item.id}
+                                name={`item[${index}]`}
+                              />
+                            }
+                            label={item.title}
+                          />
+                        </FormGroup>
+                      </Grid>
+                    )
+                  })
                   : null
                 }
               </>

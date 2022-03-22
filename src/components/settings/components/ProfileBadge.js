@@ -18,8 +18,8 @@ function ProfileBadge({ teamMember }) {
     <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
       <MemberAvatar>
         <AvatarContainer>
-          <Avatar alt={ teamMember ? teamMember.name : user?.displayName } src={ teamMember ? teamMember.avatar : user?.photoURL }>
-            { teamMember ? teamMember.name.charAt(0) : user?.displayName.charAt(0) } 
+          <Avatar alt={ teamMember ? teamMember.name : user?.displayName } src={ teamMember ? teamMember?.avatar : user?.photoURL }>
+            { teamMember ? teamMember.name?.charAt(0) : user?.displayName?.charAt(0) } 
           </Avatar>
           <Overlay onClick={(e) => uploadAvatar()}>
             <span>Upload</span>

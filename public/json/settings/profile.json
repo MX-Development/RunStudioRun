@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Taso Katsionis",
+    "phone": "0424 059 513",
+    "email": "taso@ak-d.com.au",
+    "company": "Action Design",
+    "jobTitle": "CEO",
+    "billableRate": "100",
+    "costRate": "150",
+    "notes": "notes to remember birthday and more...",
+    "subscription": "Active",
+    "avatar": "https://storage.pubble.nl/d9c7ad83/content/2019/1/73c7f540-60e9-4cbc-90f1-23d55c040483_thumb840.jpg",
+    "password": "123456"
+  }
+]

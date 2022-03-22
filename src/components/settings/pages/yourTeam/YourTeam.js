@@ -12,6 +12,7 @@ import {
 import ProfileBadge from '../../components/ProfileBadge';
 import MemberForm from './components/MemberForm';
 
+// Define table columns
 const columns = [
   { field: 'name', type: 'string', flex: 0.3 },
   { field: 'phone', type: 'string', flex: 0.2 },
@@ -27,29 +28,33 @@ function YourTeam({ add }) {
 
   const [data, setData] = useState([])
 
+  // Fetch data from JSON files
   const fetchData = async () => {
-
     try {
       await axios.get(`/json/team.json`)
         .then(res => {
           setData(res.data)
         })
 
-        console.log('Data fetched successfully.')
     } catch (err) {
+      // An error has occurred
       console.trace(err);
     }
   }
 
+  // Fetch data on page load - when history changes
   useEffect(() => {
     fetchData()
-  }, []);
+  }, [history]);
 
+  // Get team member's ID from URL query when a member is selected
   let { id } = useParams();
   const selectedID = id;
 
+  // Initialize empty data state
   const [selectedData, setSelectedData] = useState(null)
 
+  // Set selected data depending on selected member on the front-end
   useEffect(() => {
     if (id) {
       const dataSelect = data.filter(obj => {
@@ -60,6 +65,7 @@ function YourTeam({ add }) {
     }
   }, [id, data, selectedID]);
 
+  // Modal content for team member popup
   const modalContent = (         
     <>
       <ProfileBadge teamMember={selectedData} />
@@ -67,6 +73,7 @@ function YourTeam({ add }) {
       <MemberForm 
         addMember={false}
         memberAccess={true} 
+        data={selectedData}
       />
     </>
   )

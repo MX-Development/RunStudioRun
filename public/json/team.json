@@ -5,9 +5,16 @@
     "phone": "0424 059 513",
     "email": "taso@ak-d.com.au",
     "company": "Action Design",
+    "jobTitle": "CEO",
+    "billableRate": "100",
+    "costRate": "150",
     "notes": "notes to remember birthday and more...",
     "subscription": "Active",
-    "avatar": "https://storage.pubble.nl/d9c7ad83/content/2019/1/73c7f540-60e9-4cbc-90f1-23d55c040483_thumb840.jpg"
+    "avatar": "https://storage.pubble.nl/d9c7ad83/content/2019/1/73c7f540-60e9-4cbc-90f1-23d55c040483_thumb840.jpg",
+    "access": [
+      1, 2, 4, 5, 7
+    ],
+    "password": "123456"
   },
   {
     "id": 2,
@@ -15,9 +22,15 @@
     "phone": "0424 059 513",
     "email": "lorem@ipsum.com",
     "company": "Lorem Ipsum Development",
+    "jobTitle": "Developer",
+    "billableRate": "100",
+    "costRate": "150",
     "notes": "notes to remember birthday and more...",
     "subscription": "Active",
-    "avatar": "https://img.freepik.com/vrije-photo/knappe-zelfverzekerde-lachende-man-met-handen-gekruist-op-de-borst_176420-18743.jpg?size=626&ext=jpg"
+    "avatar": "https://img.freepik.com/vrije-photo/knappe-zelfverzekerde-lachende-man-met-handen-gekruist-op-de-borst_176420-18743.jpg?size=626&ext=jpg",
+    "access": [
+      1, 2, 3, 6, 7
+    ]
   },
   {
     "id": 3,

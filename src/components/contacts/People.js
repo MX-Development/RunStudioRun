@@ -421,8 +421,8 @@ function People({ add, importing, syncing }) {
             <button className="btn btn-light-gray btn-left">Cancel</button>
           </div>
           <div className="btn-right">
-            <button type="submit" className="btn btn-dark-gray btn-right" onClick={() => deleteItem()}>Delete</button>
-            <button className="btn btn-gold btn-right">Save</button>
+            <button type="button" className="btn btn-dark-gray btn-right" onClick={() => deleteItem()}>Delete</button>
+            <button type="submit" className="btn btn-gold btn-right">Save</button>
           </div>
         </div>
       </div>

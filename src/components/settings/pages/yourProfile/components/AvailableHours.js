@@ -55,7 +55,7 @@ function AvailableHours() {
 
     var items;
 
-    if (!event.target.name.includes('item')) {
+    if (!event.target.name.includes('day')) {
       items = days;
       items[event.target.name - 1].amount = event.target.value;
       setDays([...items]);
@@ -84,7 +84,7 @@ function AvailableHours() {
                     checked={item.checked}
                     onChange={handleChange}
                     id={item.id}
-                    name={`item[${item.id}]`}
+                    name={`day[${item.id}]`}
                   />
                 }
                 label={item.title}
