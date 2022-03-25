@@ -409,7 +409,7 @@ function ProjectEstimates({ estimateID, itemType }) {
                     {...provided.droppableProps}
                     className={snapshot.isDraggingOver ? 'dragging-over' : null}
                   >
-                    {state.items?.forEach((item, index) => {
+                    {state.items?.map((item, index) => {
                       if (item.type === 'additional_time') return;
                       return (
                         <Draggable key={item.id} draggableId={(item.id).toString()} index={index}>
@@ -465,7 +465,7 @@ function ProjectEstimates({ estimateID, itemType }) {
                     {...provided.droppableProps}
                     className={snapshot.isDraggingOver ? 'dragging-over' : null}
                   >
-                    {state.items?.forEach((item, index) => {
+                    {state.items?.map((item, index) => {
                       if (item.type !== 'additional_time') return;
                       return (
                         <Draggable key={item.id} draggableId={(item.id).toString()} index={index}>

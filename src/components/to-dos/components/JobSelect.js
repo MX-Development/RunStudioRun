@@ -94,7 +94,7 @@ function JobSelect() {
             </FormGroup>
       {
         tasks ?
-          tasks.forEach(task => {
+          tasks.map(task => {
 
             if (task.title.toLowerCase().includes(searchQuery.toLowerCase()) || task.projectName.toLowerCase().includes(searchQuery.toLowerCase())) {
               return (
