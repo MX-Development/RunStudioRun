@@ -33,19 +33,19 @@ function MemberAvatars({ projectID, solo }) {
     <Members>
       { teamMembers ? teamMembers.map((member, index) => {
         if (index > 0 && solo) return false;
-        if (index > 3) return false;
+        if (index > 2) return false;
         return (
           <Avatar key={index} alt={ member.name } src={ member.avatar } onClick={solo ? () => setShowExtended(!showExtended) : null}>
             M
           </Avatar>
         )
       }) : null}
-      {/* { !solo ?
+      { !solo ?
       <Avatar className="open-ext" onClick={() => setShowExtended(!showExtended)}>
-        +
+        + {teamMembers.length - 3}
       </Avatar>
       :  null
-      } */}
+      }
       <ExtendedMembers className={showExtended ? 'active' : ''}>
       { teamMembers ? teamMembers.map((member, index) => {
         if (index < 2) return false;
@@ -70,7 +70,7 @@ export default MemberAvatars;
 const Members = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 
   .MuiAvatar-root {
     width: 30px !important;
