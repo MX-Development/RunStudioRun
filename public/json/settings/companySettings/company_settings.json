@@ -1,0 +1,14 @@
+{
+  "companyName": "AK Design",
+  "country": "AU",
+  "currency": "AUD",
+  "phone": "0000-000-000",
+  "altPhone": "61 3 1234 1234",
+  "website": "www.bloodhound-rescue.com",
+  "physicalAddress": "100 Street Name Suburb 1234 Country",
+  "postalSame": false,
+  "postalAddress": "250 Street Name Suburb 9999 Country",
+  "companyTaxNumber": "000 000 000 000",
+  "companyPrefix": "AKD",
+  "colour": "#F0F0F0"
+}

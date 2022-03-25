@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 
-import QuickbooksLogo from '../../assets/logos/quickbooks.svg';
-import MYOBLogo from '../../assets/logos/myob.svg';
-import XeroLogo from '../../assets/logos/xero.svg';
+// Logo's for the integrations
+import QuickbooksLogo from '../../../../assets/logos/quickbooks.svg';
+import MYOBLogo from '../../../../assets/logos/myob.svg';
+import XeroLogo from '../../../../assets/logos/xero.svg';
 
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -27,6 +28,7 @@ function AccountingIntegrations() {
     setSelected(id);
   };
 
+  // Array of integrations
   const integrations = [
     {
       "id": 1,
@@ -98,9 +100,9 @@ function AccountingIntegrations() {
           {
             integrationStep === 1 ?
             <>
-              { integrations.map(item => {
+              { integrations.map((item, index) => {
                 return (
-                  <Item>
+                  <Item key={index}>
                     <Checkbox
                       name={`integration[${item.id}]`}
                       checked={selected === item.id ? true : false}

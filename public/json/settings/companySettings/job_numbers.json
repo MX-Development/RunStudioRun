@@ -1,0 +1,16 @@
+{
+  "jobNumbers": {
+    "not_required": true,
+    "auto": false,
+    "combination": false
+  },
+  "jobNumber": "J-2017",
+  "estimateNumber": "E-2017",
+  "invoiceNumber": "INV-2017",
+  "timeBlocks": {
+    "test": "COntent",
+    "time_grid": true,
+    "min_15": false,
+    "min_30": true
+  }
+}

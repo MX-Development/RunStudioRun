@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
+
+import axios from 'axios';
 
 import ColorPicker from '../../../components/ColorPicker'
 
@@ -17,21 +19,61 @@ import { MenuItem, Select } from '@material-ui/core';
 
 function BusinessInformation() {
 
-  const [postalSame, setPostalSame] = useState(false);
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState(null)
+  const [countries, setCountries] = useState(null)
+  const [currencies, setCurrencies] = useState(null)
 
-  const { handleSubmit, watch } = useForm();
-  const onSubmit = data => console.log(data);
+  // Fetch data from JSON files
+  const fetchData = () => {
+    try {
+      axios.get(`/json/settings/companySettings/company_settings.json`)
+        .then(res => {
+          setSelectedData(res.data)
+        })
 
-  console.log(watch("example")); // watch input value by passing the name of it
+      axios.get(`/json/countries.json`)
+        .then(res => {
+          setCountries(res.data)
+        })
 
-  const [age, setAge] = useState('');
+      axios.get(`/json/currencies.json`)
+        .then(res => {
+          setCurrencies(res.data)
+        })
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+    } catch (err) {
+      // An error has occurred
+      console.trace(err);
+    }
+  }
 
-  const changePostal = () => {
-    setPostalSame(!postalSame)
+  // Fetch data on page load - when history changes
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  const { handleSubmit, control } = useForm();
+
+  // On change input fields
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
+
+  // On change checkbox for postal address same as physical address
+  const changePostal = (event) => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.checked 
+    });
+  }
+
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
   }
 
   return (
@@ -52,26 +94,24 @@ function BusinessInformation() {
                 <small>Image size 000 x 000 px (JPG/PNG)</small>
               </div>
               <div className="business-info">
-                <h4 className="gutterBottom" style={{ fontWeight: '600' }}>Business Name</h4>
+                <h4 className="gutterBottom" style={{ fontWeight: '600' }}>{ selectedData?.companyName }</h4>
                 <p>
-                  Address Line<br/>
-                  Second Address Line<br/>
-                  Country
+                  { selectedData?.physicalAddress }
                 </p>
                 <Grid container spacing={0} style={{ marginTop: '1rem' }}>  
                   <Grid item xs={4} sm={4}>
                     <FormControlLabel
                       control={<Checkbox checked={true} />}
                       label={'Align Left'}
-                      labelPlacement="right"
+                      labelPlacement="end"
                       style={{ margin: '0', marginRight: '12.5px' }}
                     />
                   </Grid>
                   <Grid item xs={4} sm={4}>
                     <FormControlLabel
                       control={<Checkbox checked={true} />}
-                      label={'Align Left'}
-                      labelPlacement="right"
+                      label={'Align Right'}
+                      labelPlacement="end"
                       style={{ margin: '0', marginRight: '12.5px' }}
                     />
                   </Grid>
@@ -79,7 +119,7 @@ function BusinessInformation() {
                     <FormControlLabel
                       control={<Checkbox checked={true} />}
                       label={'Replace STUDIO'}
-                      labelPlacement="right"
+                      labelPlacement="end"
                       style={{ margin: '0', marginRight: '12.5px', fontSize: '10px !important' }}
                     />
                   </Grid>
@@ -96,8 +136,9 @@ function BusinessInformation() {
               <FormControl variant="outlined">
                 <TextField
                   id="app_url"
-                  placeholder="https://akd.app.runstudiorun.net"
+                  placeholder={`https://akd.app.runstudiorun.net`}
                   variant="outlined"
+                  value={`https://${selectedData?.companyPrefix.toLowerCase()}.app.runstudiorun.net`}
                 />
               </FormControl>
             </FormGroup>
@@ -112,16 +153,16 @@ function BusinessInformation() {
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Country</FormLabel>
                 <Select
-                  value={age}
+                  value={selectedData?.country}
                   onChange={handleChange}
                   style={{ width: '100%' }}
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>1</MenuItem>
-                  <MenuItem value={20}>2</MenuItem>
-                  <MenuItem value={30}>3</MenuItem>
+                  { countries?.map((c, index) => (
+                    <MenuItem key={index} value={c.code}>{ c.name }</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </FormGroup>
@@ -131,15 +172,16 @@ function BusinessInformation() {
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Currency</FormLabel>
                 <Select
-                  value={age}
+                  value={selectedData?.currency}
                   onChange={handleChange}
+                  style={{ width: '100%' }}
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>1</MenuItem>
-                  <MenuItem value={20}>2</MenuItem>
-                  <MenuItem value={30}>3</MenuItem>
+                  { currencies?.map((c, index) => (
+                    <MenuItem key={index} value={c.cc}>{ c.cc }</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </FormGroup>
@@ -148,10 +190,19 @@ function BusinessInformation() {
             <FormGroup>
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company Name</FormLabel>
-                <TextField
-                  id="company_name"
-                  placeholder="This is what appears on your paperwork"
-                  variant="outlined"
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="This is what appears on your paperwork"
+                      variant="outlined"
+                      {...field}
+                      value={selectedData?.companyName}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="companyName"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>
@@ -160,10 +211,20 @@ function BusinessInformation() {
             <FormGroup>
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Phone</FormLabel>
-                <TextField
-                  id="phone"
-                  placeholder="000-000-0000"
-                  variant="outlined"
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="000-000-0000"
+                      variant="outlined"
+                      type="tel"
+                      {...field}
+                      value={selectedData?.phone}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="phone"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>
@@ -172,10 +233,20 @@ function BusinessInformation() {
             <FormGroup>
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Alternative Phone</FormLabel>
-                <TextField
-                  id="alt_phone"
-                  placeholder="000-000-0000"
-                  variant="outlined"
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="000-000-0000"
+                      variant="outlined"
+                      type="tel"
+                      {...field}
+                      value={selectedData?.altPhone}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="altPhone"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>
@@ -184,12 +255,21 @@ function BusinessInformation() {
             <FormGroup>
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Physical Address</FormLabel>
-                <TextField
-                  id="physical_address"
-                  placeholder="Where people can see you"
-                  variant="outlined"
-                  multiline
-                  rows={4}
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="Where people can see you"
+                      variant="outlined"
+                      {...field}
+                      multiline
+                      rows={4}
+                      value={selectedData?.physicalAddress}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="physicalAddress"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>
@@ -201,20 +281,31 @@ function BusinessInformation() {
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Postal Address</FormLabel>
                   <FormGroup>
                     <FormControlLabel
-                      control={<Checkbox checked={postalSame} />}
+                      control={<Checkbox checked={selectedData ? selectedData.postalSame : null} />}
                       label={'As above'}
-                      labelPlacement="right"
+                      labelPlacement="end"
                       style={{ margin: '0', marginLeft: '12.5px' }}
                       onChange={changePostal}
+                      name="postalSame"
                     />
                   </FormGroup>
                 </div>
-                <TextField
-                  id="postal_address"
-                  placeholder="Where to post stuff"
-                  variant="outlined"
-                  multiline
-                  rows={4}
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="Where to post stuff"
+                      variant="outlined"
+                      {...field}
+                      rows={4}
+                      disabled={selectedData ? selectedData.postalSame : null}
+                      value={selectedData ? selectedData.postalSame ? selectedData.physicalAddress : selectedData.postalAddress : null}
+                      multiline
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="postalAddress"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>
@@ -223,10 +314,19 @@ function BusinessInformation() {
             <FormGroup>
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Tax Number (Appears on Estimates & Invoices)</FormLabel>
-                <TextField
-                  id="tax_nr"
-                  placeholder="Australian business number (ABN) or equivalent (VAT)"
-                  variant="outlined"
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="Australian business number (ABN) or equivalent (VAT)"
+                      variant="outlined"
+                      {...field}
+                      value={selectedData?.companyTaxNumber}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="companyTaxNumber"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>
@@ -235,10 +335,19 @@ function BusinessInformation() {
             <FormGroup>
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Website</FormLabel>
-                <TextField
-                  id="website"
-                  placeholder="Interwebs"
-                  variant="outlined"
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="Interwebs"
+                      variant="outlined"
+                      {...field}
+                      value={selectedData?.website}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="website"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>
@@ -247,10 +356,19 @@ function BusinessInformation() {
             <FormGroup>
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company Prefix</FormLabel>
-                <TextField
-                  id="website"
-                  placeholder="Add a 3 letter representation of the company"
-                  variant="outlined"
+                <Controller
+                  render={({ field }) => (
+                    <TextField
+                      placeholder="Add a 3 letter representation of the company"
+                      variant="outlined"
+                      {...field}
+                      value={selectedData?.companyPrefix}
+                      onChange={handleChange}
+                    />
+                  )}
+                  control={control}
+                  name="companyPrefix"
+                  defaultValue=""
                 />
               </FormControl>
             </FormGroup>

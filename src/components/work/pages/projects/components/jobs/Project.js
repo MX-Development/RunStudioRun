@@ -42,7 +42,6 @@ function Project() {
 
 
           <ProjectView type={view ? view : 'timeline'} />
-          {/* <Jobs /> */}
         </Grid>
       </Grid>
     </>

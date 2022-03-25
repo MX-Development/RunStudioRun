@@ -243,7 +243,7 @@ function Companies({ add, importing }) {
                     <FormControlLabel
                       control={<Checkbox checked={selectedData ? selectedData.postalSame : null} />}
                       label={'As above'}
-                      labelPlacement="right"
+                      labelPlacement="end"
                       style={{ margin: '0', marginLeft: '12.5px' }}
                       onChange={changePostal}
                       name="postalSame"

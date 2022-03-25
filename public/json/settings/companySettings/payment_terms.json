@@ -1,0 +1,16 @@
+{
+  "terms": {
+    "30_invoice_date": true,
+    "30_invoice_eom": false,
+    "14_invoice_date": false,
+    "7_invoice_date": true,
+    "cod": false,
+    "other": false
+  },
+  "otherContent": "",
+  "standard": "$100",
+  "tier_1": "$100",
+  "tier_2": "$120",
+  "tier_3": "$150",
+  "vat": "15%"
+}

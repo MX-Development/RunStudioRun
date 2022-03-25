@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import axios from 'axios';
+
+import { useForm, Controller } from "react-hook-form"
 
 import LineArrow from '../../assets/icons/LineArrow.svg'
 import EyeIconBorder from '../../assets/icons/EyeIconBorder.svg'
@@ -47,6 +51,44 @@ function TermsAndConditions() {
       setModalContent(invoiceBody)
   }
 
+  // Fetch data from JSON files
+  const fetchData = async () => {
+    try {
+      await axios.get(`/json/settings/companySettings/terms_and_conditions.json`)
+        .then(res => {
+          setSelectedData(res.data)
+          console.log(res.data);
+        })
+
+    } catch (err) {
+      // An error has occurred
+      console.trace(err);
+    }
+  }
+
+  // Fetch data on page load - when history changes
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  const { handleSubmit, control } = useForm();
+
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState(null)
+
+  // On change input fields
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
+
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
+  }
+
   const estimateBody = (
     <> 
       <ModalBody>
@@ -58,12 +100,21 @@ function TermsAndConditions() {
 
       <FormGroup>
         <FormControl variant="outlined">
-          <TextField
-            id="content"
-            placeholder="Paste text here..."
-            variant="outlined"
-            multiline
-            minRows={20}
+          <Controller
+            render={({ field }) => (
+              <TextField
+                placeholder="Paste text here..."
+                variant="outlined"
+                {...field}
+                multiline
+                minRows={20}
+                value={selectedData?.estimates}
+                onChange={handleChange}
+              />
+            )}
+            control={control}
+            name="estimates"
+            defaultValue=""
           />
         </FormControl>
       </FormGroup>
@@ -81,12 +132,21 @@ function TermsAndConditions() {
 
       <FormGroup> 
         <FormControl variant="outlined">
-          <TextField
-            id="content"
-            placeholder="Paste text here..."
-            variant="outlined"
-            multiline
-            minRows={20}
+          <Controller
+            render={({ field }) => (
+              <TextField
+                placeholder="Paste text here..."
+                variant="outlined"
+                {...field}
+                multiline
+                minRows={20}
+                value={selectedData?.invoices}
+                onChange={handleChange}
+              />
+            )}
+            control={control}
+            name="invoices"
+            defaultValue=""
           />
         </FormControl>
       </FormGroup>
@@ -107,12 +167,21 @@ function TermsAndConditions() {
 
       <FormGroup>
         <FormControl variant="outlined">
-          <TextField
-            id="content"
-            placeholder="Paste text here..."
-            variant="outlined"
-            multiline
-            minRows={20}
+          <Controller
+            render={({ field }) => (
+              <TextField
+                placeholder="Paste text here..."
+                variant="outlined"
+                {...field}
+                multiline
+                minRows={20}
+                value={selectedData?.footer}
+                onChange={handleChange}
+              />
+            )}
+            control={control}
+            name="footer"
+            defaultValue=""
           />
         </FormControl>
       </FormGroup>
@@ -146,6 +215,7 @@ function TermsAndConditions() {
             : null
             }
           </ModalHeader>
+    <form onSubmit={handleSubmit(onSubmit)}>
           { modalContent }
           <div className="modal-footer">
             <div className="btn-group">
@@ -153,11 +223,12 @@ function TermsAndConditions() {
                 <button className="btn btn-light-gray btn-left">Cancel</button>
               </div>
               <div className="btn-right">
-                <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
-                <button className="btn btn-gold btn-right">Save</button>
+                <button className="btn btn-dark-gray btn-right">Delete</button>
+                <button type="submit" className="btn btn-gold btn-right">Save</button>
               </div>
             </div>
           </div>
+          </form>
         </div>
       </Modal>
 

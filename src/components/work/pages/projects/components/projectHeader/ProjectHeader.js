@@ -27,12 +27,32 @@ function ProjectHeader({ projectID }) {
   const [projectNav, showProjectNav] = useState(false);
 
   const [projects, setProjects] = useState([])
+  const [activeProject, setActiveProject] = useState(null)
+
+  // Fetch projects
   useEffect(() => {
     axios.get(`/json/projects.json`)
       .then(res => {
         setProjects(res.data)
+
+        // Set active project on page load
+        res.data.forEach(project => {
+          if (project.id === parseInt(projectID)) {
+            setActiveProject(project);
+            console.log('Project: ', project)
+          }
+        })
       })
-  }, []);
+  }, [projectID]);
+
+  // Set active project when project is changing
+  useEffect(() => {
+    projects.forEach(project => {
+      if (project.id === parseInt(projectID)) {
+        setActiveProject(project);
+      }
+    })
+  }, [projectID, projects]);
 
   let { id } = useParams();
 
@@ -57,6 +77,24 @@ function ProjectHeader({ projectID }) {
     history.push(`/projects/${projectID}${pagePath ? `/${pagePath}` : ``}`)
   }
 
+  const editProject = (action) => {
+    switch (action) {
+      case 'rename':
+        console.log('Rename');
+        break;
+      case 'change_company':
+        console.log('Change company');
+        break;
+      case 'duplicate':
+        console.log('Duplicate');
+        break;
+      case 'delete':
+        console.log('Delete');
+        break;
+      default: return
+    }
+  }
+
   return (
     <FormControl component="fieldset">
       <Grid container spacing={5}>
@@ -68,7 +106,7 @@ function ProjectHeader({ projectID }) {
               <FormGroup>
                 <FormControl variant="outlined">
                   <Select
-                    value={'Select project'}
+                    value={projectID}
                     style={{ width: '100%', background: 'var(--white)' }}
                     onChange={changeProject}
                     MenuProps={{
@@ -104,30 +142,30 @@ function ProjectHeader({ projectID }) {
                   onClick={() => showProjectNav(!projectNav)}>
                     {
                       projectNav ?
-                      <img src={CloseIcon} alt="Close icon" onClick={() => console.log('clicked')} style={{ height: '13px' }} />
+                      <img src={CloseIcon} alt="Close icon" style={{ height: '13px' }} />
                       :
-                      <img src={ActionIcon} alt="Action icon" onClick={() => console.log('clicked')} style={{ height: '16px' }} />
+                      <img src={ActionIcon} alt="Action icon" style={{ height: '16px' }} />
                     }
                 </PrefixBtn>
               </div>
               <ProjectMenu className={projectNav ? 'active' : ''}>
-                <NavItem>
+                <NavItem onClick={() => editProject('rename')}>
                   Rename Project
                 </NavItem>
-                <NavItem>
+                <NavItem onClick={() => editProject('change_company')}>
                   Change Company
                 </NavItem>
-                <NavItem>
+                <NavItem onClick={() => editProject('duplicate')}>
                   Duplicate Project
                 </NavItem>
-                <NavItem>
+                <NavItem onClick={() => editProject('delete')}>
                   Delete Project
                 </NavItem>
               </ProjectMenu>
             </Grid>
             <Grid item xs={12}>  
               <div className="text-row">
-                <h3>Company Name</h3>
+                <h3>{ activeProject?.companyName }</h3>
               </div>
             </Grid>
             <Grid item xs={12}>  

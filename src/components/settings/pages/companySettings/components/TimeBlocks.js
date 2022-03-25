@@ -1,5 +1,8 @@
-import React from 'react'
-import { useForm } from "react-hook-form"
+import React, { useEffect, useState } from 'react'
+
+import axios from 'axios';
+
+import { useForm, Controller } from "react-hook-form"
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
@@ -11,24 +14,60 @@ import Grid from '@material-ui/core/Grid';
 
 function TimeBlocks() {
 
-  const { handleSubmit, watch } = useForm();
-  const onSubmit = data => console.log(data);
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState(null)
 
-  console.log(watch("example")); // watch input value by passing the name of it
+  // Fetch data from JSON files
+  const fetchData = async () => {
+    try {
+      await axios.get(`/json/settings/companySettings/job_numbers.json`)
+        .then(res => {
+          setSelectedData(res.data)
+        })
 
-  const [state, setState] = React.useState({
-    job_nr_req: true,
-    job_nr_auto: true,
-    job_nr_combo: false,
+    } catch (err) {
+      // An error has occurred
+      console.trace(err);
+    }
+  }
 
-    time_grid: true,
-    min_15: false,
-    min_30: true
-  });
+  // Fetch data on page load - when history changes
+  useEffect(() => {
+    fetchData()
+  }, []);
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+  const { handleSubmit, control } = useForm();
+
+  // On change input fields
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
+
+  // On change checkbox for postal address same as physical address
+  const changePostal = (event) => {
+
+    // First part of name attribute
+    let nameSubject = event.target.name.split(`['`)[0];
+    let item = event.target.name.split(`']`)[0].split(`['`)[1];
+    let subject = selectedData[nameSubject];
+
+    let items = {...subject};
+
+    items[item] = event.target.checked;
+
+    setSelectedData({
+      ...selectedData,
+      [nameSubject]: items
+    });
+  }
+
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -39,16 +78,25 @@ function TimeBlocks() {
           <Grid item xs={12}>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_req} onChange={handleChange} name="job_nr_req" />}
+                control={<Checkbox checked={selectedData ? selectedData.jobNumbers['not_required'] : null} />}
                 label="No job numbers required"
-              />
+                style={{ margin: '0', marginLeft: '12.5px' }}
+                onChange={changePostal}
+                name="jobNumbers['not_required']"
+              /> 
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_auto} onChange={handleChange} name="job_nr_auto" />}
+                control={<Checkbox checked={selectedData ? selectedData.jobNumbers['auto'] : null} />}
                 label="Assign job numbers automatically"
+                style={{ margin: '0', marginLeft: '12.5px' }}
+                onChange={changePostal}
+                name="jobNumbers['auto']"
               />
               <FormControlLabel
-                control={<Checkbox checked={state.job_nr_combo} onChange={handleChange} name="job_nr_combo" />}
+                control={<Checkbox checked={selectedData ? selectedData.jobNumbers['combination'] : null} />}
                 label="Use a combination of job numbers and the client prefix"
+                style={{ margin: '0', marginLeft: '12.5px' }}
+                onChange={changePostal}
+                name="jobNumbers['combination']"
               />
             </FormGroup>
           </Grid>
@@ -60,30 +108,54 @@ function TimeBlocks() {
           <Grid item xs={12} sm={4}>
             <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>JOB NUMBER</FormLabel>
             <FormGroup row>
-              <TextField
-                id="job_nr"
-                defaultValue="J-2017"
-                variant="outlined"
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    placeholder="J-2017"
+                    {...field}
+                    value={selectedData?.jobNumber}
+                    onChange={handleChange}
+                  />
+                )}
+                control={control}
+                name="jobNumber"
               />
             </FormGroup>
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>ESTIMATE NUMBER</FormLabel>
             <FormGroup row>
-              <TextField
-                id="estimate_nr"
-                defaultValue="E-2017"
-                variant="outlined"
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    placeholder="E-2017"
+                    {...field}
+                    value={selectedData?.estimateNumber}
+                    onChange={handleChange}
+                  />
+                )}
+                control={control}
+                name="estimateNumber"
               />
             </FormGroup>
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormLabel style={{ lineHeight: '1.4', fontSize: '.85em' }}>INVOICE NUMBER</FormLabel>
             <FormGroup row>
-              <TextField
-                id="invoice_nr"
-                defaultValue="INV-2017"
-                variant="outlined"
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    placeholder="INV-2017"
+                    {...field}
+                    value={selectedData?.invoiceNumber}
+                    onChange={handleChange}
+                  />
+                )}
+                control={control}
+                name="invoiceNumber"
               />
             </FormGroup>
           </Grid>
@@ -92,16 +164,25 @@ function TimeBlocks() {
             <FormLabel component="time_blocks">MINIMUM TIME BLOCKS</FormLabel>
             <FormGroup row>
               <FormControlLabel
-                control={<Checkbox checked={state.time_grid} onChange={handleChange} name="time_grid" />}
+                control={<Checkbox checked={selectedData ? selectedData.timeBlocks['time_grid'] : null} />}
                 label="Time Grid"
+                style={{ margin: '0', marginLeft: '12.5px' }}
+                onChange={changePostal}
+                name="timeBlocks['time_grid']"
               />
               <FormControlLabel
-                control={<Checkbox checked={state.min_15} onChange={handleChange} name="min_15" />}
+                control={<Checkbox checked={selectedData ? selectedData.timeBlocks['min_15'] : null} />}
                 label="15 minutes"
+                style={{ margin: '0', marginLeft: '12.5px' }}
+                onChange={changePostal}
+                name="timeBlocks['min_15']"
               />
               <FormControlLabel
-                control={<Checkbox checked={state.min_30} onChange={handleChange} name="min_30" />}
+                control={<Checkbox checked={selectedData ? selectedData.timeBlocks['min_30'] : null} />}
                 label="30 minutes"
+                style={{ margin: '0', marginLeft: '12.5px' }}
+                onChange={changePostal}
+                name="timeBlocks['min_30']"
               />
             </FormGroup>
           </Grid>

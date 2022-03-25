@@ -19,7 +19,7 @@ import DisplayModes from '../../components/DisplayModes';
 
 import Labels from '../../components/Labels';
 import TermsAndConditions from '../../components/TermsAndConditions';
-import AccountingIntegrations from '../../components/AccountingIntegrations';
+import AccountingIntegrations from './components/AccountingIntegrations';
 
 function Settings() {
 
