@@ -154,8 +154,7 @@ function App() {
                     )}
                   />
 
-                  {/* <Route exact path="/kanban" component={Trello} /> */}
-                  {/* <Route exact path="/trello" component={KanbanBoard} /> */}
+                  <Route exact path="/kanban" component={Trello} />
 
                   {/* Work */}
                   <Route exact path="/projects" component={Projects} />

@@ -8,8 +8,8 @@ function PageTitle({ title, buttons }) {
       <Actions>
         { 
           buttons ?
-            buttons.map(button => (
-              <button className="btn btn-grey" type="button" onClick={button.action}>{ button.label }</button>
+            buttons.map((button, index) => (
+              <button key={index} className="btn btn-grey" type="button" onClick={button.action}>{ button.label }</button>
             ))
           : null
         }

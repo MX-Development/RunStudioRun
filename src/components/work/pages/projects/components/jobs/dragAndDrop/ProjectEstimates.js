@@ -379,10 +379,12 @@ function ProjectEstimates({ estimateID, itemType }) {
     <>
       { 
         itemType === 'estimate' ?
+        <>
         <DividerWithIcon>
           <img src={PlusIcon} alt="" onClick={() => setAddNav(!addNav)} />
           <AddNav show={addNav} addOptions={optionsToAdd} />
         </DividerWithIcon>
+        </>
         : itemType === 'additional_time' ?
         <DividerWithIcon>
           <h6>Extra time</h6>

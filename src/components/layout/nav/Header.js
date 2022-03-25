@@ -243,7 +243,8 @@ function Header() {
                   <Link to="/purchases/add" onClick={() => setQuicknav(false)}>
                     New Purchases
                   </Link>
-                  <Link onClick={(e) => {
+                  <Link to="/" onClick={(e) => {
+                    e.preventDefault();
                     // setModalTitle('Additional Time')
                     setModalOpened(!modalOpened)
                     setQuicknav(false)
@@ -335,7 +336,7 @@ function Header() {
               navItems.map(item => (
                 item.sub_items.map(sub_item => (
                   activeNav === item.item ?
-                    <Link to={sub_item.path} key={sub_item.title} parent={item.item} onClick={(e) =>  {
+                    <Link to={sub_item?.path} key={sub_item.title} parent={item.item} onClick={(e) =>  {
                       setActiveSubitem(sub_item.title)
                     }} className={activeSubitem === sub_item.title ? 'active' : null}>
                       { sub_item.title }
@@ -349,7 +350,6 @@ function Header() {
                 <>
                   <Link to="/to-do">Timeline</Link>
                   <Link to="/kanban">Kanban</Link>
-                  <Link to="/trello">Trello</Link>
                 </>
               :
               null

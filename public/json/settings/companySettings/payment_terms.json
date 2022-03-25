@@ -8,9 +8,27 @@
     "other": false
   },
   "otherContent": "",
-  "standard": "$100",
-  "tier_1": "$100",
-  "tier_2": "$120",
-  "tier_3": "$150",
+  "rates": [
+    {
+      "id": "standard",
+      "title": "Standard",
+      "value": "$100"
+    },
+    {
+      "id": "tier_1",
+      "title": "Tier 1",
+      "value": "$100"
+    },
+    {
+      "id": "tier_2",
+      "title": "Tier 2",
+      "value": "$120"
+    },
+    {
+      "id": "tier_3",
+      "title": "Tier 3",
+      "value": "$150"
+    }
+  ],
   "vat": "15%"
 }

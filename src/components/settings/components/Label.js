@@ -4,7 +4,7 @@ import './Labels.css'
 
 function Label({ defaultValue, background, color, border }) {
   return (
-    <Item defaultValue={defaultValue} style={{ background: background, color: color, border: border }} />
+    <Item value={defaultValue} style={{ background: background, color: color, border: border }} />
   )
 }
 

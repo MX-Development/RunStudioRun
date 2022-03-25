@@ -10,13 +10,13 @@ import moment from 'moment'
 
 import axios from 'axios';
 
-import './ToDos.css'
+import '../ToDos.css'
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import { MenuItem, Select } from '@material-ui/core'
 
-import Clock from '../assets/icons/Clock.svg'
+import Clock from '../../assets/icons/Clock.svg'
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');

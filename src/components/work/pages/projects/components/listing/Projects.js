@@ -43,7 +43,6 @@ function Projects({ add }) {
           setProjectLabels(res.data[0].projects);
         })
 
-        console.log('Data fetched successfully.')
     } catch (err) {
       console.trace(err);
     }
@@ -54,6 +53,7 @@ function Projects({ add }) {
     fetchLabels()
   }, []);
 
+  // Define table columns
   const columns = [
     { field: 'projectInfo', type: 'string', flex: 0.4, headerName: 'Project',
       renderCell: (params) => (
@@ -146,6 +146,105 @@ function Projects({ add }) {
     )},
   ]
 
+  const [data, setData] = useState([])
+  const [projects, setProjects] = useState(null);
+  const [jobs, setJobs] = useState([]);
+  const [rates, setRates] = useState([]);
+  const [companies, setCompanies] = useState(null);
+  const [allCompanies, setAllCompanies] = useState(null);
+
+  const order = useSelector((state) => state.order.showOrdered);
+  const [showOrdered, setShowOrdered] = useState(order);
+
+  useEffect(() => {
+    setShowOrdered(order)
+  }, [order]);
+
+  const fetchData = async () => {
+
+    try {
+      await axios.get(`/json/projects.json`)
+        .then(res => {
+          setData(res.data);
+          setProjects(res.data);
+
+          let companies = [];
+          res.data.forEach(project => {
+            var companyExists = companies.findIndex(x => x === project.companyName); 
+
+            if (companyExists === -1) companies.push(project.companyName)
+          })
+
+          setCompanies(companies);
+
+          axios.get(`/json/companies.json`)
+            .then(res => {
+              setAllCompanies(res.data);
+            })
+
+          axios.get(`/json/jobs.json`)
+            .then(res => {
+              setJobs(res.data);
+            })
+        })
+
+      // Fetch payment terms for the rates
+      axios.get(`/json/settings/companySettings/payment_terms.json`)
+        .then(res => {
+          setRates(res.data.rates);
+        })
+
+    } catch (err) {
+      console.trace(err);
+    }
+
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  const history = useHistory();
+  
+  const showCompany = (id) => {  
+    history.push(`/companies/${id}`);
+  }
+
+  const { handleSubmit, control } = useForm();
+
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState({
+    startDate: moment().format('YYYY-MM-DD'),
+    endDate: moment().format('YYYY-MM-DD')
+  })
+
+  // On change input fields
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
+
+  const handleDateChange = (id) => (date) => {
+    if (id === 'startDate') {
+      setSelectedData({
+        ...selectedData,
+        startDate: moment(date).format('YYYY-MM-DD')
+      });
+    } else if (id === 'endDate') {
+      setSelectedData({
+        ...selectedData,
+        endDate: moment(date).format('YYYY-MM-DD')
+      });
+    }
+  };
+
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
+  }
+
   const changeAction = (event) => {
     const projectId = event.target.name;
     const labelId = event.target.value;
@@ -170,91 +269,6 @@ function Projects({ add }) {
     setData(newArr);
   };
 
-  const [data, setData] = useState([])
-  const [projects, setProjects] = useState(null);
-  const [jobs, setJobs] = useState([]);
-  const [companies, setCompanies] = useState(null);
-  const [allCompanies, setAllCompanies] = useState(null);
-
-  const order = useSelector((state) => state.order.showOrdered);
-  const [showOrdered, setShowOrdered] = useState(order);
-
-  useEffect(() => {
-    setShowOrdered(order)
-  }, [order]);
-
-  const { handleSubmit, control } = useForm();
-  const onSubmit = data => console.log(data);
-
-  const fetchData = async () => {
-
-    try {
-      await axios.get(`/json/projects.json`)
-        .then(res => {
-          setData(res.data)
-          console.log(res.data);
-          setProjects(res.data);
-
-          let companies = [];
-          res.data.forEach(project => {
-            var companyExists = companies.findIndex(x => x === project.companyName); 
-
-            if (companyExists === -1) companies.push(project.companyName)
-          })
-
-          setCompanies(companies);
-
-          axios.get(`/json/companies.json`)
-            .then(res => {
-              console.log('Companies: ', res.data)
-              setAllCompanies(res.data);
-            })
-
-          axios.get(`/json/jobs.json`)
-            .then(res => {
-              console.log('Jobs: ', res.data)
-              setJobs(res.data);
-            })
-
-          // setData(res.data)
-        })
-
-        console.log('Data fetched successfully.')
-    } catch (err) {
-      console.trace(err);
-    }
-
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, []);
-
-  const [selectedDate, setSelectedDate] = useState({
-    startDate: new Date(moment(data.startDate).format()),
-    endDate: new Date(moment(data.startDate).format())
-  });
-
-  const handleDateChange = (id) => (date) => {
-    if (id === 'startDate') {
-      setSelectedDate({
-        ...selectedDate,
-        startDate: moment(date).format()
-      });
-    } else if (id === 'endDate') {
-      setSelectedDate({
-        ...selectedDate,
-        endDate: moment(date).format()
-      });
-    }
-  };
-
-  const history = useHistory();
-  
-  const showCompany = (id) => {  
-    history.push(`/companies/${id}`);
-  }
-
   const modalContent = (        
     <>           
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -272,11 +286,13 @@ function Projects({ add }) {
                         placeholder="What are you working on?"
                         variant="outlined"
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.projectName : ''}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
-                    name="title"
+                    name="projectName"
+                    defaultValue=""
                   />
                 </FormControl>
               </FormGroup>
@@ -291,7 +307,8 @@ function Projects({ add }) {
                         variant="outlined"
                         placeholder="Enter a brief description or what you intend in working on to allow a client to clearly understand the work you will do."
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.description : ''}
+                        onChange={handleChange}
                         multiline
                         rows={4}
                       />
@@ -307,8 +324,10 @@ function Projects({ add }) {
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company</FormLabel>
                   <Select
-                    value={'Select...'}
+                    value={selectedData ? selectedData.companyName : ''}
                     style={{ width: '100%' }}
+                    onChange={handleChange}
+                    name="companyName"
                   >
                     <MenuItem value="Select...">
                       <em>Select...</em>
@@ -329,13 +348,21 @@ function Projects({ add }) {
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
                   <Select
-                    value={'Select...'}
+                    value={selectedData ? selectedData.rate : ''}
                     style={{ width: '100%' }}
+                    onChange={handleChange}
+                    name="rate"
                   >
-                    <MenuItem value="">
+                    <MenuItem value="Select...">
                       <em>Select...</em>
                     </MenuItem>
-                    <MenuItem value={'standard'}>Standard</MenuItem>
+                    { 
+                      rates && rates.length > 0 ? 
+                        rates.map(rate => (
+                          <MenuItem value={rate.id} key={rate.id}>{rate.title}</MenuItem>
+                        ))
+                      : null
+                    }
                   </Select>
                 </FormControl>
               </FormGroup>
@@ -348,13 +375,14 @@ function Projects({ add }) {
                     render={({ field }) => (
                       <TextField
                         variant="outlined"
-                        placeholder="0hr/00m"
+                        placeholder="in minutes"
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.timeScheduled : ''}
+                        onChange={handleChange}
                       />
                     )}
                     control={control}
-                    name="cost"
+                    name="timeScheduled"
                   />
                 </FormControl>
               </FormGroup>
@@ -367,7 +395,7 @@ function Projects({ add }) {
                       <KeyboardDatePicker
                         margin="none"
                         format="MM/dd/yyyy"
-                        value={selectedDate.startDate}
+                        value={selectedData ? selectedData.startDate : ''}
                         onChange={handleDateChange('startDate')}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',
@@ -388,7 +416,7 @@ function Projects({ add }) {
                       <KeyboardDatePicker
                         margin="none"
                         format="MM/dd/yyyy"
-                        value={selectedDate.startDate}
+                        value={selectedData ? selectedData.endDate : ''}
                         onChange={handleDateChange('endDate')}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',
@@ -411,8 +439,7 @@ function Projects({ add }) {
               <button className="btn btn-light-gray btn-left">Cancel</button>
             </div>
             <div className="btn-right">
-              <button type="submit" className="btn btn-dark-gray btn-right">Delete</button>
-              <button className="btn btn-gold btn-right">Save</button>
+              <button type="submit" className="btn btn-gold btn-right">Save</button>
             </div>
           </div>
         </div>
