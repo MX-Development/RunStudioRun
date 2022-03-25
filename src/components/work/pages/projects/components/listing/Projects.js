@@ -255,6 +255,8 @@ function Projects({ add }) {
     });
 
     setData(newArr);
+
+    console.log('Update project action');
   };
 
   const changeStatus = (event) => {
@@ -267,6 +269,8 @@ function Projects({ add }) {
     });
 
     setData(newArr);
+    
+    console.log('Update project status');
   };
 
   const modalContent = (        

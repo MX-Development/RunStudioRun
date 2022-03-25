@@ -11,36 +11,14 @@ import { MenuItem, Select } from '@material-ui/core'
 import Label from '../../../../../settings/components/Label';
 import MemberAvatars from './MemberAvatars';
 
-function ProjectInfo({ projectID }) {
+function ProjectInfo({ project }) {
 
-  const rates = [
-    {
-      "id": 1,
-      "name": "standard",
-      "title": "Standard rate long",
-      "rate": 100
-    },
-    {
-      "id": 2,
-      "name": "tier_1",
-      "title": "Tier 1",
-      "rate": 120
-    },
-    {
-      "id": 3,
-      "name": "tier_2",
-      "title": "Tier 2",
-      "rate": 130
-    },
-    {
-      "id": 4,
-      "name": "tier_3",
-      "title": "Tier 3",
-      "rate": 150
-    }
-  ];
+  console.log('fetch')
 
+  const [jobLabels, setJobLabels] = useState([])
   const [jobs, setJobs] = useState([])
+  const [rates, setRates] = useState([])
+  const [company, setCompany] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
 
   const fetchLabels = async () => {
@@ -48,8 +26,24 @@ function ProjectInfo({ projectID }) {
     try {
       await axios.get(`/json/labels.json`)
         .then(res => {
-          setJobs(res.data[0].jobs);
+          setJobLabels(res.data[0].jobs);
           setProjectLabels(res.data[0].projects);
+        })
+      
+      axios.get(`/json/companies.json`)
+        .then(res => {
+          setCompany(res.data.filter(c => c.id === project?.companyId));
+        })
+      
+      axios.get(`/json/jobs.json`)
+        .then(res => {
+          setJobs(res.data.filter(j => j.projectID === project?.id));
+        })
+
+      // Fetch payment terms for the rates
+      axios.get(`/json/settings/companySettings/payment_terms.json`)
+        .then(res => {
+          setRates(res.data.rates);
         })
     } catch (err) {
       console.trace(err);
@@ -59,23 +53,24 @@ function ProjectInfo({ projectID }) {
 
   useEffect(() => {
     fetchLabels()
-  }, []);
+  }, [project]);
   
-  const changeStatus = (event) => {
+  const changeValue = (event) => {
+    
+    const name = event.target.name;
+    const value = event.target.value;
 
+    project[name] = value;
   };
 
-  const changeRate = (event) => {
-    
-  }
-
   return (
+    project ?
     <Info>
       <Grid container spacing={2}>
 
         <Grid item xs={5}>
           <h6>Team</h6>
-          <MemberAvatars projectID={projectID} />
+          <MemberAvatars projectID={project?.id} />
         </Grid>
 
         <Grid item xs={7}>
@@ -85,24 +80,24 @@ function ProjectInfo({ projectID }) {
               <FormGroup>
                 <FormControl>
                   <Select
-                    labelId="rate-select-label"
-                    id="rate-select"
-                    value={1}
-                    name={`1`}
+                    labelId="status-select-label"
+                    id="status-select"
+                    value={project?.rate}
+                    name="status"
                     className="label-select"
-                    label="Job rate"
-                    onChange={changeRate}
+                    label="Job status"
+                    onChange={changeValue}
                   >
                     {
                       rates.map(rate => (
                           <MenuItem value={rate.id} key={rate.id}>
                             <Label 
-                              type={1} 
+                              type={project?.rate} 
                               background={'#fff'} 
                               color={'#B1B0AF'} 
                               border={'1px solid #B1B0AF'}
                               defaultValue={rate.title}
-                              name={`label[${rate.id}]`}
+                              name={`rate[${rate.id}]`}
                               onClick={(e) => {
                                 e.stopPropagation()
                                 e.preventDefault()
@@ -122,17 +117,17 @@ function ProjectInfo({ projectID }) {
                   <Select
                     labelId="status-select-label"
                     id="status-select"
-                    value={1}
-                    name={`1`}
+                    value={project?.status}
+                    name="status"
                     className="label-select"
                     label="Job status"
-                    onChange={changeStatus}
+                    onChange={changeValue}
                   >
                     {
-                      jobs.map(label => (
+                      jobLabels.map(label => (
                           <MenuItem value={label.id} key={label.id}>
                             <Label 
-                              type={1} 
+                              type={project?.status} 
                               background={label.background} 
                               color={label.color} 
                               defaultValue={label.title}
@@ -156,17 +151,17 @@ function ProjectInfo({ projectID }) {
                   <Select
                     labelId="action-select-label"
                     id="action-select"
-                    value={1}
-                    name={`1`}
+                    value={project?.action}
+                    name="action"
                     className="label-select"
                     label="Job action"
-                    onChange={changeStatus}
+                    onChange={changeValue}
                   >
                     {
                       projectLabels.map(label => (
                           <MenuItem value={label.id} key={label.id}>
                             <Label 
-                              type={1} 
+                              type={project?.action} 
                               background={label.background} 
                               color={label.color} 
                               defaultValue={label.title}
@@ -188,6 +183,8 @@ function ProjectInfo({ projectID }) {
 
       </Grid>
     </Info>
+    :
+    null
   )
 }
 

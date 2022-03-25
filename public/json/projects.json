@@ -2,13 +2,15 @@
   {
     "id": 1,
     "projectID": 1,
-    "projectName": "RET0919 - Credentials Document",
-    "companyName": "Re-Tail Store",
+    "projectName": "BELL919 - Credentials Document",
+    "companyId": 3,
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
     "enteredDate": "01/09/2021",
     "dueDate": "30/09/2021",
-    "action": 1,
-    "status": 1
+    "action": 4,
+    "status": 2,
+    "rate": 3,
+    "memberRequested": 1
   },
   {
     "id": 2,
@@ -19,7 +21,8 @@
     "enteredDate": "01/09/2021",
     "dueDate": "30/09/2021",
     "action": 1,
-    "status": 1
+    "status": 1,
+    "rate": 2
   },
   {
     "id": 3,
@@ -30,7 +33,8 @@
     "enteredDate": "01/09/2021",
     "dueDate": "30/09/2021",
     "action": 1,
-    "status": 1
+    "status": 1,
+    "rate": 2
   },
   {
     "id": 4,

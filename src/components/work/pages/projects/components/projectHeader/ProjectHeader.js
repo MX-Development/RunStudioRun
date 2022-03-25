@@ -28,6 +28,8 @@ function ProjectHeader({ projectID }) {
 
   const [projects, setProjects] = useState([])
   const [activeProject, setActiveProject] = useState(null)
+  const [company, setCompany] = useState(null)
+  const [team, setTeam] = useState([])
 
   // Fetch projects
   useEffect(() => {
@@ -35,24 +37,27 @@ function ProjectHeader({ projectID }) {
       .then(res => {
         setProjects(res.data)
 
+        let currentProject = res.data.filter(p => p.id === parseInt(projectID));
+
         // Set active project on page load
-        res.data.forEach(project => {
-          if (project.id === parseInt(projectID)) {
-            setActiveProject(project);
-            console.log('Project: ', project)
-          }
-        })
+        setActiveProject(currentProject[0]);
+
+        axios.get(`/json/companies.json`)
+          .then(res => {
+
+            // Set company from active project
+            let currentCompany = res.data.filter(c => c.id === parseInt(currentProject[0].companyId));
+            setCompany(currentCompany[0]);
+          })
       })
   }, [projectID]);
 
-  // Set active project when project is changing
   useEffect(() => {
-    projects.forEach(project => {
-      if (project.id === parseInt(projectID)) {
-        setActiveProject(project);
-      }
-    })
-  }, [projectID, projects]);
+    axios.get(`/json/team.json`)
+      .then(res => {
+        setTeam(res.data)
+      });
+  }, []);
 
   let { id } = useParams();
 
@@ -137,7 +142,7 @@ function ProjectHeader({ projectID }) {
             </Grid>
             <Grid item xs={12} style={{ position: 'relative' }}>  
               <div className="text-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3>PREFIX <strong>Project Master</strong></h3>
+                <h3>{ company?.companyPrefix } <strong>Project Master</strong></h3>
                 <PrefixBtn
                   onClick={() => showProjectNav(!projectNav)}>
                     {
@@ -165,7 +170,7 @@ function ProjectHeader({ projectID }) {
             </Grid>
             <Grid item xs={12}>  
               <div className="text-row">
-                <h3>{ activeProject?.companyName }</h3>
+                <h3>{ company?.companyName }</h3>
               </div>
             </Grid>
             <Grid item xs={12}>  
@@ -183,14 +188,20 @@ function ProjectHeader({ projectID }) {
                       },
                       getContentAnchorEl: null
                     }}
-                    value={'Who requested the work?'}
+                    placeholder={'Who requested the work?'}
+                    value={activeProject ? activeProject.memberRequested : ''}
                     style={{ width: '100%', background: 'var(--white)' }}
                   >
                     <MenuItem value="Who requested the work?"> 
                       <em>Who requested the work?</em>
                     </MenuItem>
-                    <MenuItem value={20}>2</MenuItem>
-                    <MenuItem value={30}>3</MenuItem>
+                    {
+                      team ?
+                      team.map(member => (
+                          <MenuItem value={member.id} key={member.id}>{ member.name }</MenuItem>
+                        ))
+                      : null
+                    }
                   </Select>
                 </FormControl>
               </FormGroup>
@@ -230,7 +241,7 @@ function ProjectHeader({ projectID }) {
 
               <ProjectNotes data={selectedData} />
 
-              <ProjectInfo projectID={projectID} />
+              <ProjectInfo project={activeProject} />
 
             </div>
 

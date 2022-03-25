@@ -217,7 +217,10 @@ function Estimates({ projectID, add }) {
 
   return (
       viewID ? 
-      <ProjectEstimates estimateID={viewID} />
+      <>
+        <ProjectEstimates estimateID={viewID} itemType={'estimate'} />
+        <ProjectEstimates estimateID={viewID} itemType={'additional_time'} />
+      </>
       :
       <List 
         title={'Estimates'}

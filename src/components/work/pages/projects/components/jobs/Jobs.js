@@ -45,7 +45,7 @@ function Jobs({ projectID }) {
   return (
     viewID ? 
     <>
-      <ProjectEstimates estimateID={viewID} itemType={'estimate'} key={1} />
+      <ProjectEstimates estimateID={viewID} itemType={'estimate'} />
       <ProjectEstimates estimateID={viewID} itemType={'additional_time'} />
     </>
     :
