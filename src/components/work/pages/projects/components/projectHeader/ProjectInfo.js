@@ -13,7 +13,11 @@ import MemberAvatars from './MemberAvatars';
 
 function ProjectInfo({ project }) {
 
-  console.log('fetch')
+  useEffect(() => {
+    setActiveProject(project)
+  }, [project]);
+
+  const [activeProject, setActiveProject] = useState(null)
 
   const [jobLabels, setJobLabels] = useState([])
   const [jobs, setJobs] = useState([])
@@ -56,11 +60,14 @@ function ProjectInfo({ project }) {
   }, [project]);
   
   const changeValue = (event) => {
-    
-    const name = event.target.name;
-    const value = event.target.value;
 
-    project[name] = value;
+    console.log(event.target.value);
+
+    setActiveProject({
+      ...activeProject,
+      [event.target.name]: event.target.value 
+    });
+
   };
 
   return (
@@ -82,8 +89,8 @@ function ProjectInfo({ project }) {
                   <Select
                     labelId="status-select-label"
                     id="status-select"
-                    value={project?.rate}
-                    name="status"
+                    value={activeProject ? activeProject.rate : ''}
+                    name="rate"
                     className="label-select"
                     label="Job status"
                     onChange={changeValue}
@@ -92,7 +99,7 @@ function ProjectInfo({ project }) {
                       rates.map(rate => (
                           <MenuItem value={rate.id} key={rate.id}>
                             <Label 
-                              type={project?.rate} 
+                              type={activeProject?.rate} 
                               background={'#fff'} 
                               color={'#B1B0AF'} 
                               border={'1px solid #B1B0AF'}
@@ -117,7 +124,7 @@ function ProjectInfo({ project }) {
                   <Select
                     labelId="status-select-label"
                     id="status-select"
-                    value={project?.status}
+                    value={activeProject ? activeProject.status : ''}
                     name="status"
                     className="label-select"
                     label="Job status"
@@ -127,7 +134,7 @@ function ProjectInfo({ project }) {
                       jobLabels.map(label => (
                           <MenuItem value={label.id} key={label.id}>
                             <Label 
-                              type={project?.status} 
+                              type={activeProject?.status} 
                               background={label.background} 
                               color={label.color} 
                               defaultValue={label.title}
@@ -151,7 +158,7 @@ function ProjectInfo({ project }) {
                   <Select
                     labelId="action-select-label"
                     id="action-select"
-                    value={project?.action}
+                    value={activeProject ? activeProject.action : ''}
                     name="action"
                     className="label-select"
                     label="Job action"
@@ -161,7 +168,7 @@ function ProjectInfo({ project }) {
                       projectLabels.map(label => (
                           <MenuItem value={label.id} key={label.id}>
                             <Label 
-                              type={project?.action} 
+                              type={activeProject?.action} 
                               background={label.background} 
                               color={label.color} 
                               defaultValue={label.title}

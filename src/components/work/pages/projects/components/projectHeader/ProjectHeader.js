@@ -226,7 +226,7 @@ function ProjectHeader({ projectID }) {
                     />
                   </FormControl>
                 </FormGroup>  
-                <MemberAvatars projectID={projectID} solo={true} />
+                <MemberAvatars projectID={activeProject?.id} solo={true} />
               </ClientPurchase>
             </Grid>
           </Grid>
