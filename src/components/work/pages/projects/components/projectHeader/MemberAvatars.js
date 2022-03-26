@@ -41,8 +41,8 @@ function MemberAvatars({ projectID, solo }) {
         )
       }) : null}
       { !solo ?
-      <Avatar className="open-ext" onClick={() => setShowExtended(!showExtended)}>
-        + {teamMembers.length - 3}
+      <Avatar className="open-ext" style={{ fontSize: '12px' }} onClick={() => setShowExtended(!showExtended)}>
+        +{teamMembers.length - 3}
       </Avatar>
       :  null
       }

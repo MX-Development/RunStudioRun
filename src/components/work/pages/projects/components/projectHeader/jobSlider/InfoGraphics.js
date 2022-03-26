@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 function InfoGraphics({ item }) {
 
+  console.log('Job: ', item);
+
   return (
     <JobContainer>
       <Block percentage={40}> 
@@ -24,7 +26,7 @@ function InfoGraphics({ item }) {
         <div className="top">
           <div className="info">
             <h6>Planned budget</h6>
-            <span>10hr</span>
+            <span>$1500</span>
           </div>
           <div className="info">
             <h6>Used</h6>

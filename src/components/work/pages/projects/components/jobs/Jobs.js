@@ -45,8 +45,8 @@ function Jobs({ projectID }) {
   return (
     viewID ? 
     <>
-      <ProjectEstimates estimateID={viewID} itemType={'estimate'} />
-      <ProjectEstimates estimateID={viewID} itemType={'additional_time'} />
+      <ProjectEstimates estimateID={viewID} itemType={'estimate'} stage={'job'} />
+      <ProjectEstimates estimateID={viewID} itemType={'additional_time'} stage={'job'} />
     </>
     :
       data.length > 0 ?

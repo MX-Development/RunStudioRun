@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import axios from 'axios'; 
+
 import ActionIcon from '../../../../../../../assets/icons/ActionIcon.svg'
 import CloseIcon from '../../../../../../../assets/icons/CloseIcon.svg'
 
@@ -62,17 +64,26 @@ function ActionButton({ setAction, snapshot, item }) {
           Duplicate
         </ActionItem>
         <ActionItem
-          onClick={() => setOpenActions(false)}
+          onClick={() => {
+            setAction('pending', snapshot, item)
+            setOpenActions(false)
+          }}
         >
           Pending
         </ActionItem>
         <ActionItem
-          onClick={() => setOpenActions(false)}
+          onClick={() => {
+            setAction('approve', snapshot, item)
+            setOpenActions(false)
+          }}
         >
           Approve & Create Task
         </ActionItem>
         <ActionItem
-          onClick={() => setOpenActions(false)}
+          onClick={() => {
+            setAction('commit', snapshot, item)
+            setOpenActions(false)
+          }}
         >
           Commit Time
         </ActionItem>

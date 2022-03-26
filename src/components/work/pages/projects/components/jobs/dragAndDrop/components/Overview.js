@@ -1,20 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function PhaseTitle({ data, stage }) {
+function Overview({ data }) {
   return (
     <Container small={false}>
 
       <Info>
         <Top>
           <div className="title">
-            <h3 style={{ fontWeight: 'bold' }}>
-              { data.title } 
-            </h3>
-            {
-              // Show status if stage is estimate - remove status when stage is job
-              stage === 'job' ? <span className="item-status">{ data.status }</span> : null
-            }
+            <h3 style={{ fontWeight: 'bold' }}>{ data.title }</h3>
           </div>
         </Top>
       </Info>
@@ -28,7 +22,7 @@ function PhaseTitle({ data, stage }) {
   )
 }
 
-export default PhaseTitle
+export default Overview
 
 const Container = styled.div`
   display: flex;

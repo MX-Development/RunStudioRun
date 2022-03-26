@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import Avatar from '@material-ui/core/Avatar';
 
-function Task({ data, size }) {
+function Task({ data, size, stage }) {
 
   const [teamMembers, setTeamMembers] = useState([])
 
@@ -36,7 +36,10 @@ function Task({ data, size }) {
         <Top>
           <div className="title">
             <h3>{ data.title }</h3>
-            <span>Pending</span>
+            {
+              // Show status if stage is estimate - remove status when stage is job
+              stage !== 'job' ? <span className="item-status">{ data.status }</span> : null
+            }
           </div>
           <Members>
             { teamMembers.forEach(member => {
@@ -186,6 +189,13 @@ const Description = styled.div`
   background: #fff;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 `
 
 const Members = styled.div`

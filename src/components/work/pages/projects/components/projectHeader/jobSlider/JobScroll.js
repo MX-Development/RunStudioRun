@@ -238,6 +238,10 @@ const JobContainer = styled.div`
 
 const GraphicItem = styled.div`
   position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const GraphicHeading = styled.h5`

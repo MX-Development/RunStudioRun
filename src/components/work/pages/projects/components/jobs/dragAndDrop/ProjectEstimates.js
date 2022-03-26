@@ -18,8 +18,9 @@ import PlusIcon from '../../../../../../assets/icons/PlusIcon.svg'
 import DragIcon from '../../../../../../assets/icons/DragIcon.svg'
 import ActionButton from './components/ActionButton'
 import ExtraTime from './components/ExtraTime'
+import Overview from './components/Overview'
 
-function ProjectEstimates({ estimateID, itemType }) { 
+function ProjectEstimates({ estimateID, itemType, stage }) { 
 
   const [data, setData] = useState([]);
 
@@ -293,6 +294,25 @@ function ProjectEstimates({ estimateID, itemType }) {
         setData(oldData);
 
         break;
+
+      case 'pending':
+
+        // Change item status to pending
+        console.log('pending', item.id);
+        break;
+        
+      case 'approve':
+
+        // Change item status to approve
+        console.log('approve', item.id);
+        break;
+        
+      case 'commit':
+
+        // Change item status to committed
+        console.log('commit', item.id);
+        break;
+
       case 'move_down':
 
         // Find index of item in array
@@ -423,27 +443,42 @@ function ProjectEstimates({ estimateID, itemType }) {
                                 <div 
                                   className="dragger-content"
                                 >
-                                  <div {...provided.dragHandleProps}>
-                                    <DragButton className={item.type === 'subtask' ? 'padded' : ''}>
-                                      <img src={DragIcon} alt="drag icon" />
-                                    </DragButton>
-                                  </div>
+                                  {
+                                    // if stage is esimate - show drag buttons becausae we still need to edit the estimate. 
+                                    // once it is approved it becomes a job and it cannot be modified, 
+                                    // so we remove the handle functions
+                                    stage === 'estimate' ?
+                                      <div {...provided.dragHandleProps}>
+                                        <DragButton className={item.type === 'subtask' ? 'padded' : ''}>
+                                          <img src={DragIcon} alt="drag icon" />
+                                        </DragButton>
+                                      </div>
+                                    : 
+                                      <div style={{ marginLeft: item.type === 'subtask' ? '50px' : '0px' }}></div>
+                                  }
                                   {(() => {
                                     switch(item.type) {
                                       case 'overview':
-                                        return <PhaseTitle data={item} />
+                                        return <Overview data={item} stage={stage} />
                                       case 'phase':
-                                        return <PhaseTitle data={item} />
+                                        return <PhaseTitle data={item} stage={stage} />
                                       case 'task':
-                                        return <Task data={item} />
+                                        return <Task data={item} stage={stage} />
                                       case 'subtask':
-                                        return <Task data={item} size={'small'} />
+                                        return <Task data={item} size={'small'} stage={stage} />
                                       case 'expense':
-                                        return <Expense data={item} />
+                                        return <Expense data={item} stage={stage} />
                                       default: return
                                     }
                                   })()}
-                                  <ActionButton setAction={(action_data, snapshot, item) => fireAction(action_data, snapshot, item)} snapshot={provided} item={item} />
+                                  {
+                                    // if stage is esimate - show edit buttons becausae we still need to edit the estimate. 
+                                    // once it is approved it becomes a job and it cannot be modified, 
+                                    // so we remove the edit functions
+                                    stage === 'estimate' ?
+                                    <ActionButton setAction={(action_data, snapshot, item) => fireAction(action_data, snapshot, item)} snapshot={provided} item={item} />
+                                    : null
+                                  }
                                 </div>
                               </div>
                             ); 
