@@ -4,7 +4,10 @@ import styled from 'styled-components'
 
 import axios from 'axios'
 
-function MemberAvatars({ projectID, solo }) {
+function SoloAvatar({ memberID, projectID }) {
+
+  console.log('avatarrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+
 
   const [teamMembers, setTeamMembers] = useState([])
   const [showExtended, setShowExtended] = useState(false)
@@ -12,47 +15,46 @@ function MemberAvatars({ projectID, solo }) {
 
   useEffect(() => {
     axios.get(`/json/estimates/items.json`)
-    .then(res => {
-      setTeamMembers([])
-      res.data.forEach(task => {
-       if (task.projectId === parseInt(projectID)) {
-
-        axios.get(`/json/team.json`)
-        .then(res => {
-          let members = [];
-          res.data.forEach(member => {
-            if (members.indexOf(member) === -1) {
-              members.push(member);
-            }
-          })
-
-          console.log(members);
-
-          setTeamMembers(members)
+      .then(res => {
+        setTeamMembers([])
+        res.data.forEach(task => {
+          if (task.projectId === parseInt(projectID)) {
+   
+           axios.get(`/json/team.json`)
+           .then(res => {
+             let members = [];
+             res.data.forEach(member => {
+               if (members.indexOf(member) === -1) {
+                 members.push(member);
+               }
+             })
+   
+             console.log(members);
+   
+             setTeamMembers(members)
+           })
+          }
         })
-       }
       })
-    })
   }, [projectID])
+
+  const setMember = (id) => {
+    console.log('Set member: ', id)
+
+    setActiveMember(teamMembers.filter(m => m.id === id)[0])
+    console.log(teamMembers);
+    console.log(teamMembers.filter(m => m.id === id)[0]);
+  }
   
   return (
     <Members>
-      { teamMembers?.map((member, index) => {
-        if (index > 2) return false;
-        return (
-          <Avatar key={index} alt={ member.name } src={ member.avatar } onClick={solo ? () => setShowExtended(!showExtended) : null}>
-            M
-          </Avatar>
-        )
-      })}
-      <Avatar className="open-ext" style={{ fontSize: '12px' }} onClick={() => setShowExtended(!showExtended)}>
-        +{teamMembers.length - 3}
+      <Avatar alt={ activeMember?.name } src={ activeMember?.avatar } onClick={() => setShowExtended(!showExtended)}>
+        M
       </Avatar>
       <ExtendedMembers className={showExtended ? 'active' : ''}>
-      { teamMembers ? teamMembers.map((member, index) => {
-        if (index < 3) return false;
+      { teamMembers?.map((member, index) => {
         return (
-          <Member key={index}>
+          <Member key={index} onClick={() => setMember(member.id)}>
             <Avatar key={index} alt={ member.name } src={ member.avatar }>
               M
             </Avatar>
@@ -61,13 +63,13 @@ function MemberAvatars({ projectID, solo }) {
             </span>
           </Member>
         )
-      }) : null}
+      })}
       </ExtendedMembers>
     </Members>
   )
 }
 
-export default MemberAvatars;
+export default SoloAvatar;
 
 const Members = styled.div`
   position: relative;
@@ -78,6 +80,10 @@ const Members = styled.div`
     width: 30px !important;
     height: 30px !important;
     margin-left: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .open-ext {
@@ -89,7 +95,7 @@ const Members = styled.div`
 
 const ExtendedMembers = styled.div`
   position: absolute;
-  left: 82.5%;
+  left: 50%;
   top: 40px;
   transform: translate(-50%, 0);
   display: none;
@@ -116,6 +122,13 @@ const Member = styled.div`
   padding: 7.5px 10px;
   color: #292724;
   font-size: 14px;
+
+  &:hover {
+    cursor: pointer;
+    background: #F4F2F0;
+    -webkit-transition: background .25s ease-in,color .25s ease-in;
+    transition: background .25s ease-in,color .25s ease-in;
+  }
 
   span {
     margin-left: 8px;

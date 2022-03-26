@@ -7,16 +7,15 @@
     "jobNo": "JOB001",
     "estimate": "E3121",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
-    "enteredDate": "01/09/2021",
-    "approved": 0,
+    "enteredDate": "01/08/2021",
+    "startDate": "01/12/2021",
+    "dueDate": "01/16/2021",
     "budget": 5000,
+    "budgetUsed": 500,
+    "plannedHours": 12,
+    "usedHours": 3,
     "action": 1,
-    "status": 1,
-    "overview": {
-      "title": "Overview text",
-      "description": "Overview description"
-    },
-    "amountOfPhases": 2
+    "status": 1
   },
   {
     "id": 20,
@@ -26,16 +25,15 @@
     "jobNo": "JOB002",
     "estimate": "E3122",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
-    "enteredDate": "01/09/2021",
-    "approved": 0,
-    "budget": 3000,
+    "enteredDate": "01/08/2021",
+    "startDate": "01/12/2021",
+    "dueDate": "01/16/2021",
+    "budget": 500,
+    "budgetUsed": 50,
+    "plannedHours": 10,
+    "usedHours": 2,
     "action": 1,
-    "status": 1,
-    "overview": {
-      "title": "Overview 2 text",
-      "description": "Overview 2 description"
-    },
-    "amountOfPhases": 2
+    "status": 1
   },
   {
     "id": 30,
@@ -45,15 +43,14 @@
     "jobNo": "JOB003",
     "estimate": "E3122",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
-    "enteredDate": "01/09/2021",
-    "approved": 0,
-    "budget": 3000,
+    "enteredDate": "01/08/2021",
+    "startDate": "01/12/2021",
+    "dueDate": "01/16/2021",
+    "budget": 5000,
+    "budgetUsed": 500,
+    "plannedHours": 12,
+    "usedHours": 3,
     "action": 1,
-    "status": 1,
-    "overview": {
-      "title": "Overview 3 text",
-      "description": "Overview 3 description"
-    },
-    "amountOfPhases": 2
+    "status": 1
   }
 ]

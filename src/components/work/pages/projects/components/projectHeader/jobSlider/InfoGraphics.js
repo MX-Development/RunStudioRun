@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
+import moment from 'moment'
 
 function InfoGraphics({ item }) {
 
-  console.log('Job: ', item);
+  console.log('Job: ', item.dueDate);
 
   return (
     <JobContainer>
@@ -11,11 +12,11 @@ function InfoGraphics({ item }) {
         <div className="top">
           <div className="info">
             <h6>Planned hours</h6>
-            <span>10hr</span>
+            <span>{ item.plannedHours }hr</span>
           </div>
           <div className="info">
             <h6>Used</h6>
-            <span>1hr/9hr</span>
+            <span>{ item.usedHours }hr/{ item.plannedHours }hr</span>
           </div>
         </div>
         <div className="bottom">
@@ -26,11 +27,11 @@ function InfoGraphics({ item }) {
         <div className="top">
           <div className="info">
             <h6>Planned budget</h6>
-            <span>$1500</span>
+            <span>${ item.budget }</span>
           </div>
           <div className="info">
             <h6>Used</h6>
-            <span>$150/$1350</span>
+            <span>${ item.budgetUsed }/${ item.budget }</span>
           </div>
         </div>
         <div className="bottom">
@@ -41,17 +42,17 @@ function InfoGraphics({ item }) {
         <div className="top">
           <div className="info">
             <h6>Entered</h6>
-            <span>8 SEP 2017</span>
+            <span style={{ textTransform: 'uppercase' }}>{ moment(item.enteredDate).format('D MMM YYYY') }</span>
           </div>
           <div className="info">
             <div className="sub">
               <div className="left">
                 <h6>Start</h6>
-                <span>1 SEP 2017</span>
+                <span style={{ textTransform: 'uppercase' }}>{ moment(item.startDate).format('D MMM YYYY') }</span>
               </div>
               <div className="right">
                 <h6>Due date</h6>
-                <span>30 SEP 2017</span>
+                <span style={{ textTransform: 'uppercase' }}>{ moment(item.dueDate).format('D MMM YYYY') }</span>
               </div>
             </div>
           </div>

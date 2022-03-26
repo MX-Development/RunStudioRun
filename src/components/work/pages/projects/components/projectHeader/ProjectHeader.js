@@ -19,7 +19,7 @@ import ActionIcon from '../../../../../assets/icons/ActionIcon.svg'
 import CloseIcon from '../../../../../assets/icons/CloseIcon.svg'
 import ProjectNotes from './projectNotes/ProjectNotes'
 
-import MemberAvatars from './MemberAvatars'
+import SoloAvatar from './SoloAvatar'
 import JobScroll from './jobSlider/JobScroll'
 
 function ProjectHeader({ projectID }) {
@@ -226,7 +226,7 @@ function ProjectHeader({ projectID }) {
                     />
                   </FormControl>
                 </FormGroup>  
-                <MemberAvatars projectID={activeProject?.id} solo={true} />
+                <SoloAvatar projectID={activeProject?.id} memberID={activeProject?.memberRequested} />
               </ClientPurchase>
             </Grid>
           </Grid>
