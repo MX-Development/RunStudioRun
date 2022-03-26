@@ -11,6 +11,8 @@ import axios from 'axios';
 
 import './ToDos.css'
 
+import { useParams } from "react-router-dom"
+
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import { MenuItem, Select } from '@material-ui/core'
@@ -25,6 +27,8 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 function Calendar({ action, taskID }) {
+  
+  let { id } = useParams();
 
   const calendarRef = React.createRef()
 
@@ -60,12 +64,18 @@ function Calendar({ action, taskID }) {
   const history = useHistory();
 
   const [userSettings, setUserSettings] = useState([])
+  const [teamMembers, setTeamMembers] = useState([])
   const fetchData = async () => {
 
     try {
       await axios.get(`/json/settings.json`)
         .then(res => {
           setUserSettings(res.data);
+        })
+
+      await axios.get(`/json/team.json`)
+        .then(res => {
+          setTeamMembers(res.data);
         })
 
       await axios.get(`/json/estimates/items.json`)
@@ -137,8 +147,9 @@ function Calendar({ action, taskID }) {
   }
 
   const changeMember = event => {
+    console.log(id);
     const memberID = event.target.value
-    history.push(`/to-do/${memberID}`)
+    history.push(`/to-do/member/${memberID}`)
   }
 
   const [events, setEvents] = useState([])
@@ -432,14 +443,18 @@ function Calendar({ action, taskID }) {
                 },
                 getContentAnchorEl: null
               }}
-              value={'Taso Katsionis'}
+              value={1}
               style={{ width: '100%', background: 'var(--white)' }}
               onChange={changeMember}
             >
               <MenuItem value="">
                 <em>Select member</em>
               </MenuItem>
-              <MenuItem value={'Taso Katsionis'} key={1}>Taso Katsionis</MenuItem>
+              {
+                teamMembers?.map(member => (
+                  <MenuItem value={member.id} key={member.id}>{ member.name }</MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
         </FormGroup>
