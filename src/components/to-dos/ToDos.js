@@ -82,7 +82,7 @@ function Calendar({ action, taskID }) {
         .then(res => {
           setEvents([])
 
-          const tasks = res.data
+          const tasks = res.data;
           tasks.forEach((task, index) => {
             let taskObject = {
               id: task.id,
@@ -100,7 +100,12 @@ function Calendar({ action, taskID }) {
               eventDurationEditable: true
             }
 
-            setEvents(events => [...events, taskObject])
+            console.log(task.team);
+            console.log(parseInt(member_id));
+            if (task.team.includes(parseInt(member_id))) {
+              setEvents(events => [...events, taskObject])
+            }
+
           })
         })
     } catch (err) {
@@ -116,31 +121,34 @@ function Calendar({ action, taskID }) {
     fetchData()
     
     let draggableEl = document.getElementById("task-list")
-    new Draggable(draggableEl, {
-      itemSelector: ".dragabble-task",
-      eventData: function(eventEl) {
-        console.log('Event data: ', eventEl);
-        let title = eventEl.getAttribute("title");
-        let id = eventEl.getAttribute("data");
-        let time = eventEl.getAttribute("data-time");
-        let time_worked = eventEl.getAttribute("data-time-worked");
-        let description = eventEl.getAttribute("data-description");
-        let jobId = eventEl.getAttribute("data-job-id");
-        let projectId = eventEl.getAttribute("data-project-id");
-        return {
-          title: title,
-          id: id,
-          time: time,
-          time_worked: time_worked,
-          description: description,
-          jobId: jobId,
-          projectId: projectId,
-          editable: true,
-          eventDurationEditable: true
-        };
-      }
-    })
-  }, [])
+
+    if (draggableEl) {
+      new Draggable(draggableEl, {
+        itemSelector: ".dragabble-task",
+        eventData: function(eventEl) {
+          console.log('Event data: ', eventEl);
+          let title = eventEl.getAttribute("title");
+          let id = eventEl.getAttribute("data");
+          let time = eventEl.getAttribute("data-time");
+          let time_worked = eventEl.getAttribute("data-time-worked");
+          let description = eventEl.getAttribute("data-description");
+          let jobId = eventEl.getAttribute("data-job-id");
+          let projectId = eventEl.getAttribute("data-project-id");
+          return {
+            title: title,
+            id: id,
+            time: time,
+            time_worked: time_worked,
+            description: description,
+            jobId: jobId,
+            projectId: projectId,
+            editable: true,
+            eventDurationEditable: true
+          };
+        }
+      })
+    }
+  }, [member_id])
 
   const handleEventClick = () => {
     console.log('handleEventClick')
@@ -261,7 +269,6 @@ function Calendar({ action, taskID }) {
       header.querySelector('.time-total').style.color = `var(--text-gray)`; 
       header.querySelector('.time-total').innerHTML = `8h`;  
     } else {
-      console.log(percentage);
       // You have overworked for the day
       header.querySelector('.bar').style.width = `100%`; 
       header.querySelector('.bar').style.background = `#DE5454`; 
@@ -443,11 +450,11 @@ function Calendar({ action, taskID }) {
                 },
                 getContentAnchorEl: null
               }}
-              value={1}
+              value={member_id}
               style={{ width: '100%', background: 'var(--white)' }}
               onChange={changeMember}
             >
-              <MenuItem value="">
+              <MenuItem value="" disabled>
                 <em>Select member</em>
               </MenuItem>
               {

@@ -55,7 +55,7 @@ function Header() {
     }
 
     // To Dos
-    else if (location.pathname === '/to-do') {
+    else if (location.pathname.includes('/to-do')) {
       setActiveNav('To Dos')
     }
 
@@ -330,7 +330,7 @@ function Header() {
           <LeftSpace />
           <SubnavLinks className={hideSubnav ? 'hidden' : 'shown'}>
             {
-              location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
+              location.pathname.includes("/to-do") || location.pathname === '/kanban' || location.pathname === '/trello' ?
                 <JobSelect />
               :
               navItems.map(item => (
@@ -346,7 +346,7 @@ function Header() {
               ))
             }
             {
-              location.pathname === "/to-do" || location.pathname === '/kanban' || location.pathname === '/trello' ?
+              location.pathname.includes("/to-do") || location.pathname === '/kanban' || location.pathname === '/trello' ?
                 <>
                   <Link to="/to-do">Timeline</Link>
                   <Link to="/kanban">Kanban</Link>
