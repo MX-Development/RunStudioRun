@@ -28,7 +28,7 @@ Modal.setAppElement('#root');
 
 function Calendar({ action, taskID }) {
   
-  let { id } = useParams();
+  let { member_id } = useParams();
 
   const calendarRef = React.createRef()
 
@@ -147,7 +147,7 @@ function Calendar({ action, taskID }) {
   }
 
   const changeMember = event => {
-    console.log(id);
+    console.log('Active member: ', member_id);
     const memberID = event.target.value
     history.push(`/to-do/member/${memberID}`)
   }

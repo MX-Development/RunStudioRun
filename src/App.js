@@ -148,7 +148,7 @@ function App() {
                   
                   <Route exact path="/to-do" component={userSettings?.time_blocks.time_grid ? ToDos : Trello} /> 
                   <Route
-                    path='/to-do/member/:id'
+                    path='/to-do/member/:member_id'
                     render={(props) => (
                       <ToDos {...props} />
                     )}
