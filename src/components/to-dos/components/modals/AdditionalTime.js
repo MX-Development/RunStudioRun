@@ -23,9 +23,7 @@ import { ReactComponent as DatePickerIcon } from '../../../assets/icons/DatePick
 function AdditionalTime() {
 
   const { handleSubmit, control } = useForm();
-  const onSubmit = data => console.log(data);
-
-  const [data, setData] = useState([])
+  
   const [projects, setProjects] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
 
@@ -34,7 +32,6 @@ function AdditionalTime() {
     try {
       await axios.get(`/json/work/projects.json`)
         .then(res => {
-          setData(res.data)
           setProjects(res.data);
         })
 
@@ -82,6 +79,11 @@ function AdditionalTime() {
     });
   }
 
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -94,10 +96,12 @@ function AdditionalTime() {
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Select the project</FormLabel>
                   <Select
-                    value={'Select...'}
+                    value={selectedData ? selectedData.projectId : ''}
                     style={{ width: '100%' }}
+                    onChange={handleChange}
+                    name="projectId"
                   >
-                    <MenuItem value="Select...">
+                    <MenuItem value="Select..." disabled>
                       <em>Select...</em>
                     </MenuItem>
                     { 
@@ -116,10 +120,12 @@ function AdditionalTime() {
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Add Team Member</FormLabel>
                   <Select
-                    value={'none'}
+                    value={selectedData ? selectedData.teamMember : ''}
                     style={{ width: '100%' }}
+                    onChange={handleChange}
+                    name="teamMember"
                   >
-                    <MenuItem value="none">
+                    <MenuItem value="none" disabled>
                       <em>Choose the unfortunate soul to complete this task</em>
                     </MenuItem>
                     { 
@@ -143,7 +149,9 @@ function AdditionalTime() {
                         variant="outlined"
                         placeholder="Enter a brief description or what you intend in working on to allow a client to clearly understand the work you will do."
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.description : ''}
+                        name="description"
+                        onChange={handleChange}
                         multiline
                         rows={4}
                       />
@@ -159,8 +167,10 @@ function AdditionalTime() {
                 <FormControl variant="outlined">
                   <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Rate</FormLabel>
                   <Select
-                    value={'Rate'}
+                    value={selectedData ? selectedData.rate : ''}
                     style={{ width: '100%' }}
+                    onChange={handleChange}
+                    name="rate"
                   >
                     <MenuItem value="">
                       <em>Select</em>
@@ -181,8 +191,10 @@ function AdditionalTime() {
                       <TextField
                         variant="outlined"
                         placeholder="0hr/00m"
+                        onChange={handleChange}
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.timeScheduled : ''}
+                        name="timeScheduled"
                       />
                     )}
                     control={control}
@@ -199,7 +211,7 @@ function AdditionalTime() {
                       <KeyboardDatePicker
                         margin="none"
                         format="MM/dd/yyyy"
-                        value={selectedData.startDate}
+                        value={selectedData?.startDate}
                         onChange={handleDateChange('startDate')}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',
@@ -220,7 +232,7 @@ function AdditionalTime() {
                       <KeyboardDatePicker
                         margin="none"
                         format="MM/dd/yyyy"
-                        value={selectedData.startDate}
+                        value={selectedData?.endDate}
                         onChange={handleDateChange('endDate')}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',

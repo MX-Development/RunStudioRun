@@ -179,7 +179,7 @@ function Estimates({ projectID, add }) {
       })
   }, []);
 
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit } = useForm();
 
   // Initialize empty data state
   const [selectedData, setSelectedData] = useState(null)
@@ -195,11 +195,6 @@ function Estimates({ projectID, add }) {
   // On submit form
   const onSubmit = () => { 
     console.log('Form data: ', selectedData)
-  }
-
-  // Delete item from database
-  const deleteItem = () => {
-    console.log('Delete item with ID: ', selectedData.id);
   }
 
   // Modal content for company info

@@ -100,9 +100,8 @@ function Calendar({ action, taskID }) {
               eventDurationEditable: true
             }
 
-            console.log(task.team);
-            console.log(parseInt(member_id));
             if (task.team.includes(parseInt(member_id))) {
+              console.log(taskObject);
               setEvents(events => [...events, taskObject])
             }
 
@@ -119,6 +118,7 @@ function Calendar({ action, taskID }) {
 
   useEffect(() => {
     fetchData()
+    console.log("Fetching data...");
     
     let draggableEl = document.getElementById("task-list")
 
@@ -148,14 +148,13 @@ function Calendar({ action, taskID }) {
         }
       })
     }
-  }, [])
+  }, [member_id])
 
   const handleEventClick = () => {
     console.log('handleEventClick')
   }
 
   const changeMember = event => {
-    console.log('Active member: ', member_id);
     const memberID = event.target.value
     history.push(`/to-do/member/${memberID}`)
   }
@@ -467,7 +466,7 @@ function Calendar({ action, taskID }) {
             </Select>
           </FormControl>
         </FormGroup>
-        <AddTime onClick={() => setIsOpen(true)}>
+        <AddTime onClick={() => commitTime()}>
           <img src={Clock} alt="clock icon" />
         </AddTime>
       </MemberSelect>
