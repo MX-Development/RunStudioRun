@@ -34,14 +34,13 @@ function SoloAvatar({ memberID, projectID }) {
   }, [projectID])
 
   const setMember = (id) => {
-
     setActiveMember(teamMembers.filter(m => m.id === id)[0])
   }
   
   return (
     <Members>
       <Avatar alt={ activeMember?.name } src={ activeMember?.avatar } onClick={() => setShowExtended(!showExtended)}>
-        M
+        { activeMember ? activeMember.name.charAt(0) : '+'}
       </Avatar>
       <ExtendedMembers className={showExtended ? 'active' : ''}>
       { teamMembers?.map((member, index) => {

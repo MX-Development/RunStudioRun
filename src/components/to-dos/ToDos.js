@@ -117,7 +117,7 @@ function Calendar({ action, taskID }) {
   }, [userSettings]);
 
   useEffect(() => {
-    fetchData()
+    fetchData();
     console.log("Fetching data...");
     
     let draggableEl = document.getElementById("task-list")

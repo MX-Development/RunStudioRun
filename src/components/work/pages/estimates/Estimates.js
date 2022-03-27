@@ -37,7 +37,7 @@ function Estimates({ projectID, add }) {
             setProjectLabels(res.data[0].projects);
           })
   
-          axios.get(`/json/estimates.json`)
+          axios.get(`/json/estimates/estimates.json`)
             .then(res => {
               projectID ? 
                 res.data.forEach((item, index) => {
