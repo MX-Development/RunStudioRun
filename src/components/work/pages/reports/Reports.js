@@ -92,10 +92,62 @@ export default Reports
 
 const TypeSelector = styled.div`
   display: flex;
+  align-items: center;
+  width: 890px;
+  background: #fff;
+  padding: 8px 16px;
+  margin-bottom: 15px;
+
+  button {
+    box-shadow: none;
+    border: none;
+    color: #B1B0AF;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    background: transparent;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+
+  button.active,
+  button:hover {
+    background-color: var(--gold);
+    color: var(--white);
+    cursor: pointer;
+  }
 `
 
 const FilterSelector = styled.div`
   display: flex;
+  align-items: center;
+  width: 890px;
+  background: #fff;
+  padding: 8px 16px;
+  margin-bottom: 15px;
+
+  p {
+    margin-right: 10px;
+  }
+
+  button {
+    box-shadow: none;
+    border: none;
+    color: #B1B0AF;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    background: transparent;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+
+  button.active,
+  button:hover {
+    background-color: var(--gold);
+    color: var(--white);
+    cursor: pointer;
+  }
 `
 
 const Item = styled.button`

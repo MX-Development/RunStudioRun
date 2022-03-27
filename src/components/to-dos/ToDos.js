@@ -100,7 +100,12 @@ function Calendar({ action, taskID }) {
               eventDurationEditable: true
             }
 
-            if (task.team.includes(parseInt(member_id))) {
+            let filterId = 1;
+            if (member_id) {
+              filterId = parseInt(member_id);
+            } 
+
+            if (task.team.includes(parseInt(filterId))) {
               console.log(taskObject);
               setEvents(events => [...events, taskObject])
             }
@@ -451,7 +456,7 @@ function Calendar({ action, taskID }) {
                 },
                 getContentAnchorEl: null
               }}
-              value={member_id}
+              value={member_id ? member_id : 1}
               style={{ width: '100%', background: 'var(--white)' }}
               onChange={changeMember}
             >
