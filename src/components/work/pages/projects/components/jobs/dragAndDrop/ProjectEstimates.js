@@ -477,7 +477,7 @@ function ProjectEstimates({ estimateID, itemType, stage }) {
                     className={snapshot.isDraggingOver ? 'dragging-over' : null}
                   >
                     {state.items?.map((item, index) => {
-                      if (item.type === 'additional_time') return;
+                      if (item.type === 'additional_time') return false;
                       return (
                         <Draggable key={item.id} draggableId={(item.id).toString()} index={index}>
                           {(provided, snapshot) => {
@@ -548,7 +548,7 @@ function ProjectEstimates({ estimateID, itemType, stage }) {
                     className={snapshot.isDraggingOver ? 'dragging-over' : null}
                   >
                     {state.items?.map((item, index) => {
-                      if (item.type !== 'additional_time') return;
+                      if (item.type !== 'additional_time') return false;
                       return (
                         <Draggable key={item.id} draggableId={(item.id).toString()} index={index}>
                           {(provided, snapshot) => {

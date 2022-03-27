@@ -96,39 +96,39 @@ function JobSelect() {
         tasks ?
           tasks.map(task => {
 
-            if (task.title.toLowerCase().includes(searchQuery.toLowerCase()) || task.projectName.toLowerCase().includes(searchQuery.toLowerCase())) {
-              return (
-                <SelectItem 
-                  className="dragabble-task"
-                  title={task.title}
-                  data-time={task.time}
-                  data-time-worked={task.time_worked}
-                  data-description={task.description}
-                  data-job-id={task.jobId}
-                  data-project-id={task.projectId}
-                  data={task.id}
-                  key={task.id}
-                >
-                  <TaskInfo>
-                    <p> 
-                      { task.title }
-                    </p>
-                    <span>{ task.projectName ? task.projectName : null }</span>
-                  </TaskInfo>
-                  <Members>
-                    { teamMembers.forEach(member => {
-                      if (task.team.includes(member.id)) {
-                        return (
-                          <Avatar alt={ member.name } src={ member.avatar } key={ member.id }>
-                            M
-                          </Avatar>
-                        )
-                      }
-                    })}
-                  </Members>
-                </SelectItem>
-              )
-            }
+            if (!task.title.toLowerCase().includes(searchQuery.toLowerCase()) || task.projectName.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+            return (
+              <SelectItem 
+                className="dragabble-task"
+                title={task.title}
+                data-time={task.time}
+                data-time-worked={task.time_worked}
+                data-description={task.description}
+                data-job-id={task.jobId}
+                data-project-id={task.projectId}
+                data={task.id}
+                key={task.id}
+              >
+                <TaskInfo>
+                  <p> 
+                    { task.title }
+                  </p>
+                  <span>{ task.projectName ? task.projectName : null }</span>
+                </TaskInfo>
+                <Members>
+                  { teamMembers.forEach(member => {
+                    if (task.team.includes(member.id)) {
+                      return (
+                        <Avatar alt={ member.name } src={ member.avatar } key={ member.id }>
+                          M
+                        </Avatar>
+                      )
+                    }
+                  })}
+                </Members>
+              </SelectItem>
+            )
+            
           })
         : null
       }

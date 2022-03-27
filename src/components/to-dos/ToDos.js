@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom"
 import FullCalendar from '@fullcalendar/react' // must go before plugins
@@ -65,22 +65,22 @@ function Calendar({ action, taskID }) {
 
   const [userSettings, setUserSettings] = useState([])
   const [teamMembers, setTeamMembers] = useState([])
-  const fetchData = async () => {
+  const fetchData = useCallback(() => {
 
     console.log('Final version v.10 active');
 
     try {
-      await axios.get(`/json/settings/settings.json`)
+      axios.get(`/json/settings/settings.json`)
         .then(res => {
           setUserSettings(res.data);
         })
 
-      await axios.get(`/json/settings/team.json`)
+      axios.get(`/json/settings/team.json`)
         .then(res => {
           setTeamMembers(res.data);
         })
 
-      await axios.get(`/json/estimates/items.json`)
+      axios.get(`/json/estimates/items.json`)
         .then(res => {
           setEvents([])
 
@@ -116,7 +116,7 @@ function Calendar({ action, taskID }) {
     } catch (err) {
       console.trace(err);
     }
-  }
+  }, [member_id]);
 
   useEffect(() => {
 
@@ -152,7 +152,7 @@ function Calendar({ action, taskID }) {
         }
       })
     }
-  }, [member_id])
+  }, [member_id, fetchData])
 
   const handleEventClick = () => {
     console.log('handleEventClick')
