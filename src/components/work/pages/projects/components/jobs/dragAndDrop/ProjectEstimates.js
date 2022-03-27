@@ -269,6 +269,7 @@ function ProjectEstimates({ estimateID, itemType, stage }) {
     let oldData;
     let [removed] = [];
     var index;
+    let newItem;
   
     switch(action_data) {
       case 'move_up':
@@ -298,19 +299,65 @@ function ProjectEstimates({ estimateID, itemType, stage }) {
       case 'pending':
 
         // Change item status to pending
-        console.log('pending', item.id);
+        oldData = [...data];
+        newItem = oldData.filter(i => i.id === parseInt(item.id))[0];
+        index = oldData.indexOf(newItem);
+        newItem = {
+          ...newItem,
+          'status': 'Pending'
+        };
+        oldData.splice(index, 1);
+        oldData.splice(index, 0, newItem);
+
+        setData(oldData);
+
+        dispatch({ 
+          type: 'UPDATE', 
+          items: oldData
+        })
+
         break;
         
       case 'approve':
 
-        // Change item status to approve
-        console.log('approve', item.id);
+        // Change item status to approved
+        oldData = [...data];
+        newItem = oldData.filter(i => i.id === parseInt(item.id))[0];
+        index = oldData.indexOf(newItem);
+        newItem = {
+          ...newItem,
+          'status': 'Approved'
+        };
+        oldData.splice(index, 1);
+        oldData.splice(index, 0, newItem);
+
+        setData(oldData);
+
+        dispatch({ 
+          type: 'UPDATE', 
+          items: oldData
+        })
         break;
         
       case 'commit':
 
         // Change item status to committed
-        console.log('commit', item.id);
+        oldData = [...data];
+        newItem = oldData.filter(i => i.id === parseInt(item.id))[0];
+        index = oldData.indexOf(newItem);
+        newItem = {
+          ...newItem,
+          'status': 'Committed'
+        };
+        oldData.splice(index, 1);
+        oldData.splice(index, 0, newItem);
+
+        setData(oldData);
+
+        dispatch({ 
+          type: 'UPDATE', 
+          items: oldData
+        })
         break;
 
       case 'move_down':
