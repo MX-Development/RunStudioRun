@@ -148,7 +148,7 @@ function Calendar({ action, taskID }) {
         }
       })
     }
-  }, [member_id])
+  }, [])
 
   const handleEventClick = () => {
     console.log('handleEventClick')
@@ -314,7 +314,9 @@ function Calendar({ action, taskID }) {
     function confirmDelete(eInfo) {
 
       const selectedEvent = calendar.getEventById(eInfo.event.id);
-      selectedEvent.remove();
+      if (selectedEvent) {
+        selectedEvent.remove();
+      }
 
       deleteBtn.current.click();
 

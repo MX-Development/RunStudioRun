@@ -70,8 +70,8 @@ function Projects({ add }) {
             }}
             onClick={(e) => {
               e.stopPropagation()
-              if (companies) {
-                let c = companies.filter((company) => company === params.row.companyName);
+              if (allCompanies) {
+                let c = allCompanies.filter((company) => company.id === params.row.companyId);
                 let companyID = c[0].id;
                 showCompany(companyID)
               }

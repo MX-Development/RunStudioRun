@@ -340,6 +340,7 @@ function Companies({ add, importing }) {
                   value={selectedData ? selectedData.rate : null}
                   style={{ width: '100%' }}
                   name="rate"
+                  onChange={handleChange}
                 >
                   <MenuItem value={''}>
                     <em>Select</em>

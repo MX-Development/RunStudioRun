@@ -25,8 +25,6 @@ function ExtraTime({ data, size }) {
 
   const { control } = useForm();
 
-  const [selectedData, setSelectedData] = useState(null)
-
   useEffect(() => {
     // if (id) {
     //   const dataSelect = data.filter(obj => {
@@ -47,29 +45,22 @@ function ExtraTime({ data, size }) {
     });
   }
 
-  const [selectedDate, setSelectedDate] = useState({
-    startDate: new Date(moment(data.startDate).format()),
-    endDate: new Date(moment(data.startDate).format())
-  });
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState({
+    startDate: moment().format('YYYY-MM-DD'),
+    endDate: moment().format('YYYY-MM-DD')
+  })
 
   const handleDateChange = (id) => (date) => {
     if (id === 'startDate') {
-      setSelectedDate({
-        ...selectedDate,
-        startDate: moment(date).format()
-      });
       setSelectedData({
         ...selectedData,
-        startDate: moment(date).format()
+        startDate: moment(date).format('YYYY-MM-DD')
       });
     } else if (id === 'endDate') {
-      setSelectedDate({
-        ...selectedDate,
-        endDate: moment(date).format()
-      });
       setSelectedData({
         ...selectedData,
-        endDate: moment(date).format()
+        endDate: moment(date).format('YYYY-MM-DD')
       });
     }
   };
@@ -174,7 +165,7 @@ function ExtraTime({ data, size }) {
                     <KeyboardDatePicker
                       margin="normal"
                       format="MM/dd/yyyy"
-                      value={selectedDate.startDate}
+                      value={selectedData.startDate}
                       onChange={handleDateChange('startDate')}
                       KeyboardButtonProps={{
                         'aria-label': 'change date',
@@ -195,7 +186,7 @@ function ExtraTime({ data, size }) {
                     <KeyboardDatePicker
                       margin="normal"
                       format="MM/dd/yyyy"
-                      value={selectedDate.endDate}
+                      value={selectedData.endDate}
                       onChange={handleDateChange('endDate')}
                       KeyboardButtonProps={{
                         'aria-label': 'change date',

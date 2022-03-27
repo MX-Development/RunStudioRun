@@ -8,7 +8,6 @@ function MemberAvatars({ projectID, solo }) {
 
   const [teamMembers, setTeamMembers] = useState([])
   const [showExtended, setShowExtended] = useState(false)
-  const [activeMember, setActiveMember] = useState(null)
 
   useEffect(() => {
     axios.get(`/json/estimates/items.json`)

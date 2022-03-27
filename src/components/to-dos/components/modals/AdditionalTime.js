@@ -54,24 +54,33 @@ function AdditionalTime() {
     fetchData()
   }, []);
 
-  const [selectedDate, setSelectedDate] = useState({
-    startDate: new Date(moment(data.startDate).format()),
-    endDate: new Date(moment(data.startDate).format())
-  });
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState({
+    startDate: moment().format('YYYY-MM-DD'),
+    endDate: moment().format('YYYY-MM-DD')
+  })
 
   const handleDateChange = (id) => (date) => {
     if (id === 'startDate') {
-      setSelectedDate({
-        ...selectedDate,
-        startDate: moment(date).format()
+      setSelectedData({
+        ...selectedData,
+        startDate: moment(date).format('YYYY-MM-DD')
       });
     } else if (id === 'endDate') {
-      setSelectedDate({
-        ...selectedDate,
-        endDate: moment(date).format()
+      setSelectedData({
+        ...selectedData,
+        endDate: moment(date).format('YYYY-MM-DD')
       });
     }
   };
+
+  // On change input fields
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
 
   return (
     <>
@@ -190,7 +199,7 @@ function AdditionalTime() {
                       <KeyboardDatePicker
                         margin="none"
                         format="MM/dd/yyyy"
-                        value={selectedDate.startDate}
+                        value={selectedData.startDate}
                         onChange={handleDateChange('startDate')}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',
@@ -211,7 +220,7 @@ function AdditionalTime() {
                       <KeyboardDatePicker
                         margin="none"
                         format="MM/dd/yyyy"
-                        value={selectedDate.startDate}
+                        value={selectedData.startDate}
                         onChange={handleDateChange('endDate')}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',

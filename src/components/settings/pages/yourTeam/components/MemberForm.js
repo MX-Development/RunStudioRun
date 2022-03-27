@@ -281,7 +281,7 @@ function MemberForm({ memberAccess, addMember, data }) {
                         variant="outlined"
                         type="password"
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.password : ''}
                         onChange={handleChange}
                       />
                     )}
@@ -303,7 +303,7 @@ function MemberForm({ memberAccess, addMember, data }) {
                         variant="outlined"
                         type="password"
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.new_password : ''}
                         onChange={handleChange}
                       />
                     )}
@@ -325,7 +325,7 @@ function MemberForm({ memberAccess, addMember, data }) {
                         variant="outlined"
                         type="password"
                         {...field}
-                        value={''}
+                        value={selectedData ? selectedData.confirm_password : ''}
                         onChange={handleChange}
                       />
                     )}
@@ -354,7 +354,7 @@ function MemberForm({ memberAccess, addMember, data }) {
                   accessOptions ?
                   accessOptions.map((item, index) => {
                     let checked = false;
-                    if (selectedData?.access.includes(item.id)) {
+                    if (selectedData?.access?.includes(item.id)) {
                       checked = true;
                     }
                     return (

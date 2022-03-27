@@ -4,8 +4,6 @@ import moment from 'moment'
 
 function InfoGraphics({ item }) {
 
-  console.log('Job: ', item.dueDate);
-
   return (
     <JobContainer>
       <Block percentage={40}> 

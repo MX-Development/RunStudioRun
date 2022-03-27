@@ -43,6 +43,7 @@ function People({ add, importing, syncing }) {
       await axios.get(`/json/people.json`)
         .then(res => {
           setData(res.data)
+          console.log(res.data);
 
           axios.get(`/json/companies.json`)
             .then(res => {
@@ -87,6 +88,24 @@ function People({ add, importing, syncing }) {
     setSelectedData({
       ...selectedData,
       [event.target.name]: event.target.value
+    });
+  }
+
+  // On change checkbox for postal address same as physical address
+  const handleChangeCheckbox = (event) => {
+
+    // First part of name attribute
+    let nameSubject = event.target.name.split(`['`)[0];
+    let item = event.target.name.split(`']`)[0].split(`['`)[1];
+    let subject = selectedData[nameSubject];
+
+    let items = {...subject};
+
+    items[item] = event.target.checked;
+
+    setSelectedData({
+      ...selectedData,
+      [nameSubject]: items
     });
   }
 
@@ -153,17 +172,18 @@ function People({ add, importing, syncing }) {
               <FormControl variant="outlined">
                 <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Company</FormLabel>
                 <Select
-                  value={selectedData ? selectedData.companyName : ''}
+                  value={selectedData ? selectedData.companyId : ''}
                   style={{ width: '100%' }}
-                  name="companyName"
+                  name="companyId"
+                  onChange={handleChange}
                 >
-                  <MenuItem value="">
+                  <MenuItem value="" disabled>
                     <em>Select a company</em>
                   </MenuItem>
                   { 
                     companies ? 
                       companies.map(company => (
-                        <MenuItem value={company.companyName} key={company.id}>{company.companyName}</MenuItem>
+                        <MenuItem value={company.id} key={company.id}>{company.companyName}</MenuItem>
                       ))
                     : null
                   }
@@ -285,9 +305,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.all : null}
-                    onChange={handleChange}
-                    name="communicationPrefs.all"
+                    checked={selectedData ? selectedData.communicationPrefs['all'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['all']"
                   />
                 }
                 label="Select all"
@@ -297,9 +317,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.email : null}
-                    onChange={handleChange}
-                    name="email"
+                    checked={selectedData ? selectedData.communicationPrefs['email'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['email']"
                   />
                 }
                 label="Email"
@@ -311,9 +331,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.phone_call : null}
-                    onChange={handleChange}
-                    name="phone_call"
+                    checked={selectedData ? selectedData.communicationPrefs['phone_call'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['phone_call']"
                   />
                 }
                 label="Phone Call"
@@ -323,9 +343,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.text_sms : null}
-                    onChange={handleChange}
-                    name="text_sms"
+                    checked={selectedData ? selectedData.communicationPrefs['text_sms'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['text_sms']"
                   />
                 }
                 label="Text / SMS"
@@ -337,9 +357,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.google_chat : null}
-                    onChange={handleChange}
-                    name="google_chat"
+                    checked={selectedData ? selectedData.communicationPrefs['google_chat'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['google_chat']"
                   />
                 }
                 label="Google Chat"
@@ -349,9 +369,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.skype_messenger : null}
-                    onChange={handleChange}
-                    name="skype_messenger"
+                    checked={selectedData ? selectedData.communicationPrefs['skype_messenger'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['skype_messenger']"
                   />
                 }
                 label="Skype / Messenger"
@@ -363,9 +383,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.post : null}
-                    onChange={handleChange}
-                    name="post"
+                    checked={selectedData ? selectedData.communicationPrefs['post'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['post']"
                   />
                 }
                 label="Post"
@@ -377,9 +397,9 @@ function People({ add, importing, syncing }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={selectedData ? selectedData.communicationPrefs.marketing_emails : null}
-                    onChange={handleChange}
-                    name="marketing_emails"
+                    checked={selectedData ? selectedData.communicationPrefs['marketing_emails'] : null}
+                    onChange={handleChangeCheckbox}
+                    name="communicationPrefs['marketing_emails']"
                   />
                 }
                 label="Consent to receiving marketing emails & collateral"

@@ -63,15 +63,6 @@ function ProjectHeader({ projectID }) {
 
   const { control } = useForm();
 
-  const [selectedData, setSelectedData] = useState(null)
-
-  const handleChange = event => {
-    setSelectedData({
-      ...selectedData,
-      [event.target.name]: event.target.value // This code replace the font object
-    });
-  }
-
   const location = useLocation();
   const history = useHistory();
   const pagePath = location.pathname.split('/')[3]
@@ -98,6 +89,14 @@ function ProjectHeader({ projectID }) {
         break;
       default: return
     }
+  }
+
+  // On change input fields
+  const handleChange = event => {
+    setActiveProject({
+      ...activeProject,
+      [event.target.name]: event.target.value 
+    });
   }
 
   return (
@@ -191,6 +190,8 @@ function ProjectHeader({ projectID }) {
                     placeholder={'Who requested the work?'}
                     value={activeProject ? activeProject.memberRequested : ''}
                     style={{ width: '100%', background: 'var(--white)' }}
+                    onChange={handleChange}
+                    name="memberRequested"
                   >
                     <MenuItem value="Who requested the work?"> 
                       <em>Who requested the work?</em>
@@ -216,13 +217,13 @@ function ProjectHeader({ projectID }) {
                           variant="outlined"
                           placeholder="Client Purchase Order Number [Optional]"
                           {...field}
-                          value={selectedData ? selectedData.order_nr : ''}
+                          value={activeProject ? activeProject.orderNr : ''}
                           onChange={handleChange}
                           style={{ background: 'var(--white)' }}
                         />
                       )}
                       control={control}
-                      name="order_nr"
+                      name="orderNr"
                     />
                   </FormControl>
                 </FormGroup>  
@@ -239,7 +240,7 @@ function ProjectHeader({ projectID }) {
 
               <ProjectNav />
 
-              <ProjectNotes data={selectedData} />
+              <ProjectNotes data={activeProject} />
 
               <ProjectInfo project={activeProject} />
 

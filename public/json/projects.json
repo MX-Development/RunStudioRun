@@ -11,7 +11,8 @@
     "action": 4,
     "status": 2,
     "rate": 1,
-    "memberRequested": 1
+    "memberRequested": 3,
+    "orderNr": "ABC-001"
   },
   {
     "id": 2,

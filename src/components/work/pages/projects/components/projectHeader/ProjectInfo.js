@@ -20,9 +20,7 @@ function ProjectInfo({ project }) {
   const [activeProject, setActiveProject] = useState(null)
 
   const [jobLabels, setJobLabels] = useState([])
-  const [jobs, setJobs] = useState([])
   const [rates, setRates] = useState([])
-  const [company, setCompany] = useState([])
   const [projectLabels, setProjectLabels] = useState([])
 
   const fetchLabels = async () => {
@@ -32,16 +30,6 @@ function ProjectInfo({ project }) {
         .then(res => {
           setJobLabels(res.data[0].jobs);
           setProjectLabels(res.data[0].projects);
-        })
-      
-      axios.get(`/json/companies.json`)
-        .then(res => {
-          setCompany(res.data.filter(c => c.id === project?.companyId));
-        })
-      
-      axios.get(`/json/jobs.json`)
-        .then(res => {
-          setJobs(res.data.filter(j => j.projectID === project?.id));
         })
 
       // Fetch payment terms for the rates
@@ -57,7 +45,7 @@ function ProjectInfo({ project }) {
 
   useEffect(() => {
     fetchLabels()
-  }, [project]);
+  }, []);
   
   const changeValue = (event) => {
 

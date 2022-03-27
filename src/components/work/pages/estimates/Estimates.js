@@ -5,15 +5,20 @@ import axios from 'axios';
 
 import List from '../../../layout/tables/List'
 
-import { MenuItem, Select } from '@material-ui/core'
-import Label from '../../../settings/components/Label';
 import ProjectEstimates from '../projects/components/jobs/dragAndDrop/ProjectEstimates';
 
-import ModalContent from '../../../modals/ModalContent';
+import { useForm } from "react-hook-form"
+
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
+import { MenuItem, Select } from '@material-ui/core'
 
 import {
   useHistory
 } from "react-router-dom"
+import Label from 'components/settings/components/Label';
 
 function Estimates({ projectID, add }) {
 
@@ -149,71 +154,129 @@ function Estimates({ projectID, add }) {
     setData(newArr);
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-  const [projects, setProjects] = useState([])
-  const jobs = [
-    {
-      "value": "job_1",
-      "label": "Job 1"
-    },
-    {
-      "value": "job_2",
-      "label": "Job 2"
-    }
-  ]
+  const [projects, setProjects] = useState([]);
+  const [jobs, setJobs] = useState([]);
   useEffect(() => {
     // Get all projects
     axios.get(`/json/projects.json`)
       .then(res => {
 
-        // Add each project to the projects array
-        res.data.forEach(project => {
-          setProjects(projects => [...projects, {
-            "value": project.id,
-            "label": project.projectName
-          }]);
+        let uniqueProjects = [];
+        res.data.forEach(p => {
+          if (uniqueProjects.indexOf(p) === -1) {
+            uniqueProjects.push(p);
+          }
         })
+
+        setProjects(uniqueProjects);
+      })
+
+    // Get all jobs
+    axios.get(`/json/jobs.json`)
+      .then(res => {
+
+        setJobs(res.data);
       })
   }, []);
 
-  const modalForm = [
-    {
-      "columns": 12,
-      "type": "select",
-      "label": "Select the Project",
-      "name": "project",
-      "placeholder": "Select...",
-      "value": "Select...",
-      "options": projects
-    },
-    {
-      "columns": 12,
-      "type": "select",
-      "label": "Select the Job",
-      "name": "job",
-      "placeholder": "Select...",
-      "value": "Select...",
-      "options": jobs
-    }
-  ] 
+  const { handleSubmit, control } = useForm();
+
+  // Initialize empty data state
+  const [selectedData, setSelectedData] = useState(null)
+
+  // On change input fields
+  const handleChange = event => {
+    setSelectedData({
+      ...selectedData,
+      [event.target.name]: event.target.value 
+    });
+  }
+
+  // On submit form
+  const onSubmit = () => { 
+    console.log('Form data: ', selectedData)
+  }
+
+  // Delete item from database
+  const deleteItem = () => {
+    console.log('Delete item with ID: ', selectedData.id);
+  }
+
+  // Modal content for company info
+  const modalContent = (        
+      
+    <form onSubmit={handleSubmit(onSubmit)}>
+
+      <FormControl component="fieldset">
+        <Grid container spacing={2}>  
+          
+          <Grid item xs={12}>
+            <FormGroup>
+              <FormControl variant="outlined">
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Select the Project</FormLabel>
+                <Select
+                  value={selectedData ? selectedData.projectId : ''}
+                  style={{ width: '100%' }}
+                  placeholder="Select the Project"
+                  name="projectId"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={''} disabled>
+                    <em>Select the Project</em>
+                  </MenuItem>
+                  { 
+                    projects ? 
+                      projects.map(project => (
+                        <MenuItem value={project.id} key={project.id}>{project.projectName}</MenuItem>
+                      ))
+                    : null
+                  }
+                </Select>
+              </FormControl>
+            </FormGroup>
+          </Grid>
+          <Grid item xs={12}>
+            <FormGroup>
+              <FormControl variant="outlined">
+                <FormLabel style={{ lineHeight: '1.4', fontWeight: '400 !important' }}>Select the Job</FormLabel>
+                <Select
+                  value={selectedData ? selectedData.jobId : ''}
+                  style={{ width: '100%' }}
+                  placeholder="Select the Job"
+                  name="jobId"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={''} disabled>
+                    <em>Select the Project</em>
+                  </MenuItem>
+                  { 
+                    jobs ? 
+                      jobs.map(job => (
+                        <MenuItem value={job.id} key={job.id}>{job.jobNo}</MenuItem>
+                      ))
+                    : null
+                  }
+                </Select>
+              </FormControl>
+            </FormGroup>
+          </Grid>
+
+        </Grid>
+      </FormControl>
+
+      <div className="modal-footer">
+        <div className="btn-group">
+          <div className="btn-left">
+            <button className="btn btn-light-gray btn-left">Cancel</button>
+          </div>
+          <div className="btn-right">
+            <button type="submit" className="btn btn-gold btn-right">Save</button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  )
 
   return (
       viewID ? 
@@ -239,7 +302,7 @@ function Estimates({ projectID, add }) {
         key={projectID} 
         view={view} 
         modalTitle={'New Estimates'} 
-        modalContent={<ModalContent formElements={modalForm} />} 
+        modalContent={modalContent} 
         add={add ? true : false} 
       />
   )

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import axios from 'axios'; 
-
 import ActionIcon from '../../../../../../../assets/icons/ActionIcon.svg'
 import CloseIcon from '../../../../../../../assets/icons/CloseIcon.svg'
 

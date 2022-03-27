@@ -6,9 +6,6 @@ import axios from 'axios'
 
 function SoloAvatar({ memberID, projectID }) {
 
-  console.log('avatarrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
-
-
   const [teamMembers, setTeamMembers] = useState([])
   const [showExtended, setShowExtended] = useState(false)
   const [activeMember, setActiveMember] = useState(null)
@@ -29,8 +26,6 @@ function SoloAvatar({ memberID, projectID }) {
                }
              })
    
-             console.log(members);
-   
              setTeamMembers(members)
            })
           }
@@ -39,11 +34,8 @@ function SoloAvatar({ memberID, projectID }) {
   }, [projectID])
 
   const setMember = (id) => {
-    console.log('Set member: ', id)
 
     setActiveMember(teamMembers.filter(m => m.id === id)[0])
-    console.log(teamMembers);
-    console.log(teamMembers.filter(m => m.id === id)[0]);
   }
   
   return (
