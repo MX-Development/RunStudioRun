@@ -67,6 +67,8 @@ function Calendar({ action, taskID }) {
   const [teamMembers, setTeamMembers] = useState([])
   const fetchData = async () => {
 
+    console.log('Final version v.10 active');
+
     try {
       await axios.get(`/json/settings/settings.json`)
         .then(res => {
@@ -106,7 +108,6 @@ function Calendar({ action, taskID }) {
             } 
 
             if (task.team.includes(parseInt(filterId))) {
-              console.log(taskObject);
               setEvents(events => [...events, taskObject])
             }
 
@@ -123,7 +124,6 @@ function Calendar({ action, taskID }) {
 
   useEffect(() => {
     fetchData();
-    console.log("Fetching data...");
     
     let draggableEl = document.getElementById("task-list")
 
@@ -131,7 +131,6 @@ function Calendar({ action, taskID }) {
       new Draggable(draggableEl, {
         itemSelector: ".dragabble-task",
         eventData: function(eventEl) {
-          console.log('Event data: ', eventEl);
           let title = eventEl.getAttribute("title");
           let id = eventEl.getAttribute("data");
           let time = eventEl.getAttribute("data-time");
