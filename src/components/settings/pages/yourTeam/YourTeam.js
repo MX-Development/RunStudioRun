@@ -31,7 +31,7 @@ function YourTeam({ add }) {
   // Fetch data from JSON files
   const fetchData = async () => {
     try {
-      await axios.get(`/json/team.json`)
+      await axios.get(`/json/settings/team.json`)
         .then(res => {
           setData(res.data)
         })

@@ -25,7 +25,7 @@ function JobSelect() {
     try {
       setTasks([])
 
-      await axios.get(`/json/jobs.json`)
+      await axios.get(`/json/work/jobs.json`)
         .then(res => {
           let jobs = res.data
 
@@ -41,7 +41,7 @@ function JobSelect() {
               task.projectName = job[0].projectName
               setTasks(tasks => [...tasks, task])
 
-              axios.get(`/json/team.json`)
+              axios.get(`/json/settings/team.json`)
               .then(res => {
                 setTeamMembers([])
                 res.data.forEach(member => {

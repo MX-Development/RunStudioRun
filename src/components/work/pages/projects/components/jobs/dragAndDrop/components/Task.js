@@ -70,7 +70,7 @@ function Task({ data, size, stage }) {
   const fetchData = async () => {
 
     try {
-      axios.get(`/json/team.json`)
+      axios.get(`/json/settings/team.json`)
       .then(res => {
         setTeamMembers([])
         res.data.forEach(member => {

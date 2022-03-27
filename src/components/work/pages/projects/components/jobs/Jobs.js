@@ -26,7 +26,7 @@ function Jobs({ projectID }) {
   const [data, setData] = useState([])
   useEffect(() => {
     setData([]);
-    axios.get(`/json/jobs.json`)
+    axios.get(`/json/work/jobs.json`)
       .then(res => {
         projectID ? 
           res.data.forEach(item => {

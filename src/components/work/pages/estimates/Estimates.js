@@ -32,7 +32,7 @@ function Estimates({ projectID, add }) {
     const fetchLabels = () => {
   
       try {
-        axios.get(`/json/labels.json`)
+        axios.get(`/json/settings/labels.json`)
           .then(res => {
             setProjectLabels(res.data[0].projects);
           })
@@ -158,7 +158,7 @@ function Estimates({ projectID, add }) {
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
     // Get all projects
-    axios.get(`/json/projects.json`)
+    axios.get(`/json/work/projects.json`)
       .then(res => {
 
         let uniqueProjects = [];
@@ -172,7 +172,7 @@ function Estimates({ projectID, add }) {
       })
 
     // Get all jobs
-    axios.get(`/json/jobs.json`)
+    axios.get(`/json/work/jobs.json`)
       .then(res => {
 
         setJobs(res.data);

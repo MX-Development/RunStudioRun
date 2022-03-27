@@ -26,7 +26,7 @@ function ProjectInfo({ project }) {
   const fetchLabels = async () => {
 
     try {
-      await axios.get(`/json/labels.json`)
+      await axios.get(`/json/settings/labels.json`)
         .then(res => {
           setJobLabels(res.data[0].jobs);
           setProjectLabels(res.data[0].projects);

@@ -35,7 +35,7 @@ function Expenses({ add }) {
   // Fetch data from JSON files
   const fetchData = async () => {
     try {
-      await axios.get(`/json/expenses.json`)
+      await axios.get(`/json/work/expenses.json`)
         .then(res => {
           setData(res.data)
         })

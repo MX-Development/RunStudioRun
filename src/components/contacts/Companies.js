@@ -40,7 +40,7 @@ function Companies({ add, importing }) {
   // Fetch data from JSON files
   const fetchData = async () => {
     try {
-      await axios.get(`/json/companies.json`)
+      await axios.get(`/json/contacts/companies.json`)
         .then(res => {
           setData(res.data)
         })

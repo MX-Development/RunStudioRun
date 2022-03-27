@@ -31,7 +31,7 @@ function EditTask({ eventInfo }) {
 
     try {
 
-      await axios.get(`/json/team.json`)
+      await axios.get(`/json/settings/team.json`)
         .then(res => {
           setTeamMembers(res.data);
         })

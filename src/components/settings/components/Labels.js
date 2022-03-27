@@ -20,7 +20,7 @@ function Labels() {
     setIsLoading(true);
 
     try {
-      await axios.get(`/json/labels.json`)
+      await axios.get(`/json/settings/labels.json`)
         .then(res => {
           setJobs(res.data[0].jobs);
           setInvoices(res.data[0].invoices);

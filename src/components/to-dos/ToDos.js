@@ -68,12 +68,12 @@ function Calendar({ action, taskID }) {
   const fetchData = async () => {
 
     try {
-      await axios.get(`/json/settings.json`)
+      await axios.get(`/json/settings/settings.json`)
         .then(res => {
           setUserSettings(res.data);
         })
 
-      await axios.get(`/json/team.json`)
+      await axios.get(`/json/settings/team.json`)
         .then(res => {
           setTeamMembers(res.data);
         })

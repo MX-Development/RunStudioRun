@@ -97,7 +97,7 @@ function App() {
   const fetchSettings = async () => {
 
     try {
-      await axios.get(`/json/settings.json`)
+      await axios.get(`/json/settings/settings.json`)
         .then(res => {
           setUserSettings(res.data);
         })

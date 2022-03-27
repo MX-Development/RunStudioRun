@@ -16,7 +16,7 @@ function MemberAvatars({ projectID, solo }) {
       res.data.forEach(task => {
        if (task.projectId === parseInt(projectID)) {
 
-        axios.get(`/json/team.json`)
+        axios.get(`/json/settings/team.json`)
         .then(res => {
           let members = [];
           res.data.forEach(member => {

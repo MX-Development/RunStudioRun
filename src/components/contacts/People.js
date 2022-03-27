@@ -40,12 +40,12 @@ function People({ add, importing, syncing }) {
   // Fetch data from JSON files
   const fetchData = async () => {
     try {
-      await axios.get(`/json/people.json`)
+      await axios.get(`/json/contacts/people.json`)
         .then(res => {
           setData(res.data)
           console.log(res.data);
 
-          axios.get(`/json/companies.json`)
+          axios.get(`/json/contacts/companies.json`)
             .then(res => {
               setCompanies(res.data)
             })

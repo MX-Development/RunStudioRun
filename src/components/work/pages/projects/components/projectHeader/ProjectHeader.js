@@ -33,7 +33,7 @@ function ProjectHeader({ projectID }) {
 
   // Fetch projects
   useEffect(() => {
-    axios.get(`/json/projects.json`)
+    axios.get(`/json/work/projects.json`)
       .then(res => {
         setProjects(res.data)
 
@@ -42,7 +42,7 @@ function ProjectHeader({ projectID }) {
         // Set active project on page load
         setActiveProject(currentProject[0]);
 
-        axios.get(`/json/companies.json`)
+        axios.get(`/json/contacts/companies.json`)
           .then(res => {
 
             // Set company from active project
@@ -53,7 +53,7 @@ function ProjectHeader({ projectID }) {
   }, [projectID]);
 
   useEffect(() => {
-    axios.get(`/json/team.json`)
+    axios.get(`/json/settings/team.json`)
       .then(res => {
         setTeam(res.data)
       });

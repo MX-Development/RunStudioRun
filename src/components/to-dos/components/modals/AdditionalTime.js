@@ -32,13 +32,13 @@ function AdditionalTime() {
   const fetchData = async () => {
 
     try {
-      await axios.get(`/json/projects.json`)
+      await axios.get(`/json/work/projects.json`)
         .then(res => {
           setData(res.data)
           setProjects(res.data);
         })
 
-      await axios.get(`/json/team.json`)
+      await axios.get(`/json/settings/team.json`)
         .then(res => {
           setTeamMembers(res.data);
         })

@@ -37,7 +37,7 @@ function Projects({ add }) {
   const fetchLabels = async () => {
 
     try {
-      await axios.get(`/json/labels.json`)
+      await axios.get(`/json/settings/labels.json`)
         .then(res => {
           setJobLabels(res.data[0].jobs);
           setProjectLabels(res.data[0].projects);
@@ -163,7 +163,7 @@ function Projects({ add }) {
   const fetchData = async () => {
 
     try {
-      await axios.get(`/json/projects.json`)
+      await axios.get(`/json/work/projects.json`)
         .then(res => {
           setData(res.data);
           setProjects(res.data);
@@ -177,12 +177,12 @@ function Projects({ add }) {
 
           setCompanies(companies);
 
-          axios.get(`/json/companies.json`)
+          axios.get(`/json/contacts/companies.json`)
             .then(res => {
               setAllCompanies(res.data);
             })
 
-          axios.get(`/json/jobs.json`)
+          axios.get(`/json/work/jobs.json`)
             .then(res => {
               setJobs(res.data);
             })

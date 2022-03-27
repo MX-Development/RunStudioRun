@@ -61,7 +61,7 @@ function ItemsTasks({ add }) {
   // Fetch data from JSON files
   const fetchData = async () => {
     try {
-      await axios.get(`/json/items_tasks.json`)
+      await axios.get(`/json/settings/items_tasks.json`)
         .then(res => {
           setData(res.data)
         })

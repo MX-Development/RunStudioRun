@@ -27,7 +27,7 @@ function Invoices({ projectID, add }) {
   const fetchLabels = async () => {
 
     try {
-      await axios.get(`/json/labels.json`)
+      await axios.get(`/json/settings/labels.json`)
         .then(res => {
           setInvoices(res.data[0].invoices);
         })
@@ -47,7 +47,7 @@ function Invoices({ projectID, add }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`/json/invoices.json`)
+    axios.get(`/json/work/invoices.json`)
       .then(res => {
         projectID ? 
           res.data.forEach((item, index) => {
@@ -133,7 +133,7 @@ function Invoices({ projectID, add }) {
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
     // Get all projects
-    axios.get(`/json/projects.json`)
+    axios.get(`/json/work/projects.json`)
       .then(res => {
 
         let uniqueProjects = [];
@@ -147,7 +147,7 @@ function Invoices({ projectID, add }) {
       })
 
     // Get all jobs
-    axios.get(`/json/jobs.json`)
+    axios.get(`/json/work/jobs.json`)
       .then(res => {
 
         setJobs(res.data);

@@ -27,7 +27,7 @@ function Purchases({ projectID, add }) {
   const fetchLabels = async () => {
 
     try {
-      await axios.get(`/json/labels.json`)
+      await axios.get(`/json/settings/labels.json`)
         .then(res => {
           setPurchases(res.data[0].purchases);
         })
@@ -47,7 +47,7 @@ function Purchases({ projectID, add }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(`/json/purchases.json`)
+    axios.get(`/json/work/purchases.json`)
       .then(res => {
         projectID ? 
           <>
@@ -123,7 +123,7 @@ function Purchases({ projectID, add }) {
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
     // Get all projects
-    axios.get(`/json/projects.json`)
+    axios.get(`/json/work/projects.json`)
       .then(res => {
 
         let uniqueProjects = [];
@@ -137,7 +137,7 @@ function Purchases({ projectID, add }) {
       })
 
     // Get all jobs
-    axios.get(`/json/jobs.json`)
+    axios.get(`/json/work/jobs.json`)
       .then(res => {
 
         setJobs(res.data);
