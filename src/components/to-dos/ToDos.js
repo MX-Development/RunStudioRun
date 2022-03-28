@@ -261,7 +261,7 @@ function Calendar({ action, taskID }) {
 
     header.querySelector('.time-worked').innerHTML = `${totalDayTime.toFixed(1)}h`;  
 
-    if (percentage < 35) {
+    if (percentage <= 35) {
       header.querySelector('.bar').style.width = `${percentage}%`; 
       header.querySelector('.bar').style.background = `#77E0CC`; 
       header.querySelector('.time-total').style.color = `#fff`; 
