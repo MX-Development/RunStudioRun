@@ -10,22 +10,22 @@
   "otherContent": "",
   "rates": [
     {
-      "id": "standard",
+      "id": 1,
       "title": "Standard",
       "value": "$100"
     },
     {
-      "id": "tier_1",
+      "id": 2,
       "title": "Tier 1",
       "value": "$100"
     },
     {
-      "id": "tier_2",
+      "id": 3,
       "title": "Tier 2",
       "value": "$120"
     },
     {
-      "id": "tier_3",
+      "id": 4,
       "title": "Tier 3",
       "value": "$150"
     }

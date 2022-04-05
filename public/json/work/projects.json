@@ -10,7 +10,7 @@
     "dueDate": "30/09/2021",
     "action": 4,
     "status": 2,
-    "rate": 1,
+    "rate": 2,
     "memberRequested": 3,
     "orderNr": "ABC-001"
   },
@@ -32,56 +32,70 @@
     "id": 3,
     "projectID": 3,
     "projectName": "BHR1212 - Digital Billboard",
+    "companyId": 1,
     "companyName": "Bloodhound Rescue",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
     "enteredDate": "01/09/2021",
     "dueDate": "30/09/2021",
     "action": 1,
     "status": 1,
-    "rate": 2
+    "rate": 2,
+    "orderNr": ""
   },
   {
     "id": 4,
     "projectID": 4,
     "projectName": "BHR1213 - Digital Billboard",
+    "companyId": 1,
     "companyName": "Bloodhound Rescue",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
     "enteredDate": "01/09/2021",
     "dueDate": "30/09/2021",
     "action": 1,
-    "status": 1
+    "status": 1,
+    "rate": 2,
+    "orderNr": ""
   },
   {
     "id": 5,
     "projectID": 5,
     "projectName": "BHR1214 - Digital Billboard",
+    "companyId": 1,
     "companyName": "Bloodhound Rescue",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
     "enteredDate": "01/09/2021",
     "dueDate": "30/09/2021",
     "action": 1,
-    "status": 1
+    "status": 1,
+    "rate": 2,
+    "orderNr": ""
   },
   {
     "id": 6,
     "projectID": 2,
     "projectName": "HOU0542 - Design Branding",
+    "companyId": 4,
     "companyName": "Hound Empire",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
     "enteredDate": "02/09/2021",
     "dueDate": "31/09/2021",
     "action": 3,
-    "status": 2
+    "status": 2,
+    "rate": 2,
+    "orderNr": ""
   },
   {
     "id": 7,
     "projectID": 1,
     "projectName": "RET0919 - Credentials Document",
+    "companyId": 6,
     "companyName": "Re-Tail Store",
     "description": "Keeping notes on clients is a good way to remember unique requirements when communicating with this person. You may also want to add important dates, or billing details as they may be in a different department.",
     "enteredDate": "03/09/2021",
     "dueDate": "24/09/2021",
     "action": 2,
-    "status": 6
+    "status": 6,
+    "rate": 2,
+    "orderNr": ""
   }
 ]

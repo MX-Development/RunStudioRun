@@ -200,3 +200,7 @@ form h5 {
 .padded-right textarea {
   padding-right: 30px !important;
 }
+
+.MuiCheckbox-root + .MuiFormControlLabel-label {
+  font-size: 12px;
+}
